@@ -58,5 +58,11 @@ module Alexandria
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Scaffolding generators
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+
   end
 end
