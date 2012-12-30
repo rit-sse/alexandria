@@ -1,5 +1,5 @@
-source ~/.bashrc | /dev/null
-cd . | /dev/null
+source ~/.bashrc
+cd .
 bundle install
 rake db:schema:load
 SPEC_OPTS="--format html" rake rspec
