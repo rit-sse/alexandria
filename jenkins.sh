@@ -2,5 +2,5 @@ source ~/.bashrc
 cd .
 bundle install
 rake db:schema:load
-SPEC_OPTS="--format html" rake rspec
+rake spec
 CUCUMBER_FORMAT=html rake cucumber
