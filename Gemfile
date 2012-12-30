@@ -24,6 +24,10 @@ gem 'jquery-rails'
 
 # Test-related gems
 group :development, :test do
+  gem 'therubyracer'
+  gem 'libv8', '~> 3.11.8'
+
+
   gem 'rspec'
   gem 'webrat'
   gem 'capybara'
