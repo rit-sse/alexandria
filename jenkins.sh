@@ -1,7 +1,6 @@
 source ~/.bashrc 
 cd .
-pwd
-ruby -v
+rvm gemset use alexandria
 rvm gemset list
 bundle install
 rake db:schema:load
