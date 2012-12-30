@@ -5,4 +5,4 @@ rvm_gemset_create_on_use_flag=1
 rvm_project_rvmrc_default=1
 
 # use ruby 1.9.3 with a specific gemset
-rvm ruby-1.9.3-p286@alexandria
+rvm ruby-1.9.3-p327@alexandria
