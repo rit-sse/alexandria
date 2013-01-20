@@ -43,6 +43,8 @@ group :development, :test do
   gem 'rspec_junit_formatter'
 end
 
+gem "haml-rails"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @reservation.user
+%p
+  %b Book:
+  = @reservation.book
+%p
+  %b Reserve at:
+  = @reservation.reserve_at
+%p
+  %b Fuffiled:
+  = @reservation.fuffiled
+%p
+  %b Expires at:
+  = @reservation.expires_at
+
+= link_to 'Edit', edit_reservation_path(@reservation)
+\|
+= link_to 'Back', reservations_path

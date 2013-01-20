@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @strike.user
+%p
+  %b Distributor:
+  = @strike.distributor
+%p
+  %b Message:
+  = @strike.message
+
+= link_to 'Edit', edit_strike_path(@strike)
+\|
+= link_to 'Back', strikes_path

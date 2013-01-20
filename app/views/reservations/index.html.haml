@@ -1,0 +1,27 @@
+%h1 Listing reservations
+
+%table
+  %tr
+    %th User
+    %th Book
+    %th Reserve at
+    %th Fuffiled
+    %th Expires at
+    %th
+    %th
+    %th
+
+  - @reservations.each do |reservation|
+    %tr
+      %td= reservation.user
+      %td= reservation.book
+      %td= reservation.reserve_at
+      %td= reservation.fuffiled
+      %td= reservation.expires_at
+      %td= link_to 'Show', reservation
+      %td= link_to 'Edit', edit_reservation_path(reservation)
+      %td= link_to 'Destroy', reservation, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Reservation', new_reservation_path

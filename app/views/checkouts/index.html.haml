@@ -1,0 +1,27 @@
+%h1 Listing checkouts
+
+%table
+  %tr
+    %th User
+    %th Distributor
+    %th Book
+    %th Checked out at
+    %th Checked in at
+    %th
+    %th
+    %th
+
+  - @checkouts.each do |checkout|
+    %tr
+      %td= checkout.user
+      %td= checkout.distributor
+      %td= checkout.book
+      %td= checkout.checked_out_at
+      %td= checkout.checked_in_at
+      %td= link_to 'Show', checkout
+      %td= link_to 'Edit', edit_checkout_path(checkout)
+      %td= link_to 'Destroy', checkout, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Checkout', new_checkout_path

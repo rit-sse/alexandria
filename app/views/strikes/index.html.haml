@@ -1,0 +1,23 @@
+%h1 Listing strikes
+
+%table
+  %tr
+    %th User
+    %th Distributor
+    %th Message
+    %th
+    %th
+    %th
+
+  - @strikes.each do |strike|
+    %tr
+      %td= strike.user
+      %td= strike.distributor
+      %td= strike.message
+      %td= link_to 'Show', strike
+      %td= link_to 'Edit', edit_strike_path(strike)
+      %td= link_to 'Destroy', strike, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Strike', new_strike_path
