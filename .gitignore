@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+#ignore omniauth config (which contains API keys)
+config/initializers/omniauth.rb
