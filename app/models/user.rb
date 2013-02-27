@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # Only permit omniauth accounts
   devise :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :database_authenticatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
