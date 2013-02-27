@@ -1,4 +1,8 @@
 Alexandria::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  get "home/welcome"
+
   resources :strikes
 
 
@@ -12,6 +16,8 @@ Alexandria::Application.routes.draw do
 
 
   resources :users
+
+  root :to => "home#welcome"
 
 
   # The priority is based upon order of creation:

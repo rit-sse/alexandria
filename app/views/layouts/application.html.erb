@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<!-- This is here to TEST auth, and should not be a permenant fixture in the final app. -->
+<% if user_signed_in? %>
+	User is logged in.
+<% else %>
+	<%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+<% end %>
+
+
 <%= yield %>
 
 </body>

@@ -34,16 +34,23 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', :require => false
 
-  gem 'cucumber-rails', :require => false
-
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 
   # Jenkins unit test formatting
   gem 'rspec_junit_formatter'
+
+  # Make error checking/viewing less horrible
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem "haml-rails"
+
+#for authentication
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
