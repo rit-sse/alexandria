@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @author.first_name
+%p
+  %b Last name:
+  = @author.last_name
+%p
+  %b Middle initial:
+  = @author.middle_initial
+
+= link_to 'Edit', edit_author_path(@author)
+\|
+= link_to 'Back', authors_path

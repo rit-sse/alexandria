@@ -1,4 +1,7 @@
 Alexandria::Application.routes.draw do
+  resources :authors
+
+
   resources :strikes
 
 
