@@ -14,7 +14,6 @@ d.each do |row|
 
 	book = Book.new(
 		:ISBN => isbn,
-		:author => author,
 		:title => title,
 		:publish_date => publish_date
 	)
