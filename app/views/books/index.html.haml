@@ -1,5 +1,10 @@
 %h1 Listing books
 
+= form_tag books_path, :method => :get do
+  %p
+    = text_field_tag :search, params[:search]
+    = submit_tag "Search", :name => nil
+
 %table
   %tr
     %th Isbn

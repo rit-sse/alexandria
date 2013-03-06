@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
 
 
 # Gems used only for assets and not required
@@ -41,9 +41,15 @@ group :development, :test do
 
   # Jenkins unit test formatting
   gem 'rspec_junit_formatter'
+
+  #for search
+  gem 'sunspot_solr'
 end
 
 gem "haml-rails"
+gem "mysql2" #needed for thinking-sphinx's SphinxQL even though we're using postgres
+gem 'sunspot_rails'
+gem 'progress_bar'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
