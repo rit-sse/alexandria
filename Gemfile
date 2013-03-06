@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -47,7 +47,8 @@ group :development, :test do
 end
 
 gem "haml-rails"
-gem "mysql2" #needed for thinking-sphinx's SphinxQL even though we're using postgres
+
+#for search
 gem 'sunspot_rails'
 gem 'progress_bar'
 
