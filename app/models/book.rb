@@ -3,4 +3,9 @@ class Book < ActiveRecord::Base
   belongs_to :checkout
   has_and_belongs_to_many :reservation
   has_and_belongs_to_many :author
+
+  searchable do
+    text :title, :ISBN, :author
+  end
+  
 end

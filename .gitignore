@@ -11,5 +11,12 @@
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log/*
 /tmp
+
+# Ignore solr search files
+solr/*
+
+# Ignore mac trash
+.DS_Store
+config/.DS_Store

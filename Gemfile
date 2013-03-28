@@ -42,9 +42,16 @@ group :development, :test do
 
   # Jenkins unit test formatting
   gem 'rspec_junit_formatter'
+
+  #for search
+  gem 'sunspot_solr'
 end
 
 gem "haml-rails"
+
+#for search
+gem 'sunspot_rails'
+gem 'progress_bar'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
