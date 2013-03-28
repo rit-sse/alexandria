@@ -20,3 +20,6 @@ solr/*
 # Ignore mac trash
 .DS_Store
 config/.DS_Store
+
+#ignore omniauth config (which contains API keys)
+config/initializers/omniauth.rb
