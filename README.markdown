@@ -15,3 +15,6 @@ Solr
 ----
 Solr is the search engine tool used in Alexandria. Once it is running, it will automatically index newly created book entries, but existing entries that are not indexed are ignored. Index entries manually by running `rake sunspot:reindex`.
 
+Authentication
+--------------
+**Do not check config/initializers/omniauth.rb into the repo. Our Google API keys are in there for auth stuff. Just don't do it. Seriously.**
