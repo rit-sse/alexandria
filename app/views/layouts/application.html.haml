@@ -12,7 +12,7 @@
       .navbar-inner
         .container
           %a.brand{ href: "#" }
-            %img.logo{ src: "logo.png"}
+            =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
             Alexandria
     .container      
       = yield
