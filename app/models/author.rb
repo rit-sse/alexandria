@@ -71,8 +71,20 @@ class Author < ActiveRecord::Base
       return {first_name: name_parts[0],
           middle_initial: name_parts[1].sub('.',''),
           last_name: name_parts[2]}
+    elsif name_parts.size == 4
+      if ["III", "Jr", "Jr."].include? name_parts[3]
+        return {first_name: name_parts[0],
+          middle_initial: name_parts[1].sub('.',''),
+          last_name: name_parts[2]
+          }
+      else
+        return {first_name: name_parts[0],
+          middle_initial: "#{name_parts[1]} #{name_parts[2]}".sub('.',''),
+          last_name: name_parts[3]
+          }
+      end
     else
-      raise ArgumentError, "Argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"  
+      raise ArgumentError, "Error with #{name} argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"  
     end
   end
 end
