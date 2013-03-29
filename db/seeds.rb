@@ -18,6 +18,13 @@ d.each do |row|
 		:publish_date => publish_date
 	)
 
+	author ||= ""
+
+	author.split(",").each do |i|
+		book.author << Author.find_or_create(i)
+	end
+
+
 	book.save
 
 	puts "Title: #{book.title}"
