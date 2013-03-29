@@ -8,4 +8,11 @@
     = csrf_meta_tags
 
   %body
-    = yield
+    .nav.navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{ href: "#" }
+            %img.logo{ src: "logo.png"}
+            Alexandria
+    .container      
+      = yield
