@@ -13,7 +13,10 @@
 %dl.dl-horizontal
   %dt Authors
   %dd
-    = @book.author
+    %ul.commas
+      - @book.author.each do |author|
+        %li
+          = link_to author.full_name, author
 
   %dt ISBN
   %dd 

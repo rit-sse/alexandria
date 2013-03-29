@@ -87,5 +87,9 @@ class Author < ActiveRecord::Base
       raise ArgumentError, "Error with #{name} argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"  
     end
   end
+
+  def full_name
+    "#{self.first_name} #{self.middle_initial} #{self.last_name}"
+  end
 end
 
