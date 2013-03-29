@@ -1,3 +1,5 @@
+require 'google_books'
+
 class Book < ActiveRecord::Base
   attr_accessible :ISBN, :UUID, :publish_date, :title
   belongs_to :checkout
@@ -6,6 +8,10 @@ class Book < ActiveRecord::Base
 
   searchable do
     text :title, :ISBN, :author
+  end
+
+  def google_book
+  	return GoogleBooks::API.search("isbn:#{self.ISBN}")
   end
   
 end
