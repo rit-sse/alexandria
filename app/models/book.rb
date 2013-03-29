@@ -6,12 +6,16 @@ class Book < ActiveRecord::Base
   has_and_belongs_to_many :reservation
   has_and_belongs_to_many :author
 
+  @google_book = nil
   searchable do
     text :title, :ISBN, :author
   end
 
   def google_book
-  	return GoogleBooks::API.search("isbn:#{self.ISBN}")
+    if not @google_book
+  	 @google_book = GoogleBooks::API.search("isbn:#{self.ISBN}").first
+    end
+    return @google_book
   end
   
 end
