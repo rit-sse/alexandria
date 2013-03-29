@@ -1,20 +1,28 @@
-%p#notice= notice
-
-%p
-  %b Isbn:
-  = @book.ISBN
-%p
-  %b Title:
+%h1
   = @book.title
-%p
-  %b Author:
-  = @book.author
-%p
-  %b Publish date:
-  = @book.publish_date
-%p
-  %b Uuid:
-  = @book.UUID
+.row
+  .span2
+    %img{src: @book.google_book.covers[:small], class: "img-polaroid"}
+  .span10
+    %p
+      = @book.google_book.description
+
+%h3
+  Bibliographic information
+
+%dl.dl-horizontal
+  %dt Authors
+  %dd
+    = @book.author
+
+  %dt ISBN
+  %dd 
+    =@book.ISBN
+
+  %dt Publish date
+  %dd
+    = @book.publish_date 
+
 
 = link_to 'Edit', edit_book_path(@book)
 \|
