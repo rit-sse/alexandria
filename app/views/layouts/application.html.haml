@@ -14,5 +14,16 @@
           %a.brand{ href: "#" }
             =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
             Alexandria
+
+          .pull-right
+            -if user_signed_in?
+              %ul.nav
+                %li
+                  %a{href:"#"}
+                    = current_user.email
+              = link_to "Sign out", destroy_user_session_path, class: "btn", method: :delete
+            -else
+              = link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn"
     .container      
+      
       = yield
