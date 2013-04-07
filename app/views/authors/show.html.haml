@@ -1,14 +1,9 @@
-%p#notice= notice
+%h1
+	= @author.full_name
 
-%p
-  %b First name:
-  = @author.first_name
-%p
-  %b Last name:
-  = @author.last_name
-%p
-  %b Middle initial:
-  = @author.middle_initial
+- @author.book.each do |book|
+	= book.title
+
 
 = link_to 'Edit', edit_author_path(@author)
 \|
