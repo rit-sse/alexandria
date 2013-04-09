@@ -84,4 +84,11 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    @books = Book.search{ fulltext params[:query] }.results
+    respond_to do |format|
+      format.json { render json: @books }
+    end
+  end
 end
