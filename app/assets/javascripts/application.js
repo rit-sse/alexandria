@@ -15,11 +15,14 @@
 //= require_tree .
 //= require twitter/bootstrap
 
+var a;
+var b;
+
 $(document).ready(function(){
 	$("#master-search").typeahead({
 		source: function(query, process){
 			$.ajax({
-				url: "books/search.json",
+				url: "/books/search.json",
 				data: {"query": query}
 			}).done(function( data ){
 				process( data );	
@@ -27,6 +30,7 @@ $(document).ready(function(){
 			
 		},
 		matcher: function(item){
+			item.toString = function(){return item.id};
 			return true;
 		},
 		sorter: function(item){
@@ -34,6 +38,9 @@ $(document).ready(function(){
 		},
 		highlighter: function(item){
 			return "<b>" + item.title + "</b>";
+		},
+		updater: function(item){
+			window.location = window.location.origin + "/books/" + item
 		},
 		minLength: 3
 	})
