@@ -15,8 +15,8 @@
             =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
             Alexandria
 
-          
-
+          %form.navbar-search.pull-left
+            %input.search-query.input-xlarge{ id: "master-search", type: "text", placeholder:"Search", "data-provide" => "typahead", autocomplete: "off"}          
           .pull-right
             -if user_signed_in?
               %ul.nav
@@ -26,8 +26,6 @@
             -else
               = link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn"
 
-          %form.navbar-search.pull-right
-            %input.search-query{ id: "master-search", type: "text", placeholder:"Search", "data-provide" => "typahead", autocomplete: "off"}
     .container      
       - if notice
         .alert.alert-success
