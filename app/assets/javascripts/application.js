@@ -30,8 +30,15 @@ $(document).ready(function(){
 				if(!data[0]){
 					data = [{
 						title: "No results found",
-						id: -1
+						id: "none",
+						none: true
 					}]
+				} else if(data.length > 8){
+					data[8] = {
+						title: "More results",
+						id: "more",
+						more: true
+					}
 				}
 				process( data );	
 			})
@@ -48,10 +55,15 @@ $(document).ready(function(){
 			return HandlebarsTemplates['search-item']({item: item});
 		},
 		updater: function(item){
-			if(item.toString() != "-1"){
+			if(item.toString() != "none" && item.toString() != "more"){
 				window.location = window.location.origin + "/books/" + item
 			}
+			if(item.toString() == "more" || item.toString() == "none"){
+				window.location = window.location.origin + "/books?search=" +
+					$("#master-search")[0].value;
+			}
 		},
-		minLength: 3
+		minLength: 3,
+		items: 9
 	})
 });

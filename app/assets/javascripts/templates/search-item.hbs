@@ -1,15 +1,30 @@
-<div>
-  {{item.title}}
-</div>
+{{! If the item is actually a book }}
+{{#if item.authors}}
+  <div>
+    {{item.title}}
+  </div>
 
-<div>
-  <ul class="commas">
-    {{#each item.authors}}
-      <li><small><em>
-        {{this.first_name}}
-        {{this.middle_initial}}
-        {{this.last_name}}
-      </em></small></li>
-    {{/each}}
-  </ul>
-</div>
+  <div>
+    <ul class="commas">
+      {{#each item.authors}}
+        <li><small><em>
+          {{this.first_name}}
+          {{this.middle_initial}}
+          {{this.last_name}}
+        </em></small></li>
+      {{/each}}
+    </ul>
+  </div>
+{{/if}}
+
+{{! If this is the "More results" placeholder}}
+{{#if item.more}}
+  <div class="more-results">
+    See more...
+  </div>
+{{/if}}
+
+{{! If there are no results }}
+{{#if item.none}}
+  No results found
+{{/if}}
