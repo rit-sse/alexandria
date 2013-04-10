@@ -24,8 +24,8 @@ $(document).ready(function(){
 	$("#master-search").typeahead({
 		source: function(query, process){
 			$.ajax({
-				url: "/books/search.json",
-				data: {"query": query}
+				url: "/books.json",
+				data: {"search": query}
 			}).done(function( data ){
 				if(!data[0]){
 					data = [{
