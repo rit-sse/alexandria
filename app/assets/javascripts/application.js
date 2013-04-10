@@ -25,7 +25,10 @@ $(document).ready(function(){
 		source: function(query, process){
 			$.ajax({
 				url: "/books.json",
-				data: {"search": query}
+				data: {
+					"search": query,
+					"limit": 9
+				}
 			}).done(function( data ){
 				if(!data[0]){
 					data = [{

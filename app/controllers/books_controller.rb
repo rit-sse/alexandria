@@ -6,6 +6,10 @@ class BooksController < ApplicationController
       fulltext params[:search]
     end
     @books = @search.results
+
+    if params[:limit]
+      @books = @books.first(params[:limit].to_i)
+    end
     #@books = Book.all
 
     respond_to do |format|
