@@ -6,6 +6,9 @@
     {{#if item.thumbnail}}
       <img src="{{item.thumbnail}}" class="master-search-thumbnail"/>
     {{/if}}
+    {{#unless item.thumbnail}}
+      <div class="blank-thumbnail-small"/>
+    {{/unless}}
   </div>
 
   <div class="span3">
