@@ -15,9 +15,7 @@ Alexandria::Application.routes.draw do
   resources :reservations
 
 
-  resources :books do
-    get 'search', on: :collection
-  end
+  resources :books
 
 
   resources :users
