@@ -59,13 +59,13 @@ ul.commas{
 	outline:none;
 
 	&:focus{
-		width:400px;
+		width:500px;
 
 	}
 }
 
 .navbar-search .typeahead{
-	width:400px;
+	width:500px;
 }
 
 .typeahead li{
@@ -77,4 +77,14 @@ ul.commas{
 	border-style:solid;
 	border-color:black;
 	border-width:1px;
+}
+
+.title{
+	h1{
+		margin-bottom: 0px
+	}
+	h2,h3,h4,h5,h6 {
+		margin-top:2px;
+		margin-left: 5px;
+	}
 }
