@@ -16,7 +16,7 @@
             Alexandria
 
           %form.navbar-search.pull-left{action: "/books"}
-            %input.search-query.input-xlarge{ id: "master-search", type: "text", placeholder:"Search", "data-provide" => "typahead", autocomplete: "off", name:"search"}          
+            %input{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search"}          
           .pull-right
             -if user_signed_in?
               %ul.nav

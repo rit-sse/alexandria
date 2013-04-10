@@ -13,6 +13,7 @@
  *= require twitter/bootstrap
  */
 
+@import "compass/css3/transition";
 
 body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -45,4 +46,35 @@ ul.commas{
 	text-align: center;
 	border-top: solid 1px grey;
 	padding-top: 5px	
+}
+
+#master-search{
+	width:200px;
+	
+	@include transition-delay(0s);
+	@include transition-duration(0.15s);
+	@include transition-property(all);
+	@include transition-timing-function(ease-in);
+
+	outline:none;
+
+	&:focus{
+		width:400px;
+
+	}
+}
+
+.navbar-search .typeahead{
+	width:400px;
+}
+
+.typeahead li{
+	overflow: hidden
+}
+
+.master-search-thumbnail{
+	height:50px;
+	border-style:solid;
+	border-color:black;
+	border-width:1px;
 }
