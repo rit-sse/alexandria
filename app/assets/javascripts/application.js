@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require handlebars.js
+//= require_tree ./templates
 //= require twitter/bootstrap
+//= require_tree .
 
 var a;
 var b;
@@ -37,7 +39,7 @@ $(document).ready(function(){
 			return item;
 		},
 		highlighter: function(item){
-			return "<b>" + item.title + "</b>";
+			return HandlebarsTemplates['search-item']({item: item});
 		},
 		updater: function(item){
 			window.location = window.location.origin + "/books/" + item
