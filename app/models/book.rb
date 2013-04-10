@@ -1,7 +1,7 @@
 require 'google_books'
 
 class Book < ActiveRecord::Base
-  attr_accessible :ISBN, :UUID, :publish_date, :title
+  attr_accessible :ISBN, :UUID, :publish_date, :title, :subtitle
   belongs_to :checkout
   has_and_belongs_to_many :reservation
   has_and_belongs_to_many :author

@@ -1,31 +1,36 @@
-%h1
-  = @book.title
+.title
+  %h1
+    = @book.title
+  %h4
+    %i
+      = @book.subtitle
+
 - if @book.google_book
   .row
     .span2
       %img{src: @book.google_book.covers[:small], class: "img-polaroid"}
     .span10
-      %p
-        = @book.google_book.description
+      %dl.dl-horizontal
+        %dt Authors
+        %dd
+          %ul.commas
+            - @book.author.each do |author|
+              %li
+                = link_to author.full_name, author
 
-%h3
-  Bibliographic information
+        %dt ISBN
+        %dd 
+          =@book.ISBN
 
-%dl.dl-horizontal
-  %dt Authors
-  %dd
-    %ul.commas
-      - @book.author.each do |author|
-        %li
-          = link_to author.full_name, author
+        %dt Publish date
+        %dd
+          = @book.publish_date 
 
-  %dt ISBN
-  %dd 
-    =@book.ISBN
+        %dt Description
+        %dd
+          = @book.google_book.description
 
-  %dt Publish date
-  %dd
-    = @book.publish_date 
+
 
 
 = link_to 'Edit', edit_book_path(@book)

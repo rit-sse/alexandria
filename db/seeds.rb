@@ -4,7 +4,15 @@ d = CSV.read(Rails.root.join("db", "data.csv"))
 d.shift
 
 d.each do |row|
-	title = row[0]
+	titles = row[0].split(":")
+	title = titles[0]
+	subtitle = ""
+
+	if(titles.length > 1)
+		subtitle = titles[1]
+	end
+
+
 	author = row[1]
 	publish_date = Date.new(row[2].to_i,1,1)
 	isbn = row[3]
@@ -15,6 +23,7 @@ d.each do |row|
 	book = Book.new(
 		:ISBN => isbn,
 		:title => title,
+		:subtitle => subtitle,
 		:publish_date => publish_date
 	)
 
