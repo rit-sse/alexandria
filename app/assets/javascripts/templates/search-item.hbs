@@ -1,0 +1,15 @@
+<div>
+  {{item.title}}
+</div>
+
+<div>
+  <ul class="commas">
+    {{#each item.authors}}
+      <li><small><em>
+        {{this.first_name}}
+        {{this.middle_initial}}
+        {{this.last_name}}
+      </em></small></li>
+    {{/each}}
+  </ul>
+</div>
