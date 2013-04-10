@@ -13,9 +13,19 @@ class Book < ActiveRecord::Base
 
   def google_book
     if not @google_book
-  	 @google_book = GoogleBooks::API.search("isbn:#{self.ISBN}").first
+      begin
+    	 @google_book = GoogleBooks::API.search("isbn:#{self.ISBN}").first
+      rescue
+        @google_book = nil
+      end
     end
     return @google_book
+  end
+
+  def as_json(options = {})
+    json = super(options)
+    json[:authors] = self.author.as_json(only: [:first_name, :last_name, :middle_initial])
+    json
   end
   
 end
