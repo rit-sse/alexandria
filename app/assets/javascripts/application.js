@@ -27,6 +27,12 @@ $(document).ready(function(){
 				url: "/books/search.json",
 				data: {"query": query}
 			}).done(function( data ){
+				if(!data[0]){
+					data = [{
+						title: "No results found",
+						id: -1
+					}]
+				}
 				process( data );	
 			})
 			
@@ -42,7 +48,9 @@ $(document).ready(function(){
 			return HandlebarsTemplates['search-item']({item: item});
 		},
 		updater: function(item){
-			window.location = window.location.origin + "/books/" + item
+			if(item.toString() != "-1"){
+				window.location = window.location.origin + "/books/" + item
+			}
 		},
 		minLength: 3
 	})
