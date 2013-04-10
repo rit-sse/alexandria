@@ -1,4 +1,5 @@
 require File.expand_path('../boot', __FILE__)
+require 'active_support/core_ext/numeric/bytes'
 
 require 'rails/all'
 
@@ -63,6 +64,8 @@ module Alexandria
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.cache_store = :memory_store, { size: 64.megabytes }
 
   end
 end

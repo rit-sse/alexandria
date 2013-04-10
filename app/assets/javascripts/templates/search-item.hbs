@@ -1,21 +1,31 @@
 {{! If the item is actually a book }}
 {{#unless item.more}}
 {{#unless item.none}}
-  <div>
-    {{item.title}}
+<div class="row">
+  <div class="span1">
+    {{#if item.thumbnail}}
+      <img src="{{item.thumbnail}}" class="master-search-thumbnail"/>
+    {{/if}}
   </div>
 
-  <div>
-    <ul class="commas">
-      {{#each item.authors}}
-        <li><small><em>
-          {{this.first_name}}
-          {{this.middle_initial}}
-          {{this.last_name}}
-        </em></small></li>
-      {{/each}}
-    </ul>
+  <div class="span3">
+    <div>
+      {{item.title}}
+    </div>
+
+    <div>
+      <ul class="commas">
+        {{#each item.authors}}
+          <li><small><em>
+            {{this.first_name}}
+            {{this.middle_initial}}
+            {{this.last_name}}
+          </em></small></li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
+</div>
 {{/unless}}
 {{/unless}}
 
