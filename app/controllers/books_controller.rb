@@ -10,7 +10,8 @@ class BooksController < ApplicationController
     if params[:limit]
       @books = @books.first(params[:limit].to_i)
     end
-    #@books = Book.all
+    
+    @query = params[:search]
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,32 +1,27 @@
-%h1 Listing books
-
-= form_tag books_path, :method => :get do
-  %p
-    = text_field_tag :search, params[:search]
-    = submit_tag "Search", :name => nil
-
-%table
-  %tr
-    %th Isbn
-    %th Title
-    %th Author
-    %th Publish date
-    %th Uuid
-    %th
-    %th
-    %th
-
-  - @books.each do |book|
-    %tr
-      %td= book.ISBN
-      %td= book.title
-      %td= book.author
-      %td= book.publish_date
-      %td= book.UUID
-      %td= link_to 'Show', book
-      %td= link_to 'Edit', edit_book_path(book)
-      %td= link_to 'Destroy', book, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Book', new_book_path
+%h3
+  - if @query
+    Results for
+    %i
+      = @query
+  - else
+    Listing Books
+- @books.each do |book|
+  .book-block
+    .row
+      .span1
+        - if book.thumbnail != ''
+          = link_to image_tag(book.thumbnail), book
+      .span10
+        %h4
+          = link_to book.title, book
+        %h5
+          = link_to book.subtitle, book
+        %ul.commas
+          - book.author.each do |author|
+            %li
+              %i
+                = link_to author.full_name, author
+        .isbn
+          %small
+            ISBN:
+            = book.ISBN
