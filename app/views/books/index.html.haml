@@ -6,24 +6,4 @@
   - else
     Listing Books
 - @books.each do |book|
-  .book-block
-    .row
-      .span1
-        - if book.thumbnail != ''
-          = link_to image_tag(book.thumbnail), book
-        - else
-          = link_to "", book, class: "blank-thumbnail"
-      .span10
-        %h4
-          = link_to book.title, book
-        %h5
-          = link_to book.subtitle, book
-        %ul.commas
-          - book.author.each do |author|
-            %li
-              %i
-                = link_to author.full_name, author
-        .isbn
-          %small
-            ISBN:
-            = book.ISBN
+  = render partial: "book", locals: {book: book}
