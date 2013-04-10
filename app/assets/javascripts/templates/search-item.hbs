@@ -1,5 +1,6 @@
 {{! If the item is actually a book }}
-{{#if item.authors}}
+{{#unless item.more}}
+{{#unless item.none}}
   <div>
     {{item.title}}
   </div>
@@ -15,7 +16,8 @@
       {{/each}}
     </ul>
   </div>
-{{/if}}
+{{/unless}}
+{{/unless}}
 
 {{! If this is the "More results" placeholder}}
 {{#if item.more}}
