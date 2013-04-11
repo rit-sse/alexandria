@@ -1,21 +1,17 @@
-%p#notice= notice
+%h4 Reservation Details
 
 %p
   %b User:
-  = @reservation.user
+  = @reservation.user.user_name
 %p
   %b Book:
-  = @reservation.book
+  = @reservation.book.title
 %p
-  %b Reserve at:
-  = @reservation.reserve_at
+  %b Reserved at:
+  = @reservation.reserve_at.strftime("%m/%d/%Y")
 %p
   %b Fuffiled:
   = @reservation.fuffiled
-%p
-  %b Expires at:
-  = @reservation.expires_at
-
-= link_to 'Edit', edit_reservation_path(@reservation)
-\|
-= link_to 'Back', reservations_path
+/ %p
+/   %b Expires at:
+/   = @reservation.expires_at
