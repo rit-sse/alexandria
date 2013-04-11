@@ -11,10 +11,14 @@
       %img{src: @book.google_book.covers[:small], class: "img-polaroid" }
       - if user_signed_in?
         .book-actions
-          = form_for :reservation, url: "/reservations" do |f|
-            = f.hidden_field "book_id", value: @book.id
-            = f.hidden_field "user_id", value: current_user.id
-            = f.submit "Make Reservation", class: "btn btn-primary"
+          - if Reservation.has_reservation(@book, current_user)
+            %a{href: "#", class:"btn btn-primary", disabled: true}
+              Already Reserved
+          - else  
+            = form_for :reservation, url: "/reservations" do |f|
+              = f.hidden_field "book_id", value: @book.id
+              = f.hidden_field "user_id", value: current_user.id
+              = f.submit "Make Reservation", class: "btn btn-primary"
     .span10
       %dl.dl-horizontal
         %dt Authors
