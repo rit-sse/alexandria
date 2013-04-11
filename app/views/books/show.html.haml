@@ -8,7 +8,7 @@
 - if @book.google_book
   .row
     .span2
-      %img{src: @book.google_book.covers[:small], class: "img-polaroid"}
+      %img{src: @book.google_book.covers[:small], class: "img-polaroid" }
     .span10
       %dl.dl-horizontal
         %dt Authors
@@ -29,10 +29,3 @@
         %dt Description
         %dd
           = @book.google_book.description
-
-
-
-
-= link_to 'Edit', edit_book_path(@book)
-\|
-= link_to 'Back', books_path
