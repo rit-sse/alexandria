@@ -11,14 +11,18 @@ class Book < ActiveRecord::Base
   end
 
   def google_book
-    # 
+    if @google_book
+      return @google_book
+    end
 
     begin
-      return GoogleBooks::API.search("isbn:#{self.ISBN}").first      
+      @google_book =  GoogleBooks::API.search("isbn:#{self.ISBN}").first      
       Rails.cache.write(self, google_book)
     rescue
       return nil
     end
+
+    return @google_book
   end
 
   def thumbnail
@@ -58,6 +62,17 @@ class Book < ActiveRecord::Base
 
   def reserved?
     Reservation.where(book_id: self.id, fuffiled: false).any?
+  end
+
+  def self.featured_book
+    book = nil
+
+    while !book
+      book = Book.find(rand(1..(Book.count-1)))
+      book = nil if book.google_book == nil
+    end
+
+    book
   end
 
 

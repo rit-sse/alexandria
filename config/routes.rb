@@ -20,7 +20,7 @@ Alexandria::Application.routes.draw do
 
   resources :users
 
-  root :to => "home#welcome"
+  root :to => "root#index"
 
 
   # The priority is based upon order of creation:
