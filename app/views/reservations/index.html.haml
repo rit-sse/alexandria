@@ -16,8 +16,9 @@
       %td
         = reservation.book.title
       %td
+        = form_for :checkout, url: "/checkouts", html: {class: "btn-form"} do |f|
+          = f.hidden_field "book", value: reservation.book.id
+          = f.hidden_field "patron_id", value: reservation.user.id
+          = f.submit "Check Out", class: "btn btn-success"
+
         = link_to "Delete", reservation, method: :delete, class: "btn btn-danger"
-
-%br
-
-= link_to 'New Reservation', new_reservation_path

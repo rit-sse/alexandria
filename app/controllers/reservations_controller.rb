@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.where(fuffiled: false)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+        format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
         format.json { render json: @reservation, status: :created, location: @reservation }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
+        format.html { redirect_to request.referer, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
