@@ -2,9 +2,4 @@
 	= @author.full_name
 
 - @author.book.each do |book|
-	= book.title
-
-
-= link_to 'Edit', edit_author_path(@author)
-\|
-= link_to 'Back', authors_path
+	= render partial: "books/book", locals: {book: book}
