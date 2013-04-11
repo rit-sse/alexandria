@@ -19,6 +19,9 @@
         = form_for :checkout, url: "/checkouts", html: {class: "btn-form"} do |f|
           = f.hidden_field "book", value: reservation.book.id
           = f.hidden_field "patron_id", value: reservation.user.id
-          = f.submit "Check Out", class: "btn btn-success"
+          - if reservation.book.checked_out?
+            = f.submit "Check Out", class: "btn btn-success", disabled:true
+          - else
+            = f.submit "Check Out", class: "btn btn-success"
 
         = link_to "Delete", reservation, method: :delete, class: "btn btn-danger"
