@@ -19,4 +19,8 @@ class Reservation < ActiveRecord::Base
   		errors.add(:user_id, "cannot have multiple reservations on one book")
   	end
   end
+
+  def self.has_reservation(book, user)
+  	!Reservation.where(user_id: user.id, book_id: book.id).empty?
+  end
 end
