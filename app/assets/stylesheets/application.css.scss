@@ -118,6 +118,22 @@ ul.commas{
 	background-color: #ddd;
 }
 
+.blank-thumbnail-large{
+	height:250px;
+	width:200px;
+	border: 1px solid black;
+	background-color: #ddd;
+}
+
 .book-actions{
 	margin-top:10px;
+}
+
+.btn-form{
+	margin:0;
+	display: inline;
+}
+
+.text-center{
+	text-align: center
 }

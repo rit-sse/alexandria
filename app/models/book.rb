@@ -2,7 +2,6 @@ require 'google_books'
 
 class Book < ActiveRecord::Base
   attr_accessible :ISBN, :UUID, :publish_date, :title, :subtitle
-  belongs_to :checkout
   has_many :reservation
   has_and_belongs_to_many :author
 
@@ -47,4 +46,20 @@ class Book < ActiveRecord::Base
     json
   end
   
+
+  def checked_out?
+    checkouts = Checkout.where(checked_in_at: nil).select do |i|
+      i.book.id == self.id
+    end
+
+    checkouts.any?
+  end
+
+
+  def reserved?
+    Reservation.where(book_id: self.id, fuffiled: false).any?
+  end
+
+
+
 end

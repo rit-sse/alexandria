@@ -1,21 +1,12 @@
-%p#notice= notice
-
 %p
   %b User:
-  = @checkout.user
-%p
-  %b Distributor:
-  = @checkout.distributor
+  = @checkout.patron.user_name
 %p
   %b Book:
-  = @checkout.book
+  = @checkout.book.title
 %p
   %b Checked out at:
   = @checkout.checked_out_at
 %p
   %b Checked in at:
   = @checkout.checked_in_at
-
-= link_to 'Edit', edit_checkout_path(@checkout)
-\|
-= link_to 'Back', checkouts_path

@@ -2,7 +2,7 @@ class CheckoutsController < ApplicationController
   # GET /checkouts
   # GET /checkouts.json
   def index
-    @checkouts = Checkout.all
+    @checkouts = Checkout.all_active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,11 +40,20 @@ class CheckoutsController < ApplicationController
   # POST /checkouts
   # POST /checkouts.json
   def create
+    if params[:checkout][:book]
+      params[:checkout][:book] = Book.find(params[:checkout][:book].to_i)
+    end
     @checkout = Checkout.new(params[:checkout])
 
     respond_to do |format|
       if @checkout.save
-        format.html { redirect_to @checkout, notice: 'Checkout was successfully created.' }
+        reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
+        if reservation
+          reservation.fuffiled = true
+          reservation.save
+        end
+
+        format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
         format.json { render json: @checkout, status: :created, location: @checkout }
       else
         format.html { render action: "new" }
@@ -56,11 +65,15 @@ class CheckoutsController < ApplicationController
   # PUT /checkouts/1
   # PUT /checkouts/1.json
   def update
+    if params[:checkout][:checked_in_at] and params[:checkout][:checked_in_at] == "now"
+      params[:checkout][:checked_in_at] = DateTime.now
+    end
+
     @checkout = Checkout.find(params[:id])
 
     respond_to do |format|
       if @checkout.update_attributes(params[:checkout])
-        format.html { redirect_to @checkout, notice: 'Checkout was successfully updated.' }
+        format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
