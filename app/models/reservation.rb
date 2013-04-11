@@ -1,5 +1,22 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :expires_at, :fuffiled, :reserve_at
+	after_initialize :default_values
+
+  attr_accessible :expires_at, :fuffiled, :reserve_at, :book_id, :user_id
   belongs_to :user
-  has_one :book
+  belongs_to :book
+
+  validates_presence_of :book_id, :user_id
+  validate :cannot_have_2_reservations_on_1_book
+
+  def default_values
+  	self.expires_at = DateTime.now + 1.week
+  	self.fuffiled = false
+  	self.reserve_at = DateTime.now
+  end
+
+  def cannot_have_2_reservations_on_1_book
+  	if !Reservation.where(user_id: self.user_id, book_id: self.book_id).empty?
+  		errors.add(:user_id, "cannot have multiple reservations on one book")
+  	end
+  end
 end
