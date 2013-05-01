@@ -16,13 +16,13 @@
 		.span4
 			.text-center
 				%br
-				%img{src: book.google_book.covers[:small], class: "img-polaroid"}
+				%img{src: book.google_book_data.img_small, class: "img-polaroid"}
 
 .row
 	- @books.each do |book|
 		.span4
 			%br
-			%p= truncate(book.google_book.description, length: 500)
+			%p= truncate(book.google_book_data.description, length: 500)
 
 %hr
 

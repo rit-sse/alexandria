@@ -3,6 +3,10 @@ require 'csv'
 d = CSV.read(Rails.root.join("db", "data.csv"))
 d.shift
 
+if Rails.env == "development"
+	d = d.first(5)
+end
+
 d.each do |row|
 	titles = row[0].split(":")
 	title = titles[0]
@@ -32,17 +36,21 @@ d.each do |row|
 	author.split(",").each do |i|
 		book.author << Author.find_or_create(i)
 	end
+	book.save
 
 	gbook = GoogleBookData.book_from_isbn(book.ISBN)
 	gbook.save
-
-	book.google_book_data = gbook
-
-	book.save
-
+	
+	gbook.book = book
+	gbook.save
 
 
 	puts "Title: #{book.title}"
 	puts "Author: #{book.author}"
-	puts "----------------"
+	puts "ISBN: #{book.ISBN}"
+	puts "**** Google Book ****"
+	puts book.google_book_data
+	puts "Description: #{book.google_book_data.description[0..300]}"
+	puts "================"
+
 end
