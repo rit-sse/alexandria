@@ -31,9 +31,10 @@ class Book < ActiveRecord::Base
   end
 
   def self.featured_book
-    all = Book.includes(:google_book_data).where("google_book_data.description IS NOT ''")
+    gb = GoogleBookData.arel_table
+    all = GoogleBookData.where(gb[:description].not_eq(""))
     index = (rand(0..(all.count-1)))
-    all[index]
+    all[index].book
   end
 
 
