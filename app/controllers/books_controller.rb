@@ -2,20 +2,25 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @search = Book.search do
-      fulltext params[:search]
-    end
-    @books = @search.results
+    books_with_isbn = Book.where(ISBN: params[:search])
+    if(books_with_isbn.any?)
+      redirect_to books_with_isbn.first
+    else
+      @search = Book.search do
+        fulltext params[:search]
+      end
+      @books = @search.results
 
-    if params[:limit]
-      @books = @books.first(params[:limit].to_i)
-    end
-    
-    @query = params[:search]
+      if params[:limit]
+        @books = @books.first(params[:limit].to_i)
+      end
+      
+      @query = params[:search]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @books }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @books }
+      end
     end
   end
 
