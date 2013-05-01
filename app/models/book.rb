@@ -37,6 +37,32 @@ class Book < ActiveRecord::Base
     all[index].book
   end
 
+  def self.add_by_isbn(isbn)
+    results =  GoogleBooks.search("isbn:#{isbn}")
+    book = Book.new
+    book.ISBN = isbn
+    if (results.total_items > 0)
+      gb = results.first
 
+      title = gb.title.split(":")
+      book.title = title[0]
+      book.subtitle = title[1] ? title[1] : ""
+
+      author = gb.authors
+      author ||= ""
+      author.split(",").each do |i|
+        book.author << Author.find_or_create(i)
+      end
+      book.save
+      gbook = GoogleBookData.book_from_isbn(book.ISBN)
+      gbook.save
+  
+      gbook.book = book
+      gbook.save
+    end
+
+    book.save
+    book
+  end
 
 end
