@@ -9,8 +9,8 @@
 
 .row
   .span2.text-center
-    - if @book.google_book 
-      %img{src: @book.google_book.covers[:small], class: "img-polaroid" }
+    - if @book.google_book_data.img_small != "" 
+      %img{src: @book.google_book_data.img_small, class: "img-polaroid" }
     -else
       .blank-thumbnail-large
 
@@ -54,7 +54,7 @@
       %dd
         = @book.publish_date 
 
-      - if @book.google_book 
+      - if @book.google_book_data.description != ""
         %dt Description
         %dd
-          = @book.google_book.description
+          = @book.google_book_data.description

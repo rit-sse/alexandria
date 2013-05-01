@@ -11,7 +11,7 @@ class Book < ActiveRecord::Base
   def as_json(options = {})
     json = super(options)
     json[:authors] = self.author.as_json(only: [:first_name, :last_name, :middle_initial])
-    json[:thumbnail] = self.thumbnail
+    json[:thumbnail] = self.google_book_data.img_thumbnail
 
     json
   end

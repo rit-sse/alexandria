@@ -1,8 +1,8 @@
 .book-block
   .row
     .span1
-      - if book.thumbnail != ''
-        = link_to image_tag(book.thumbnail), book
+      - if book.img_thumbnail != ''
+        = link_to image_tag(book.img_thumbnail), book
       - else
         = link_to "", book, class: "blank-thumbnail"
     .span10
