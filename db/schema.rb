@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501182201) do
+ActiveRecord::Schema.define(:version => 20130501214616) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20130501182201) do
   end
 
   create_table "google_book_data", :force => true do |t|
-    t.string   "description"
+    t.text     "description"
     t.string   "preview_link"
     t.string   "img_thumbnail"
     t.string   "img_small"
