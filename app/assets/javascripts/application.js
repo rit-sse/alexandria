@@ -17,8 +17,7 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-var a;
-var b;
+if (!window.location.origin) window.location.origin = window.location.protocol+"//"+window.location.host;
 
 $(document).ready(function(){
 	$("#master-search").typeahead({
