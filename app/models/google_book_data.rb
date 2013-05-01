@@ -15,7 +15,7 @@ class GoogleBookData < ActiveRecord::Base
       ).update_data(isbn)
   end
 
-  def update_data(isbn)
+  def update_data(isbn = self.book.ISBN)
     results =  GoogleBooks.search("isbn:#{isbn}")
 
     if (results.total_items > 0)
@@ -30,4 +30,9 @@ class GoogleBookData < ActiveRecord::Base
 
     self
   end
+
+  def self.update_all_null
+    GoogleBookData.where(description: "").each{|i| i.update_data.save}
+  end
+
 end
