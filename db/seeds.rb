@@ -33,8 +33,14 @@ d.each do |row|
 		book.author << Author.find_or_create(i)
 	end
 
+	gbook = GoogleBookData.book_from_isbn(book.ISBN)
+	gbook.save
+
+	book.google_book_data = gbook
 
 	book.save
+
+
 
 	puts "Title: #{book.title}"
 	puts "Author: #{book.author}"
