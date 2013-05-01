@@ -1,46 +1,11 @@
-require 'google_books'
-
 class Book < ActiveRecord::Base
   attr_accessible :ISBN, :UUID, :publish_date, :title, :subtitle
   has_many :reservation
   has_and_belongs_to_many :author
-  belongs_to :google_book_data
+  has_one :google_book_data
 
-  @google_book = nil
   searchable do
     text :title, :ISBN, :author
-  end
-
-  def google_book
-    if @google_book
-      return @google_book
-    end
-
-    begin
-      @google_book =  GoogleBooks::API.search("isbn:#{self.ISBN}").first      
-      Rails.cache.write(self, google_book)
-    rescue
-      return nil
-    end
-
-    return @google_book
-  end
-
-  def thumbnail
-    if Rails.cache.read(self)
-       return Rails.cache.read(self)
-    end
-
-    g_book = google_book
-    thumbnail = ""
-    
-    if g_book
-      thumbnail = g_book.covers[:thumbnail]
-    end
-    
-    Rails.cache.write(self, thumbnail)
-    return thumbnail
-
   end
 
   def as_json(options = {})
@@ -66,14 +31,9 @@ class Book < ActiveRecord::Base
   end
 
   def self.featured_book
-    book = nil
-
-    while !book
-      book = Book.find(rand(1..(Book.count-1)))
-      book = nil if book.google_book == nil
-    end
-
-    book
+    all = Book.includes(:google_book_data).where("google_book_data.description IS NOT ''")
+    index = (rand(0..(all.count-1)))
+    all[index]
   end
 
 

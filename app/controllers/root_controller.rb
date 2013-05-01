@@ -1,7 +1,7 @@
 class RootController < ApplicationController
 	def index
-		@books = (100..102).to_a.map do |i|
-			Book.find(i)
+		@books = (0..2).to_a.map do |i|
+			Book.featured_book
 		end
 	end
 end
