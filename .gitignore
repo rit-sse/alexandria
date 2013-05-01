@@ -23,3 +23,6 @@ config/.DS_Store
 
 #ignore omniauth config (which contains API keys)
 config/initializers/omniauth.rb
+
+Gemfile.lock
+public/assets/*
