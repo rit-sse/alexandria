@@ -1,6 +1,9 @@
 class BooksController < ApplicationController
   # GET /books
   # GET /books.json
+  before_filter :authenticate!
+  skip_before_filter :authenticate!, :only => [:index, :show]
+
   def index
     books_with_isbn = Book.where(ISBN: params[:search])
     if(books_with_isbn.any?)
@@ -54,11 +57,11 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(params[:book])
+    @book = Book.add_by_isbn(params[:ISBN])
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: "Book was successfully created." }
         format.json { render json: @book, status: :created, location: @book }
       else
         format.html { render action: "new" }
