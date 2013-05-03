@@ -9,10 +9,15 @@ class BooksController < ApplicationController
     if(books_with_isbn.any?)
       redirect_to books_with_isbn.first
     else
-      @search = Book.search do
-        fulltext params[:search]
+
+      if params[:search]
+        @search = Book.search do
+          fulltext params[:search]
+        end
+        @books = @search.results
+      else
+        @books = Book.all
       end
-      @books = @search.results
 
       if params[:limit]
         @books = @books.first(params[:limit].to_i)
