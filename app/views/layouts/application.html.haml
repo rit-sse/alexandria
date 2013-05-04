@@ -12,9 +12,11 @@
     .nav.navbar.navbar-fixed-top
       .navbar-inner
         .container
-          %a.brand{ href: "/" }
+          %a.brand.visible-desktop{ href: "/" }
             =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
             Alexandria
+          %a.brand.hidden-desktop{ href: "/" }
+            =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
 
           %form.navbar-search.pull-left{action: "/books"}
             %input{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search", autofocus: "autofocus"}          
