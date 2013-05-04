@@ -20,7 +20,8 @@
 		.span4
 			.text-center
 				%br
-				%img{src: book.google_book_data.img_small, class: "img-polaroid"}
+				= link_to book do
+					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
 
 .row.hidden-phone
 	- @books.each do |book|
