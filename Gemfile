@@ -82,3 +82,5 @@ gem 'googlebooks'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'yaml_db'
