@@ -59,8 +59,17 @@ ul.commas{
 
 	outline:none;
 
-	&:focus{
-		width:450px;
+	@media (min-width: 767px) 
+	{
+		&:focus{
+			width:450px;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 979px){
+		&:focus{
+			width:300px;
+		}	
 	}
 }
 
