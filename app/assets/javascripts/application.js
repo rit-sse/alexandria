@@ -68,4 +68,6 @@ $(document).ready(function(){
 		minLength: 3,
 		items: 9
 	})
+
+	$("#isbn-add").focus();
 });

@@ -10,15 +10,19 @@
 					=link_to book.title, book
 				%i
 					%h5= book.subtitle
+				.row.visible-phone
+					%br
+					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
+					%hr
 
-.row
+.row.hidden-phone
 	- @books.each do |book|
 		.span4
 			.text-center
 				%br
 				%img{src: book.google_book_data.img_small, class: "img-polaroid"}
 
-.row
+.row.hidden-phone
 	- @books.each do |book|
 		.span4
 			%br
