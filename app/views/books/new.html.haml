@@ -1,5 +1,4 @@
-%h1 New book
-
-= render 'form'
-
-= link_to 'Back', books_path
+= form_tag("/books") do |f|
+  %h2
+    ISBN
+  %input{ type: "text", placeholder: "isbn", name: "ISBN", id: "isbn-add" }
