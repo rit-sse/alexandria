@@ -13,7 +13,7 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'compass-rails'
-  gem 'bootstrap-sass-rails'
+  gem 'bootstrap-sass-rails', '~> 2.3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
