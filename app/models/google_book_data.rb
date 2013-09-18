@@ -1,7 +1,6 @@
 require 'googlebooks'
 
 class GoogleBookData < ActiveRecord::Base
-  attr_accessible :book_id, :description, :img_large, :img_medium, :img_small, :img_thumbnail, :preview_link
   belongs_to :book
 
   def self.book_from_isbn(isbn)
