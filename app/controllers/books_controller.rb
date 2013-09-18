@@ -33,7 +33,6 @@ class BooksController < ApplicationController
   end
 
   # GET /books/new
-  # GET /books/new.json
   def new
     @book = Book.new
   end
@@ -58,8 +57,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # PUT /books/1
-  # PUT /books/1.json
+  # PATCH/PUT /books/1
+  # PATCH/PUT /books/1.json
   def update
     respond_to do |format|
       if @book.update_attributes(book_params)

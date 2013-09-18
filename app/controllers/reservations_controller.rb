@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+
   # GET /reservations
   # GET /reservations.json
   def index
@@ -12,7 +13,6 @@ class ReservationsController < ApplicationController
   end
 
   # GET /reservations/new
-  # GET /reservations/new.json
   def new
     @reservation = Reservation.new
   end
@@ -37,8 +37,8 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # PUT /reservations/1
-  # PUT /reservations/1.json
+  # PATCH/PUT /reservations/1
+  # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
       if @reservation.update_attributes(reservation_params)
@@ -55,7 +55,6 @@ class ReservationsController < ApplicationController
   # DELETE /reservations/1.json
   def destroy
     @reservation.destroy
-
     respond_to do |format|
       format.html { redirect_to reservations_url }
       format.json { head :no_content }

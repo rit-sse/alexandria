@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
+
   # GET /authors
   # GET /authors.json
   def index
@@ -12,7 +13,6 @@ class AuthorsController < ApplicationController
   end
 
   # GET /authors/new
-  # GET /authors/new.json
   def new
     @author = Author.new
   end
@@ -37,8 +37,8 @@ class AuthorsController < ApplicationController
     end
   end
 
-  # PUT /authors/1
-  # PUT /authors/1.json
+  # PATCH/PUT /authors/1
+  # PATCH/PUT /authors/1.json
   def update
     respond_to do |format|
       if @author.update_attributes(author_params)
@@ -55,7 +55,6 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1.json
   def destroy
     @author.destroy
-
     respond_to do |format|
       format.html { redirect_to authors_url }
       format.json { head :no_content }

@@ -1,5 +1,6 @@
 class StrikesController < ApplicationController
   before_action :set_strike, only: [:show, :edit, :update, :destroy]
+
   # GET /strikes
   # GET /strikes.json
   def index
@@ -12,7 +13,6 @@ class StrikesController < ApplicationController
   end
 
   # GET /strikes/new
-  # GET /strikes/new.json
   def new
     @strike = Strike.new
   end
@@ -37,8 +37,8 @@ class StrikesController < ApplicationController
     end
   end
 
-  # PUT /strikes/1
-  # PUT /strikes/1.json
+  # PATCH/PUT /strikes/1
+  # PATCH/PUT /strikes/1.json
   def update
     respond_to do |format|
       if @strike.update_attributes(strike_params)
@@ -55,7 +55,6 @@ class StrikesController < ApplicationController
   # DELETE /strikes/1.json
   def destroy
     @strike.destroy
-
     respond_to do |format|
       format.html { redirect_to strikes_url }
       format.json { head :no_content }
