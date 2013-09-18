@@ -1,46 +1,30 @@
 class StrikesController < ApplicationController
+  before_action :set_strike, only: [:show, :edit, :update, :destroy]
   # GET /strikes
   # GET /strikes.json
   def index
     @strikes = Strike.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @strikes }
-    end
   end
 
   # GET /strikes/1
   # GET /strikes/1.json
   def show
-    @strike = Strike.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @strike }
-    end
   end
 
   # GET /strikes/new
   # GET /strikes/new.json
   def new
     @strike = Strike.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @strike }
-    end
   end
 
   # GET /strikes/1/edit
   def edit
-    @strike = Strike.find(params[:id])
   end
 
   # POST /strikes
   # POST /strikes.json
   def create
-    @strike = Strike.new(params[:strike])
+    @strike = Strike.new(strike_params)
 
     respond_to do |format|
       if @strike.save
@@ -56,10 +40,8 @@ class StrikesController < ApplicationController
   # PUT /strikes/1
   # PUT /strikes/1.json
   def update
-    @strike = Strike.find(params[:id])
-
     respond_to do |format|
-      if @strike.update_attributes(params[:strike])
+      if @strike.update_attributes(strike_params)
         format.html { redirect_to @strike, notice: 'Strike was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,7 +54,6 @@ class StrikesController < ApplicationController
   # DELETE /strikes/1
   # DELETE /strikes/1.json
   def destroy
-    @strike = Strike.find(params[:id])
     @strike.destroy
 
     respond_to do |format|
@@ -80,4 +61,15 @@ class StrikesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_strike
+      @author = Strike.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def strike_params
+      params.require(:strike).permit(:message)
+    end
 end
