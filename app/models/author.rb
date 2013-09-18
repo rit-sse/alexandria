@@ -13,7 +13,7 @@ class Author < ActiveRecord::Base
 
   has_and_belongs_to_many :book
 
-  # validates_length_of :middle_initial, :maximum => 1, :allow_blank => false
+  validates :middle_initial, length: {maximum: 1}
   validates_with UniqueAuthorValidator
 
   def detault_values
