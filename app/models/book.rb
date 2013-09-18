@@ -1,15 +1,15 @@
 class Book < ActiveRecord::Base
-  has_many :reservation
-  has_and_belongs_to_many :author
+  has_many :reservations
+  has_and_belongs_to_many :authors
   has_one :google_book_data
 
   searchable do
-    text :title, :ISBN, :author
+    text :title, :ISBN, :authors
   end
 
   def as_json(options = {})
     json = super(options)
-    json[:authors] = self.author.as_json(only: [:first_name, :last_name, :middle_initial])
+    json[:authors] = self.authors.as_json(only: [:first_name, :last_name, :middle_initial])
     json[:thumbnail] = self.google_book_data.img_thumbnail
 
     json
@@ -50,7 +50,7 @@ class Book < ActiveRecord::Base
       author = gb.authors
       author ||= ""
       author.split(",").each do |i|
-        book.author << Author.find_or_create(i)
+        book.authors << Author.find_or_create(i)
       end
       book.save
       gbook = GoogleBookData.book_from_isbn(book.ISBN)

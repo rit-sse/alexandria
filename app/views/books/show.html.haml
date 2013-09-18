@@ -42,7 +42,7 @@
       %dt Authors
       %dd
         %ul.commas
-          - @book.author.each do |author|
+          - @book.authors.each do |author|
             %li
               = link_to author.full_name, author
 
