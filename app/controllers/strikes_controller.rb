@@ -29,9 +29,9 @@ class StrikesController < ApplicationController
     respond_to do |format|
       if @strike.save
         format.html { redirect_to @strike, notice: 'Strike was successfully created.' }
-        format.json { render json: @strike, status: :created, location: @strike }
+        format.json { render action: 'show', status: :created, location: @strike }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @strike.errors, status: :unprocessable_entity }
       end
     end
@@ -41,11 +41,11 @@ class StrikesController < ApplicationController
   # PATCH/PUT /strikes/1.json
   def update
     respond_to do |format|
-      if @strike.update_attributes(strike_params)
+      if @strike.update(strike_params)
         format.html { redirect_to @strike, notice: 'Strike was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @strike.errors, status: :unprocessable_entity }
       end
     end
