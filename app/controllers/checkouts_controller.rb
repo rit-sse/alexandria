@@ -77,7 +77,7 @@ class CheckoutsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_checkout
-      @author = Checkout.find(params[:id])
+      @checkout = Checkout.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
