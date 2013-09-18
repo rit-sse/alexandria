@@ -1,5 +1,6 @@
 Alexandria
 ==========
+[![Build Status](https://travis-ci.org/rit-sse/alexandria.png?branch=master)](https://travis-ci.org/rit-sse/alexandria)
 
 Library Management System by the Society of Software Engineers
 
