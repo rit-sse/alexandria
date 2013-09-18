@@ -29,9 +29,9 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
-        format.json { render json: @reservation, status: :created, location: @reservation }
+        format.json { render action: 'show', status: :created, location: @reservation }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -41,11 +41,11 @@ class ReservationsController < ApplicationController
   # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
-      if @reservation.update_attributes(reservation_params)
+      if @reservation.update(reservation_params)
         format.html { redirect_to request.referer, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end

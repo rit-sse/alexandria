@@ -38,9 +38,9 @@ class CheckoutsController < ApplicationController
         end
 
         format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
-        format.json { render json: @checkout, status: :created, location: @checkout }
+        format.json { render action: 'show', status: :created, location: @checkout }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
       end
     end
@@ -54,11 +54,11 @@ class CheckoutsController < ApplicationController
     end
 
     respond_to do |format|
-      if @checkout.update_attributes(checkout_params)
+      if @checkout.update(checkout_params)
         format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
       end
     end
