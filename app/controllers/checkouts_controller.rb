@@ -1,40 +1,24 @@
 class CheckoutsController < ApplicationController
+  before_action :set_checkout, only: [:show, :edit, :update, :destroy]
   # GET /checkouts
   # GET /checkouts.json
   def index
     @checkouts = Checkout.all_active
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @checkouts }
-    end
   end
 
   # GET /checkouts/1
   # GET /checkouts/1.json
   def show
-    @checkout = Checkout.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @checkout }
-    end
   end
 
   # GET /checkouts/new
   # GET /checkouts/new.json
   def new
     @checkout = Checkout.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @checkout }
-    end
   end
 
   # GET /checkouts/1/edit
   def edit
-    @checkout = Checkout.find(params[:id])
   end
 
   # POST /checkouts
@@ -43,7 +27,7 @@ class CheckoutsController < ApplicationController
     if params[:checkout][:book]
       params[:checkout][:book] = Book.find(params[:checkout][:book].to_i)
     end
-    @checkout = Checkout.new(params[:checkout])
+    @checkout = Checkout.new(checkout_params)
 
     respond_to do |format|
       if @checkout.save
@@ -69,10 +53,8 @@ class CheckoutsController < ApplicationController
       params[:checkout][:checked_in_at] = DateTime.now
     end
 
-    @checkout = Checkout.find(params[:id])
-
     respond_to do |format|
-      if @checkout.update_attributes(params[:checkout])
+      if @checkout.update_attributes(checkout_params)
         format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,7 +67,6 @@ class CheckoutsController < ApplicationController
   # DELETE /checkouts/1
   # DELETE /checkouts/1.json
   def destroy
-    @checkout = Checkout.find(params[:id])
     @checkout.destroy
 
     respond_to do |format|
@@ -93,4 +74,14 @@ class CheckoutsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_checkout
+      @author = Checkout.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def checkout_params
+      params.require(:checkout).permit(:checked_in_at, :checked_out_at, :book, :patron_id)
+    end
 end

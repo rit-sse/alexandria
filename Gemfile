@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -10,19 +10,21 @@ gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'compass-rails'
-  gem 'bootstrap-sass-rails', '~> 2.3.2.1'
+gem 'sass-rails',   '~> 4.0.0'
+gem "compass-rails", "~> 2.0.alpha.0"
+gem 'bootstrap-sass-rails', '~> 2.3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-  gem 'handlebars_assets'
-end
+gem 'uglifier', '>= 1.0.3'
+gem 'handlebars_assets'
+
 
 gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
 
 # Test-related gems
 group :development, :test do
@@ -43,7 +45,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
 
   #for search
-  gem 'sunspot_solr'
+  gem 'sunspot_solr', '~> 2.0.0'
 
   # Make error checking/viewing less horrible
   gem "better_errors"
@@ -51,7 +53,7 @@ group :development, :test do
 end
 
 group :production do
- gem 'pg'
+  gem 'pg'
 end
 
 gem "haml-rails"
@@ -67,6 +69,7 @@ gem 'omniauth-google-oauth2'
 
 #for google books
 gem 'googlebooks'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -4,16 +4,16 @@ class Author < ActiveRecord::Base
       other_authors = Author.where(first_name: record.first_name,
                                    middle_initial: record.middle_initial,
                                    last_name: record.last_name)
+      other_authors.delete_if{|x| x.id == record.id}
       if other_authors.size != 0
         record.errors[:base] << "This author already exists in the system"
       end
     end
   end
-  
-  attr_accessible :first_name, :last_name, :middle_initial
+
   has_and_belongs_to_many :book
 
-  validates_length_of :middle_initial, :maximum => 1, :allow_blank => false
+  validates :middle_initial, length: {maximum: 1}
   validates_with UniqueAuthorValidator
 
   def detault_values
@@ -30,7 +30,7 @@ class Author < ActiveRecord::Base
   end
 
   ##
-  # Finds an Author when given a single string name. 
+  # Finds an Author when given a single string name.
   #
   # It parses the name, expecting it to be space deliniated into 3 parts.
   # It expects strings in the format "<first> <last>" or "<first> <middle> <last>"
@@ -43,9 +43,9 @@ class Author < ActiveRecord::Base
  end
 
   ##
-  # Finds an author with the given name. If there is no such author, 
+  # Finds an author with the given name. If there is no such author,
   # creates one and returns that. If created, it DOES save it.
-  # 
+  #
   # Uses the parsing rules: "<first> <last>" or "<first> <middle> <last>"
   def self.find_or_create(name)
     author = find_with_name(name)

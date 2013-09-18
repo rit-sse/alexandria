@@ -24,7 +24,7 @@ describe StrikesController do
   # Strike. As you add validations to Strike, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "user" => "" }
+    { "user" => User.new('User') }
   end
 
   # This should return the minimal set of values that should be in the session
