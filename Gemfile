@@ -67,9 +67,6 @@ gem 'omniauth-google-oauth2'
 #for google books
 gem 'googlebooks'
 
-# Backwards compatibility support for attr_accessible in Rails 4.
-# TODO: Remove this and use strong_parameters instead.
-gem 'protected_attributes'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
