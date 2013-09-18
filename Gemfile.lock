@@ -258,7 +258,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sqlite3
   sunspot_rails
-  sunspot_solr
+  sunspot_solr (~> 2.0.0)
   therubyracer
   uglifier (>= 1.0.3)
   webrat
