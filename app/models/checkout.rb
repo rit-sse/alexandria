@@ -1,7 +1,6 @@
 class Checkout < ActiveRecord::Base
   after_initialize :default_values
-  
-  attr_accessible :checked_in_at, :checked_out_at, :book, :patron_id
+
   belongs_to :user, class_name: "User", :foreign_key => :patron_id
   belongs_to :user, :foreign_key => :distributor_id
   has_one :book
