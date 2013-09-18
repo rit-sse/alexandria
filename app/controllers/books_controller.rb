@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
-  # GET /books
-  # GET /books.json
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate!
   skip_before_filter :authenticate!, :only => [:index, :show]
 
+  # GET /books
+  # GET /books.json
   def index
     books_with_isbn = Book.where(ISBN: params[:search])
     if(books_with_isbn.any?)
@@ -22,41 +23,23 @@ class BooksController < ApplicationController
       if params[:limit]
         @books = @books.first(params[:limit].to_i)
       end
-      
       @query = params[:search]
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @books }
-      end
     end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    @book = Book.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @book }
-    end
   end
 
   # GET /books/new
   # GET /books/new.json
   def new
     @book = Book.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @book }
-    end
   end
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
   end
 
   # POST /books
@@ -78,10 +61,8 @@ class BooksController < ApplicationController
   # PUT /books/1
   # PUT /books/1.json
   def update
-    @book = Book.find(params[:id])
-
     respond_to do |format|
-      if @book.update_attributes(params[:book])
+      if @book.update_attributes(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { head :no_content }
       else
@@ -94,12 +75,21 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
-
     respond_to do |format|
       format.html { redirect_to books_url }
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_book
+      @author = Book.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def book_params
+      params.require(:book).permit(:ISBN, :UUID, :publish_date, :title, :subtitle)
+    end
 end

@@ -42,7 +42,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
 
   #for search
-  gem 'sunspot_solr'
+  gem 'sunspot_solr', '~> 2.0.0'
 
   # Make error checking/viewing less horrible
   gem "better_errors"
@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :production do
- gem 'pg'
+  gem 'pg'
 end
 
 gem "haml-rails"
