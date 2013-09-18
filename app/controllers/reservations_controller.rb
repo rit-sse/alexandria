@@ -1,46 +1,30 @@
 class ReservationsController < ApplicationController
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   # GET /reservations
   # GET /reservations.json
   def index
     @reservations = Reservation.where(fuffiled: false)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @reservations }
-    end
   end
 
   # GET /reservations/1
   # GET /reservations/1.json
   def show
-    @reservation = Reservation.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @reservation }
-    end
   end
 
   # GET /reservations/new
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @reservation }
-    end
   end
 
   # GET /reservations/1/edit
   def edit
-    @reservation = Reservation.find(params[:id])
   end
 
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(params[:reservation])
+    @reservation = Reservation.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
@@ -56,10 +40,8 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1
   # PUT /reservations/1.json
   def update
-    @reservation = Reservation.find(params[:id])
-
     respond_to do |format|
-      if @reservation.update_attributes(params[:reservation])
+      if @reservation.update_attributes(reservation_params)
         format.html { redirect_to request.referer, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,7 +54,6 @@ class ReservationsController < ApplicationController
   # DELETE /reservations/1
   # DELETE /reservations/1.json
   def destroy
-    @reservation = Reservation.find(params[:id])
     @reservation.destroy
 
     respond_to do |format|
@@ -80,4 +61,15 @@ class ReservationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_reservation
+      @author = Reservation.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def reservation_params
+      params.require(:reservation).permit(:expires_at, :fuffiled, :reserve_at, :book_id, :user_id)
+    end
 end
