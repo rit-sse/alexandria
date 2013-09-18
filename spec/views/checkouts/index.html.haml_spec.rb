@@ -2,16 +2,17 @@ require 'spec_helper'
 
 describe "checkouts/index" do
   before(:each) do
+    @
     assign(:checkouts, [
       stub_model(Checkout,
-        :user => "",
+        :patron => "",
         :distributor => "",
         :book => "",
         :checked_out_at => "",
         :checked_in_at => ""
       ),
       stub_model(Checkout,
-        :user => "",
+        :patron => "",
         :distributor => "",
         :book => "",
         :checked_out_at => "",

@@ -63,7 +63,7 @@ gem 'sunspot_rails'
 gem 'progress_bar'
 
 #for authentication
-gem 'devise'
+gem 'devise', '~> 3.1.0'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 

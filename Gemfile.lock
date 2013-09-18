@@ -247,7 +247,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.alpha.0)
   cucumber-rails
   database_cleaner
-  devise
+  devise (~> 3.1.0)
   googlebooks
   haml-rails
   handlebars_assets
