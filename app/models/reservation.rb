@@ -3,7 +3,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :book
 
-  validates_presence_of :book_id, :user_id
+  validates :book_id, :user_id, presence: true
   validate :cannot_have_2_reservations_on_1_book
 
   def default_values

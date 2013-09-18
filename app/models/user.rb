@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:google_oauth2]
   devise :database_authenticatable
 
-
-  
   attr_accessor :password
 
   has_many :reservations
