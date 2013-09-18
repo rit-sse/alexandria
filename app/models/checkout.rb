@@ -5,7 +5,7 @@ class Checkout < ActiveRecord::Base
   belongs_to :user, :foreign_key => :distributor_id
   has_one :book
 
-  validates_presence_of :checked_out_at
+  validates :checked_out_at, presence: true
 
   def default_values
     self.checked_out_at ||= DateTime.now
