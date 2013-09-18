@@ -31,7 +31,7 @@ describe BooksController do
   # in order to pass any filters (e.g. authentication) defined in
   # BooksController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {"warden.user.user.key" => session["warden.user.user.key"]}
   end
 
   describe "GET index" do

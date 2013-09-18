@@ -23,6 +23,9 @@ gem 'handlebars_assets'
 
 gem 'jquery-rails'
 
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
 # Test-related gems
 group :development, :test do
   gem 'therubyracer'
