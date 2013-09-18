@@ -1,5 +1,4 @@
 class Book < ActiveRecord::Base
-  attr_accessible :ISBN, :UUID, :publish_date, :title, :subtitle
   has_many :reservation
   has_and_belongs_to_many :author
   has_one :google_book_data
