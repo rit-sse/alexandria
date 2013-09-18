@@ -1,5 +1,6 @@
 class CheckoutsController < ApplicationController
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
+
   # GET /checkouts
   # GET /checkouts.json
   def index
@@ -12,7 +13,6 @@ class CheckoutsController < ApplicationController
   end
 
   # GET /checkouts/new
-  # GET /checkouts/new.json
   def new
     @checkout = Checkout.new
   end
@@ -46,8 +46,8 @@ class CheckoutsController < ApplicationController
     end
   end
 
-  # PUT /checkouts/1
-  # PUT /checkouts/1.json
+  # PATCH/PUT /checkouts/1
+  # PATCH/PUT /checkouts/1.json
   def update
     if params[:checkout][:checked_in_at] and params[:checkout][:checked_in_at] == "now"
       params[:checkout][:checked_in_at] = DateTime.now
@@ -68,12 +68,12 @@ class CheckoutsController < ApplicationController
   # DELETE /checkouts/1.json
   def destroy
     @checkout.destroy
-
     respond_to do |format|
       format.html { redirect_to checkouts_url }
       format.json { head :no_content }
     end
   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_checkout
