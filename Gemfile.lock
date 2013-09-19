@@ -247,6 +247,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass-rails (~> 3.0.0)
   capybara
+  coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0.alpha.0)
   cucumber-rails
   database_cleaner
