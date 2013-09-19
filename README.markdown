@@ -1,6 +1,9 @@
 Alexandria
 ==========
-[![Build Status](https://travis-ci.org/rit-sse/alexandria.png?branch=master)](https://travis-ci.org/rit-sse/alexandria)
+[![Build Status](https://secure.travis-ci.org/rit-sse/alexandria.png?branch=master)](http://travis-ci.org/rit-sse/alexandria)
+[![Dependency Status](https://gemnasium.com/rit-sse/alexandria.png)](https://gemnasium.com/rit-sse/alexandria)
+[![Code Climate](https://codeclimate.com/github/rit-sse/alexandria.png)](https://codeclimate.com/github/rit-sse/alexandria)
+
 
 Library Management System by the Society of Software Engineers
 
