@@ -24,7 +24,7 @@ describe StrikesController do
   # Strike. As you add validations to Strike, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "user" => User.new('User') }
+    { "message" => "MyString" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -110,8 +110,8 @@ describe StrikesController do
         # specifies that the Strike created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Strike.any_instance.should_receive(:update_attributes).with({ "user" => "" })
-        put :update, {:id => strike.to_param, :strike => { "user" => "" }}, valid_session
+        Strike.any_instance.should_receive(:update_attributes).with({ "message" => "" })
+        put :update, {:id => strike.to_param, :strike => { "message" => "" }}, valid_session
       end
 
       it "assigns the requested strike as @strike" do
