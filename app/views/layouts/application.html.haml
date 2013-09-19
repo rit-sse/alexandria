@@ -9,27 +9,26 @@
     %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
 
   %body
-    .nav.navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.navbar-brand.visible-lg{ href: "/" }
-            =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
-            Alexandria
-          %a.navbar-brand.hidden-lg{ href: "/" }
-            =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
+    %nav.navbar.navbar-default.navbar-fixed-top
+      .navbar-header
+        %a.navbar-brand.visible-lg{ href: "/" }
+          =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
+          Alexandria
+        %a.navbar-brand.hidden-lg{ href: "/" }
+          =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
 
-          %form.navbar-search.pull-left{action: "/books"}
-            %input{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search", autofocus: "autofocus"}
-          .pull-right
-            -if user_signed_in?
-              %ul.nav
-                %li
-                  =link_to current_user.email, user_path(current_user)
-              = link_to "Add Book", "/books/new", class: "btn btn-default"
-              = link_to "Sign out", destroy_user_session_path, class: "btn btn-default", method: :delete
+      %form.navbar-form.navbar-left{action: "/books"}
+        %input.form-control{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search", autofocus: "autofocus"}
+      .navbar-right
+        -if user_signed_in?
+          %ul.nav
+            %li
+              =link_to current_user.email, user_path(current_user)
+          = link_to "Add Book", "/books/new", class: "btn btn-default navbar-btn"
+          = link_to "Sign out", destroy_user_session_path, class: "btn btn-default navbar-btn", method: :delete
 
-            -else
-              = link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-default"
+        -else
+          = link_to "Sign in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-default navbar-btn"
 
     .container
       - if notice
