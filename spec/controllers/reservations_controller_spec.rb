@@ -122,7 +122,7 @@ describe ReservationsController do
         # specifies that the Reservation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Reservation.any_instance.should_receive(:update_attributes).with({"fuffiled" => true})
+        Reservation.any_instance.should_receive(:update).with({"fuffiled" => true})
         put :update, {:id => reservation.to_param, :reservation => {"fuffiled" => true}}, valid_session
       end
 

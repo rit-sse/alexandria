@@ -124,7 +124,7 @@ describe CheckoutsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         date = DateTime.new
-        Checkout.any_instance.should_receive(:update_attributes).with({ "checked_out_at" => date })
+        Checkout.any_instance.should_receive(:update).with({ "checked_out_at" => date })
         put :update, {:id => checkout.to_param, :checkout => { "checked_out_at" => date }}, valid_session
       end
 

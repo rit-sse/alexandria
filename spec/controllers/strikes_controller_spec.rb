@@ -110,7 +110,7 @@ describe StrikesController do
         # specifies that the Strike created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Strike.any_instance.should_receive(:update_attributes).with({ "message" => "" })
+        Strike.any_instance.should_receive(:update).with({ "message" => "" })
         put :update, {:id => strike.to_param, :strike => { "message" => "" }}, valid_session
       end
 
