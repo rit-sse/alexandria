@@ -119,7 +119,7 @@ describe BooksController do
         # specifies that the Book created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Book.any_instance.should_receive(:update_attributes).with({ "ISBN" => "MyString" })
+        Book.any_instance.should_receive(:update).with({ "ISBN" => "MyString" })
         put :update, {:id => book.to_param, :book => { "ISBN" => "MyString" }}, valid_session
       end
 
