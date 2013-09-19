@@ -4,28 +4,28 @@
 
 .row
 	- @books.each do |book|
-		.span4
+		.col-md-4
 			.text-center
 				%h4
 					=link_to book.title, book
 				%i
 					%h5= book.subtitle
-				.row.visible-phone
+				.row.visible-sm
 					%br
 					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
 					%hr
 
-.row.hidden-phone
+.row.hidden-sm
 	- @books.each do |book|
-		.span4
+		.col-md-4
 			.text-center
 				%br
 				= link_to book do
 					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
 
-.row.hidden-phone
+.row.hidden-sm
 	- @books.each do |book|
-		.span4
+		.col-md-4
 			%br
 			%p= truncate(book.google_book_data.description, length: 500)
 
