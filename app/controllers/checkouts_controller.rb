@@ -50,9 +50,8 @@ class CheckoutsController < ApplicationController
   # PUT /checkouts/1.json
   def update
     if params[:checkout][:checked_in_at] and params[:checkout][:checked_in_at] == "now"
-      params[:checkout][:checked_in_at] = DateTime.now
+       @checkout.checked_in_at = DateTime.now
     end
-
     respond_to do |format|
       if @checkout.update_attributes(checkout_params)
         format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
@@ -82,6 +81,6 @@ class CheckoutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def checkout_params
-      params.require(:checkout).permit(:checked_in_at, :checked_out_at, :patron_id)
+      params.require(:checkout).permit( :checked_out_at, :patron_id)
     end
 end
