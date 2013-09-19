@@ -42,7 +42,7 @@ d.each do |row|
 	author ||= ""
 
 	author.split(",").each do |i|
-		book.author << Author.find_or_create(i)
+		book.authors << Author.find_or_create(i)
 	end
 	book.save
 
@@ -54,7 +54,7 @@ d.each do |row|
 
 
 	puts "Title: #{book.title}"
-	puts "Author: #{book.author}"
+	puts "Author: #{book.authors}"
 	puts "ISBN: #{book.ISBN}"
 	puts "**** Google Book ****"
 	puts book.google_book_data
