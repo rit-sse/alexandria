@@ -21,9 +21,7 @@
         %input.form-control{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search", autofocus: "autofocus"}
       .navbar-right
         -if user_signed_in?
-          %ul.nav
-            %li
-              =link_to current_user.email, user_path(current_user)
+          =link_to current_user.email, user_path(current_user)
           = link_to "Add Book", "/books/new", class: "btn btn-default navbar-btn"
           = link_to "Sign out", destroy_user_session_path, class: "btn btn-default navbar-btn", method: :delete
 
