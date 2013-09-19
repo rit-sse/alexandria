@@ -1,10 +1,10 @@
 require 'googlebooks'
 
-class GoogleBookData < ActiveRecord::Base
+class GoogleBookDatum < ActiveRecord::Base
   belongs_to :book
 
   def self.book_from_isbn(isbn)
-    GoogleBookData.new( 
+    GoogleBookDatum.new( 
         description:   "",
         img_thumbnail: "",
         img_small:     "",
@@ -31,7 +31,7 @@ class GoogleBookData < ActiveRecord::Base
   end
 
   def self.update_all_null
-    GoogleBookData.where(description: "").each{|i| i.update_data.save}
+    GoogleBookDatum.where(description: "").each{|i| i.update_data.save}
   end
 
 end

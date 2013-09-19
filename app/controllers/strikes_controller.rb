@@ -1,5 +1,6 @@
 class StrikesController < ApplicationController
   before_action :set_strike, only: [:show, :edit, :update, :destroy]
+
   # GET /strikes
   # GET /strikes.json
   def index
@@ -12,7 +13,6 @@ class StrikesController < ApplicationController
   end
 
   # GET /strikes/new
-  # GET /strikes/new.json
   def new
     @strike = Strike.new
   end
@@ -29,23 +29,23 @@ class StrikesController < ApplicationController
     respond_to do |format|
       if @strike.save
         format.html { redirect_to @strike, notice: 'Strike was successfully created.' }
-        format.json { render json: @strike, status: :created, location: @strike }
+        format.json { render action: 'show', status: :created, location: @strike }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @strike.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /strikes/1
-  # PUT /strikes/1.json
+  # PATCH/PUT /strikes/1
+  # PATCH/PUT /strikes/1.json
   def update
     respond_to do |format|
-      if @strike.update_attributes(strike_params)
+      if @strike.update(strike_params)
         format.html { redirect_to @strike, notice: 'Strike was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @strike.errors, status: :unprocessable_entity }
       end
     end
@@ -55,7 +55,6 @@ class StrikesController < ApplicationController
   # DELETE /strikes/1.json
   def destroy
     @strike.destroy
-
     respond_to do |format|
       format.html { redirect_to strikes_url }
       format.json { head :no_content }
@@ -65,7 +64,7 @@ class StrikesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_strike
-      @author = Strike.find(params[:id])
+      @strike = Strike.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
