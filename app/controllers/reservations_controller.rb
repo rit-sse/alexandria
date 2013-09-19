@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+
   # GET /reservations
   # GET /reservations.json
   def index
@@ -12,7 +13,6 @@ class ReservationsController < ApplicationController
   end
 
   # GET /reservations/new
-  # GET /reservations/new.json
   def new
     @reservation = Reservation.new
   end
@@ -29,23 +29,23 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
-        format.json { render json: @reservation, status: :created, location: @reservation }
+        format.json { render action: 'show', status: :created, location: @reservation }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /reservations/1
-  # PUT /reservations/1.json
+  # PATCH/PUT /reservations/1
+  # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
-      if @reservation.update_attributes(reservation_params)
+      if @reservation.update(reservation_params)
         format.html { redirect_to request.referer, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -55,7 +55,6 @@ class ReservationsController < ApplicationController
   # DELETE /reservations/1.json
   def destroy
     @reservation.destroy
-
     respond_to do |format|
       format.html { redirect_to reservations_url }
       format.json { head :no_content }
@@ -65,7 +64,7 @@ class ReservationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
-      @author = Reservation.find(params[:id])
+      @reservation = Reservation.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
