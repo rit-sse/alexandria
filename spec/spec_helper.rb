@@ -35,4 +35,12 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.before(:type => :controller) do
+    request.env["HTTP_REFERER"] = "/"
+    request.env["devise.mapping"] = Devise.mappings[:user]
+  end
+
+  #Devise and things
+  config.include Devise::TestHelpers, :type => :controller
 end

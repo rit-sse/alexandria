@@ -9,7 +9,7 @@ describe Author do
     author = Author.create_with_name("First M. Last")
     expect(author.first_name).to eq ("First")
     expect(author.middle_initial).to eq("M")
-  expect(author.last_name).to eq("Last")    
+    expect(author.last_name).to eq("Last")
   end
 
   it "finds a user properly with find_with_name" do
@@ -19,8 +19,8 @@ describe Author do
 
   full_name = "#{first_name} #{middle_initial} #{last_name}"
 
-  author = Author.new(first_name: first_name, 
-              middle_initial: middle_initial, 
+  author = Author.new(first_name: first_name,
+              middle_initial: middle_initial,
               last_name: last_name)
   author.save
 

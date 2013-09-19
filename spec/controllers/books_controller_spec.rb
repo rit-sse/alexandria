@@ -20,6 +20,15 @@ require 'spec_helper'
 
 describe BooksController do
 
+  before(:each) do
+    @user = User.create(email: 'user@email.com', password: 'password')
+    sign_in @user
+  end
+
+  after(:each) do
+    @user.destroy
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # update the return value of this method accordingly.
@@ -31,7 +40,7 @@ describe BooksController do
   # in order to pass any filters (e.g. authentication) defined in
   # BooksController. Be sure to keep this updated too.
   def valid_session
-    {"warden.user.user.key" => session["warden.user.user.key"]}
+    {}
   end
 
   describe "GET index" do
@@ -89,14 +98,14 @@ describe BooksController do
       it "assigns a newly created but unsaved book as @book" do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {:book => { "ISBN" => "invalid value" }}, valid_session
+        post :create, {:book => { "reservatioon" => 9 }}, valid_session
         assigns(:book).should be_a_new(Book)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {:book => { "ISBN" => "invalid value" }}, valid_session
+        post :create, {:book => { "reservation" => 9 }}, valid_session
         response.should render_template("new")
       end
     end

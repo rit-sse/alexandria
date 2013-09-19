@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate!
-  skip_before_filter :authenticate!, :only => [:index, :show]
+  skip_before_filter :authenticate!, :only => [:index, :show, :create]
 
   # GET /books
   # GET /books.json

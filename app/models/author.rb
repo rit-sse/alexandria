@@ -11,7 +11,7 @@ class Author < ActiveRecord::Base
     end
   end
 
-  has_and_belongs_to_many :book
+  has_and_belongs_to_many :books
 
   validates :middle_initial, length: {maximum: 1}
   validates_with UniqueAuthorValidator
