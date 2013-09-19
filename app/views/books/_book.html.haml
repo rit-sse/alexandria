@@ -11,7 +11,7 @@
       %h5
         = link_to book.subtitle, book
       %ul.commas
-        - book.author.each do |author|
+        - book.authors.each do |author|
           %li
             %i
               = link_to author.full_name, author
