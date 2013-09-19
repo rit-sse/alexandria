@@ -8,7 +8,7 @@
 
 
 .row
-  .span2.text-center
+  .col-md-2.text-center
     - if @book.google_book_data.img_small != "" 
       %img{src: @book.google_book_data.img_small, class: "img-polaroid" }
     -else
@@ -37,7 +37,7 @@
               = f.hidden_field "book_id", value: @book.id
               = f.hidden_field "user_id", value: current_user.id
               = f.submit "Make Reservation", class: "btn btn-primary"
-  .span10
+  .col-md-10
     %dl.dl-horizontal
       %dt Authors
       %dd

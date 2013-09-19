@@ -12,7 +12,7 @@ gem 'sqlite3'
 # in production environments by default.
 gem 'sass-rails',   '~> 4.0.0'
 gem "compass-rails", "~> 2.0.alpha.0"
-gem 'bootstrap-sass-rails', '~> 2.3.2.1'
+gem 'bootstrap-sass-rails', '~> 3.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platforms => :ruby
