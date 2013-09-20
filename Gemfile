@@ -68,6 +68,10 @@ gem 'omniauth-google-oauth2'
 #for google books
 gem 'googlebooks'
 
+#for Library of Congress Classification
+gem 'zoom', :git => 'https://github.com/bricestacey/ruby-zoom.git'
+gem 'marc'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
