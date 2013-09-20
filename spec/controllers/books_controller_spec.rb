@@ -33,7 +33,7 @@ describe BooksController do
   # Book. As you add validations to Book, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "ISBN" => "MyString" }
+    { "ISBN" => "9780199273133" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -78,18 +78,18 @@ describe BooksController do
     describe "with valid params" do
       it "creates a new Book" do
         expect do
-          post :create, {:book => valid_attributes}, valid_session
+          post :create, valid_attributes, valid_session
         end.to change(Book, :count).by(1)
       end
 
       it "assigns a newly created book as @book" do
-        post :create, {:book => valid_attributes}, valid_session
+        post :create, valid_attributes, valid_session
         assigns(:book).should be_a(Book)
         assigns(:book).should be_persisted
       end
 
       it "redirects to the created book" do
-        post :create, {:book => valid_attributes}, valid_session
+        post :create, valid_attributes, valid_session
         response.should redirect_to(Book.last)
       end
     end
@@ -98,14 +98,14 @@ describe BooksController do
       it "assigns a newly created but unsaved book as @book" do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {:book => { "reservatioon" => 9 }}, valid_session
+        post :create, {"ISBN" => "9780199273133", :book => { "reservation" => 9 }}, valid_session
         assigns(:book).should be_a_new(Book)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {:book => { "reservation" => 9 }}, valid_session
+        post :create, {"ISBN" => "9780199273133", :book => { "reservation" => 9 }}, valid_session
         response.should render_template("new")
       end
     end

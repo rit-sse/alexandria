@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  include Lccable
   has_many :reservations
   has_and_belongs_to_many :authors
   has_one :google_book_data
@@ -44,6 +45,8 @@ class Book < ActiveRecord::Base
       title = gb.title.split(":")
       book.title = title[0]
       book.subtitle = title[1] ? title[1] : ""
+      book.publish_date = gb.published_date
+      book.get_lcc
 
       author = gb.authors
       author ||= ""
