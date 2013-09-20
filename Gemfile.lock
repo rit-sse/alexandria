@@ -37,12 +37,6 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
-    capybara (2.1.0)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
     chunky_png (1.2.8)
     coderay (1.1.0)
     coffee-rails (4.0.0)
@@ -58,17 +52,6 @@ GEM
       sass (~> 3.1)
     compass-rails (2.0.alpha.0)
       compass (>= 0.12.2, < 0.14)
-    cucumber (1.3.8)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.3)
-      gherkin (~> 2.12.1)
-      multi_json (>= 1.7.5, < 2.0)
-      multi_test (>= 0.0.2)
-    cucumber-rails (1.4.0)
-      capybara (>= 1.1.2)
-      cucumber (>= 1.2.0)
-      nokogiri (>= 1.5.0)
-      rails (>= 3.0.0)
     database_cleaner (1.1.1)
     debug_inspector (0.0.2)
     devise (3.1.0)
@@ -84,8 +67,6 @@ GEM
       multipart-post (~> 1.2.0)
     fattr (2.2.1)
     fssm (0.2.10)
-    gherkin (2.12.1)
-      multi_json (~> 1.3)
     googlebooks (0.0.7)
       httparty
     haml (4.0.3)
@@ -123,7 +104,6 @@ GEM
     mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.8.0)
-    multi_test (0.0.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     nokogiri (1.6.0)
@@ -235,8 +215,6 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
     yaml_db (0.2.3)
 
 PLATFORMS
@@ -246,9 +224,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass-rails (~> 3.0.0)
-  capybara
   compass-rails (~> 2.0.alpha.0)
-  cucumber-rails
   database_cleaner
   devise (~> 3.1.0)
   googlebooks
