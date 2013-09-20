@@ -12,53 +12,53 @@ d = CSV.read(Rails.root.join("db", "data.csv"))
 d.shift
 
 if Rails.env == "development"
-	d = d.first(5)
+  d = d.first(5)
 end
 
 d.each do |row|
-	titles = row[0].split(":")
-	title = titles[0]
-	subtitle = ""
+  titles = row[0].split(":")
+  title = titles[0]
+  subtitle = ""
 
-	if(titles.length > 1)
-		subtitle = titles[1]
-	end
-
-
-	author = row[1]
-	publish_date = Date.new(row[2].to_i,1,1)
-	isbn = row[3]
-	tags = row[4]
-	tags = tags.split(", ") if tags != nil
-	height_total = row[5]
-
-	book = Book.new(
-		:ISBN => isbn,
-		:title => title,
-		:subtitle => subtitle,
-		:publish_date => publish_date
-	)
-
-	author ||= ""
-
-	author.split(",").each do |i|
-		book.authors << Author.find_or_create(i)
-	end
-	book.save
-
-	gbook = GoogleBookData.book_from_isbn(book.ISBN)
-	gbook.save
-	
-	gbook.book = book
-	gbook.save
+  if(titles.length > 1)
+    subtitle = titles[1]
+  end
 
 
-	puts "Title: #{book.title}"
-	puts "Author: #{book.authors}"
-	puts "ISBN: #{book.ISBN}"
-	puts "**** Google Book ****"
-	puts book.google_book_data
-	puts "Description: #{book.google_book_data.description[0..300]}"
-	puts "================"
+  author = row[1]
+  publish_date = Date.new(row[2].to_i,1,1)
+  isbn = row[3]
+  tags = row[4]
+  tags = tags.split(", ") if tags != nil
+  height_total = row[5]
+
+  book = Book.new(
+    :ISBN => isbn,
+    :title => title,
+    :subtitle => subtitle,
+    :publish_date => publish_date
+  )
+
+  author ||= ""
+
+  author.split(",").each do |i|
+    book.authors << Author.find_or_create(i)
+  end
+  book.save
+
+  gbook = GoogleBookData.book_from_isbn(book.ISBN)
+  gbook.save
+
+  gbook.book = book
+  gbook.save
+
+
+  puts "Title: #{book.title}"
+  puts "Author: #{book.authors}"
+  puts "ISBN: #{book.ISBN}"
+  puts "**** Google Book ****"
+  puts book.google_book_data
+  puts "Description: #{book.google_book_data.description[0..300]}"
+  puts "================"
 
 end

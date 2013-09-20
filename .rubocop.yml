@@ -104,9 +104,6 @@ SpaceInsideParens:
 StringLiterals:
   Enabled: false
 
-Tab:
-  Enabled: false
-
 TrailingBlankLines:
   Enabled: false
 
