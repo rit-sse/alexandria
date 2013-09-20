@@ -27,3 +27,4 @@ config/initializers/omniauth.rb
 
 public/assets/*
 db/data.yml
+coverage

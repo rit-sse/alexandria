@@ -35,10 +35,9 @@ group :development, :test do
 
 
   gem 'rspec'
+  gem 'coveralls', require: false
   gem 'webrat'
-  gem 'capybara'
   gem 'rspec-rails'
-  gem 'cucumber-rails', :require => false
 
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
@@ -71,6 +70,10 @@ gem 'omniauth-google-oauth2'
 
 #for google books
 gem 'googlebooks'
+
+#for Library of Congress Classification
+gem 'zoom', :git => 'https://github.com/bricestacey/ruby-zoom.git'
+gem 'marc'
 
 
 # To use ActiveModel has_secure_password
