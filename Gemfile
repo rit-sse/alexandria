@@ -33,6 +33,7 @@ group :development, :test do
 
 
   gem 'rspec'
+  gem 'coveralls', require: false
   gem 'webrat'
   gem 'rspec-rails'
 
