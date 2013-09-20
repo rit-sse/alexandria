@@ -1,9 +1,9 @@
-= form_for @author do |f|
-  - if @author.errors.any?
+= form_for author do |f|
+  - if author.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@author.errors.count, "error")} prohibited this author from being saved:"
+      %h2= "#{pluralize(author.errors.count, "error")} prohibited this author from being saved:"
       %ul
-        - @author.errors.full_messages.each do |msg|
+        - author.errors.full_messages.each do |msg|
           %li= msg
 
   .field
