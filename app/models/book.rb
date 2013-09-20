@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  include Lccable
   has_many :reservations
   has_and_belongs_to_many :authors
   has_one :google_book_data
@@ -14,7 +15,6 @@ class Book < ActiveRecord::Base
 
     json
   end
-  
 
   def checked_out?
     checkouts = Checkout.where(checked_in_at: nil).select do |i|
@@ -46,6 +46,8 @@ class Book < ActiveRecord::Base
       title = gb.title.split(":")
       book.title = title[0]
       book.subtitle = title[1] ? title[1] : ""
+      book.publish_date = gb.published_date
+      book.get_lcc
 
       author = gb.authors
       author ||= ""
@@ -55,7 +57,7 @@ class Book < ActiveRecord::Base
       book.save
       gbook = GoogleBookData.book_from_isbn(book.ISBN)
       gbook.save
-  
+
       gbook.book = book
       gbook.save
     end

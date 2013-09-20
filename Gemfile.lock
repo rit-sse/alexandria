@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/bricestacey/ruby-zoom.git
+  revision: 9a3787008e0385f8d9085bbfb2b27096e1bcb528
+  specs:
+    zoom (0.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +106,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    marc (0.7.1)
     mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
@@ -233,6 +240,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   libv8 (~> 3.11.8)
+  marc
   omniauth
   omniauth-google-oauth2
   pg
@@ -250,3 +258,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   webrat
   yaml_db
+  zoom!
