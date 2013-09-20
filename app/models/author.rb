@@ -16,7 +16,7 @@ class Author < ActiveRecord::Base
   validates :middle_initial, length: {maximum: 1}
   validates_with UniqueAuthorValidator
 
-  def detault_values
+  def default_values
     self.middle_initial ||= ""
   end
 
