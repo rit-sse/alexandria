@@ -4,7 +4,7 @@ class GoogleBookData < ActiveRecord::Base
   belongs_to :book
 
   def self.book_from_isbn(isbn)
-    GoogleBookData.new( 
+    GoogleBookData.new(
         description:   "",
         img_thumbnail: "",
         img_small:     "",

@@ -4,7 +4,7 @@ Devise.setup do |config|
 
   # Secret key (added so the app won't crash on Travis)
    config.secret_key = '584854020abf9f54e095756e0960b2aff0eb6e44924e8a2c14196829004820fec1713e7fd9a005634bcfb1f3e7dde34f60d186a2f7a317aa6ea59da2a31e671c'
-  
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

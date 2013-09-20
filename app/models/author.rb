@@ -64,7 +64,7 @@ class Author < ActiveRecord::Base
     name_parts = name.split(' ')
 
     if name_parts.size == 2
-      return {first_name: name_parts[0], 
+      return {first_name: name_parts[0],
           middle_initial: '',
           last_name: name_parts[1]}
     elsif name_parts.size == 3
@@ -84,7 +84,7 @@ class Author < ActiveRecord::Base
           }
       end
     else
-      raise ArgumentError, "Error with #{name} argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"  
+      raise ArgumentError, "Error with #{name} argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"
     end
   end
 

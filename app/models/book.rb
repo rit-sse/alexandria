@@ -14,7 +14,7 @@ class Book < ActiveRecord::Base
 
     json
   end
-  
+
 
   def checked_out?
     checkouts = Checkout.where(checked_in_at: nil).select do |i|
@@ -55,7 +55,7 @@ class Book < ActiveRecord::Base
       book.save
       gbook = GoogleBookData.book_from_isbn(book.ISBN)
       gbook.save
-  
+
       gbook.book = book
       gbook.save
     end
