@@ -15,7 +15,6 @@ class Book < ActiveRecord::Base
     json
   end
 
-
   def checked_out?
     checkouts = Checkout.where(checked_in_at: nil).select do |i|
       i.book.id == self.id
@@ -23,7 +22,6 @@ class Book < ActiveRecord::Base
 
     checkouts.any?
   end
-
 
   def reserved?
     Reservation.where(book_id: self.id, fuffiled: false).any?
@@ -40,7 +38,7 @@ class Book < ActiveRecord::Base
     results =  GoogleBooks.search("isbn:#{isbn}")
     book = Book.new
     book.ISBN = isbn
-    if (results.total_items > 0)
+    if results.total_items > 0
       gb = results.first
 
       title = gb.title.split(":")

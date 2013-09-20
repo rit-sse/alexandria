@@ -15,7 +15,7 @@ class Reservation < ActiveRecord::Base
   def cannot_have_2_reservations_on_1_book
     reservations = Reservation.where(user_id: user.id, book_id: book.id, fuffiled: false)
     reservations = reservations.where('id != ?', self.id)
-    if !reservations.empty?
+    unless reservations.empty?
       errors.add(:user_id, "cannot have multiple reservations on one book")
     end
   end

@@ -2,34 +2,10 @@
 # The point is for the user to remove these configuration records
 # one by one as the offences are removed from the code base.
 
-AlignHash:
-  Enabled: false
-
-AndOr:
-  Enabled: false
-
 Documentation:
   Enabled: false
 
-EmptyLines:
-  Enabled: false
-
-EndAlignment:
-  Enabled: false
-
-FavorUnlessOverNegatedIf:
-  Enabled: false
-
-FinalNewline:
-  Enabled: false
-
 HashSyntax:
-  Enabled: false
-
-IfUnlessModifier:
-  Enabled: false
-
-IndentationWidth:
   Enabled: false
 
 LeadingCommentSpace:
@@ -39,18 +15,6 @@ LineLength:
   Enabled: false
 
 MethodLength:
-  Enabled: false
-
-NilComparison:
-  Enabled: false
-
-NumericLiterals:
-  Enabled: false
-
-ParenthesesAroundCondition:
-  Enabled: false
-
-ParenthesesAsGroupedExpression:
   Enabled: false
 
 RedundantSelf:
@@ -81,9 +45,6 @@ SpaceInsideParens:
   Enabled: false
 
 StringLiterals:
-  Enabled: false
-
-TrailingBlankLines:
   Enabled: false
 
 UselessAssignment:

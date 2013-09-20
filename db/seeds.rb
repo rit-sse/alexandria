@@ -11,25 +11,20 @@ require 'csv'
 d = CSV.read(Rails.root.join("db", "data.csv"))
 d.shift
 
-if Rails.env == "development"
-  d = d.first(5)
-end
+d = d.first(5) if Rails.env == "development"
 
 d.each do |row|
   titles = row[0].split(":")
   title = titles[0]
   subtitle = ""
 
-  if(titles.length > 1)
-    subtitle = titles[1]
-  end
-
+  subtitle = titles[1] if titles.length > 1
 
   author = row[1]
   publish_date = Date.new(row[2].to_i,1,1)
   isbn = row[3]
   tags = row[4]
-  tags = tags.split(", ") if tags != nil
+  tags = tags.split(", ") unless tags.nil?
   height_total = row[5]
 
   book = Book.new(
@@ -51,7 +46,6 @@ d.each do |row|
 
   gbook.book = book
   gbook.save
-
 
   puts "Title: #{book.title}"
   puts "Author: #{book.authors}"

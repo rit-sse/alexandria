@@ -20,7 +20,6 @@ require 'spec_helper'
 
 describe CheckoutsController do
 
-
   before(:each) do
     @user = User.create(email: 'user@email.com', password: 'password')
     @book = Book.create

@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     books_with_isbn = Book.where(ISBN: params[:search])
-    if(books_with_isbn.any?)
+    if books_with_isbn.any?
       redirect_to books_with_isbn.first
     else
 
@@ -20,9 +20,7 @@ class BooksController < ApplicationController
         @books = Book.all
       end
 
-      if params[:limit]
-        @books = @books.first(params[:limit].to_i)
-      end
+      @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
     end
   end
