@@ -2,5 +2,7 @@ language: ruby
 rvm:
 - 1.9.3
 - 2.0
+before_install:
+  - sudo apt-get install yaz
 before_script:
   - rake sunspot:solr:start RAILS_ENV=test
