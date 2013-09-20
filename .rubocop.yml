@@ -11,15 +11,6 @@ AlignHash:
 AndOr:
   Enabled: false
 
-Blocks:
-  Enabled: false
-
-CollectionMethods:
-  Enabled: false
-
-DefWithParentheses:
-  Enabled: false
-
 Documentation:
   Enabled: false
 
@@ -33,9 +24,6 @@ FavorUnlessOverNegatedIf:
   Enabled: false
 
 FinalNewline:
-  Enabled: false
-
-HasAndBelongsToMany:
   Enabled: false
 
 HashSyntax:
@@ -53,9 +41,6 @@ LeadingCommentSpace:
 LineLength:
   Enabled: false
 
-MethodCallParentheses:
-  Enabled: false
-
 MethodLength:
   Enabled: false
 
@@ -69,9 +54,6 @@ ParenthesesAroundCondition:
   Enabled: false
 
 ParenthesesAsGroupedExpression:
-  Enabled: false
-
-RedundantReturn:
   Enabled: false
 
 RedundantSelf:
@@ -105,9 +87,6 @@ StringLiterals:
   Enabled: false
 
 TrailingBlankLines:
-  Enabled: false
-
-TrailingWhitespace:
   Enabled: false
 
 UselessAssignment:

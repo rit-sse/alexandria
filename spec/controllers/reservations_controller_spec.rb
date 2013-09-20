@@ -23,7 +23,7 @@ describe ReservationsController do
 
   before(:each) do
     @user = User.create(email: 'user@email.com', password: 'password')
-    @book = Book.create()
+    @book = Book.create
     sign_in @user
   end
 
@@ -80,9 +80,9 @@ describe ReservationsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Reservation" do
-        expect {
+        expect do
           post :create, {:reservation => valid_attributes}, valid_session
-        }.to change(Reservation, :count).by(1)
+        end.to change(Reservation, :count).by(1)
       end
 
       it "assigns a newly created reservation as @reservation" do
@@ -161,9 +161,9 @@ describe ReservationsController do
   describe "DELETE destroy" do
     it "destroys the requested reservation" do
       reservation = Reservation.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => reservation.to_param}, valid_session
-      }.to change(Reservation, :count).by(-1)
+      end.to change(Reservation, :count).by(-1)
     end
 
     it "redirects to the reservations list" do

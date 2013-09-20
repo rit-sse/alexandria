@@ -23,7 +23,7 @@ describe CheckoutsController do
 
   before(:each) do
     @user = User.create(email: 'user@email.com', password: 'password')
-    @book = Book.create()
+    @book = Book.create
     @reservation = Reservation.create(user_id: @user.id, book_id: @book.id)
   end
 
@@ -81,9 +81,9 @@ describe CheckoutsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Checkout" do
-        expect {
+        expect do
           post :create, {:checkout => valid_attributes}, valid_session
-        }.to change(Checkout, :count).by(1)
+        end.to change(Checkout, :count).by(1)
       end
 
       it "assigns a newly created checkout as @checkout" do
@@ -163,9 +163,9 @@ describe CheckoutsController do
   describe "DELETE destroy" do
     it "destroys the requested checkout" do
       checkout = Checkout.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => checkout.to_param}, valid_session
-      }.to change(Checkout, :count).by(-1)
+      end.to change(Checkout, :count).by(-1)
     end
 
     it "redirects to the checkouts list" do
