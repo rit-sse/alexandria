@@ -29,9 +29,9 @@ class AuthorsController < ApplicationController
     respond_to do |format|
       if @author.save
         format.html { redirect_to @author, notice: 'Author was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @author }
+        format.json { render 'show', status: :created, location: @author }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end
@@ -45,7 +45,7 @@ class AuthorsController < ApplicationController
         format.html { redirect_to @author, notice: 'Author was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render 'edit' }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
     end

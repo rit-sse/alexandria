@@ -49,9 +49,9 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @book }
+        format.json { render 'show', status: :created, location: @book }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render 'edit' }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
