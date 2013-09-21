@@ -1,7 +1,8 @@
 class Book < ActiveRecord::Base
   include Lccable
   has_many :reservations
-  has_and_belongs_to_many :authors
+  has_many :author_books
+  has_many :authors, through: :author_books
   has_one :google_book_data
 
   searchable do

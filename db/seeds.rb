@@ -28,7 +28,7 @@ d.each do |row|
   height_total = row[5]
 
   book = Book.new(
-    ISBN: isbn,
+    isbn: isbn,
     title: title,
     subtitle: subtitle,
     publish_date: publish_date
