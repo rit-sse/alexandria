@@ -72,6 +72,7 @@ gem 'googlebooks'
 gem 'zoom', :git => 'https://github.com/bricestacey/ruby-zoom.git'
 gem 'marc'
 
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
