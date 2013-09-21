@@ -5,7 +5,7 @@ class Book < ActiveRecord::Base
   has_one :google_book_data
 
   searchable do
-    text :title, :ISBN, :authors
+    text :title, :isbn, :authors
   end
 
   def as_json(options = {})
@@ -38,7 +38,7 @@ class Book < ActiveRecord::Base
   def self.add_by_isbn(isbn)
     results =  GoogleBooks.search("isbn:#{isbn}")
     book = Book.new
-    book.ISBN = isbn
+    book.isbn = isbn
     if results.total_items > 0
       gb = results.first
 
@@ -54,7 +54,7 @@ class Book < ActiveRecord::Base
         book.authors << Author.find_or_create(i)
       end
       book.save
-      gbook = GoogleBookData.book_from_isbn(book.ISBN)
+      gbook = GoogleBookData.book_from_isbn(book.isbn)
       gbook.save
 
       gbook.book = book

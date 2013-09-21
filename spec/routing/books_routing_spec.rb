@@ -12,11 +12,11 @@ describe BooksController do
     end
 
     it "routes to #show" do
-      get("/books/1").should route_to("books#show", :id => "1")
+      get("/books/1").should route_to("books#show", id: "1")
     end
 
     it "routes to #edit" do
-      get("/books/1/edit").should route_to("books#edit", :id => "1")
+      get("/books/1/edit").should route_to("books#edit", id: "1")
     end
 
     it "routes to #create" do
@@ -24,11 +24,11 @@ describe BooksController do
     end
 
     it "routes to #update" do
-      put("/books/1").should route_to("books#update", :id => "1")
+      put("/books/1").should route_to("books#update", id: "1")
     end
 
     it "routes to #destroy" do
-      delete("/books/1").should route_to("books#destroy", :id => "1")
+      delete("/books/1").should route_to("books#destroy", id: "1")
     end
 
   end

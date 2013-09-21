@@ -14,16 +14,16 @@ class GoogleBookData < ActiveRecord::Base
       ).update_data(isbn)
   end
 
-  def update_data(isbn = self.book.ISBN)
+  def update_data(isbn = self.book.isbn)
     results =  GoogleBooks.search("isbn:#{isbn}")
 
     if results.total_items > 0
       google_book = results.first
       self.description   = google_book.description.to_s
-      self.img_thumbnail = google_book.image_link(:zoom => 5).to_s
+      self.img_thumbnail = google_book.image_link(zoom: 5).to_s
       self.img_small     = google_book.image_link.to_s
-      self.img_medium    = google_book.image_link(:zoom => 2).to_s
-      self.img_large     = google_book.image_link(:zoom => 3).to_s
+      self.img_medium    = google_book.image_link(zoom: 2).to_s
+      self.img_large     = google_book.image_link(zoom: 3).to_s
       self.preview_link  = google_book.preview_link.to_s
     end
 

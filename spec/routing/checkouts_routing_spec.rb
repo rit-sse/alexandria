@@ -12,11 +12,11 @@ describe CheckoutsController do
     end
 
     it "routes to #show" do
-      get("/checkouts/1").should route_to("checkouts#show", :id => "1")
+      get("/checkouts/1").should route_to("checkouts#show", id: "1")
     end
 
     it "routes to #edit" do
-      get("/checkouts/1/edit").should route_to("checkouts#edit", :id => "1")
+      get("/checkouts/1/edit").should route_to("checkouts#edit", id: "1")
     end
 
     it "routes to #create" do
@@ -24,11 +24,11 @@ describe CheckoutsController do
     end
 
     it "routes to #update" do
-      put("/checkouts/1").should route_to("checkouts#update", :id => "1")
+      put("/checkouts/1").should route_to("checkouts#update", id: "1")
     end
 
     it "routes to #destroy" do
-      delete("/checkouts/1").should route_to("checkouts#destroy", :id => "1")
+      delete("/checkouts/1").should route_to("checkouts#destroy", id: "1")
     end
 
   end

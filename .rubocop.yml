@@ -6,7 +6,7 @@ Documentation:
   Enabled: false
 
 HashSyntax:
-  Enabled: false
+  Enabled: true
 
 LeadingCommentSpace:
   Enabled: false
