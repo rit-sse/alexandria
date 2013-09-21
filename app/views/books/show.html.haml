@@ -9,12 +9,12 @@
 
 .row
   .col-md-2.text-center
-    - if @book.google_book_data.img_small != "" 
+    - if @book.google_book_data.img_small != ""
       %img{src: @book.google_book_data.img_small, class: "img-polaroid" }
     -else
       .blank-thumbnail-large
 
-    
+
     %h4
       - if @book.checked_out?
         %p.text-error Checked Out
@@ -28,7 +28,7 @@
         - if Reservation.has_reservation(@book, current_user)
           %a{href: "#", class:"btn btn-primary", disabled: true}
             Reserved
-        - else  
+        - else
           - if Checkout.checked_out(@book, current_user)
             %a{href: "#", class:"btn btn-primary", disabled: true}
               Checked Out
@@ -47,7 +47,7 @@
               = link_to author.full_name, author
 
       %dt ISBN
-      %dd 
+      %dd
         =@book.ISBN
       %dt LCC
       %dd
@@ -55,7 +55,7 @@
 
       %dt Publish date
       %dd
-        = @book.publish_date 
+        = @book.publish_date
 
       - if @book.google_book_data.description != ""
         %dt Description

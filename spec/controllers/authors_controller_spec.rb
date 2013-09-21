@@ -68,9 +68,9 @@ describe AuthorsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Author" do
-        expect {
+        expect do
           post :create, {:author => valid_attributes}, valid_session
-        }.to change(Author, :count).by(1)
+        end.to change(Author, :count).by(1)
       end
 
       it "assigns a newly created author as @author" do
@@ -149,9 +149,9 @@ describe AuthorsController do
   describe "DELETE destroy" do
     it "destroys the requested author" do
       author = Author.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => author.to_param}, valid_session
-      }.to change(Author, :count).by(-1)
+      end.to change(Author, :count).by(-1)
     end
 
     it "redirects to the authors list" do

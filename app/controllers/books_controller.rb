@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     books_with_isbn = Book.where(ISBN: params[:search])
-    if(books_with_isbn.any?)
+    if books_with_isbn.any?
       redirect_to books_with_isbn.first
     else
 
@@ -20,9 +20,7 @@ class BooksController < ApplicationController
         @books = Book.all
       end
 
-      if params[:limit]
-        @books = @books.first(params[:limit].to_i)
-      end
+      @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
     end
   end
@@ -49,9 +47,9 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @book }
+        format.json { render 'show', status: :created, location: @book }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +63,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render 'edit' }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -82,13 +80,14 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:ISBN, :UUID, :publish_date, :title, :subtitle)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:ISBN, :UUID, :publish_date, :title, :subtitle)
+  end
 end

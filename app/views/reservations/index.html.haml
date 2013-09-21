@@ -6,12 +6,12 @@
     %th User
     %th Book
     %th Actions
-    
+
 
   - @reservations.each do |reservation|
     %tr
       %td= reservation.id
-      %td 
+      %td
         = reservation.user.user_name
       %td
         = reservation.book.title

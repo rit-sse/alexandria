@@ -4,7 +4,7 @@ class GoogleBookData < ActiveRecord::Base
   belongs_to :book
 
   def self.book_from_isbn(isbn)
-    GoogleBookData.new( 
+    GoogleBookData.new(
         description:   "",
         img_thumbnail: "",
         img_small:     "",
@@ -17,7 +17,7 @@ class GoogleBookData < ActiveRecord::Base
   def update_data(isbn = self.book.ISBN)
     results =  GoogleBooks.search("isbn:#{isbn}")
 
-    if (results.total_items > 0)
+    if results.total_items > 0
       google_book = results.first
       self.description   = google_book.description.to_s
       self.img_thumbnail = google_book.image_link(:zoom => 5).to_s

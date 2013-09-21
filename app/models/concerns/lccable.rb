@@ -15,7 +15,7 @@ module Lccable
       conn.preferred_record_syntax = 'USMARC'
       conn.search("@attr 1=7 #{self.ISBN}").each_record do |item|
         MARC::Reader.new(StringIO.new(item.raw)).each do |rec|
-          if not rec['050'].nil?
+          unless rec['050'].nil?
             if rec['050']['b'] =~ /\..*/
               second_part = rec['050']['b'][1..-1]
             else
@@ -28,31 +28,17 @@ module Lccable
     end
   end
 
-  def normalize callno
+  def normalize(callno)
     cp = LCC_REGEX.match(callno)
     out = cp[:aclass] + cp[:nclass]
-    if not cp[:dclass].nil?
-      out += ".#{cp[:dclass]}"
-    end
-    if not cp[:date].nil?
-      out += " #{cp[:dclass]} "
-    end
+    out += ".#{cp[:dclass]}" unless cp[:dclass].nil?
+    out += " #{cp[:dclass]} " unless cp[:date].nil?
     out += ".#{cp[:c1]}"
-    if not cp[:c1d].nil?
-      out += " #{cp[:c1d]} "
-    end
-    if not cp[:c2].nil?
-      out += " #{cp[:c2]}"
-    end
-    if not cp[:e8].nil?
-      out += " #{cp[:e8]}"
-    end
-    if not cp[:e9].nil?
-      out += " #{cp[:e9]}"
-    end
-    if not cp[:e10].nil?
-      out += " #{cp[:e10]}"
-    end
+    out += " #{cp[:c1d]} " unless cp[:c1d].nil?
+    out += " #{cp[:c2]}" unless cp[:c2].nil?
+    out += " #{cp[:e8]}" unless cp[:e8].nil?
+    out += " #{cp[:e9]}" unless cp[:e9].nil?
+    out += " #{cp[:e10]}" unless cp[:e10].nil?
     out
   end
 end

@@ -68,9 +68,9 @@ describe UsersController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new User" do
-        expect {
+        expect do
           post :create, {:user => valid_attributes}, valid_session
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
@@ -149,9 +149,9 @@ describe UsersController do
   describe "DELETE destroy" do
     it "destroys the requested user" do
       user = User.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => user.to_param}, valid_session
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
     end
 
     it "redirects to the users list" do

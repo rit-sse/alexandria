@@ -77,9 +77,9 @@ describe BooksController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Book" do
-        expect {
+        expect do
           post :create, valid_attributes, valid_session
-        }.to change(Book, :count).by(1)
+        end.to change(Book, :count).by(1)
       end
 
       it "assigns a newly created book as @book" do
@@ -158,9 +158,9 @@ describe BooksController do
   describe "DELETE destroy" do
     it "destroys the requested book" do
       book = Book.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => book.to_param}, valid_session
-      }.to change(Book, :count).by(-1)
+      end.to change(Book, :count).by(-1)
     end
 
     it "redirects to the books list" do
