@@ -30,6 +30,7 @@ gem 'turbolinks'
 
 group :development do
   gem 'rubocop'
+  gem 'rails_best_practices'
 end
 
 # Test-related gems
