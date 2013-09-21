@@ -7,6 +7,8 @@ gem 'rails', '4.0.0'
 
 gem 'sqlite3'
 
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
