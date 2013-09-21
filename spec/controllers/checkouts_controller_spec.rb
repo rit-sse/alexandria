@@ -22,8 +22,8 @@ describe CheckoutsController do
 
 
   before(:each) do
-    @user = User.create(email: 'user@email.com', password: 'password')
-    @book = Book.create()
+    @user = create(:user)
+    @book = create(:book)
     @reservation = Reservation.create(user_id: @user.id, book_id: @book.id)
   end
 
