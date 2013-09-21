@@ -23,9 +23,6 @@ d.each do |row|
   author = row[1]
   publish_date = Date.new(row[2].to_i,1,1)
   isbn = row[3]
-  tags = row[4]
-  tags = tags.split(", ") unless tags.nil?
-  height_total = row[5]
 
   book = Book.new(
     isbn: isbn,

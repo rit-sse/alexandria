@@ -48,4 +48,4 @@ StringLiterals:
   Enabled: false
 
 UselessAssignment:
-  Enabled: false
+  Enabled: true
