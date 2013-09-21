@@ -3,6 +3,7 @@ class Book < ActiveRecord::Base
   has_many :reservations
   has_and_belongs_to_many :authors
   has_one :google_book_data
+  has_many :checkouts
 
   searchable do
     text :title, :ISBN, :authors
