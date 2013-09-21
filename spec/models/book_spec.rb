@@ -5,6 +5,7 @@ describe Book do
     book = create(:book)
     expect(book).to_not be_nil
     expect(book.ISBN).to eq('9780199273133')
+    book.destroy
   end
 
   it 'creates a book from ISBN' do
@@ -25,6 +26,8 @@ describe Book do
     expect(book.reserved?).to be_false
     Reservation.create(book_id: book.id, user_id: user.id )
     expect(book.reserved?).to be_true
+    user.destroy
+    book.destroy
   end
 
   it 'can be checked out' do
@@ -32,5 +35,6 @@ describe Book do
     expect(book.checked_out?).to be_false
     Checkout.create(checked_out_at: DateTime.now, book: book)
     expect(book.checked_out?).to be_true
+    book.destroy
   end
 end

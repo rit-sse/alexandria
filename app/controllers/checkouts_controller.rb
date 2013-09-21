@@ -25,9 +25,6 @@ class CheckoutsController < ApplicationController
   # POST /checkouts.json
   def create
     @checkout = Checkout.new(checkout_params)
-    if params[:checkout][:book]
-      @checkout.book = Book.find(params[:checkout][:book].to_i)
-    end
 
     respond_to do |format|
       if @checkout.save
@@ -81,6 +78,6 @@ class CheckoutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def checkout_params
-      params.require(:checkout).permit( :checked_out_at, :patron_id)
+      params.require(:checkout).permit( :checked_out_at, :patron_id, :book_id)
     end
 end

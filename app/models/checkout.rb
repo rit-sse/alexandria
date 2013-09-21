@@ -37,9 +37,12 @@ class Checkout < ActiveRecord::Base
   end
 
   def unique_checkout
-    book_checkout = Checkout.all_active.where(book_id: book.id)
-    if book_checkout.count != 0
-      errors.add(:book, 'Cannot checkout an already checked out book.')
+    unless book.nil?
+      book_checkouts = Checkout.all_active.where(book_id: book.id)
+      book_checkouts = book_checkouts.where('id != ?', self.id)
+      unless book_checkouts.empty?
+        errors.add(:book, 'Cannot checkout an already checked out book.')
+      end
     end
   end
 end
