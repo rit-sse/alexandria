@@ -21,7 +21,7 @@ RedundantSelf:
   Enabled: false
 
 SpaceAfterComma:
-  Enabled: false
+  Enabled: true
 
 SpaceAfterControlKeyword:
   Enabled: false

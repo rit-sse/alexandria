@@ -21,7 +21,7 @@ d.each do |row|
   subtitle = titles[1] if titles.length > 1
 
   author = row[1]
-  publish_date = Date.new(row[2].to_i,1,1)
+  publish_date = Date.new(row[2].to_i, 1, 1)
   isbn = row[3]
 
   book = Book.new(
