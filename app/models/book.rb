@@ -8,6 +8,8 @@ class Book < ActiveRecord::Base
     text :title, :ISBN, :authors
   end
 
+  validates :ISBN, :LCC, uniqueness: true
+
   def as_json(options = {})
     json = super(options)
     json[:authors] = self.authors.as_json(only: [:first_name, :last_name, :middle_initial])
