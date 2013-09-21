@@ -31,7 +31,7 @@ class Checkout < ActiveRecord::Base
     !checkouts.empty?
   end
 
-  def self.all_active()
-    return Checkout.where(checked_in_at: nil)
+  def self.all_active
+    Checkout.where(checked_in_at: nil)
   end
 end

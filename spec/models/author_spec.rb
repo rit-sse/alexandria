@@ -7,7 +7,7 @@ describe Author do
     expect(author.last_name).to eq("Last")
 
     author = Author.create_with_name("First M. Last")
-    expect(author.first_name).to eq ("First")
+    expect(author.first_name).to eq("First")
     expect(author.middle_initial).to eq("M")
     expect(author.last_name).to eq("Last")
   end
@@ -20,8 +20,8 @@ describe Author do
   full_name = "#{first_name} #{middle_initial} #{last_name}"
 
   author = Author.new(first_name: first_name,
-              middle_initial: middle_initial,
-              last_name: last_name)
+                      middle_initial: middle_initial,
+                      last_name: last_name)
   author.save
 
     expect(Author.find_with_name(full_name)).to eq author

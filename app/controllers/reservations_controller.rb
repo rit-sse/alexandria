@@ -29,9 +29,9 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @reservation }
+        format.json { render 'show', status: :created, location: @reservation }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -45,7 +45,7 @@ class ReservationsController < ApplicationController
         format.html { redirect_to request.referer, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render 'edit' }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,14 @@ class ReservationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reservation
-      @reservation = Reservation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def reservation_params
-      params.require(:reservation).permit(:expires_at, :fuffiled, :reserve_at, :book_id, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def reservation_params
+    params.require(:reservation).permit(:expires_at, :fuffiled, :reserve_at, :book_id, :user_id)
+  end
 end

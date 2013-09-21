@@ -1,9 +1,9 @@
-= form_for @reservation do |f|
-  -if @reservation.errors.any?
+= form_for reservation do |f|
+  -if reservation.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@reservation.errors.count, "error")} prohibited this reservation from being saved:"
+      %h2= "#{pluralize(reservation.errors.count, "error")} prohibited this reservation from being saved:"
       %ul
-        - @reservation.errors.full_messages.each do |msg|
+        - reservation.errors.full_messages.each do |msg|
           %li= msg
 
   .field

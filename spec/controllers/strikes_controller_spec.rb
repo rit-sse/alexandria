@@ -68,9 +68,9 @@ describe StrikesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Strike" do
-        expect {
+        expect do
           post :create, {:strike => valid_attributes}, valid_session
-        }.to change(Strike, :count).by(1)
+        end.to change(Strike, :count).by(1)
       end
 
       it "assigns a newly created strike as @strike" do
@@ -149,9 +149,9 @@ describe StrikesController do
   describe "DELETE destroy" do
     it "destroys the requested strike" do
       strike = Strike.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {:id => strike.to_param}, valid_session
-      }.to change(Strike, :count).by(-1)
+      end.to change(Strike, :count).by(-1)
     end
 
     it "redirects to the strikes list" do
