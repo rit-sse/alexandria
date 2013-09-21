@@ -8,7 +8,7 @@ class Book < ActiveRecord::Base
     text :title, :ISBN, :authors
   end
 
-  validates :ISBN, :LCC, uniqueness: true
+  validates :ISBN, :LCC, uniqueness: true, allow_blank: true
 
   def as_json(options = {})
     json = super(options)
@@ -47,13 +47,14 @@ class Book < ActiveRecord::Base
 
       title = gb.title.split(":")
       book.title = title[0]
-      book.subtitle = title[1] ? title[1] : ""
+      book.subtitle = title[1] ? title[1].strip : ""
+      book.subtitle
       book.publish_date = gb.published_date
       book.get_lcc
 
       author = gb.authors
       author ||= ""
-      author.split(",").each do |i|
+      author.split(", ").each do |i|
         book.authors << Author.find_or_create(i)
       end
       book.save
