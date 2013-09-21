@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130919215833) do
+ActiveRecord::Schema.define(version: 20130921172000) do
 
   create_table "authors", force: true do |t|
     t.string   "first_name"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20130919215833) do
   end
 
   create_table "authors_books", id: false, force: true do |t|
-    t.integer "author_id"
-    t.integer "book_id"
+    t.integer "author_id", null: false
+    t.integer "book_id",   null: false
   end
 
   create_table "books", force: true do |t|
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20130919215833) do
     t.string   "UUID"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "checkout_id"
     t.string   "subtitle"
     t.string   "LCC"
   end
@@ -45,7 +44,12 @@ ActiveRecord::Schema.define(version: 20130919215833) do
     t.datetime "updated_at"
     t.integer  "patron_id"
     t.integer  "distributor_id"
+    t.integer  "book_id"
   end
+
+  add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"
+  add_index "checkouts", ["distributor_id"], name: "index_checkouts_on_distributor_id"
+  add_index "checkouts", ["patron_id"], name: "index_checkouts_on_patron_id"
 
   create_table "google_book_data", force: true do |t|
     t.text     "description"
@@ -68,6 +72,9 @@ ActiveRecord::Schema.define(version: 20130919215833) do
     t.integer  "user_id"
     t.integer  "book_id"
   end
+
+  add_index "reservations", ["book_id"], name: "index_reservations_on_book_id"
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "strikes", force: true do |t|
     t.string   "message"
