@@ -3,6 +3,9 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :book
 
+  delegate :title, to: :book
+  delegate :user_name, to: :user
+
   validates :book_id, :user_id, presence: true
   validate :cannot_have_2_reservations_on_1_book
 

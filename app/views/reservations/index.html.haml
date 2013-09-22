@@ -12,9 +12,9 @@
     %tr
       %td= reservation.id
       %td
-        = reservation.user.user_name
+        = reservation.user_name
       %td
-        = reservation.book.title
+        = reservation.title
       %td
         = form_for :checkout, url: "/checkouts", html: {class: "btn-form"} do |f|
           = f.hidden_field "book", value: reservation.book.id

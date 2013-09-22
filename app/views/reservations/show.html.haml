@@ -2,10 +2,10 @@
 
 %p
   %b User:
-  = @reservation.user.user_name
+  = @reservation.user_name
 %p
   %b Book:
-  = @reservation.book.title
+  = @reservation.title
 %p
   %b Reserved at:
   = @reservation.reserve_at.strftime("%m/%d/%Y")

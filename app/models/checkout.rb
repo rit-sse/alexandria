@@ -5,6 +5,9 @@ class Checkout < ActiveRecord::Base
   belongs_to :distributor, class_name: "User", foreign_key: :distributor_id
   has_one :book
 
+  delegate :title, to: :book
+  delegate :user_name, to: :patron
+
   validates :checked_out_at, presence: true
 
   def default_values
