@@ -41,7 +41,6 @@ group :development, :test do
 
   gem 'rspec'
   gem 'coveralls', require: false
-  gem 'webrat'
   gem 'rspec-rails'
 
   # database_cleaner is not required, but highly recommended
