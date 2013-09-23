@@ -2,7 +2,25 @@
 
 $(document).ready(function() {
   $("#master-search").typeahead([{
-    remote: '/books.json?search=%QUERY',
+    remote: {
+        url: "/books.json?search=%QUERY&limit=9",
+        filter: function( data ){
+        if(!data[0]){
+          data = [{
+            title: $("#master-search")[0].value,
+            id: "none",
+            none: true
+          }]
+        } else if(data.length > 8){
+          data[8] = {
+            title: $("#master-search")[0].value,
+            id: "more",
+            more: true
+          }
+        }
+        return data;
+      }
+    },
     name: 'search',
     valueKey: 'title',
     template: function(item) {
@@ -12,7 +30,13 @@ $(document).ready(function() {
   }]).on('typeahead:selected', onSelected);
 
   function onSelected($e, datum){
-  	window.location = window.location.origin + "/books/" + datum.id;
+     if(datum.id != "none" && datum.id != "more"){
+        window.location = window.location.origin + "/books/" + datum.id
+      }
+      if(datum.id == "more" || datum.id == "none"){
+        window.location = window.location.origin + "/books?search=" +
+          $("#master-search")[0].value;
+      }
   }
 
   $("#master-search").keyup(function (event){
