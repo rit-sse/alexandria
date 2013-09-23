@@ -4,7 +4,7 @@ describe Book do
   it 'creates a book properly' do
     book = create(:book)
     expect(book).to_not be_nil
-    expect(book.ISBN).to eq('9780199273133')
+    expect(book.isbn).to eq('9780199273133')
     book.destroy
   end
 
@@ -12,7 +12,7 @@ describe Book do
     book = Book.add_by_isbn("9780201633610")
     expect(book.title).to eq('Design Patterns')
     expect(book.subtitle).to eq('Elements of Reusable Object-Oriented Software')
-    expect(book.ISBN).to eq('9780201633610')
+    expect(book.isbn).to eq('9780201633610')
     expect(book.authors).to include(Author.find_with_name('Ralph Johnson'),
                                     Author.find_with_name('Erich Gamma'),
                                     Author.find_with_name('John Vlissides'),

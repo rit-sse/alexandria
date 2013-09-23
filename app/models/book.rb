@@ -10,7 +10,7 @@ class Book < ActiveRecord::Base
     text :title, :isbn, :authors
   end
 
-  validates :ISBN, :LCC, uniqueness: true, allow_blank: true
+  validates :isbn, :lcc, uniqueness: true, allow_blank: true
 
   def as_json(options = {})
     json = super(options)
