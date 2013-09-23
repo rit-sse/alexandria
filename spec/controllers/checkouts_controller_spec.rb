@@ -20,13 +20,13 @@ require 'spec_helper'
 
 describe CheckoutsController do
 
-  before(:each) do
-    @user = User.create(email: 'user@email.com', password: 'password')
-    @book = Book.create
+  before(:all) do
+    @user = create(:user)
+    @book = create(:book)
     @reservation = Reservation.create(user_id: @user.id, book_id: @book.id)
   end
 
-  after(:each) do
+  after(:all) do
     @user.destroy
     @book.destroy
     @reservation.destroy
@@ -36,7 +36,7 @@ describe CheckoutsController do
   # Checkout. As you add validations to Checkout, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {patron_id: @user.id, book: @book}
+    {patron_id: @user.id, book_id: @book.id}
   end
 
   # This should return the minimal set of values that should be in the session

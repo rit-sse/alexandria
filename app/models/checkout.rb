@@ -3,9 +3,10 @@ class Checkout < ActiveRecord::Base
 
   belongs_to :patron, class_name: "User", :foreign_key => :patron_id
   belongs_to :distributor, class_name: "User", :foreign_key => :distributor_id
-  has_one :book
+  belongs_to :book
 
   validates :checked_out_at, presence: true
+  validate :unique_checkout
 
   def default_values
     self.checked_out_at ||= DateTime.now
@@ -33,5 +34,15 @@ class Checkout < ActiveRecord::Base
 
   def self.all_active
     Checkout.where(checked_in_at: nil)
+  end
+
+  def unique_checkout
+    unless book.nil?
+      book_checkouts = Checkout.all_active.where(book_id: book.id)
+      book_checkouts = book_checkouts.where('id != ?', self.id)
+      unless book_checkouts.empty?
+        errors.add(:book, 'Cannot checkout an already checked out book.')
+      end
+    end
   end
 end

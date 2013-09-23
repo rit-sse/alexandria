@@ -1,5 +1,5 @@
 class AddCheckoutToBook < ActiveRecord::Migration
   def change
-    add_column :books, :checkout_id, :integer
+    add_reference :books, :checkout, index: true
   end
 end

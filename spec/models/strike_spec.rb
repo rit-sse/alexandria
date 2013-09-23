@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Strike do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "Waiting until strikes is implemented properly"
 end
