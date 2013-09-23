@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Only permit omniauth accounts
-  devise :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
   devise :database_authenticatable
 
   attr_accessor :password
@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
-    user = User.where(:email => data["email"]).first
+    user = User.where(email: data["email"]).first
 
     unless user
       user = User.create(user_name: data["name"],
                          email: data["email"],
-                         password: Devise.friendly_token[0,20]
+                         password: Devise.friendly_token[0, 20]
           )
     end
     user

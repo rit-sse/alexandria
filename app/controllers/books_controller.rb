@@ -1,12 +1,12 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate!
-  skip_before_filter :authenticate!, :only => [:index, :show, :create]
+  skip_before_filter :authenticate!, only: [:index, :show, :create]
 
   # GET /books
   # GET /books.json
   def index
-    books_with_isbn = Book.where(ISBN: params[:search])
+    books_with_isbn = Book.where(isbn: params[:search])
     if books_with_isbn.any?
       redirect_to books_with_isbn.first
     else
@@ -42,7 +42,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.add_by_isbn(params[:ISBN])
+    @book = Book.add_by_isbn(params[:isbn])
 
     respond_to do |format|
       if @book.save
@@ -88,6 +88,6 @@ class BooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
-    params.require(:book).permit(:ISBN, :UUID, :publish_date, :title, :subtitle)
+    params.require(:book).permit(:isbn, :UUID, :publish_date, :title, :subtitle)
   end
 end

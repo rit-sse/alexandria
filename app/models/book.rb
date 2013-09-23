@@ -1,12 +1,13 @@
 class Book < ActiveRecord::Base
   include Lccable
   has_many :reservations
-  has_and_belongs_to_many :authors
+  has_many :author_books
+  has_many :authors, through: :author_books
   has_one :google_book_data
   has_many :checkouts
 
   searchable do
-    text :title, :ISBN, :authors
+    text :title, :isbn, :authors
   end
 
   validates :ISBN, :LCC, uniqueness: true, allow_blank: true
@@ -41,7 +42,7 @@ class Book < ActiveRecord::Base
   def self.add_by_isbn(isbn)
     results =  GoogleBooks.search("isbn:#{isbn}")
     book = Book.new
-    book.ISBN = isbn
+    book.isbn = isbn
     if results.total_items > 0
       gb = results.first
 
@@ -58,7 +59,7 @@ class Book < ActiveRecord::Base
         book.authors << Author.find_or_create(i)
       end
       book.save
-      gbook = GoogleBookData.book_from_isbn(book.ISBN)
+      gbook = GoogleBookData.book_from_isbn(book.isbn)
       gbook.save
 
       gbook.book = book

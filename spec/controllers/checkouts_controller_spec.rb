@@ -57,7 +57,7 @@ describe CheckoutsController do
   describe "GET show" do
     it "assigns the requested checkout as @checkout" do
       checkout = Checkout.create! valid_attributes
-      get :show, {:id => checkout.to_param}, valid_session
+      get :show, {id: checkout.to_param}, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
@@ -72,7 +72,7 @@ describe CheckoutsController do
   describe "GET edit" do
     it "assigns the requested checkout as @checkout" do
       checkout = Checkout.create! valid_attributes
-      get :edit, {:id => checkout.to_param}, valid_session
+      get :edit, {id: checkout.to_param}, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
@@ -81,18 +81,18 @@ describe CheckoutsController do
     describe "with valid params" do
       it "creates a new Checkout" do
         expect do
-          post :create, {:checkout => valid_attributes}, valid_session
+          post :create, {checkout: valid_attributes}, valid_session
         end.to change(Checkout, :count).by(1)
       end
 
       it "assigns a newly created checkout as @checkout" do
-        post :create, {:checkout => valid_attributes}, valid_session
+        post :create, {checkout: valid_attributes}, valid_session
         assigns(:checkout).should be_a(Checkout)
         assigns(:checkout).should be_persisted
       end
 
       it "redirects to the created checkout" do
-        post :create, {:checkout => valid_attributes}, valid_session
+        post :create, {checkout: valid_attributes}, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -101,14 +101,14 @@ describe CheckoutsController do
       it "assigns a newly created but unsaved checkout as @checkout" do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {:checkout => { "user" => "invalid value" }}, valid_session
+        post :create, {checkout: { "user" => "invalid value" }}, valid_session
         assigns(:checkout).should be_a_new(Checkout)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {:checkout => { "user" => "invalid value" }}, valid_session
+        post :create, {checkout: { "user" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -124,18 +124,18 @@ describe CheckoutsController do
         # submitted in the request.
         date = DateTime.new
         Checkout.any_instance.should_receive(:update).with({ "checked_out_at" => date })
-        put :update, {:id => checkout.to_param, :checkout => { "checked_out_at" => date }}, valid_session
+        put :update, {id: checkout.to_param, checkout: { "checked_out_at" => date }}, valid_session
       end
 
       it "assigns the requested checkout as @checkout" do
         checkout = Checkout.create! valid_attributes
-        put :update, {:id => checkout.to_param, :checkout => valid_attributes}, valid_session
+        put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
       it "redirects to the checkout" do
         checkout = Checkout.create! valid_attributes
-        put :update, {:id => checkout.to_param, :checkout => valid_attributes}, valid_session
+        put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -145,7 +145,7 @@ describe CheckoutsController do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {:id => checkout.to_param, :checkout => { "patron" => "invalid value" }}, valid_session
+        put :update, {id: checkout.to_param, checkout: { "patron" => "invalid value" }}, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
@@ -153,7 +153,7 @@ describe CheckoutsController do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {:id => checkout.to_param, :checkout => { "patron" => "invalid value" }}, valid_session
+        put :update, {id: checkout.to_param, checkout: { "patron" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
@@ -163,13 +163,13 @@ describe CheckoutsController do
     it "destroys the requested checkout" do
       checkout = Checkout.create! valid_attributes
       expect do
-        delete :destroy, {:id => checkout.to_param}, valid_session
+        delete :destroy, {id: checkout.to_param}, valid_session
       end.to change(Checkout, :count).by(-1)
     end
 
     it "redirects to the checkouts list" do
       checkout = Checkout.create! valid_attributes
-      delete :destroy, {:id => checkout.to_param}, valid_session
+      delete :destroy, {id: checkout.to_param}, valid_session
       response.should redirect_to(checkouts_url)
     end
   end

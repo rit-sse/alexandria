@@ -27,8 +27,8 @@ working_directory  APP_PATH
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen "#{APP_PATH}/tmp/unicorn.sock", :backlog => 64
-#listen 80, :tcp_nopush => true
+listen "#{APP_PATH}/tmp/unicorn.sock", backlog: 64
+#listen 80, tcp_nopush: true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 30
@@ -92,7 +92,7 @@ end
 after_fork do |server, worker|
   # per-process listener ports for debugging/admin/migrations
   # addr = "127.0.0.1:#{9293 + worker.nr}"
-  # server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)
+  # server.listen(addr, tries: -1, delay: 5, tcp_nopush: true)
 
   # the following is *required* for Rails + "preload_app true",
   defined?(ActiveRecord::Base) &&
