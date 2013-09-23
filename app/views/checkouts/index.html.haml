@@ -11,8 +11,8 @@
   - @checkouts.each do |checkout|
     %tr
       %td= checkout.id
-      %td= checkout.patron.user_name
-      %td= checkout.book.title
+      %td= checkout.user_name
+      %td= checkout.title
       %td= checkout.checked_out_at.strftime("%Y-%m-%d %l:%M %p")
       %td
         = form_for checkout, html: {class: "btn-form"} do |f|

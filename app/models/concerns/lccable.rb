@@ -13,7 +13,7 @@ module Lccable
     ZOOM::Connection.open('z3950.loc.gov', 7090) do |conn|
       conn.database_name = 'VOYAGER'
       conn.preferred_record_syntax = 'USMARC'
-      conn.search("@attr 1=7 #{self.ISBN}").each_record do |item|
+      conn.search("@attr 1=7 #{self.isbn}").each_record do |item|
         MARC::Reader.new(StringIO.new(item.raw)).each do |rec|
           unless rec['050'].nil?
             if rec['050']['b'] =~ /\..*/
@@ -21,7 +21,7 @@ module Lccable
             else
               second_part = rec['050']['b']
             end
-            self.LCC = normalize("#{rec['050']['a']} #{second_part}")
+            self.lcc = normalize("#{rec['050']['a']} #{second_part}")
           end
         end
       end

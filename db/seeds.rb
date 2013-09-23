@@ -21,17 +21,14 @@ d.each do |row|
   subtitle = titles[1] if titles.length > 1
 
   author = row[1]
-  publish_date = Date.new(row[2].to_i,1,1)
+  publish_date = Date.new(row[2].to_i, 1, 1)
   isbn = row[3]
-  tags = row[4]
-  tags = tags.split(", ") unless tags.nil?
-  height_total = row[5]
 
   book = Book.new(
-    :ISBN => isbn,
-    :title => title,
-    :subtitle => subtitle,
-    :publish_date => publish_date
+    isbn: isbn,
+    title: title,
+    subtitle: subtitle,
+    publish_date: publish_date
   )
 
   author ||= ""
@@ -41,7 +38,7 @@ d.each do |row|
   end
   book.save
 
-  gbook = GoogleBookData.book_from_isbn(book.ISBN)
+  gbook = GoogleBookData.book_from_isbn(book.isbn)
   gbook.save
 
   gbook.book = book
@@ -49,7 +46,7 @@ d.each do |row|
 
   puts "Title: #{book.title}"
   puts "Author: #{book.authors}"
-  puts "ISBN: #{book.ISBN}"
+  puts "ISBN: #{book.isbn}"
   puts "**** Google Book ****"
   puts book.google_book_data
   puts "Description: #{book.google_book_data.description[0..300]}"
