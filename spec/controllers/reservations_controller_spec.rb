@@ -21,8 +21,8 @@ require 'spec_helper'
 describe ReservationsController do
 
   before(:each) do
-    @user = User.create(email: 'user@email.com', password: 'password')
-    @book = Book.create
+    @user = create(:user)
+    @book = create(:book)
     sign_in @user
   end
 

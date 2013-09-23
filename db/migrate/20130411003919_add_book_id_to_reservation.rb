@@ -1,5 +1,5 @@
 class AddBookIdToReservation < ActiveRecord::Migration
   def change
-    add_column :reservations, :book_id, :integer
+    add_reference :reservations, :book, index: true
   end
 end

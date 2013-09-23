@@ -8,7 +8,7 @@ class CreateGoogleBookData < ActiveRecord::Migration
       t.string :img_large
       t.string :img_medium
       t.string :img_large
-      t.integer :book_id
+      t.references :book
 
       t.timestamps
     end

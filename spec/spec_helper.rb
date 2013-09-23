@@ -44,6 +44,9 @@ RSpec.configure do |config|
     request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
+  #Factory Girl and things
+  config.include FactoryGirl::Syntax::Methods
+
   #Devise and things
   config.include Devise::TestHelpers, type: :controller
 end

@@ -41,7 +41,6 @@ group :development, :test do
 
   gem 'rspec'
   gem 'coveralls', require: false
-  gem 'webrat'
   gem 'rspec-rails'
 
   # database_cleaner is not required, but highly recommended
@@ -77,6 +76,7 @@ gem 'googlebooks'
 gem 'zoom', git: 'https://github.com/bricestacey/ruby-zoom.git'
 gem 'marc'
 
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -21,7 +21,7 @@ require 'spec_helper'
 describe BooksController do
 
   before(:each) do
-    @user = User.create(email: 'user@email.com', password: 'password')
+    @user = create(:user)
     sign_in @user
   end
 

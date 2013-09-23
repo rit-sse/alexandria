@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922022652) do
+ActiveRecord::Schema.define(version: 20130921185545) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20130922022652) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "middle_initial"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "books", force: true do |t|
@@ -36,24 +36,23 @@ ActiveRecord::Schema.define(version: 20130922022652) do
     t.string   "title"
     t.date     "publish_date"
     t.string   "UUID"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "checkout_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "subtitle"
     t.string   "lcc"
   end
 
-  add_index "books", ["checkout_id"], name: "index_books_on_checkout_id"
-
   create_table "checkouts", force: true do |t|
     t.datetime "checked_out_at"
     t.datetime "checked_in_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "patron_id"
     t.integer  "distributor_id"
+    t.integer  "book_id"
   end
 
+  add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"
   add_index "checkouts", ["distributor_id"], name: "index_checkouts_on_distributor_id"
   add_index "checkouts", ["patron_id"], name: "index_checkouts_on_patron_id"
 
@@ -65,18 +64,16 @@ ActiveRecord::Schema.define(version: 20130922022652) do
     t.string   "img_large"
     t.string   "img_medium"
     t.integer  "book_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "google_book_data", ["book_id"], name: "index_google_book_data_on_book_id"
 
   create_table "reservations", force: true do |t|
     t.datetime "reserve_at"
     t.boolean  "fuffiled"
     t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "book_id"
   end
@@ -86,16 +83,16 @@ ActiveRecord::Schema.define(version: 20130922022652) do
 
   create_table "strikes", force: true do |t|
     t.string   "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "user_name"
     t.boolean  "banned"
     t.string   "role"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
