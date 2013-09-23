@@ -5,7 +5,7 @@ begin
 
   require 'rspec/core/rake_task'
   desc "Run all specs"
-  RSpec::Core::RakeTask.new(:spec => 'db:test:prepare') do |t|
+  RSpec::Core::RakeTask.new(spec: 'db:test:prepare') do |t|
     # t.rspec_opts = ['--format RspecJunitFormatter', '--out rspec.xml']
   end
 rescue LoadError

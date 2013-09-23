@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_130_919_215_833) do
+ActiveRecord::Schema.define(version: 20130922022652) do
+
+  create_table "author_books", force: true do |t|
+    t.integer  "author_id"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "author_books", ["author_id"], name: "index_author_books_on_author_id"
+  add_index "author_books", ["book_id"], name: "index_author_books_on_book_id"
 
   create_table "authors", force: true do |t|
     t.string   "first_name"
@@ -21,13 +31,8 @@ ActiveRecord::Schema.define(version: 20_130_919_215_833) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "authors_books", id: false, force: true do |t|
-    t.integer "author_id"
-    t.integer "book_id"
-  end
-
   create_table "books", force: true do |t|
-    t.string   "ISBN"
+    t.string   "isbn"
     t.string   "title"
     t.date     "publish_date"
     t.string   "UUID"
@@ -35,8 +40,10 @@ ActiveRecord::Schema.define(version: 20_130_919_215_833) do
     t.datetime "updated_at",   null: false
     t.integer  "checkout_id"
     t.string   "subtitle"
-    t.string   "LCC"
+    t.string   "lcc"
   end
+
+  add_index "books", ["checkout_id"], name: "index_books_on_checkout_id"
 
   create_table "checkouts", force: true do |t|
     t.datetime "checked_out_at"
@@ -46,6 +53,9 @@ ActiveRecord::Schema.define(version: 20_130_919_215_833) do
     t.integer  "patron_id"
     t.integer  "distributor_id"
   end
+
+  add_index "checkouts", ["distributor_id"], name: "index_checkouts_on_distributor_id"
+  add_index "checkouts", ["patron_id"], name: "index_checkouts_on_patron_id"
 
   create_table "google_book_data", force: true do |t|
     t.text     "description"
@@ -59,6 +69,8 @@ ActiveRecord::Schema.define(version: 20_130_919_215_833) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "google_book_data", ["book_id"], name: "index_google_book_data_on_book_id"
+
   create_table "reservations", force: true do |t|
     t.datetime "reserve_at"
     t.boolean  "fuffiled"
@@ -68,6 +80,9 @@ ActiveRecord::Schema.define(version: 20_130_919_215_833) do
     t.integer  "user_id"
     t.integer  "book_id"
   end
+
+  add_index "reservations", ["book_id"], name: "index_reservations_on_book_id"
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "strikes", force: true do |t|
     t.string   "message"

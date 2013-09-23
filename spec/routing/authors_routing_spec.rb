@@ -12,11 +12,11 @@ describe AuthorsController do
     end
 
     it "routes to #show" do
-      get("/authors/1").should route_to("authors#show", :id => "1")
+      get("/authors/1").should route_to("authors#show", id: "1")
     end
 
     it "routes to #edit" do
-      get("/authors/1/edit").should route_to("authors#edit", :id => "1")
+      get("/authors/1/edit").should route_to("authors#edit", id: "1")
     end
 
     it "routes to #create" do
@@ -24,11 +24,11 @@ describe AuthorsController do
     end
 
     it "routes to #update" do
-      put("/authors/1").should route_to("authors#update", :id => "1")
+      put("/authors/1").should route_to("authors#update", id: "1")
     end
 
     it "routes to #destroy" do
-      delete("/authors/1").should route_to("authors#destroy", :id => "1")
+      delete("/authors/1").should route_to("authors#destroy", id: "1")
     end
 
   end

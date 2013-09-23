@@ -1,9 +1,12 @@
 class Checkout < ActiveRecord::Base
   after_initialize :default_values
 
-  belongs_to :patron, class_name: "User", :foreign_key => :patron_id
-  belongs_to :distributor, class_name: "User", :foreign_key => :distributor_id
+  belongs_to :patron, class_name: "User", foreign_key: :patron_id
+  belongs_to :distributor, class_name: "User", foreign_key: :distributor_id
   has_one :book
+
+  delegate :title, to: :book
+  delegate :user_name, to: :patron
 
   validates :checked_out_at, presence: true
 

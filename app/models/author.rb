@@ -11,7 +11,8 @@ class Author < ActiveRecord::Base
     end
   end
 
-  has_and_belongs_to_many :books
+  has_many :author_books
+  has_many :books, through: :author_books
 
   validates :middle_initial, length: {maximum: 1}
   validates_with UniqueAuthorValidator
@@ -69,17 +70,17 @@ class Author < ActiveRecord::Base
               last_name: name_parts[1]}
     elsif name_parts.size == 3
       return {first_name: name_parts[0],
-              middle_initial: name_parts[1].sub('.',''),
+              middle_initial: name_parts[1].sub('.', ''),
               last_name: name_parts[2]}
     elsif name_parts.size == 4
       if ["III", "Jr", "Jr."].include? name_parts[3]
         return {first_name: name_parts[0],
-                middle_initial: name_parts[1].sub('.',''),
+                middle_initial: name_parts[1].sub('.', ''),
                 last_name: name_parts[2]
           }
       else
         return {first_name: name_parts[0],
-                middle_initial: "#{name_parts[1]} #{name_parts[2]}".sub('.',''),
+                middle_initial: "#{name_parts[1]} #{name_parts[2]}".sub('.', ''),
                 last_name: name_parts[3]
           }
       end

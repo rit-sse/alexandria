@@ -6,7 +6,7 @@ Documentation:
   Enabled: false
 
 HashSyntax:
-  Enabled: false
+  Enabled: true
 
 LeadingCommentSpace:
   Enabled: false
@@ -21,7 +21,7 @@ RedundantSelf:
   Enabled: false
 
 SpaceAfterComma:
-  Enabled: false
+  Enabled: true
 
 SpaceAfterControlKeyword:
   Enabled: false
@@ -48,4 +48,4 @@ StringLiterals:
   Enabled: false
 
 UselessAssignment:
-  Enabled: false
+  Enabled: true
