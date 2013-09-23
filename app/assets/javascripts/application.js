@@ -16,4 +16,5 @@
 //= require handlebars.js
 //= require_tree ./templates
 //= require twitter/bootstrap
+//= require twitter/typeahead.min
 //= require_tree .

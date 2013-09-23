@@ -2,4 +2,4 @@
 	= @author.full_name
 
 - @author.books.each do |book|
-	= render partial: "books/book", locals: {book: book}
+	= render "books/book", book: book

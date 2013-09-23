@@ -58,6 +58,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'twitter-typeahead-rails'
+
 gem "haml-rails"
 
 #for search
