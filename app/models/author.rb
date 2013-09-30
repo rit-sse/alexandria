@@ -27,7 +27,7 @@ class Author < ActiveRecord::Base
   # It parses the name, expecting it to be space deliniated into 3 parts.
   # It expects strings in the format "<first> <last>" or "<first> <middle> <last>"
   def self.create_with_name(name)
-    self.new(parse_name(name))
+    new(parse_name(name))
   end
 
   ##
@@ -90,6 +90,6 @@ class Author < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name} #{self.middle_initial} #{self.last_name}"
+    "#{first_name} #{middle_initial} #{last_name}"
   end
 end

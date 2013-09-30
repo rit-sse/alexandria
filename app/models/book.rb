@@ -14,22 +14,22 @@ class Book < ActiveRecord::Base
 
   def as_json(options = {})
     json = super(options)
-    json[:authors] = self.authors.as_json(only: [:first_name, :last_name, :middle_initial])
-    json[:thumbnail] = self.google_book_data.img_thumbnail
+    json[:authors] = authors.as_json(only: [:first_name, :last_name, :middle_initial])
+    json[:thumbnail] = google_book_data.img_thumbnail
 
     json
   end
 
   def checked_out?
     checkouts = Checkout.where(checked_in_at: nil).select do |i|
-      i.book.id == self.id
+      i.book.id == id
     end
 
     checkouts.any?
   end
 
   def reserved?
-    Reservation.where(book_id: self.id, fuffiled: false).any?
+    Reservation.where(book_id: id, fuffiled: false).any?
   end
 
   def self.featured_book
