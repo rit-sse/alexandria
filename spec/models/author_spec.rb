@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Author do
 
-
   before(:all) do
     first_name = "James"
     middle_initial = "T"
