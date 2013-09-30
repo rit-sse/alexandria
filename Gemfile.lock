@@ -236,6 +236,9 @@ GEM
     sunspot (2.0.0)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
+    sunspot-rails-tester (1.0.0)
+      sunspot_rails (>= 1.2)
+      sunspot_solr (>= 1.2)
     sunspot_rails (2.0.0)
       nokogiri
       sunspot (= 2.0.0)
@@ -298,6 +301,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 4.0.0)
   sqlite3
+  sunspot-rails-tester
   sunspot_rails
   sunspot_solr (~> 2.0.0)
   therubyracer
