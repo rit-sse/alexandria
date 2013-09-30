@@ -42,7 +42,7 @@ SpaceInsideHashLiteralBraces:
   Enabled: false
 
 SpaceInsideParens:
-  Enabled: false
+  Enabled: true
 
 StringLiterals:
   Enabled: false

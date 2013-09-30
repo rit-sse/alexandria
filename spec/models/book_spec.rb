@@ -24,7 +24,7 @@ describe Book do
     user = create(:user)
     book = create(:book)
     expect(book.reserved?).to be_false
-    Reservation.create(book_id: book.id, user_id: user.id )
+    Reservation.create(book_id: book.id, user_id: user.id)
     expect(book.reserved?).to be_true
     user.destroy
     book.destroy

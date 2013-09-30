@@ -13,7 +13,7 @@ describe Reservation do
 
   it 'creates a reservation properly' do
     expect do
-      @reservation = Reservation.create(book_id: @book.id, user_id: @user.id )
+      @reservation = Reservation.create(book_id: @book.id, user_id: @user.id)
     end.to change{Reservation.all.count}.by(1)
   end
 
@@ -31,16 +31,16 @@ describe Reservation do
 
   it 'cannot have 2 reservations on 1 book' do
     expect do
-      @reservation = Reservation.create(book_id: @book.id, user_id: @user.id )
+      @reservation = Reservation.create(book_id: @book.id, user_id: @user.id)
     end.to change{Reservation.all.count}.by(1)
     expect do
-      Reservation.create(book_id: @book.id, user_id: @user.id )
+      Reservation.create(book_id: @book.id, user_id: @user.id)
     end.to_not change{Reservation.all.count}.by(1)
   end
 
   it 'user should have a reservation' do
     expect(Reservation.has_reservation(@book, @user)).to be_false
-    @reservation = Reservation.create(book_id: @book.id, user_id: @user.id )
+    @reservation = Reservation.create(book_id: @book.id, user_id: @user.id)
     expect(Reservation.has_reservation(@book, @user)).to be_true
   end
 end

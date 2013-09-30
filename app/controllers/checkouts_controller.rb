@@ -77,6 +77,6 @@ class CheckoutsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def checkout_params
-    params.require(:checkout).permit( :checked_out_at, :patron_id, :book_id)
+    params.require(:checkout).permit(:checked_out_at, :patron_id, :book_id)
   end
 end
