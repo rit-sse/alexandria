@@ -30,7 +30,7 @@ SpaceAroundBlockBraces:
   Enabled: false
 
 SpaceAroundEqualsInParameterDefault:
-  Enabled: false
+  Enabled: true
 
 SpaceAroundOperators:
   Enabled: false

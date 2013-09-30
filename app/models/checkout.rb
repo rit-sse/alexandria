@@ -15,7 +15,7 @@ class Checkout < ActiveRecord::Base
     self.checked_out_at ||= DateTime.now
   end
 
-  def patron(who=nil)
+  def patron(who = nil)
     if who
       self.patron_id = who.id
     else
