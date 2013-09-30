@@ -41,7 +41,6 @@ RSpec.configure do |config|
 
   config.before(type: :controller) do
     request.env["HTTP_REFERER"] = "/"
-    request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
   #Factory Girl and things
