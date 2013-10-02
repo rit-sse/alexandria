@@ -43,10 +43,10 @@ RSpec.configure do |config|
     request.env["HTTP_REFERER"] = "/"
   end
 
-  #Factory Girl and things
+  # Factory Girl and things
   config.include FactoryGirl::Syntax::Methods
 
-  #Devise and things
+  # Devise and things
   config.include Devise::TestHelpers, type: :controller
 
   config.before do
