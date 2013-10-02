@@ -41,6 +41,6 @@ describe Checkout do
     expect do
       checkout.checked_in_at = DateTime.now
       checkout.save
-    end.to change{Checkout.all_active.count}.from(1).to(0)
+    end.to change { Checkout.all_active.count }.from(1).to(0)
   end
 end

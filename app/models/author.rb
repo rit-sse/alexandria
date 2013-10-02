@@ -5,7 +5,7 @@ class Author < ActiveRecord::Base
       other_authors = Author.where(first_name: record.first_name,
                                    middle_initial: record.middle_initial,
                                    last_name: record.last_name)
-      other_authors.delete_if{|x| x.id == record.id}
+      other_authors.delete_if { |x| x.id == record.id }
       if other_authors.size != 0
         record.errors[:base] << "This author already exists in the system"
       end
