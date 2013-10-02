@@ -65,7 +65,6 @@ gem "haml-rails"
 #for search
 gem 'sunspot_rails'
 gem 'sunspot-rails-tester'
-gem 'progress_bar'
 
 #for authentication
 gem 'devise', '~> 3.1.0'
