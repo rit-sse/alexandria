@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921185545) do
+ActiveRecord::Schema.define(version: 20131002215915) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -85,7 +85,12 @@ ActiveRecord::Schema.define(version: 20130921185545) do
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "patron_id"
+    t.integer  "distributor_id"
   end
+
+  add_index "strikes", ["distributor_id"], name: "index_strikes_on_distributor_id"
+  add_index "strikes", ["patron_id"], name: "index_strikes_on_patron_id"
 
   create_table "users", force: true do |t|
     t.string   "user_name"

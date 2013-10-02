@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :reservations
   has_many :checkouts
+  has_many :strikes, foreign_key: :patron_id
 
   before_save :default_values
 
