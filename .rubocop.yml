@@ -15,9 +15,6 @@ AllCops:
 Documentation:
   Enabled: false
 
-HashSyntax:
-  Enabled: true
-
 LeadingCommentSpace:
   Enabled: false
 
@@ -35,6 +32,3 @@ SpaceInsideHashLiteralBraces:
 
 StringLiterals:
   Enabled: false
-
-UselessAssignment:
-  Enabled: true
