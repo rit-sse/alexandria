@@ -35,8 +35,7 @@ class Book < ActiveRecord::Base
   def self.featured_book
     gb = GoogleBookData.arel_table
     all = GoogleBookData.where(gb[:description].not_eq(""))
-    index = (rand(0..(all.count-1)))
-    all[index].book
+    all.sample.book
   end
 
   def self.add_by_isbn(isbn)
