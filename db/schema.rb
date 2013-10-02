@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002215915) do
+ActiveRecord::Schema.define(version: 20131002234145) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20131002215915) do
     t.integer  "patron_id"
     t.integer  "distributor_id"
     t.integer  "book_id"
+    t.datetime "date_due"
   end
 
   add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"
