@@ -3,6 +3,8 @@ AllCops:
     - Rakefile
     - config.ru
   Excludes:
+    # TODO: Only exclude LCCAble for the RedundantSelf cop.
+    - app/models/concerns/lccable.rb
     - db/schema.rb
     #- db/**
     #- config/**
@@ -19,9 +21,6 @@ LineLength:
   Enabled: false
 
 MethodLength:
-  Enabled: false
-
-RedundantSelf:
   Enabled: false
 
 SpaceInsideHashLiteralBraces:

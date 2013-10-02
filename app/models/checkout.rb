@@ -19,8 +19,8 @@ class Checkout < ActiveRecord::Base
     if who
       self.patron_id = who.id
     else
-      if self.patron_id
-        return User.find(self.patron_id)
+      if patron_id
+        return User.find(patron_id)
       else
         return nil
       end
@@ -42,7 +42,7 @@ class Checkout < ActiveRecord::Base
   def unique_checkout
     unless book.nil?
       book_checkouts = Checkout.all_active.where(book_id: book.id)
-      book_checkouts = book_checkouts.where('id != ?', self.id)
+      book_checkouts = book_checkouts.where('id != ?', id)
       unless book_checkouts.empty?
         errors.add(:book, 'Cannot checkout an already checked out book.')
       end
