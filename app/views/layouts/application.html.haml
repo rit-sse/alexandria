@@ -19,7 +19,7 @@
             =image_tag("logo.png", class: "logo", alt: "Alexandria logo")
 
         %form.navbar-form.navbar-left{action: "/books"}
-          %input.form-control{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typahead", autocomplete: "off", name:"search", autofocus: "autofocus"}
+          %input.form-control{ id: "master-search", type: "text", placeholder:"Search for a book...", "data-provide" => "typeahead", autocomplete: "off", name:"search", autofocus: "autofocus"}
         .navbar-right
           -if user_signed_in?
             =link_to current_user.email, user_path(current_user)

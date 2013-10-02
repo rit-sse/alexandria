@@ -2,16 +2,16 @@
 {{#unless item.more}}
 {{#unless item.none}}
 <div class="row">
-  <div class="col-md-1">
-    {{#if item.thumbnail}}
-      <img src="{{item.thumbnail}}" class="master-search-thumbnail"/>
+  <div class="col-md-4">
+    {{#if item.google_book.img_thumbnail}}
+      <img src="{{item.google_book.img_thumbnail}}" class="master-search-thumbnail"/>
     {{/if}}
-    {{#unless item.thumbnail}}
-      <div class="blank-thumbnail-small"/>
+    {{#unless item.google_book.img_thumbnail}}
+      <img class="blank-thumbnail-small"/>
     {{/unless}}
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-8">
     <div>
       {{item.title}}
     </div>

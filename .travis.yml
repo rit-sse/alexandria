@@ -4,5 +4,3 @@ rvm:
 - 2.0.0
 before_install:
   - sudo apt-get install yaz libyaz4-dev
-before_script:
-  - rake sunspot:solr:start RAILS_ENV=test

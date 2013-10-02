@@ -31,6 +31,8 @@ d.each do |row|
     publish_date: publish_date
   )
 
+  book.get_lcc
+
   author ||= ""
 
   author.split(",").each do |i|
@@ -47,9 +49,8 @@ d.each do |row|
   puts "Title: #{book.title}"
   puts "Author: #{book.authors}"
   puts "ISBN: #{book.isbn}"
+  puts "LCC: #{book.lcc}"
   puts "**** Google Book ****"
   puts book.google_book_data
-  puts "Description: #{book.google_book_data.description[0..300]}"
   puts "================"
-
 end

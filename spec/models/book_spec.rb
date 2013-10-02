@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Book do
+describe Book, solr: true do
   it 'creates a book properly' do
     book = create(:book)
     expect(book).to_not be_nil
