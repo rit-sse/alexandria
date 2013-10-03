@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', :'http-equiv' => 'Content-Type'}
+  %body
+    %p
+      = "Hi #{@user.user_name},"
+      %br
+      We would like to inform you that the book you have checked out,
+      %b
+        = @book.title
+      , is overdue. Because of this, you have recieved a strike. You
+      currently have
+      %b
+        = @user.strikes.count
+        strikes.
+      If you don't return this book by
+      %b
+        = @checkout.due_date.strftime('%B %d, %Y')
+      you will recieve another strike.
+      %br
+      \- The Society of Software Engineers
