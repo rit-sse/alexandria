@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20131002234145) do
     t.integer  "patron_id"
     t.integer  "distributor_id"
     t.integer  "book_id"
-    t.datetime "date_due"
+    t.datetime "due_date"
   end
 
   add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"

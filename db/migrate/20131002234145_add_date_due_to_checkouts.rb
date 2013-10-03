@@ -1,5 +1,5 @@
 class AddDateDueToCheckouts < ActiveRecord::Migration
   def change
-    add_column :checkouts, :date_due, :datetime
+    add_column :checkouts, :due_date, :datetime
   end
 end

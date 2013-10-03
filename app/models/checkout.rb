@@ -13,6 +13,7 @@ class Checkout < ActiveRecord::Base
 
   def default_values
     self.checked_out_at ||= DateTime.now
+    self.due_date ||= checked_out_at + 1.week
   end
 
   def patron(who=nil)
