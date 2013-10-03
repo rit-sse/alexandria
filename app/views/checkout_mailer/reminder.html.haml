@@ -1,0 +1,19 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', :'http-equiv' => 'Content-Type'}
+  %body
+    %p
+      = "Hi #{@user.user_name},"
+      %br
+      We would like to inform you that the book you have checked out,
+      %b
+        = @book.title
+      , is due in 3 days.
+      If you don't return this book by
+      %b
+        = @checkout.due_date.strftime('%B %d, %Y')
+      you will recieve strike. If you will need the book longer than that, please
+      stop by to renew the book.
+      %br
+      \- The Society of Software Engineers
