@@ -1,5 +1,5 @@
 class CheckoutMailer < ActionMailer::Base
-  default from: "no-reply@kristen-mills.com"
+  default from: "from@example.com"
 
   def overdue_book(checkout)
     @user = checkout.patron
