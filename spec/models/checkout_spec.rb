@@ -24,6 +24,11 @@ describe Checkout do
     expect(checkout.patron).to eq(@user)
   end
 
+  it 'has a due date of a week after' do
+    checkout = create(:checkout)
+    expect(checkout.due_date).to eq(checkout.checked_out_at + 1.week)
+  end
+
   it 'can be found given book and patron' do
     expect(Checkout.checked_out(@book, @user)).to be_false
     checkout = create(:checkout)
