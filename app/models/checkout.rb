@@ -49,4 +49,22 @@ class Checkout < ActiveRecord::Base
       end
     end
   end
+
+  def overdue?
+    DateTime.now > self.due_date and self.checked_in_at.blank?
+  end
+
+  def self.send_overdue
+    self.all.each do |checkout|
+      if checkout.overdue?
+        checkout.due_date += 1.week
+        checkout.save
+        strike = Strike.new
+        strike.patron = checkout.patron
+        strike.distributor = checkout.distributor
+        strike.save
+        CheckoutMailer.overdue_book(checkout).deliver
+      end
+    end
+  end
 end

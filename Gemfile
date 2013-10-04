@@ -86,6 +86,9 @@ gem 'factory_girl_rails'
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
+# For scheduled job
+gem 'whenever'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -45,6 +45,7 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
+    chronic (0.10.2)
     chunky_png (1.2.8)
     code_analyzer (0.4.2)
       sexp_processor
@@ -261,6 +262,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     yaml_db (0.2.3)
 
 PLATFORMS
@@ -300,5 +304,6 @@ DEPENDENCIES
   turbolinks
   twitter-typeahead-rails
   uglifier (>= 1.0.3)
+  whenever
   yaml_db
   zoom!
