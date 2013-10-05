@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Reservation do
+describe Reservation, solr: true do
   before(:all) do
     @book = create(:book)
     @user = create(:user)
