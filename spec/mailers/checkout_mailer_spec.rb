@@ -18,7 +18,6 @@ describe CheckoutMailer, solr: true do
     end
     it 'assigns @user' do
       expect(mail.body.encoded).to match(user.user_name)
-      expect(mail.body.encoded).to match(/#{user.strikes.count}\s*strikes/)
     end
 
     it 'assigns @book' do
