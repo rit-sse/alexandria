@@ -1,18 +1,15 @@
 require 'spec_helper'
 
 describe Checkout, solr: true do
-  before(:all) do
-    @user = create(:user)
-    @book = create(:book)
-  end
+  let(:user) {create(:user)}
+  let(:book) {create(:book)}
 
   before(:each) do
     @checkout = create(:checkout)
   end
 
   after(:all) do
-    @user.destroy
-    @book.destroy
+    user.destroy
   end
 
   it 'can be created' do
@@ -22,8 +19,8 @@ describe Checkout, solr: true do
 
   it 'can have a patron' do
     expect(@checkout.patron).to be_nil
-    @checkout.patron @user
-    expect(@checkout.patron).to eq(@user)
+    @checkout.patron user
+    expect(@checkout.patron).to eq(user)
   end
 
   it 'has a due date of a week after' do
@@ -31,11 +28,11 @@ describe Checkout, solr: true do
   end
 
   it 'can be found given book and patron' do
-    expect(Checkout.checked_out(@book, @user)).to be_false
-    @checkout.book = @book
-    @checkout.patron @user
+    expect(Checkout.checked_out(book, user)).to be_false
+    @checkout.book = book
+    @checkout.patron user
     @checkout.save
-    expect(Checkout.checked_out(@book, @user)).to be_true
+    expect(Checkout.checked_out(book, user)).to be_true
   end
 
   it 'can be checked back in' do
