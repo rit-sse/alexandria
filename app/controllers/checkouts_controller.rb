@@ -1,3 +1,4 @@
+# Checkouts controller
 class CheckoutsController < ApplicationController
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
 
@@ -25,15 +26,9 @@ class CheckoutsController < ApplicationController
   # POST /checkouts.json
   def create
     @checkout = Checkout.new(checkout_params)
-
     respond_to do |format|
       if @checkout.save
-        reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
-        if reservation
-          reservation.fuffiled = true
-          reservation.save
-        end
-
+        check_reservation
         format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
         format.json { render 'show', status: :created, location: @checkout }
       else
@@ -46,7 +41,7 @@ class CheckoutsController < ApplicationController
   # PATCH/PUT /checkouts/1
   # PATCH/PUT /checkouts/1.json
   def update
-    @checkout.checked_in_at = DateTime.now if params[:checkout][:checked_in_at] && params[:checkout][:checked_in_at] == "now"
+    @checkout.checked_in_at = DateTime.now if params[:checkout][:checked_in_at] && params[:checkout][:checked_in_at] == 'now'
     respond_to do |format|
       if @checkout.update(checkout_params)
         format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
@@ -77,6 +72,14 @@ class CheckoutsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def checkout_params
-    params.require(:checkout).permit( :checked_out_at, :patron_id, :book_id)
+    params.require(:checkout).permit(:checked_out_at, :patron_id, :book_id)
+  end
+
+  def check_reservation
+    reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
+    if reservation
+      reservation.fulfilled = true
+      reservation.save
+    end
   end
 end

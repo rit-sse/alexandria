@@ -1,3 +1,4 @@
+# Controller for books
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate!
@@ -10,16 +11,7 @@ class BooksController < ApplicationController
     if books_with_isbn.any?
       redirect_to books_with_isbn.first
     else
-
-      if params[:search]
-        @search = Book.search do
-          fulltext params[:search]
-        end
-        @books = @search.results
-      else
-        @books = Book.all
-      end
-
+      search
       @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
     end
@@ -89,5 +81,16 @@ class BooksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
     params.require(:book).permit(:isbn, :UUID, :publish_date, :title, :subtitle)
+  end
+
+  def search
+    if params[:search]
+      @search = Book.search do
+        fulltext params[:search]
+      end
+      @books = @search.results
+    else
+      @books = Book.all
+    end
   end
 end

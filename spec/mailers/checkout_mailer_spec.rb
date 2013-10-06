@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe CheckoutMailer, solr: true do
   let(:user) { create(:user) }

@@ -1,3 +1,4 @@
+# Book model
 class Book < ActiveRecord::Base
   include Lccable
   has_many :reservations
@@ -14,59 +15,55 @@ class Book < ActiveRecord::Base
 
   def as_json(options = {})
     json = super(options)
-    json[:authors] = self.authors.as_json(only: [:first_name, :last_name, :middle_initial])
-    json[:thumbnail] = self.google_book_data.img_thumbnail
+    json[:authors] = authors.as_json(only: [:first_name, :last_name, :middle_initial])
+    json[:thumbnail] = google_book_data.img_thumbnail
 
     json
   end
 
   def checked_out?
     checkouts = Checkout.where(checked_in_at: nil).select do |i|
-      i.book.id == self.id
+      i.book.id == id
     end
 
     checkouts.any?
   end
 
   def reserved?
-    Reservation.where(book_id: self.id, fuffiled: false).any?
+    Reservation.where(book_id: id, fulfilled: false).any?
   end
 
   def self.featured_book
     gb = GoogleBookData.arel_table
-    all = GoogleBookData.where(gb[:description].not_eq(""))
+    all = GoogleBookData.where(gb[:description].not_eq(''))
     all.sample.book
   end
 
   def self.add_by_isbn(isbn)
     results =  GoogleBooks.search("isbn:#{isbn}")
-    book = Book.new
-    book.isbn = isbn
+    book = Book.new(isbn: isbn)
     if results.total_items > 0
-      gb = results.first
-
-      title = gb.title.split(":")
-      book.title = title[0]
-      book.subtitle = title[1] ? title[1].strip : ""
-      book.subtitle
-      book.publish_date = gb.published_date
-      book.get_lcc
-
-      author = gb.authors
-      author ||= ""
-      author.split(", ").each do |i|
-        book.authors << Author.find_or_create(i)
-      end
-      book.save
+      book.set_book(results.first)
       gbook = GoogleBookData.book_from_isbn(book.isbn)
-      gbook.save
-
       gbook.book = book
       gbook.save
     end
-
     book.save
     book
+  end
+
+  def set_book(gb)
+    title = gb.title.split(':')
+    self.title = title[0]
+    self.subtitle = title[1] ? title[1].strip : ''
+    self.publish_date = gb.published_date
+    get_lcc
+
+    author = gb.authors
+    author ||= ''
+    author.split(', ').each do |i|
+      authors << Author.find_or_create(i)
+    end
   end
 
 end
