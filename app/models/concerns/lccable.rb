@@ -22,7 +22,7 @@ module Lccable
       end
     end
   rescue
-    puts "Connection Lost"
+    puts 'Connection Lost'
   end
 
   # Set's and normalizes the lcc

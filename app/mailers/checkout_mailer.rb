@@ -1,5 +1,5 @@
 class CheckoutMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: 'from@example.com'
 
   def reminder(checkout)
     @user = checkout.patron

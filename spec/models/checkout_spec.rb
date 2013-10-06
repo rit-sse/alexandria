@@ -8,10 +8,6 @@ describe Checkout, solr: true do
     @checkout = create(:checkout)
   end
 
-  after(:all) do
-    user.destroy
-  end
-
   it 'can be created' do
     expect(@checkout).to_not be_nil
     expect(@checkout.checked_out_at).to eq(Date.new(2013, 2, 4))

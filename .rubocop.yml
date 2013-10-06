@@ -24,6 +24,3 @@ MethodLength:     # Seperated out as much as seemed reasonable. 3 methods have 1
 
 SpaceInsideHashLiteralBraces:
   Enabled: false
-
-StringLiterals:
-  Enabled: false

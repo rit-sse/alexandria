@@ -59,8 +59,8 @@ class Book < ActiveRecord::Base
     get_lcc
 
     author = gb.authors
-    author ||= ""
-    author.split(", ").each do |i|
+    author ||= ''
+    author.split(', ').each do |i|
       authors << Author.find_or_create(i)
     end
   end

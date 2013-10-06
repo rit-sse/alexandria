@@ -5,12 +5,12 @@ class GoogleBookData < ActiveRecord::Base
 
   def self.book_from_isbn(isbn)
     GoogleBookData.new(
-        description:   "",
-        img_thumbnail: "",
-        img_small:     "",
-        img_medium:    "",
-        img_large:     "",
-        preview_link:  ""
+        description:   '',
+        img_thumbnail: '',
+        img_small:     '',
+        img_medium:    '',
+        img_large:     '',
+        preview_link:  ''
       ).update_data(isbn)
   end
 
@@ -39,7 +39,7 @@ class GoogleBookData < ActiveRecord::Base
   end
 
   def self.update_all_null
-    GoogleBookData.where(description: "").each { |i| i.update_data.save }
+    GoogleBookData.where(description: '').each { |i| i.update_data.save }
   end
 
 end

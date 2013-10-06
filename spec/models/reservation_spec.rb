@@ -4,10 +4,6 @@ describe Reservation, solr: true do
   let(:book) { create(:book) }
   let(:user) { create(:user) }
 
-  after(:all) do
-    user.destroy
-  end
-
   it 'creates a reservation properly' do
     expect do
       Reservation.create(book_id: book.id, user_id: user.id)

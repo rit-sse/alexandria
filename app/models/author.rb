@@ -7,7 +7,7 @@ class Author < ActiveRecord::Base
                                    last_name: record.last_name)
       other_authors.delete_if { |x| x.id == record.id }
       if other_authors.size != 0
-        record.errors[:base] << "This author already exists in the system"
+        record.errors[:base] << 'This author already exists in the system'
       end
     end
   end
@@ -19,7 +19,7 @@ class Author < ActiveRecord::Base
   validates_with UniqueAuthorValidator
 
   def default_values
-    self.middle_initial ||= ""
+    self.middle_initial ||= ''
   end
 
   ##
@@ -70,7 +70,7 @@ class Author < ActiveRecord::Base
     when 3
       format_name(name_parts[0], name_parts[1].sub('.', ''), name_parts[2])
     when 4
-      if ["III", "Jr", "Jr."].include? name_parts[3]
+      if ['III', 'Jr', 'Jr.'].include? name_parts[3]
         format_name(name_parts[0], name_parts[1].sub('.', ''), name_parts[2])
       else
         format_name(name_parts[0], "#{name_parts[1]} #{name_parts[2]}".sub('.', ''), name_parts[3])

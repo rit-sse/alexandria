@@ -21,7 +21,7 @@ worker_processes 4
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-APP_PATH = "/home/deploy/alexandria"
+APP_PATH = '/home/deploy/alexandria'
 
 working_directory  APP_PATH
 
@@ -39,10 +39,10 @@ timeout 30
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
 
-stderr_path APP_PATH + "/log/unicorn.stderr.log"
-stdout_path APP_PATH + "/log/unicorn.stderr.log"
+stderr_path APP_PATH + '/log/unicorn.stderr.log'
+stdout_path APP_PATH + '/log/unicorn.stderr.log'
 
-pid APP_PATH + "/tmp/pids/unicorn.pid"
+pid APP_PATH + '/tmp/pids/unicorn.pid'
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow

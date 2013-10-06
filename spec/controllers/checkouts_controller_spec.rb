@@ -44,128 +44,128 @@ describe CheckoutsController, solr: true do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all checkouts as @checkouts" do
+  describe 'GET index' do
+    it 'assigns all checkouts as @checkouts' do
       checkout = Checkout.create! valid_attributes
       get :index, {}, valid_session
       assigns(:checkouts).should eq([checkout])
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested checkout as @checkout" do
+  describe 'GET show' do
+    it 'assigns the requested checkout as @checkout' do
       checkout = Checkout.create! valid_attributes
       get :show, {id: checkout.to_param}, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new checkout as @checkout" do
+  describe 'GET new' do
+    it 'assigns a new checkout as @checkout' do
       get :new, {}, valid_session
       assigns(:checkout).should be_a_new(Checkout)
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested checkout as @checkout" do
+  describe 'GET edit' do
+    it 'assigns the requested checkout as @checkout' do
       checkout = Checkout.create! valid_attributes
       get :edit, {id: checkout.to_param}, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Checkout" do
+  describe 'POST create' do
+    describe 'with valid params' do
+      it 'creates a new Checkout' do
         expect do
           post :create, {checkout: valid_attributes}, valid_session
         end.to change(Checkout, :count).by(1)
       end
 
-      it "assigns a newly created checkout as @checkout" do
+      it 'assigns a newly created checkout as @checkout' do
         post :create, {checkout: valid_attributes}, valid_session
         assigns(:checkout).should be_a(Checkout)
         assigns(:checkout).should be_persisted
       end
 
-      it "redirects to the created checkout" do
+      it 'redirects to the created checkout' do
         post :create, {checkout: valid_attributes}, valid_session
         response.should redirect_to(request.referer)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved checkout as @checkout" do
+    describe 'with invalid params' do
+      it 'assigns a newly created but unsaved checkout as @checkout' do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {checkout: { "user" => "invalid value" }}, valid_session
+        post :create, {checkout: { 'user' => 'invalid value' }}, valid_session
         assigns(:checkout).should be_a_new(Checkout)
       end
 
-      it "re-renders the 'new' template" do
+      it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {checkout: { "user" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        post :create, {checkout: { 'user' => 'invalid value' }}, valid_session
+        response.should render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested checkout" do
+  describe 'PUT update' do
+    describe 'with valid params' do
+      it 'updates the requested checkout' do
         checkout = Checkout.create! valid_attributes
         # Assuming there are no other checkouts in the database, this
         # specifies that the Checkout created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         date = DateTime.new
-        Checkout.any_instance.should_receive(:update).with({ "checked_out_at" => date })
-        put :update, {id: checkout.to_param, checkout: { "checked_out_at" => date }}, valid_session
+        Checkout.any_instance.should_receive(:update).with({ 'checked_out_at' => date })
+        put :update, {id: checkout.to_param, checkout: { 'checked_out_at' => date }}, valid_session
       end
 
-      it "assigns the requested checkout as @checkout" do
+      it 'assigns the requested checkout as @checkout' do
         checkout = Checkout.create! valid_attributes
         put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
-      it "redirects to the checkout" do
+      it 'redirects to the checkout' do
         checkout = Checkout.create! valid_attributes
         put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
         response.should redirect_to(request.referer)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the checkout as @checkout" do
+    describe 'with invalid params' do
+      it 'assigns the checkout as @checkout' do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {id: checkout.to_param, checkout: { "patron" => "invalid value" }}, valid_session
+        put :update, {id: checkout.to_param, checkout: { 'patron' => 'invalid value' }}, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
-      it "re-renders the 'edit' template" do
+      it 're-renders the edit template' do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {id: checkout.to_param, checkout: { "patron" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        put :update, {id: checkout.to_param, checkout: { 'patron' => 'invalid value' }}, valid_session
+        response.should render_template('edit')
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested checkout" do
+  describe 'DELETE destroy' do
+    it 'destroys the requested checkout' do
       checkout = Checkout.create! valid_attributes
       expect do
         delete :destroy, {id: checkout.to_param}, valid_session
       end.to change(Checkout, :count).by(-1)
     end
 
-    it "redirects to the checkouts list" do
+    it 'redirects to the checkouts list' do
       checkout = Checkout.create! valid_attributes
       delete :destroy, {id: checkout.to_param}, valid_session
       response.should redirect_to(checkouts_url)

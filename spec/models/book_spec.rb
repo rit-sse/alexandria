@@ -8,7 +8,7 @@ describe Book, solr: true do
   end
 
   it 'creates a book from ISBN' do
-    book = Book.add_by_isbn("9780201633610")
+    book = Book.add_by_isbn('9780201633610')
     expect(book.title).to eq('Design Patterns')
     expect(book.subtitle).to eq('Elements of Reusable Object-Oriented Software')
     expect(book.isbn).to eq('9780201633610')
