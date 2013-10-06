@@ -45,7 +45,7 @@ describe AuthorsController do
   describe 'GET show' do
     it 'assigns the requested author as @author' do
       author = Author.create! valid_attributes
-      get :show, {id: author.to_param}, valid_session
+      get :show, { id: author.to_param }, valid_session
       assigns(:author).should eq(author)
     end
   end
@@ -60,7 +60,7 @@ describe AuthorsController do
   describe 'GET edit' do
     it 'assigns the requested author as @author' do
       author = Author.create! valid_attributes
-      get :edit, {id: author.to_param}, valid_session
+      get :edit, { id: author.to_param }, valid_session
       assigns(:author).should eq(author)
     end
   end
@@ -69,18 +69,18 @@ describe AuthorsController do
     describe 'with valid params' do
       it 'creates a new Author' do
         expect do
-          post :create, {author: valid_attributes}, valid_session
+          post :create, { author: valid_attributes }, valid_session
         end.to change(Author, :count).by(1)
       end
 
       it 'assigns a newly created author as @author' do
-        post :create, {author: valid_attributes}, valid_session
+        post :create, { author: valid_attributes }, valid_session
         assigns(:author).should be_a(Author)
         assigns(:author).should be_persisted
       end
 
       it 'redirects to the created author' do
-        post :create, {author: valid_attributes}, valid_session
+        post :create, { author: valid_attributes }, valid_session
         response.should redirect_to(Author.last)
       end
     end
@@ -89,14 +89,14 @@ describe AuthorsController do
       it 'assigns a newly created but unsaved author as @author' do
         # Trigger the behavior that occurs when invalid params are submitted
         Author.any_instance.stub(:save).and_return(false)
-        post :create, {author: { 'first_name' => 'invalid value' }}, valid_session
+        post :create, { author: { 'first_name' => 'invalid value' } }, valid_session
         assigns(:author).should be_a_new(Author)
       end
 
       it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Author.any_instance.stub(:save).and_return(false)
-        post :create, {author: { 'first_name' => 'invalid value' }}, valid_session
+        post :create, { author: { 'first_name' => 'invalid value' } }, valid_session
         response.should render_template('new')
       end
     end
@@ -111,18 +111,18 @@ describe AuthorsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Author.any_instance.should_receive(:update).with({ 'first_name' => 'MyString' })
-        put :update, {id: author.to_param, author: { 'first_name' => 'MyString' }}, valid_session
+        put :update, { id: author.to_param, author: { 'first_name' => 'MyString' } }, valid_session
       end
 
       it 'assigns the requested author as @author' do
         author = Author.create! valid_attributes
-        put :update, {id: author.to_param, author: valid_attributes}, valid_session
+        put :update, { id: author.to_param, author: valid_attributes }, valid_session
         assigns(:author).should eq(author)
       end
 
       it 'redirects to the author' do
         author = Author.create! valid_attributes
-        put :update, {id: author.to_param, author: valid_attributes}, valid_session
+        put :update, { id: author.to_param, author: valid_attributes }, valid_session
         response.should redirect_to(author)
       end
     end
@@ -132,7 +132,7 @@ describe AuthorsController do
         author = Author.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Author.any_instance.stub(:save).and_return(false)
-        put :update, {id: author.to_param, author: { 'first_name' => 'invalid value' }}, valid_session
+        put :update, { id: author.to_param, author: { 'first_name' => 'invalid value' } }, valid_session
         assigns(:author).should eq(author)
       end
 
@@ -140,7 +140,7 @@ describe AuthorsController do
         author = Author.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Author.any_instance.stub(:save).and_return(false)
-        put :update, {id: author.to_param, author: { 'first_name' => 'invalid value' }}, valid_session
+        put :update, { id: author.to_param, author: { 'first_name' => 'invalid value' } }, valid_session
         response.should render_template('edit')
       end
     end
@@ -150,13 +150,13 @@ describe AuthorsController do
     it 'destroys the requested author' do
       author = Author.create! valid_attributes
       expect do
-        delete :destroy, {id: author.to_param}, valid_session
+        delete :destroy, { id: author.to_param }, valid_session
       end.to change(Author, :count).by(-1)
     end
 
     it 'redirects to the authors list' do
       author = Author.create! valid_attributes
-      delete :destroy, {id: author.to_param}, valid_session
+      delete :destroy, { id: author.to_param }, valid_session
       response.should redirect_to(authors_url)
     end
   end

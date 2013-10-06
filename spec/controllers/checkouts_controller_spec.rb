@@ -34,7 +34,7 @@ describe CheckoutsController, solr: true do
   # Checkout. As you add validations to Checkout, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {patron_id: user.id, book_id: book.id}
+    { patron_id: user.id, book_id: book.id }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -55,7 +55,7 @@ describe CheckoutsController, solr: true do
   describe 'GET show' do
     it 'assigns the requested checkout as @checkout' do
       checkout = Checkout.create! valid_attributes
-      get :show, {id: checkout.to_param}, valid_session
+      get :show, { id: checkout.to_param }, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
@@ -70,7 +70,7 @@ describe CheckoutsController, solr: true do
   describe 'GET edit' do
     it 'assigns the requested checkout as @checkout' do
       checkout = Checkout.create! valid_attributes
-      get :edit, {id: checkout.to_param}, valid_session
+      get :edit, { id: checkout.to_param }, valid_session
       assigns(:checkout).should eq(checkout)
     end
   end
@@ -79,18 +79,18 @@ describe CheckoutsController, solr: true do
     describe 'with valid params' do
       it 'creates a new Checkout' do
         expect do
-          post :create, {checkout: valid_attributes}, valid_session
+          post :create, { checkout: valid_attributes }, valid_session
         end.to change(Checkout, :count).by(1)
       end
 
       it 'assigns a newly created checkout as @checkout' do
-        post :create, {checkout: valid_attributes}, valid_session
+        post :create, { checkout: valid_attributes }, valid_session
         assigns(:checkout).should be_a(Checkout)
         assigns(:checkout).should be_persisted
       end
 
       it 'redirects to the created checkout' do
-        post :create, {checkout: valid_attributes}, valid_session
+        post :create, { checkout: valid_attributes }, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -99,14 +99,14 @@ describe CheckoutsController, solr: true do
       it 'assigns a newly created but unsaved checkout as @checkout' do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {checkout: { 'user' => 'invalid value' }}, valid_session
+        post :create, { checkout: { 'user' => 'invalid value' } }, valid_session
         assigns(:checkout).should be_a_new(Checkout)
       end
 
       it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        post :create, {checkout: { 'user' => 'invalid value' }}, valid_session
+        post :create, { checkout: { 'user' => 'invalid value' } }, valid_session
         response.should render_template('new')
       end
     end
@@ -122,18 +122,18 @@ describe CheckoutsController, solr: true do
         # submitted in the request.
         date = DateTime.new
         Checkout.any_instance.should_receive(:update).with({ 'checked_out_at' => date })
-        put :update, {id: checkout.to_param, checkout: { 'checked_out_at' => date }}, valid_session
+        put :update, { id: checkout.to_param, checkout: { 'checked_out_at' => date } }, valid_session
       end
 
       it 'assigns the requested checkout as @checkout' do
         checkout = Checkout.create! valid_attributes
-        put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
+        put :update, { id: checkout.to_param, checkout: valid_attributes }, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
       it 'redirects to the checkout' do
         checkout = Checkout.create! valid_attributes
-        put :update, {id: checkout.to_param, checkout: valid_attributes}, valid_session
+        put :update, { id: checkout.to_param, checkout: valid_attributes }, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -143,7 +143,7 @@ describe CheckoutsController, solr: true do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {id: checkout.to_param, checkout: { 'patron' => 'invalid value' }}, valid_session
+        put :update, { id: checkout.to_param, checkout: { 'patron' => 'invalid value' } }, valid_session
         assigns(:checkout).should eq(checkout)
       end
 
@@ -151,7 +151,7 @@ describe CheckoutsController, solr: true do
         checkout = Checkout.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Checkout.any_instance.stub(:save).and_return(false)
-        put :update, {id: checkout.to_param, checkout: { 'patron' => 'invalid value' }}, valid_session
+        put :update, { id: checkout.to_param, checkout: { 'patron' => 'invalid value' } }, valid_session
         response.should render_template('edit')
       end
     end
@@ -161,13 +161,13 @@ describe CheckoutsController, solr: true do
     it 'destroys the requested checkout' do
       checkout = Checkout.create! valid_attributes
       expect do
-        delete :destroy, {id: checkout.to_param}, valid_session
+        delete :destroy, { id: checkout.to_param }, valid_session
       end.to change(Checkout, :count).by(-1)
     end
 
     it 'redirects to the checkouts list' do
       checkout = Checkout.create! valid_attributes
-      delete :destroy, {id: checkout.to_param}, valid_session
+      delete :destroy, { id: checkout.to_param }, valid_session
       response.should redirect_to(checkouts_url)
     end
   end

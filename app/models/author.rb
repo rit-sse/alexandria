@@ -17,7 +17,7 @@ class Author < ActiveRecord::Base
   has_many :author_books
   has_many :books, through: :author_books
 
-  validates :middle_initial, length: {maximum: 1}
+  validates :middle_initial, length: { maximum: 1 }
   validates_with UniqueAuthorValidator
 
   def default_values
@@ -83,7 +83,7 @@ class Author < ActiveRecord::Base
   end
 
   def self.format_name(first, middle, last)
-    {first_name: first, middle_initial: middle, last_name: last}
+    { first_name: first, middle_initial: middle, last_name: last }
   end
 
   def full_name

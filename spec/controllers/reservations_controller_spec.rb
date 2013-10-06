@@ -32,7 +32,7 @@ describe ReservationsController, solr: true do
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {'user_id' => user.id, 'book_id' => book.id}
+    { user_id: user.id, book_id: book.id }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -53,7 +53,7 @@ describe ReservationsController, solr: true do
   describe 'GET show' do
     it 'assigns the requested reservation as @reservation' do
       reservation = Reservation.create! valid_attributes
-      get :show, {id: reservation.to_param}, valid_session
+      get :show, { id: reservation.to_param }, valid_session
       assigns(:reservation).should eq(reservation)
     end
   end
@@ -68,7 +68,7 @@ describe ReservationsController, solr: true do
   describe 'GET edit' do
     it 'assigns the requested reservation as @reservation' do
       reservation = Reservation.create! valid_attributes
-      get :edit, {id: reservation.to_param}, valid_session
+      get :edit, { id: reservation.to_param }, valid_session
       assigns(:reservation).should eq(reservation)
     end
   end
@@ -77,18 +77,18 @@ describe ReservationsController, solr: true do
     describe 'with valid params' do
       it 'creates a new Reservation' do
         expect do
-          post :create, {reservation: valid_attributes}, valid_session
+          post :create, { reservation: valid_attributes }, valid_session
         end.to change(Reservation, :count).by(1)
       end
 
       it 'assigns a newly created reservation as @reservation' do
-        post :create, {reservation: valid_attributes}, valid_session
+        post :create, { reservation: valid_attributes }, valid_session
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it 'redirects to the created reservation' do
-        post :create, {reservation: valid_attributes}, valid_session
+        post :create, { reservation: valid_attributes }, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -97,14 +97,14 @@ describe ReservationsController, solr: true do
       it 'assigns a newly created but unsaved reservation as @reservation' do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {reservation: { 'user' => 'invalid value' }}, valid_session
+        post :create, { reservation: { 'user' => 'invalid value' } }, valid_session
         assigns(:reservation).should be_a_new(Reservation)
       end
 
       it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {reservation: { 'user' => 'invalid value' }}, valid_session
+        post :create, { reservation: { 'user' => 'invalid value' } }, valid_session
         response.should render_template('new')
       end
     end
@@ -118,19 +118,19 @@ describe ReservationsController, solr: true do
         # specifies that the Reservation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Reservation.any_instance.should_receive(:update).with({'fuffiled' => true})
-        put :update, {id: reservation.to_param, reservation: {'fuffiled' => true}}, valid_session
+        Reservation.any_instance.should_receive(:update).with({ 'fuffiled' => true })
+        put :update, { id: reservation.to_param, reservation: { 'fuffiled' => true } }, valid_session
       end
 
       it 'assigns the requested reservation as @reservation' do
         reservation = Reservation.create! valid_attributes
-        put :update, {id: reservation.to_param, reservation: valid_attributes}, valid_session
+        put :update, { id: reservation.to_param, reservation: valid_attributes }, valid_session
         assigns(:reservation).should eq(reservation)
       end
 
       it 'redirects to the reservation' do
         reservation = Reservation.create! valid_attributes
-        put :update, {id: reservation.to_param, reservation: valid_attributes}, valid_session
+        put :update, { id: reservation.to_param, reservation: valid_attributes }, valid_session
         response.should redirect_to(request.referer)
       end
     end
@@ -140,7 +140,7 @@ describe ReservationsController, solr: true do
         reservation = Reservation.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {id: reservation.to_param, reservation: { 'user' => 'invalid value' }}, valid_session
+        put :update, { id: reservation.to_param, reservation: { 'user' => 'invalid value' } }, valid_session
         assigns(:reservation).should eq(reservation)
       end
 
@@ -148,7 +148,7 @@ describe ReservationsController, solr: true do
         reservation = Reservation.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {id: reservation.to_param, reservation: { 'user' => 'invalid value' }}, valid_session
+        put :update, { id: reservation.to_param, reservation: { 'user' => 'invalid value' } }, valid_session
         response.should render_template('edit')
       end
     end
@@ -158,13 +158,13 @@ describe ReservationsController, solr: true do
     it 'destroys the requested reservation' do
       reservation = Reservation.create! valid_attributes
       expect do
-        delete :destroy, {id: reservation.to_param}, valid_session
+        delete :destroy, { id: reservation.to_param }, valid_session
       end.to change(Reservation, :count).by(-1)
     end
 
     it 'redirects to the reservations list' do
       reservation = Reservation.create! valid_attributes
-      delete :destroy, {id: reservation.to_param}, valid_session
+      delete :destroy, { id: reservation.to_param }, valid_session
       response.should redirect_to(reservations_url)
     end
   end

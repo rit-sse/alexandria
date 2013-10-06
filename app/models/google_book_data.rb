@@ -18,7 +18,7 @@ class GoogleBookData < ActiveRecord::Base
     if ENV['ALEXANDRIA_SIMPLE'].blank?
       results = GoogleBooks.search("isbn:#{isbn}")
     else
-      results = GoogleBooks.search("isbn:#{isbn}", {api_key: ENV['ALEXANDRIA_SIMPLE']})
+      results = GoogleBooks.search("isbn:#{isbn}", { api_key: ENV['ALEXANDRIA_SIMPLE'] })
     end
 
     set_google_book(results)

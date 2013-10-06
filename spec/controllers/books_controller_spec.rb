@@ -54,7 +54,7 @@ describe BooksController, solr: true do
   describe 'GET show' do
     it 'assigns the requested book as @book' do
       book = Book.create! valid_attributes
-      get :show, {id: book.to_param}, valid_session
+      get :show, { id: book.to_param }, valid_session
       assigns(:book).should eq(book)
     end
   end
@@ -69,7 +69,7 @@ describe BooksController, solr: true do
   describe 'GET edit' do
     it 'assigns the requested book as @book' do
       book = Book.create! valid_attributes
-      get :edit, {id: book.to_param}, valid_session
+      get :edit, { id: book.to_param }, valid_session
       assigns(:book).should eq(book)
     end
   end
@@ -98,14 +98,14 @@ describe BooksController, solr: true do
       it 'assigns a newly created but unsaved book as @book' do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {'isbn' => '9780199273133', book: { 'reservation' => 9 }}, valid_session
+        post :create, { 'isbn' => '9780199273133', book: { 'reservation' => 9 } }, valid_session
         assigns(:book).should be_a_new(Book)
       end
 
       it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, {'isbn' => '9780199273133', book: { 'reservation' => 9 }}, valid_session
+        post :create, { 'isbn' => '9780199273133', book: { 'reservation' => 9 } }, valid_session
         response.should render_template('new')
       end
     end
@@ -120,18 +120,18 @@ describe BooksController, solr: true do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Book.any_instance.should_receive(:update).with({ 'isbn' => 'MyString' })
-        put :update, {id: book.to_param, book: { 'isbn' => 'MyString' }}, valid_session
+        put :update, { id: book.to_param, book: { 'isbn' => 'MyString' } }, valid_session
       end
 
       it 'assigns the requested book as @book' do
         book = Book.create! valid_attributes
-        put :update, {id: book.to_param, book: valid_attributes}, valid_session
+        put :update, { id: book.to_param, book: valid_attributes }, valid_session
         assigns(:book).should eq(book)
       end
 
       it 'redirects to the book' do
         book = Book.create! valid_attributes
-        put :update, {id: book.to_param, book: valid_attributes}, valid_session
+        put :update, { id: book.to_param, book: valid_attributes }, valid_session
         response.should redirect_to(book)
       end
     end
@@ -141,7 +141,7 @@ describe BooksController, solr: true do
         book = Book.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        put :update, {id: book.to_param, book: { 'isbn' => 'invalid value' }}, valid_session
+        put :update, { id: book.to_param, book: { 'isbn' => 'invalid value' } }, valid_session
         assigns(:book).should eq(book)
       end
 
@@ -149,7 +149,7 @@ describe BooksController, solr: true do
         book = Book.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        put :update, {id: book.to_param, book: { 'isbn' => 'invalid value' }}, valid_session
+        put :update, { id: book.to_param, book: { 'isbn' => 'invalid value' } }, valid_session
         response.should render_template('edit')
       end
     end
@@ -159,13 +159,13 @@ describe BooksController, solr: true do
     it 'destroys the requested book' do
       book = Book.create! valid_attributes
       expect do
-        delete :destroy, {id: book.to_param}, valid_session
+        delete :destroy, { id: book.to_param }, valid_session
       end.to change(Book, :count).by(-1)
     end
 
     it 'redirects to the books list' do
       book = Book.create! valid_attributes
-      delete :destroy, {id: book.to_param}, valid_session
+      delete :destroy, { id: book.to_param }, valid_session
       response.should redirect_to(books_url)
     end
   end
