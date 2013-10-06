@@ -5,9 +5,7 @@ Alexandria::Application.routes.draw do
 
   resources :authors
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-
-  get "home/welcome"
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :strikes
 

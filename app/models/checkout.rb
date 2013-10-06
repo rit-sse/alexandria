@@ -1,8 +1,9 @@
+# Checkout model
 class Checkout < ActiveRecord::Base
   after_initialize :default_values
 
-  belongs_to :patron, class_name: "User", foreign_key: :patron_id
-  belongs_to :distributor, class_name: "User", foreign_key: :distributor_id
+  belongs_to :patron, class_name: 'User'
+  belongs_to :distributor, class_name: 'User'
   belongs_to :book
 
   delegate :title, to: :book
@@ -16,12 +17,12 @@ class Checkout < ActiveRecord::Base
     self.due_date ||= checked_out_at + 1.week
   end
 
-  def patron(who=nil)
+  def patron(who = nil)
     if who
       self.patron_id = who.id
     else
-      if self.patron_id
-        return User.find(self.patron_id)
+      if patron_id
+        return User.find(patron_id)
       else
         return nil
       end
@@ -43,7 +44,7 @@ class Checkout < ActiveRecord::Base
   def unique_checkout
     unless book.nil?
       book_checkouts = Checkout.all_active.where(book_id: book.id)
-      book_checkouts = book_checkouts.where('id != ?', self.id)
+      book_checkouts = book_checkouts.where('id != ?', id)
       unless book_checkouts.empty?
         errors.add(:book, 'Cannot checkout an already checked out book.')
       end
@@ -51,33 +52,31 @@ class Checkout < ActiveRecord::Base
   end
 
   def overdue?
-    DateTime.now > self.due_date and self.checked_in_at.blank?
+    DateTime.now > self.due_date && checked_in_at.blank?
   end
 
   def need_reminding?
-    Date.today + 3.days == self.due_date.to_date and self.checked_in_at.blank?
+    Date.today + 3.days == self.due_date.to_date && checked_in_at.blank?
   end
 
   def send_overdue
     if overdue?
       self.due_date += 1.week
-      self.save
+      save
       strike = Strike.new
-      strike.patron = self.patron
-      strike.distributor = self.distributor
+      strike.patron = patron
+      strike.distributor = distributor
       strike.save
       CheckoutMailer.overdue_book(self).deliver
     end
   end
 
   def send_reminder
-    if need_reminding?
-      CheckoutMailer.reminder(self).deliver
-    end
+    CheckoutMailer.reminder(self).deliver if need_reminding?
   end
 
   def self.send_mailers
-    self.all.each do |checkout|
+    all.each do |checkout|
       checkout.send_overdue
       checkout.send_reminder
     end

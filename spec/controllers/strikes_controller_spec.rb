@@ -24,7 +24,7 @@ describe StrikesController do
   # Strike. As you add validations to Strike, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "message" => "MyString" }
+    { 'message' => 'MyString' }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,129 +34,129 @@ describe StrikesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all strikes as @strikes" do
+  describe 'GET index' do
+    it 'assigns all strikes as @strikes' do
       strike = Strike.create! valid_attributes
       get :index, {}, valid_session
       assigns(:strikes).should eq([strike])
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested strike as @strike" do
+  describe 'GET show' do
+    it 'assigns the requested strike as @strike' do
       strike = Strike.create! valid_attributes
-      get :show, {id: strike.to_param}, valid_session
+      get :show, { id: strike.to_param }, valid_session
       assigns(:strike).should eq(strike)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new strike as @strike" do
+  describe 'GET new' do
+    it 'assigns a new strike as @strike' do
       get :new, {}, valid_session
       assigns(:strike).should be_a_new(Strike)
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested strike as @strike" do
+  describe 'GET edit' do
+    it 'assigns the requested strike as @strike' do
       strike = Strike.create! valid_attributes
-      get :edit, {id: strike.to_param}, valid_session
+      get :edit, { id: strike.to_param }, valid_session
       assigns(:strike).should eq(strike)
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Strike" do
+  describe 'POST create' do
+    describe 'with valid params' do
+      it 'creates a new Strike' do
         expect do
-          post :create, {strike: valid_attributes}, valid_session
+          post :create, { strike: valid_attributes }, valid_session
         end.to change(Strike, :count).by(1)
       end
 
-      it "assigns a newly created strike as @strike" do
-        post :create, {strike: valid_attributes}, valid_session
+      it 'assigns a newly created strike as @strike' do
+        post :create, { strike: valid_attributes }, valid_session
         assigns(:strike).should be_a(Strike)
         assigns(:strike).should be_persisted
       end
 
-      it "redirects to the created strike" do
-        post :create, {strike: valid_attributes}, valid_session
+      it 'redirects to the created strike' do
+        post :create, { strike: valid_attributes }, valid_session
         response.should redirect_to(Strike.last)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved strike as @strike" do
+    describe 'with invalid params' do
+      it 'assigns a newly created but unsaved strike as @strike' do
         # Trigger the behavior that occurs when invalid params are submitted
         Strike.any_instance.stub(:save).and_return(false)
-        post :create, {strike: { "user" => "invalid value" }}, valid_session
+        post :create, { strike: { 'user' => 'invalid value' } }, valid_session
         assigns(:strike).should be_a_new(Strike)
       end
 
-      it "re-renders the 'new' template" do
+      it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Strike.any_instance.stub(:save).and_return(false)
-        post :create, {strike: { "user" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        post :create, { strike: { 'user' => 'invalid value' } }, valid_session
+        response.should render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested strike" do
+  describe 'PUT update' do
+    describe 'with valid params' do
+      it 'updates the requested strike' do
         strike = Strike.create! valid_attributes
         # Assuming there are no other strikes in the database, this
         # specifies that the Strike created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Strike.any_instance.should_receive(:update).with({ "message" => "" })
-        put :update, {id: strike.to_param, strike: { "message" => "" }}, valid_session
+        Strike.any_instance.should_receive(:update).with({ 'message' => '' })
+        put :update, { id: strike.to_param, strike: { 'message' => '' } }, valid_session
       end
 
-      it "assigns the requested strike as @strike" do
+      it 'assigns the requested strike as @strike' do
         strike = Strike.create! valid_attributes
-        put :update, {id: strike.to_param, strike: valid_attributes}, valid_session
+        put :update, { id: strike.to_param, strike: valid_attributes }, valid_session
         assigns(:strike).should eq(strike)
       end
 
-      it "redirects to the strike" do
+      it 'redirects to the strike' do
         strike = Strike.create! valid_attributes
-        put :update, {id: strike.to_param, strike: valid_attributes}, valid_session
+        put :update, { id: strike.to_param, strike: valid_attributes }, valid_session
         response.should redirect_to(strike)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the strike as @strike" do
+    describe 'with invalid params' do
+      it 'assigns the strike as @strike' do
         strike = Strike.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Strike.any_instance.stub(:save).and_return(false)
-        put :update, {id: strike.to_param, strike: { "user" => "invalid value" }}, valid_session
+        put :update, { id: strike.to_param, strike: { 'user' => 'invalid value' } }, valid_session
         assigns(:strike).should eq(strike)
       end
 
-      it "re-renders the 'edit' template" do
+      it 're-renders the edit template' do
         strike = Strike.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Strike.any_instance.stub(:save).and_return(false)
-        put :update, {id: strike.to_param, strike: { "user" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        put :update, { id: strike.to_param, strike: { 'user' => 'invalid value' } }, valid_session
+        response.should render_template('edit')
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested strike" do
+  describe 'DELETE destroy' do
+    it 'destroys the requested strike' do
       strike = Strike.create! valid_attributes
       expect do
-        delete :destroy, {id: strike.to_param}, valid_session
+        delete :destroy, { id: strike.to_param }, valid_session
       end.to change(Strike, :count).by(-1)
     end
 
-    it "redirects to the strikes list" do
+    it 'redirects to the strikes list' do
       strike = Strike.create! valid_attributes
-      delete :destroy, {id: strike.to_param}, valid_session
+      delete :destroy, { id: strike.to_param }, valid_session
       response.should redirect_to(strikes_url)
     end
   end

@@ -8,23 +8,24 @@ describe Book, solr: true do
   end
 
   it 'creates a book from ISBN' do
-    book = Book.add_by_isbn("9780201633610")
+    book = Book.add_by_isbn('9780201633610')
     expect(book.title).to eq('Design Patterns')
     expect(book.subtitle).to eq('Elements of Reusable Object-Oriented Software')
     expect(book.isbn).to eq('9780201633610')
     # Google Books API is derping right now. Will uncomment when it works properly
-    expect(book.authors).to include(#Author.find_with_name('Ralph Johnson'),
+    expect(book.authors).to include(# Author.find_with_name('Ralph Johnson'),
                                     Author.find_with_name('Erich Gamma'))
-                                    #Author.find_with_name('John Vlissides'),
-                                    #Author.find_with_name('Richard Helm'))
+                                    # Author.find_with_name('John Vlissides'),
+                                    # Author.find_with_name('Richard Helm'))
     expect(book.google_book_data).to_not be_nil
+    expect(book.lcc).to eq('QA76.64.D47 1995')
   end
 
   it 'can be reserved' do
     user = create(:user)
     book = create(:book)
     expect(book.reserved?).to be_false
-    Reservation.create(book_id: book.id, user_id: user.id )
+    Reservation.create(book_id: book.id, user_id: user.id)
     expect(book.reserved?).to be_true
   end
 

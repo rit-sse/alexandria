@@ -1,3 +1,4 @@
+# Strikes controller
 class StrikesController < ApplicationController
   before_action :set_strike, only: [:show, :edit, :update, :destroy]
 

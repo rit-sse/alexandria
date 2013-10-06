@@ -1,15 +1,11 @@
 require 'spec_helper'
 
 describe Checkout, solr: true do
-  let(:book) {create(:book)}
-  let(:user) {create(:user)}
+  let(:book) { create(:book) }
+  let(:user) { create(:user) }
 
   before(:each) do
     @checkout = create(:checkout)
-  end
-
-  after(:all) do
-    user.destroy
   end
 
   it 'can be created' do
@@ -40,7 +36,7 @@ describe Checkout, solr: true do
     expect do
       @checkout.checked_in_at = DateTime.now
       @checkout.save
-    end.to change{Checkout.all_active.count}.from(1).to(0)
+    end.to change { Checkout.all_active.count }.from(1).to(0)
   end
 
   describe 'being overdue' do
@@ -59,7 +55,7 @@ describe Checkout, solr: true do
       @checkout.book = book
       @checkout.patron = user
       @checkout.save
-      @checkout.send_overdue
+      expect { @checkout.send_overdue }.to change { user.strikes.count }.from(0).to(1)
       expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
       expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book overdue.')
     end
