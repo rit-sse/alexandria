@@ -14,9 +14,11 @@ Get started
 	* Make sure you did pass the `--enabled-shared` option to the configure
     script before building YAZ
 3. Run `bundle install`
-4. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
-5. Start solr: `rake sunspot:solr:start`
-6. Start server: `rails s`
+4. Run `rake db:migrate`
+5. Run `rake db:seed`
+6. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
+7. Start solr: `rake sunspot:solr:start`
+8. Start server: `rails s`
 
 Solr
 ----
