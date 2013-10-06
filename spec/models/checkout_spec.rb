@@ -59,7 +59,7 @@ describe Checkout, solr: true do
       @checkout.book = book
       @checkout.patron = user
       @checkout.save
-      @checkout.send_overdue
+      expect { @checkout.send_overdue }.to change { user.strikes.count }.from(0).to(1)
       expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
       expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book overdue.')
     end
