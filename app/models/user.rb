@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :books_reserved, through: :reservations, source: :book
   has_many :checkouts, foreign_key: :patron_id
   has_many :books_checkedout, through: :checkouts, source: :book
+  has_many :strikes, foreign_key: :patron_id
 
   before_save :default_values
 

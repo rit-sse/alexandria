@@ -19,13 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BooksController, solr: true do
+  before(:all) do
+    @user = create(:user)
+  end
 
   before(:each) do
-    @user = create(:user)
     sign_in @user
   end
 
-  after(:each) do
+  after(:all) do
     @user.destroy
   end
 

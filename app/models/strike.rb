@@ -1,5 +1,4 @@
 class Strike < ActiveRecord::Base
-  has_one :user, as: :patron
-  has_one :user, as: :distributor
-
+  belongs_to :patron, class_name: "User"
+  belongs_to :distributor, class_name: "User"
 end

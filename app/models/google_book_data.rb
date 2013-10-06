@@ -14,8 +14,10 @@ class GoogleBookData < ActiveRecord::Base
       ).update_data(isbn)
   end
 
-  def update_data(isbn = book.isbn)
-    results =  GoogleBooks.search("isbn:#{isbn}")
+  def update_data(isbn = self.book.isbn)
+    results =  ENV['ALEXANDRIA_SIMPLE'].blank? ?
+                  GoogleBooks.search("isbn:#{isbn}") :
+                  GoogleBooks.search("isbn:#{isbn}", {api_key: ENV['ALEXANDRIA_SIMPLE']})
 
     if results.total_items > 0
       google_book = results.first

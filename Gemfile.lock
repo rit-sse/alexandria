@@ -45,6 +45,7 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
+    chronic (0.10.2)
     chunky_png (1.2.8)
     code_analyzer (0.4.2)
       sexp_processor
@@ -87,7 +88,6 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    fattr (2.2.1)
     fssm (0.2.10)
     googlebooks (0.0.7)
       httparty
@@ -103,7 +103,6 @@ GEM
       sprockets (>= 2.0.3)
       tilt
     hashie (2.0.5)
-    highline (1.6.19)
     hike (1.2.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -146,8 +145,6 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    options (2.3.0)
-      fattr
     orm_adapter (0.4.0)
     parser (2.0.0.pre8)
       ast (~> 1.1)
@@ -156,9 +153,6 @@ GEM
     polyglot (0.3.3)
     powerpack (0.0.8)
     pr_geohash (1.0.0)
-    progress_bar (1.0.0)
-      highline (~> 1.6.1)
-      options (~> 2.3.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -268,6 +262,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     yaml_db (0.2.3)
 
 PLATFORMS
@@ -293,7 +290,6 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   pg
-  progress_bar
   rails (= 4.0.0)
   rails_best_practices
   rspec
@@ -308,5 +304,6 @@ DEPENDENCIES
   turbolinks
   twitter-typeahead-rails
   uglifier (>= 1.0.3)
+  whenever
   yaml_db
   zoom!

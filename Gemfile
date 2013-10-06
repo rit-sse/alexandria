@@ -65,7 +65,6 @@ gem "haml-rails"
 #for search
 gem 'sunspot_rails'
 gem 'sunspot-rails-tester'
-gem 'progress_bar'
 
 #for authentication
 gem 'devise', '~> 3.1.0'
@@ -86,6 +85,9 @@ gem 'factory_girl_rails'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
+
+# For scheduled job
+gem 'whenever'
 
 # Use unicorn as the app server
 # gem 'unicorn'

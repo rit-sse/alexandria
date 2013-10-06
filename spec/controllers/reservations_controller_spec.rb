@@ -18,24 +18,22 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ReservationsController do
+describe ReservationsController, solr: true do
 
-  before(:each) do
-    @user = create(:user)
-    @book = create(:book)
-    sign_in @user
-  end
+  let(:user) {create(:user)}
+  let(:book) {create(:book)}
 
-  after(:each) do
-    @user.destroy
-    @book.destroy
+
+  after(:all) do
+    user.destroy
+    book.destroy
   end
 
   # This should return the minimal set of attributes required to create a valid
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {"user_id" => @user.id, "book_id" => @book.id}
+    {"user_id" => user.id, "book_id" => book.id}
   end
 
   # This should return the minimal set of values that should be in the session

@@ -13,6 +13,7 @@ class Checkout < ActiveRecord::Base
 
   def default_values
     self.checked_out_at ||= DateTime.now
+    self.due_date ||= checked_out_at + 1.week
   end
 
   def patron(who = nil)
@@ -46,6 +47,39 @@ class Checkout < ActiveRecord::Base
       unless book_checkouts.empty?
         errors.add(:book, 'Cannot checkout an already checked out book.')
       end
+    end
+  end
+
+  def overdue?
+    DateTime.now > self.due_date and self.checked_in_at.blank?
+  end
+
+  def need_reminding?
+    Date.today + 3.days == self.due_date.to_date and self.checked_in_at.blank?
+  end
+
+  def send_overdue
+    if overdue?
+      self.due_date += 1.week
+      self.save
+      strike = Strike.new
+      strike.patron = self.patron
+      strike.distributor = self.distributor
+      strike.save
+      CheckoutMailer.overdue_book(self).deliver
+    end
+  end
+
+  def send_reminder
+    if need_reminding?
+      CheckoutMailer.reminder(self).deliver
+    end
+  end
+
+  def self.send_mailers
+    self.all.each do |checkout|
+      checkout.send_overdue
+      checkout.send_reminder
     end
   end
 end
