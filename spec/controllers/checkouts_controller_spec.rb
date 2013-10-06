@@ -20,9 +20,9 @@ require 'spec_helper'
 
 describe CheckoutsController, solr: true do
 
-  let(:user) {create(:user)}
-  let(:book) {create(:book)}
-  let(:reservation) {Reservation.create(user_id: user.id, book_id: book.id)}
+  let(:user) { create(:user) }
+  let(:book) { create(:book) }
+  let(:reservation) { Reservation.create(user_id: user.id, book_id: book.id) }
 
   after(:all) do
     user.destroy

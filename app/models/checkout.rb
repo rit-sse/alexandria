@@ -51,33 +51,31 @@ class Checkout < ActiveRecord::Base
   end
 
   def overdue?
-    DateTime.now > self.due_date and self.checked_in_at.blank?
+    DateTime.now > self.due_date && checked_in_at.blank?
   end
 
   def need_reminding?
-    Date.today + 3.days == self.due_date.to_date and self.checked_in_at.blank?
+    Date.today + 3.days == self.due_date.to_date && checked_in_at.blank?
   end
 
   def send_overdue
     if overdue?
       self.due_date += 1.week
-      self.save
+      save
       strike = Strike.new
-      strike.patron = self.patron
-      strike.distributor = self.distributor
+      strike.patron = patron
+      strike.distributor = distributor
       strike.save
       CheckoutMailer.overdue_book(self).deliver
     end
   end
 
   def send_reminder
-    if need_reminding?
-      CheckoutMailer.reminder(self).deliver
-    end
+    CheckoutMailer.reminder(self).deliver if need_reminding?
   end
 
   def self.send_mailers
-    self.all.each do |checkout|
+    all.each do |checkout|
       checkout.send_overdue
       checkout.send_reminder
     end

@@ -20,9 +20,8 @@ require 'spec_helper'
 
 describe ReservationsController, solr: true do
 
-  let(:user) {create(:user)}
-  let(:book) {create(:book)}
-
+  let(:user) { create(:user) }
+  let(:book) { create(:book) }
 
   after(:all) do
     user.destroy

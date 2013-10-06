@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Reservation, solr: true do
-  let(:book) {create(:book)}
-  let(:user) {create(:user)}
+  let(:book) { create(:book) }
+  let(:user) { create(:user) }
 
   after(:all) do
     user.destroy
@@ -10,7 +10,7 @@ describe Reservation, solr: true do
 
   it 'creates a reservation properly' do
     expect do
-      reservation = Reservation.create(book_id: book.id, user_id: user.id)
+      Reservation.create(book_id: book.id, user_id: user.id)
     end.to change { Reservation.all.count }.by(1)
   end
 
@@ -28,7 +28,7 @@ describe Reservation, solr: true do
 
   it 'cannot have 2 reservations on 1 book' do
     expect do
-      reservation = Reservation.create(book_id: book.id, user_id: user.id)
+      Reservation.create(book_id: book.id, user_id: user.id)
     end.to change { Reservation.all.count }.by(1)
     expect do
       Reservation.create(book_id: book.id, user_id: user.id)
@@ -37,7 +37,7 @@ describe Reservation, solr: true do
 
   it 'user should have a reservation' do
     expect(Reservation.has_reservation(book, user)).to be_false
-    reservation = Reservation.create(book_id: book.id, user_id: user.id)
+    Reservation.create(book_id: book.id, user_id: user.id)
     expect(Reservation.has_reservation(book, user)).to be_true
   end
 end

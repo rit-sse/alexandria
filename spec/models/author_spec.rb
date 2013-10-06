@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Author do
 
-  let(:full_name) {"James T Kirk"}
+  let(:full_name) { "James T Kirk" }
 
   it "creates a user properly with create_with_name" do
     author = Author.create_with_name("First Last")

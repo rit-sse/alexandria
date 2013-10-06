@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Checkout, solr: true do
-  let(:book) {create(:book)}
-  let(:user) {create(:user)}
+  let(:book) { create(:book) }
+  let(:user) { create(:user) }
 
   before(:each) do
     @checkout = create(:checkout)
