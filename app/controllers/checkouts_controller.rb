@@ -25,15 +25,9 @@ class CheckoutsController < ApplicationController
   # POST /checkouts.json
   def create
     @checkout = Checkout.new(checkout_params)
-
     respond_to do |format|
       if @checkout.save
-        reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
-        if reservation
-          reservation.fuffiled = true
-          reservation.save
-        end
-
+        check_reservation
         format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
         format.json { render 'show', status: :created, location: @checkout }
       else
@@ -78,5 +72,13 @@ class CheckoutsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def checkout_params
     params.require(:checkout).permit(:checked_out_at, :patron_id, :book_id)
+  end
+
+  def check_reservation
+    reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
+    if reservation
+      reservation.fuffiled = true
+      reservation.save
+    end
   end
 end

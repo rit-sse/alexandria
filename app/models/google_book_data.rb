@@ -21,6 +21,12 @@ class GoogleBookData < ActiveRecord::Base
       results = GoogleBooks.search("isbn:#{isbn}", {api_key: ENV['ALEXANDRIA_SIMPLE']})
     end
 
+    set_google_book(results)
+
+    self
+  end
+
+  def set_google_book(results)
     if results.total_items > 0
       google_book = results.first
       self.description   = google_book.description.to_s
@@ -30,8 +36,6 @@ class GoogleBookData < ActiveRecord::Base
       self.img_large     = google_book.image_link(zoom: 3).to_s
       self.preview_link  = google_book.preview_link.to_s
     end
-
-    self
   end
 
   def self.update_all_null

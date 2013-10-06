@@ -18,6 +18,7 @@ describe Book, solr: true do
                                     # Author.find_with_name('John Vlissides'),
                                     # Author.find_with_name('Richard Helm'))
     expect(book.google_book_data).to_not be_nil
+    expect(book.lcc).to eq('QA76.64.D47 1995')
   end
 
   it 'can be reserved' do

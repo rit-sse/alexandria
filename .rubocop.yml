@@ -4,9 +4,8 @@ AllCops:
     - config.ru
   Excludes:
     # TODO: Only exclude LCCAble for the RedundantSelf cop.
-    - app/models/concerns/lccable.rb
-    - db/schema.rb
-    #- db/**
+    #app/models/concerns/lccable.rb
+    - db/**
     #- config/**
     #- script/**
 
@@ -20,8 +19,8 @@ Documentation:
 LineLength:
   Enabled: false
 
-MethodLength:
-  Enabled: false
+MethodLength:     # Seperated out as much as seemed reasonable. 3 methods have 11 lines
+  Enabled: false  # and one has 15 but it would be unreasonable to seperate out more logic.
 
 SpaceInsideHashLiteralBraces:
   Enabled: false
