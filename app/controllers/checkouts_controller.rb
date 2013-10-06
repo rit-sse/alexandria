@@ -78,7 +78,7 @@ class CheckoutsController < ApplicationController
   def check_reservation
     reservation = Reservation.get_reservation(@checkout.book, @checkout.patron)
     if reservation
-      reservation.fuffiled = true
+      reservation.fulfilled = true
       reservation.save
     end
   end

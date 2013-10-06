@@ -12,13 +12,13 @@ class Reservation < ActiveRecord::Base
 
   def default_values
     self.expires_at ||= DateTime.now + 1.week
-    self.fuffiled ||= false
+    self.fulfilled ||= false
     self.reserve_at ||= DateTime.now
   end
 
   def cannot_have_2_reservations_on_1_book
     unless user.nil? || book.nil?
-      reservations = Reservation.where(user_id: user.id, book_id: book.id, fuffiled: false)
+      reservations = Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false)
       reservations = reservations.delete_if { |x| x.id == id }
       unless reservations.empty?
         errors.add(:user_id, 'cannot have multiple reservations on one book')
@@ -27,11 +27,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.has_reservation(book, user)
-    !Reservation.where(user_id: user.id, book_id: book.id, fuffiled: false).empty?
+    !Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false).empty?
   end
 
   def self.get_reservation(book, user)
-    reservations = Reservation.where(user_id: user.id, book_id: book.id, fuffiled: false)
+    reservations = Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false)
     if reservations.empty?
       return nil
     else

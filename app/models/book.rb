@@ -30,7 +30,7 @@ class Book < ActiveRecord::Base
   end
 
   def reserved?
-    Reservation.where(book_id: id, fuffiled: false).any?
+    Reservation.where(book_id: id, fulfilled: false).any?
   end
 
   def self.featured_book

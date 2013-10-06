@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.where(fuffiled: false)
+    @reservations = Reservation.where(fulfilled: false)
   end
 
   # GET /reservations/1
@@ -71,6 +71,6 @@ class ReservationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def reservation_params
-    params.require(:reservation).permit(:expires_at, :fuffiled, :reserve_at, :book_id, :user_id)
+    params.require(:reservation).permit(:expires_at, :fulfilled, :reserve_at, :book_id, :user_id)
   end
 end
