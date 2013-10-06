@@ -1,3 +1,4 @@
+# Mailers for checkout related things
 class CheckoutMailer < ActionMailer::Base
   default from: 'from@example.com'
 

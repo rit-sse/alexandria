@@ -1,3 +1,4 @@
+# User model
 class User < ActiveRecord::Base
   # Only permit omniauth accounts
   devise :omniauthable, omniauth_providers: [:google_oauth2]

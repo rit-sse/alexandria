@@ -1,3 +1,4 @@
+# Reservation model
 class Reservation < ActiveRecord::Base
   after_initialize :default_values
   belongs_to :user

@@ -1,5 +1,5 @@
 require 'googlebooks'
-
+# Google Book data model
 class GoogleBookData < ActiveRecord::Base
   belongs_to :book
 

@@ -1,3 +1,4 @@
+# Checkout model
 class Checkout < ActiveRecord::Base
   after_initialize :default_values
 

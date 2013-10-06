@@ -1,3 +1,4 @@
+# Homepage controller
 class RootController < ApplicationController
   def index
     if !Book.all.empty?

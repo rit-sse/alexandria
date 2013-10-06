@@ -1,5 +1,7 @@
+# Author model class
 class Author < ActiveRecord::Base
   after_initialize :default_values
+  # Unique author validator class
   class UniqueAuthorValidator < ActiveModel::Validator
     def validate(record)
       other_authors = Author.where(first_name: record.first_name,

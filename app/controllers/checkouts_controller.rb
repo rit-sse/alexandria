@@ -1,3 +1,4 @@
+# Checkouts controller
 class CheckoutsController < ApplicationController
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
 

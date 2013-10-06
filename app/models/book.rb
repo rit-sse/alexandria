@@ -1,3 +1,4 @@
+# Book model
 class Book < ActiveRecord::Base
   include Lccable
   has_many :reservations
