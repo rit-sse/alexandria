@@ -71,7 +71,11 @@ class Author < ActiveRecord::Base
   def self.parse_name(name)
     parsed_name = @@parser.parse name
 
-    { first_name: parsed_name[:first], middle_initial: parsed_name[:middle], last_name: parsed_name[:last] }
+    {
+      first_name:     parsed_name[:first],
+      middle_initial: parsed_name[:middle],
+      last_name:      parsed_name[:last]
+    }
   end
 
   def full_name
