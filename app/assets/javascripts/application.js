@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require chosen-jquery
 //= require turbolinks
 //= require handlebars.js
 //= require_tree ./templates

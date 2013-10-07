@@ -89,6 +89,9 @@ gem 'jbuilder'
 # For scheduled job
 gem 'whenever'
 
+gem 'chosen-rails'
+gem "font-awesome-rails"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
