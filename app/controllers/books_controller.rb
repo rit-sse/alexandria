@@ -33,7 +33,9 @@ class BooksController < ApplicationController
 
   # GET /books/1/put_away
   def put_away
-    @left_right = Lccable.where_to_place(@book)
+    left_right = Lccable.where_to_place(@book)
+    @left = left_right[:left]
+    @right = left_right[:right]
   end
 
   # POST /books
