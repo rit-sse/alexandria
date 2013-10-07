@@ -35,4 +35,14 @@ describe Book, solr: true do
     Checkout.create(checked_out_at: DateTime.now, book: book)
     expect(book.checked_out?).to be_true
   end
+
+  it 'determines where to place the book' do
+    book = Book.add_by_isbn('9780321205681')
+    left_book = Book.add_by_isbn('9780201699692')
+    right_book = Book.add_by_isbn('9780201607345')
+    Book.add_by_isbn('9780471266099')
+    where_to_place = Lccable.where_to_place(book)
+    expect(where_to_place[:left]).to eq(left_book)
+    expect(where_to_place[:right]).to eq(right_book)
+  end
 end
