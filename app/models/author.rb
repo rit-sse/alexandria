@@ -69,11 +69,9 @@ class Author < ActiveRecord::Base
   # Parses the names into expected portions. All methods that parse
   # a name for Author use this.
   def self.parse_name(name)
-    format_name @@parser.parse name
-  end
+    parsed_name = @@parser.parse name
 
-  def self.format_name(name)
-    { first_name: name[:first], middle_initial: name[:middle], last_name: name[:last] }
+    { first_name: parsed_name[:first], middle_initial: parsed_name[:middle], last_name: parsed_name[:last] }
   end
 
   def full_name
