@@ -1,6 +1,6 @@
 # Controller for books
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :put_away]
   before_filter :authenticate!
   skip_before_filter :authenticate!, only: [:index, :show, :create]
 
@@ -29,6 +29,11 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+  end
+
+  # GET /books/1/put_away
+  def put_away
+    @left_right = Lccable.where_to_place(@book)
   end
 
   # POST /books

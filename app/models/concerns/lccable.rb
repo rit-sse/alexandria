@@ -72,7 +72,7 @@ module Lccable
   end
 
   # sort function
-  def self.sortfunc x, y
+  def self.sort_it_up x, y
     xp = LCC_REGEX.match(x)
     yp = LCC_REGEX.match(y)
     parts = {
@@ -94,5 +94,15 @@ module Lccable
       end
     end
     0
+  end
+
+  def self.where_to_place(book)
+    books = Book.all.sort{ |a,b| sort_it_up(a.lcc,b.lcc) }
+    i = books.index(book)
+    left = books[i-1]
+    right  = books[i+1]
+    left = nil if i == 0
+    right = nil if i == books.count - 1
+    {left: left, right: right}
   end
 end

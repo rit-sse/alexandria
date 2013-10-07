@@ -1,0 +1,17 @@
+= @book.title
+%br
+= @book.lcc
+%br
+%br
+Left Title
+%br
+= @left_right[:left].try(:title)
+%br
+= @left_right[:left].try(:lcc)
+%br
+%br
+Right Title
+%br
+= @left_right[:right].try(:title)
+%br
+= @left_right[:right].try(:lcc)
