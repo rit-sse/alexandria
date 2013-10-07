@@ -13,7 +13,11 @@ Alexandria::Application.routes.draw do
 
   resources :reservations
 
-  resources :books
+  resources :books do
+    member do
+      get 'put_away'
+    end
+  end
 
   resources :users
 

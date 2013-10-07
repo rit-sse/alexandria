@@ -44,8 +44,13 @@ class CheckoutsController < ApplicationController
     @checkout.checked_in_at = DateTime.now if params[:checkout][:checked_in_at] && params[:checkout][:checked_in_at] == 'now'
     respond_to do |format|
       if @checkout.update(checkout_params)
-        format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
-        format.json { head :no_content }
+        if params[:checkout][:checked_in_at] == 'now'
+          format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to request.referer, notice: 'Checkout was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render 'edit' }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
