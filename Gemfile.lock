@@ -149,6 +149,7 @@ GEM
     parser (2.0.0)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
+    people (0.2.1)
     pg (0.17.0)
     polyglot (0.3.3)
     powerpack (0.0.8)
@@ -289,6 +290,7 @@ DEPENDENCIES
   marc
   omniauth
   omniauth-google-oauth2
+  people (~> 0.2)
   pg
   rails (= 4.0.0)
   rails_best_practices
