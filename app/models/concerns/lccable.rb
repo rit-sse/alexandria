@@ -41,14 +41,14 @@ module Lccable
   def normalize(callno)
     cp = LCC_REGEX.match(callno)
     out = cp[:aclass] + cp[:nclass]
-    out += ".#{cp[:dclass]}" unless cp[:dclass].nil?
-    out += " #{cp[:dclass]} " unless cp[:date].nil?
-    out += ".#{cp[:c1]}"
-    out += " #{cp[:c1d]} " unless cp[:c1d].nil?
-    out += " #{cp[:c2]}" unless cp[:c2].nil?
-    out += " #{cp[:e8]}" unless cp[:e8].nil?
-    out += " #{cp[:e9]}" unless cp[:e9].nil?
-    out += " #{cp[:e10]}" unless cp[:e10].nil?
+    out += '.%s' % cp[:dclass] unless cp[:dclass].nil?
+    out += ' %s ' % cp[:dclass] unless cp[:date].nil?
+    out += '.%s' % cp[:c1]
+    out += ' %s ' % cp[:c1d] unless cp[:c1d].nil?
+    out += ' %s' % cp[:c2] unless cp[:c2].nil?
+    out += ' %s' % cp[:e8] unless cp[:e8].nil?
+    out += ' %s' % cp[:e9] unless cp[:e9].nil?
+    out += ' %s' % cp[:e10] unless cp[:e10].nil?
     out
   end
 end
