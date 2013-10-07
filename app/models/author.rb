@@ -1,5 +1,9 @@
+require 'people'
+
 # Author model class
 class Author < ActiveRecord::Base
+  @@parser = People::NameParser.new
+
   after_initialize :default_values
   # Unique author validator class
   class UniqueAuthorValidator < ActiveModel::Validator
@@ -65,25 +69,11 @@ class Author < ActiveRecord::Base
   # Parses the names into expected portions. All methods that parse
   # a name for Author use this.
   def self.parse_name(name)
-    name = name.split(' ')
-    case name.size
-    when 2
-      format_name(name[0], '', name[1])
-    when 3
-      format_name(name[0], name[1].sub('.', ''), name[2])
-    when 4
-      if ['III', 'Jr', 'Jr.'].include? name[3]
-        format_name(name[0], name[1].sub('.', ''), name[2])
-      else
-        format_name(name[0], "#{name[1]} #{name[2]}".sub('.', ''), name[3])
-      end
-    else
-      raise ArgumentError, "Error with #{name} argument should be in the form '<first> <last>' or '<first> <middle> <last>', space deliniated"
-    end
+    format_name @@parser.parse name
   end
 
-  def self.format_name(first, middle, last)
-    { first_name: first, middle_initial: middle, last_name: last }
+  def self.format_name(name)
+    { first_name: name[:first], middle_initial: name[:middle], last_name: name[:last] }
   end
 
   def full_name
