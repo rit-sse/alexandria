@@ -1,0 +1,39 @@
+.page-header
+  %h1 You want to know where this book goes?
+
+.row
+  .col-md-4.col-md-offset-1
+    .text-center
+      %h3 On the left side
+      %br
+      - unless @left.nil?
+        - if @left.google_book_data.img_small != ""
+          %div
+            %a{href: book_path(@left)}
+              %img{src: @left.google_book_data.img_small, height: '250px;' }
+        -else
+          %a{href: book_path(@left)}
+            .blank-thumbnail-large{style: 'margin: 0 auto;'}
+        %br
+        = @left.title
+        %br
+        = @left.lcc
+      - else
+        Nothing. This book is the first on the shelf.
+  .col-md-4.col-md-offset-1
+    .text-center
+      %h3 On the right side
+      %br
+      - unless @right.nil?
+        - if @right.google_book_data.img_small != ""
+          %a{href: book_path(@left)}
+            %img{src: @right.google_book_data.img_small}
+        -else
+          %a{href: book_path(@left)}
+            .blank-thumbnail-large{style: 'margin: 0 auto;'}
+        %br
+        = @right.title
+        %br
+        = @right.lcc
+      - else
+        Nothing This book is last on the shelf.
