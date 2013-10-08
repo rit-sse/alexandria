@@ -1,6 +1,9 @@
 // window.location.origin = window.location.protocol + "//" + window.location.host  unless window.location.origin
 
 $(document).ready(function() {
+  $('.datepicker').datepicker({
+    format: 'yyyy-mm-dd'
+  });
   $("#master-search").typeahead([{
     remote: {
         url: "/books.json?search=%QUERY&limit=9",
@@ -47,3 +50,4 @@ $(document).ready(function() {
 });
 
 $("#isbn-add").focus()
+

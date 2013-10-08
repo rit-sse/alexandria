@@ -15,7 +15,7 @@
       = f.text_field :title, class: 'form-control'
     .form-group
       = f.label :authors
-      = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, @book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
+      = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
     .form-group
       = f.label :publish_date
       .input-group.date.datepicker
@@ -25,8 +25,3 @@
     .actions
       = f.submit 'Save', class: 'btn btn-primary'
       = link_to 'Back', book_path(book), class: 'btn btn-default'
-
-:javascript
-  $('.datepicker').datepicker({
-    format: 'yyyy-mm-dd'
-  });
