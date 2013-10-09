@@ -1,5 +1,3 @@
 %h1 New reservation
 
-= render 'form'
-
-= link_to 'Back', reservations_path
+= render 'form', reservation: @reservation, back_path: reservations_path

@@ -1,10 +1,10 @@
 %h1 Listing authors
 
-%table
+%table.table.table-striped.table-responsive
   %tr
     %th First name
-    %th Last name
     %th Middle initial
+    %th Last name
     %th
     %th
     %th
@@ -12,11 +12,11 @@
   - @authors.each do |author|
     %tr
       %td= author.first_name
-      %td= author.last_name
       %td= author.middle_initial
-      %td= link_to 'Show', author
-      %td= link_to 'Edit', edit_author_path(author)
-      %td= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= author.last_name
+      %td= link_to 'Show', author, class: 'btn btn-default'
+      %td= link_to 'Edit', edit_author_path(author), class: 'btn btn-default'
+      %td= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default'
 
 %br
 

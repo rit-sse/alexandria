@@ -92,6 +92,9 @@ gem 'whenever'
 # For parsing human names
 gem 'people', '~> 0.2'
 
+gem 'chosen-rails'
+gem "font-awesome-rails"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

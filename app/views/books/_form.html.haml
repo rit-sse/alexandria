@@ -1,25 +1,27 @@
-= form_for book do |f|
-  -if book.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
-      %ul
-        - book.errors.full_messages.each do |msg|
-          %li= msg
+.well.well-small
+  = form_for book do |f|
+    -if book.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
+        %ul
+          - book.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :ISBN
-    = f.text_field :isbn
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :authors
-    = f.text_field :authors
-  .field
-    = f.label :publish_date
-    = f.text_field :publish_date
-  .field
-    = f.label :UUID
-    = f.text_field :UUID
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.label :isbn
+      = f.text_field :isbn, class: 'form-control'
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+    .form-group
+      = f.label :authors
+      = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
+    .form-group
+      = f.label :publish_date
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :publish_date, class: 'form-control'
+    .actions
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Back', book_path(book), class: 'btn btn-default'

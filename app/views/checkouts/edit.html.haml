@@ -1,7 +1,3 @@
 %h1 Editing checkout
 
-= render 'form', checkout: @checkout
-
-= link_to 'Show', @checkout
-\|
-= link_to 'Back', checkouts_path
+= render 'form', checkout: @checkout, back_path: checkout_path(@checkout)
