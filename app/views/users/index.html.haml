@@ -1,6 +1,6 @@
 %h1 Listing users
 
-%table
+%table.table.table-striped
   %tr
     %th User name
     %th Banned
@@ -14,9 +14,9 @@
       %td= user.user_name
       %td= user.banned
       %td= user.role.name
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, data: { confirm: 'Are you sure?'}, method: :delete
+      %td= link_to 'Show', user, class: 'btn btn-default'
+      %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
+      %td= link_to 'Destroy', user, data: { confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-default'
 
 %br
 
