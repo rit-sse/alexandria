@@ -11,11 +11,12 @@ class User < ActiveRecord::Base
   has_many :checkouts, foreign_key: :patron_id
   has_many :books_checkedout, through: :checkouts, source: :book
   has_many :strikes, foreign_key: :patron_id
+  belongs_to :role
 
   before_save :default_values
 
   def default_values
-    self.role ||= 'patron'
+    self.role ||= Role.find_by_name('patron')
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
