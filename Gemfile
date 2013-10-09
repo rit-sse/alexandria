@@ -52,6 +52,9 @@ group :development, :test do
   # Make error checking/viewing less horrible
   gem "better_errors"
   gem "binding_of_caller"
+
+  # Make tests faster by running them in parallel
+  gem "parallel_tests"
 end
 
 group :production do
