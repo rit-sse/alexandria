@@ -1,5 +1,3 @@
 %h1 New checkout
 
-= render 'form'
-
-= link_to 'Back', checkouts_path
+= render 'form', checkout: @checkout, back_path: checkouts_path

@@ -54,3 +54,8 @@ d.each do |row|
   puts book.google_book_data
   puts "================"
 end
+
+Role.create(name: 'patron')
+Role.create(name: 'librarian')
+Role.create(name: 'distributor')
+Role.create(name: 'technical admin')

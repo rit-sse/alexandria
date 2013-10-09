@@ -1,22 +1,41 @@
-= form_for checkout do |f|
-  -if checkout.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(checkout.errors.count, "error")} prohibited this checkout from being saved:"
-      %ul
-        - checkout.errors.full_messages.each do |msg|
-          %li= msg
+.well.well-small
+  = form_for checkout do |f|
+    -if checkout.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(checkout.errors.count, "error")} prohibited this checkout from being saved:"
+        %ul
+          - checkout.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :patron_id
-    = f.text_field :patron_id
-  .field
-    = f.label :book
-    = f.text_field :book
-  .field
-    = f.label :checked_out_at
-    = f.text_field :checked_out_at
-  .field
-    = f.label :checked_in_at
-    = f.text_field :checked_in_at
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.label :patron
+      = f.select :patron_id, options_for_select(User.all.collect { |u| [u.user_name, u.id] }, checkout.patron.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :distributor
+      - d = Role.find_by_name('distributor')
+      - l = Role.find_by_name('librarian')
+      = f.select :distributor, options_for_select(User.all.select{|u| [d, l].include?(u.role)}.collect { |u| [u.user_name, u.id] }, checkout.distributor.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :book
+      = f.select :book_id, options_for_select(Book.all.collect { |b| [b.title, b.id] }, checkout.book.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :checked_out_at
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :checked_out_at, class: 'form-control'
+    .form-group
+      = f.label :checked_in_at
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :checked_in_at, class: 'form-control'
+    .form-group
+      = f.label :due_date
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :due_date, class: 'form-control'
+    .form-group
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Back', back_path, class: 'btn btn-default'

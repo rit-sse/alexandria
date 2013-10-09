@@ -1,25 +1,33 @@
-= form_for reservation do |f|
-  -if reservation.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(reservation.errors.count, "error")} prohibited this reservation from being saved:"
-      %ul
-        - reservation.errors.full_messages.each do |msg|
-          %li= msg
+.well.well-small
+  = form_for reservation do |f|
+    -if reservation.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(reservation.errors.count, "error")} prohibited this reservation from being saved:"
+        %ul
+          - reservation.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :book
-    = f.text_field :book
-  .field
-    = f.label :reserve_at
-    = f.text_field :reserve_at
-  .field
-    = f.label :fulfilled
-    = f.check_box :fulfilled
-  .field
-    = f.label :expires_at
-    = f.text_field :expires_at
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.label :user
+      = f.select :user_id, options_for_select(User.all.collect { |u| [u.user_name, u.id] }, reservation.user.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :book
+      = f.select :book_id, options_for_select(Book.all.collect { |b| [b.title, b.id] }, reservation.book.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :reserve_at
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :reserve_at, class: 'form-control'
+    .form-group
+      = f.label :fulfilled
+      = f.check_box :fulfilled
+    .form-group
+      = f.label :expires_at
+      .input-group.date.datepicker
+        %span.input-group-addon
+          %i.icon-calendar
+        = f.text_field :expires_at, class: 'form-control'
+    .form-group
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Back', back_path, class: 'btn btn-default'
