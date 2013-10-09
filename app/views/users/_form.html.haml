@@ -1,19 +1,21 @@
-= form_for user do |f|
-  -if user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - user.errors.full_messages.each do |msg|
-          %li= msg
+.well.well-small
+  = form_for user do |f|
+    -if user.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - user.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :user_name
-    = f.text_field :user_name
-  .field
-    = f.label :banned
-    = f.check_box :banned
-  .field
-    = f.label :role
-    = f.text_field :role
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.label :user_name
+      = f.text_field :user_name, class: 'form-control'
+    .form-group
+      = f.label :banned
+      = f.check_box :banned
+    .form-group
+      = f.label :role
+      = f.select :role_id, options_for_select(Role.all.collect { |u| [u.name, u.id] }, user.role.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.submit 'Save', class: 'btn btn-primary'
+      = link_to 'Back', back_path, class: 'btn btn-default'

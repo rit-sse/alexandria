@@ -1,7 +1,3 @@
 %h1 Editing author
 
-= render 'form', author: @author
-
-= link_to 'Show', @author
-\|
-= link_to 'Back', authors_path
+= render 'form', author: @author, back_path: author_path(@author)

@@ -45,6 +45,11 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.1.4)
+    chosen-rails (1.0.0)
+      coffee-rails (>= 3.2)
+      compass-rails (>= 1.0)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chronic (0.10.2)
     chunky_png (1.2.8)
     code_analyzer (0.4.3)
@@ -88,6 +93,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    font-awesome-rails (3.2.1.3)
+      railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     googlebooks (0.0.7)
       httparty
@@ -275,12 +282,14 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass-rails (~> 3.0.0)
+  chosen-rails
   coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0.alpha.0)
   coveralls
   database_cleaner
   devise (~> 3.1.0)
   factory_girl_rails
+  font-awesome-rails
   googlebooks
   haml-rails
   handlebars_assets

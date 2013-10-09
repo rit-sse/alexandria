@@ -33,7 +33,7 @@ describe BooksController, solr: true do
   # Book. As you add validations to Book, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { 'isbn' => '9780199273133' }
+    { authors: [], 'isbn' => '9780199273133' }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -128,7 +128,7 @@ describe BooksController, solr: true do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Book.any_instance.should_receive(:update).with({ 'isbn' => 'MyString' })
-        put :update, { id: book.to_param, book: { 'isbn' => 'MyString' } }, valid_session
+        put :update, { id: book.to_param, book: { authors: [], 'isbn' => 'MyString' } }, valid_session
       end
 
       it 'assigns the requested book as @book' do
@@ -149,7 +149,7 @@ describe BooksController, solr: true do
         book = Book.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        put :update, { id: book.to_param, book: { 'isbn' => 'invalid value' } }, valid_session
+        put :update, { id: book.to_param, book: { authors: [], 'isbn' => 'invalid value' } }, valid_session
         assigns(:book).should eq(book)
       end
 
@@ -157,7 +157,7 @@ describe BooksController, solr: true do
         book = Book.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        put :update, { id: book.to_param, book: { 'isbn' => 'invalid value' } }, valid_session
+        put :update, { id: book.to_param, book: { authors: [], 'isbn' => 'invalid value' } }, valid_session
         response.should render_template('edit')
       end
     end
