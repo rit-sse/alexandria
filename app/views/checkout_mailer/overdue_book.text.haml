@@ -1,0 +1,11 @@
+= "Hi #{@user.user_name},"
+\
+We would like to inform you that the book you have checked out,
+= @book.title
+, is overdue. Because of this, you have recieved a strike. You currently have
+= @user.strikes.count
+strikes. If you don't return this book by
+= @checkout.due_date.strftime('%B %d, %Y')
+you will recieve another strike.
+\
+\- The Society of Software Engineers

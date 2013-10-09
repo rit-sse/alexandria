@@ -74,6 +74,14 @@ describe BooksController, solr: true do
     end
   end
 
+  describe 'GET put_away' do
+    it 'assigns the request book as @book' do
+      book = Book.create! valid_attributes
+      get :put_away, { id: book.to_param }, valid_session
+      assigns(:book).should eq(book)
+    end
+  end
+
   describe 'POST create' do
     describe 'with valid params' do
       it 'creates a new Book' do

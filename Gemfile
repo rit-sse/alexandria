@@ -89,6 +89,9 @@ gem 'jbuilder'
 # For scheduled job
 gem 'whenever'
 
+# For parsing human names
+gem 'people', '~> 0.2'
+
 gem 'chosen-rails'
 gem "font-awesome-rails"
 
