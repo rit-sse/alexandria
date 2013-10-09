@@ -153,9 +153,6 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
-    parallel (0.8.4)
-    parallel_tests (0.16.0)
-      parallel
     parser (2.0.0)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
@@ -302,7 +299,6 @@ DEPENDENCIES
   marc
   omniauth
   omniauth-google-oauth2
-  parallel_tests
   people (~> 0.2)
   pg
   rails (= 4.0.0)
