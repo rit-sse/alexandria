@@ -26,6 +26,10 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def self.all_active
+    Reservation.where(fulfilled: false)
+  end
+
   def self.has_reservation(book, user)
     !Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false).empty?
   end
