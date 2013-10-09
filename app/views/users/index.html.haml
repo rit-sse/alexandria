@@ -13,7 +13,7 @@
     %tr
       %td= user.user_name
       %td= user.banned
-      %td= user.role
+      %td= user.role.name
       %td= link_to 'Show', user
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, data: { confirm: 'Are you sure?'}, method: :delete
