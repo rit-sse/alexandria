@@ -10,15 +10,19 @@ Library Management System by the Society of Software Engineers
 Get started
 -----------
 1. Install Ruby
-2. Install [Yaz](http://www.indexdata.dk/yaz/)
+2. Make sure you have a supported JavaScript runtime installed.
+  * If you are on Windows or Mac OS, or have node.js installed, you should be
+    fine.
+  * Otherwise, see the [list of supported runtimes](https://github.com/sstephenson/execjs#readme).
+3. Install [Yaz](http://www.indexdata.dk/yaz/)
 	* Make sure you did pass the `--enabled-shared` option to the configure
     script before building YAZ
-3. Run `bundle install`
-4. Run `rake db:migrate`
-5. Run `rake db:seed`
-6. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
-7. Start solr: `rake sunspot:solr:start`
-8. Start server: `rails s`
+4. Run `bundle install`
+5. Run `rake db:migrate`
+6. Run `rake db:seed`
+7. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
+8. Start solr: `rake sunspot:solr:start`
+9. Start server: `rails s`
 
 Solr
 ----
