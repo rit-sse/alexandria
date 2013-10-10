@@ -22,6 +22,9 @@
         %span.input-group-addon
           %i.icon-calendar
         = f.text_field :publish_date, class: 'form-control'
+    .form-group
+      = f.label :restricted
+      = f.check_box :restricted
     .actions
       = f.submit 'Save', class: 'btn btn-primary'
       = link_to 'Back', book_path(book), class: 'btn btn-default'
