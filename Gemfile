@@ -50,8 +50,10 @@ group :development, :test do
   gem 'sunspot_solr', '~> 2.0.0'
 
   # Make error checking/viewing less horrible
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  gem 'capybara'
 end
 
 group :production do
@@ -93,7 +95,7 @@ gem 'whenever'
 gem 'people', '~> 0.2'
 
 gem 'chosen-rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Use unicorn as the app server
 # gem 'unicorn'
