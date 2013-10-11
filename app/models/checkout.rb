@@ -53,7 +53,7 @@ class Checkout < ActiveRecord::Base
   end
 
   def restricted_book
-    if book.restricted?
+    if book.present? && book.restricted
 	errors.add(:book, 'Book is restricted can not check out.')
     end
   end
