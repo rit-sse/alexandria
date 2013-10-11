@@ -20,9 +20,8 @@ Get started
 4. Run `bundle install`
 5. Run `rake db:migrate`
 6. Run `rake db:seed`
-7. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
-8. Start solr: `rake sunspot:solr:start`
-9. Start server: `rails s`
+7. Start solr: `rake sunspot:solr:start`
+8. Start server: `rails s`
 
 Solr
 ----
@@ -30,4 +29,12 @@ Solr is the search engine tool used in Alexandria. Once it is running, it will a
 
 Authentication
 --------------
-**Do not check config/initializers/omniauth.rb into the repo. Our Google API keys are in there for auth stuff. Just don't do it. Seriously.**
+If you need access to the google api keys, let kristen know and she'll give you access. 
+Store them in the following environment variables.
+
+*OAuth:*<br>
+**ALEXANDRIA_KEY**: client id<br>
+**ALEXANDRIA_SECRET**: client secret 
+
+*Google Books:*<br>
+**ALEXANDRIA_SIMPLE**: API key 
