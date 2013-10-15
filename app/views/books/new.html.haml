@@ -1,5 +1,6 @@
 .center-text
   %h3 Add book by ISBN
 %br
-= form_tag("/books") do |f|
-  %input.form-control{ type: "text", placeholder: "ISBN", name: "isbn", id: "isbn-add" }
+= form_tag('/books') do |f|
+  %input#isbn-add.form-control{ type: 'text', placeholder: 'ISBN', name: 'isbn'}
+  %input#isbn-submit.btn.btn-primary{ type: 'submit', name: 'commit', value: 'Save', style: "visibility: hidden;"}
