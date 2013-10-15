@@ -62,14 +62,14 @@ describe Checkout, solr: true do
   end
 
   describe 'needing reminding' do
-    it 'needs reminding if 3 days until duedate' do
+    it 'needs reminding if at the appropriate time until duedate' do
       expect(@checkout.need_reminding?).to be_false
-      @checkout.due_date = Date.today + 3.days
+      @checkout.due_date = Date.today + Rails.configuration.remind_before
       expect(@checkout.need_reminding?).to be_true
     end
 
     it 'should not need reminding if already checked in' do
-      @checkout.due_date = Date.today + 3.days
+      @checkout.due_date = Date.today + Rails.configuration.remind_before
       @checkout.checked_in_at = DateTime.now
       expect(@checkout.need_reminding?).to be_false
     end
@@ -77,7 +77,7 @@ describe Checkout, solr: true do
     it 'should send an email' do
       @checkout.book = book
       @checkout.patron = user
-      @checkout.due_date = Date.today + 3.days
+      @checkout.due_date = Date.today + Rails.configuration.remind_before
       @checkout.send_reminder
       expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
       expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book due soon.')

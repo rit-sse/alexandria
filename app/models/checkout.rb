@@ -63,7 +63,7 @@ class Checkout < ActiveRecord::Base
   end
 
   def need_reminding?
-    Date.today + 3.days == self.due_date.to_date && checked_in_at.blank?
+    Date.today + Rails.configuration.remind_before == self.due_date.to_date && checked_in_at.blank?
   end
 
   def send_overdue
