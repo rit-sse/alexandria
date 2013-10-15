@@ -11,7 +11,7 @@ class Reservation < ActiveRecord::Base
   validate :cannot_have_2_reservations_on_1_book
 
   def default_values
-    self.expires_at ||= DateTime.now + 1.week
+    self.expires_at ||= DateTime.now + Rails.configuration.reservation_period
     self.fulfilled ||= false
     self.reserve_at ||= DateTime.now
   end

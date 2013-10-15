@@ -19,8 +19,8 @@ describe Checkout, solr: true do
     expect(@checkout.patron).to eq(user)
   end
 
-  it 'has a due date of a week after' do
-    expect(@checkout.due_date).to eq(@checkout.checked_out_at + 1.week)
+  it 'has a due date at the appropriate time' do
+    expect(@checkout.due_date).to eq(@checkout.checked_out_at + Rails.configuration.checkout_period)
   end
 
   it 'can be found given book and patron' do

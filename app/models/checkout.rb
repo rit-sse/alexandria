@@ -15,7 +15,7 @@ class Checkout < ActiveRecord::Base
 
   def default_values
     self.checked_out_at ||= DateTime.now
-    self.due_date ||= checked_out_at + 1.week
+    self.due_date ||= checked_out_at + Rails.configuration.checkout_period
   end
 
   def patron(who = nil)
@@ -68,7 +68,7 @@ class Checkout < ActiveRecord::Base
 
   def send_overdue
     if overdue?
-      self.due_date += 1.week
+      self.due_date += Rails.configuration.checkout_period
       save
       strike = Strike.new
       strike.patron = patron
