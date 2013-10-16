@@ -110,7 +110,7 @@ describe AuthorsController do
         # specifies that the Author created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Author.any_instance.should_receive(:update).with({ 'first_name' => 'MyString' })
+        Author.any_instance.should_receive(:update).with('first_name' => 'MyString')
         put :update, { id: author.to_param, author: { 'first_name' => 'MyString' } }, valid_session
       end
 

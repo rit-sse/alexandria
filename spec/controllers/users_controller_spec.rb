@@ -110,7 +110,7 @@ describe UsersController do
         # specifies that the User created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        User.any_instance.should_receive(:update).with({ 'user_name' => 'MyString' })
+        User.any_instance.should_receive(:update).with('user_name' => 'MyString')
         put :update, { id: user.to_param, user: { 'user_name' => 'MyString' } }, valid_session
       end
 

@@ -127,7 +127,7 @@ describe BooksController, solr: true do
         # specifies that the Book created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Book.any_instance.should_receive(:update).with({ 'isbn' => 'MyString' })
+        Book.any_instance.should_receive(:update).with('isbn' => 'MyString')
         put :update, { id: book.to_param, book: { authors: [], 'isbn' => 'MyString' } }, valid_session
       end
 

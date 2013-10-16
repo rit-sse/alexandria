@@ -118,7 +118,7 @@ describe ReservationsController, solr: true do
         # specifies that the Reservation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Reservation.any_instance.should_receive(:update).with({ 'fulfilled' => true })
+        Reservation.any_instance.should_receive(:update).with('fulfilled' => true)
         put :update, { id: reservation.to_param, reservation: { 'fulfilled' => true } }, valid_session
       end
 
