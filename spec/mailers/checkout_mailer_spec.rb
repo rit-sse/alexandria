@@ -6,7 +6,7 @@ describe CheckoutMailer, solr: true do
   let(:checkout) do
     Checkout.new(
                 checked_out_at: Date.today,
-                due_date: Date.today + 1.week,
+                due_date: Date.today + Rails.configuration.checkout_period,
                 book_id: book.id,
                 patron_id: user.id
               )
