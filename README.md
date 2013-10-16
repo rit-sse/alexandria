@@ -23,6 +23,10 @@ Get started
 7. Start solr: `rake sunspot:solr:start`
 8. Start server: `rails s`
 
+Settings
+--------
+Library-specific settings can be configured in `config/initializers/settings.rb`.
+
 Solr
 ----
 Solr is the search engine tool used in Alexandria. Once it is running, it will automatically index newly created book entries, but existing entries that are not indexed are ignored. Index entries manually by running `rake sunspot:reindex`.

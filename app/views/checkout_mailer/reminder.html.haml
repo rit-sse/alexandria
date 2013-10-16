@@ -9,7 +9,7 @@
       We would like to inform you that the book you have checked out,
       %b
         = @book.title
-      , is due in 3 days.
+      , is due in #{pluralize(Rails.configuration.remind_before, 'day')}.
       If you don't return this book by
       %b
         = @checkout.due_date.strftime('%B %d, %Y')
