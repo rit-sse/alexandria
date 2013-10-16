@@ -11,6 +11,7 @@ class Checkout < ActiveRecord::Base
 
   validates :checked_out_at, presence: true
   validate :unique_checkout
+  validate :restricted_book
 
   def default_values
     self.checked_out_at ||= DateTime.now
@@ -48,6 +49,12 @@ class Checkout < ActiveRecord::Base
       unless book_checkouts.empty?
         errors.add(:book, 'Cannot checkout an already checked out book.')
       end
+    end
+  end
+
+  def restricted_book
+    if book.present? && book.restricted
+      errors.add(:book, 'Book is restricted can not check out.')
     end
   end
 

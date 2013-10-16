@@ -53,13 +53,13 @@ module Lccable
   end
 
   # regular compare
-  def self.cmp x, y
+  def self.cmp(x, y)
     x <=> y
   end
 
   # The compare function for the number classes
-  def self.ncmp x, y
-    if x.nil? and y.nil?
+  def self.ncmp(x, y)
+    if x.nil? && y.nil?
       return 0
     elsif x.nil?
       return -1
@@ -72,7 +72,7 @@ module Lccable
   end
 
   # sort function
-  def self.sort_it_up x, y
+  def self.sort_it_up(x, y)
     xp = LCC_REGEX.match(x)
     yp = LCC_REGEX.match(y)
     parts = {
@@ -89,20 +89,18 @@ module Lccable
     }
     parts.each do |part_key, part_value|
       cr = send(part_value, xp[part_key], yp[part_key])
-      if cr != 0
-        return cr
-      end
+      return cr if cr != 0
     end
     0
   end
 
   def self.where_to_place(book)
-    books = Book.all.sort{ |a,b| sort_it_up(a.lcc,b.lcc) }
+    books = Book.all.sort { |a, b| sort_it_up(a.lcc, b.lcc) }
     i = books.index(book)
-    left = books[i-1]
-    right  = books[i+1]
+    left = books[i - 1]
+    right  = books[i + 1]
     left = nil if i == 0
     right = nil if i == books.count - 1
-    {left: left, right: right}
+    { left: left, right: right }
   end
 end

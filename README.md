@@ -10,13 +10,16 @@ Library Management System by the Society of Software Engineers
 Get started
 -----------
 1. Install Ruby
-2. Install [Yaz](http://www.indexdata.dk/yaz/)
+2. Make sure you have a supported JavaScript runtime installed.
+  * If you are on Windows or Mac OS, or have node.js installed, you should be
+    fine.
+  * Otherwise, see the [list of supported runtimes](https://github.com/sstephenson/execjs#readme).
+3. Install [Yaz](http://www.indexdata.dk/yaz/)
 	* Make sure you did pass the `--enabled-shared` option to the configure
     script before building YAZ
-3. Run `bundle install`
-4. Run `rake db:migrate`
-5. Run `rake db:seed`
-6. If working on a branch with auth implemented, get the Google API keys from @kristenmills and insert them in the omniauth initializer (config/initializers/omniauth.rb)
+4. Run `bundle install`
+5. Run `rake db:migrate`
+6. Run `rake db:seed`
 7. Start solr: `rake sunspot:solr:start`
 8. Start server: `rails s`
 
@@ -26,4 +29,12 @@ Solr is the search engine tool used in Alexandria. Once it is running, it will a
 
 Authentication
 --------------
-**Do not check config/initializers/omniauth.rb into the repo. Our Google API keys are in there for auth stuff. Just don't do it. Seriously.**
+If you need access to the google api keys, let kristen know and she'll give you access. 
+Store them in the following environment variables.
+
+*OAuth:*<br>
+**ALEXANDRIA_KEY**: client id<br>
+**ALEXANDRIA_SECRET**: client secret 
+
+*Google Books:*<br>
+**ALEXANDRIA_SIMPLE**: API key 

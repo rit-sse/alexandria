@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009165951) do
+ActiveRecord::Schema.define(version: 20131010211455) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131009165951) do
     t.datetime "updated_at"
     t.string   "subtitle"
     t.string   "lcc"
+    t.boolean  "restricted"
   end
 
   create_table "checkouts", force: true do |t|

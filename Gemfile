@@ -16,9 +16,6 @@ gem 'sass-rails',   '~> 4.0.0'
 gem "compass-rails", "~> 2.0.alpha.0"
 gem 'bootstrap-sass-rails', '~> 3.0.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 gem 'uglifier', '>= 1.0.3'
 gem 'handlebars_assets'
 
@@ -35,10 +32,6 @@ end
 
 # Test-related gems
 group :development, :test do
-  gem 'therubyracer'
-  gem 'libv8', '~> 3.11.8'
-
-
   gem 'rspec'
   gem 'coveralls', require: false
   gem 'rspec-rails'
