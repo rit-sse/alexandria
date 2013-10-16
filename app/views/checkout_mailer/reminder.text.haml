@@ -2,7 +2,8 @@
 \
 We would like to inform you that the book you have checked out,
 = @book.title
-, is due in 3 days. If you don't return this book by
+, is due in #{pluralize(Rails.configuration.remind_before, 'day')}. If you don't
+return this book by
 = @checkout.due_date.strftime('%B %d, %Y')
 you will recieve a strike. It you need to keep the book longer than that, please
 stop by to renew the book.
