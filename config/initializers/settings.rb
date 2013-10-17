@@ -23,8 +23,8 @@ Alexandria::Application.configure do
   # The configuration of shelves in the physical library. Only the first and last
   # book codes of each shelf need to be stored here.
   #
-  # TODO: Replace this with an Array of Ranges of Strings. Each Range should
-  # represent the first and last book codes for the given shelf.
+  # TODO: Replace this with an Array of Shelf Structs. Each Shelf should
+  # represent the first and last LCC codes for the given shelf.
   #
   # TODO: Start using this setting in the application.
   config.shelves = []
