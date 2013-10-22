@@ -9,9 +9,6 @@ Alexandria::Application.routes.draw do
 
   resources :checkouts
 
-  get 'checkout', to: 'checkouts#checkout', as: :check_out
-  get 'checkin', to: 'checkouts#check_in', as: :check_in
-
   resources :reservations
 
   resources :books do
