@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :books_reserved, through: :reservations, source: :book
   has_many :checkouts, foreign_key: :patron_id
-  has_many :books_checkedout, through: :checkouts, source: :book
+  has_many :books_checked_out, through: :checkouts, source: :book
   has_many :strikes, foreign_key: :patron_id
   belongs_to :role
 
