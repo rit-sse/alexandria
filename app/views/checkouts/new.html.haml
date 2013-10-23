@@ -2,11 +2,17 @@
   %h3 Add book by ISBN
 %br
 = form_for(@checkout) do |f|
+  -if @checkout.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@checkout.errors.count, "error")} prohibited this checkout from being saved:"
+      %ul
+        - @checkout.errors.full_messages.each do |msg|
+          %li= msg
   = f.text_field :book, name: 'isbn', placeholder: 'ISBN', class: 'form-control input-lg center-text'
   %br
-  = f.text_field :distributor_id, placeholder: 'Distributor', class: 'form-control input-lg center-text'
+  = f.password_field :distributor_id, placeholder: 'Distributor', class: 'form-control input-lg center-text'
   %br
-  = f.text_field :patron_id, placeholder: 'Patron', class: 'form-control input-lg center-text'
+  = f.password_field :patron_id, placeholder: 'Patron', class: 'form-control input-lg center-text'
   %br
   %div
     = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'

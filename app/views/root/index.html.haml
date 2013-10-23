@@ -1,36 +1,12 @@
 %h1 Welcome to Alexandria
 %hr
-%h3 Featured books
-
 .row
-	- @books.each do |book|
-		.col-md-4
-			.text-center
-				%h4
-					=link_to book.title, book
-				%i
-					%h5= book.subtitle
-				.row.visible-sm
-					%br
-					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
-					%hr
-
-.row.hidden-sm
-	- @books.each do |book|
-		.col-md-4
-			.text-center
-				%br
-				= link_to book do
-					%img{src: book.google_book_data.img_small, class: "img-polaroid"}
-
-.row.hidden-sm
-	- @books.each do |book|
-		.col-md-4
-			%br
-			%p= truncate(book.google_book_data.description, length: 500)
-
+	.col-md-6
+		= link_to 'Checkout', new_checkout_path, class: 'btn-block btn btn-primary big-btn'
+	.col-md-6
+		= link_to 'Checkin', '#', class: 'btn-block btn btn-primary big-btn'
+%br
 %hr
-
 %footer.pull-right
 	%small
 		The library for the
