@@ -25,8 +25,15 @@ describe CheckoutsController, solr: true do
   let(:book) { create(:book) }
   let(:reservation) { Reservation.create(user_id: patron.id, book_id: book.id) }
 
+  before(:each) do
+    patron.barcode = '5555'
+    distributor.barcode = '6666'
+    patron.save
+    distributor.save
+  end
   after(:all) do
     patron.destroy
+    distributor.destroy
     book.destroy
     reservation.destroy
   end
@@ -80,19 +87,19 @@ describe CheckoutsController, solr: true do
     describe 'with valid params' do
       it 'creates a new Checkout' do
         expect do
-          post :create, { checkout: valid_attributes }, valid_session
+          post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
         end.to change(Checkout, :count).by(1)
       end
 
       it 'assigns a newly created checkout as @checkout' do
-        post :create, { checkout: valid_attributes }, valid_session
+        post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
         assigns(:checkout).should be_a(Checkout)
         assigns(:checkout).should be_persisted
       end
 
       it 'redirects to the created checkout' do
-        post :create, { checkout: valid_attributes }, valid_session
-        response.should redirect_to(request.referer)
+        post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
+        response.should redirect_to(Checkout.last)
       end
     end
 

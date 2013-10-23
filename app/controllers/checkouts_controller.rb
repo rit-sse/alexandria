@@ -35,7 +35,7 @@ class CheckoutsController < ApplicationController
     respond_to do |format|
       if @checkout.save
         check_reservation
-        format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
+        format.html { redirect_to @checkout, notice: 'Checkout was successfully created.' }
         format.json { render 'show', status: :created, location: @checkout }
       else
         format.html { render 'new' }
