@@ -10,9 +10,9 @@
           %li= msg
   = f.text_field :book, name: 'isbn', placeholder: 'ISBN', class: 'form-control input-lg center-text'
   %br
-  = f.password_field :distributor_id, placeholder: 'Distributor', class: 'form-control input-lg center-text'
+  = f.password_field :distributor, name: 'distributor_barcode', placeholder: 'Distributor', class: 'form-control input-lg center-text'
   %br
-  = f.password_field :patron_id, placeholder: 'Patron', class: 'form-control input-lg center-text'
+  = f.password_field :patron, name: 'patron_barcode', placeholder: 'Patron', class: 'form-control input-lg center-text'
   %br
   %div
     = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'

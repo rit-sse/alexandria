@@ -25,7 +25,12 @@ class CheckoutsController < ApplicationController
   # POST /checkouts
   # POST /checkouts.json
   def create
-    @checkout = Checkout.new(checkout_params)
+    @checkout = Checkout.new()
+    User.all.each do |user|
+      @checkout.distributor = user if user.barcode == params['distributor_barcode']
+      @checkout.patron = user if user.barcode == params['patron_barcode']
+      break unless @checkout.patron.nil? or @checkout.distributor.nil?
+    end
     @checkout.book = Book.find_by_isbn(params['isbn']) unless params['isbn'].nil?
     respond_to do |format|
       if @checkout.save
