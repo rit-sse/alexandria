@@ -35,6 +35,7 @@ class CheckoutsController < ApplicationController
     respond_to do |format|
       if @checkout.save
         check_reservation
+        CheckoutMailer.overdue_book(@checkout).deliver
         format.html { redirect_to @checkout, notice: 'Checkout was successfully created.' }
         format.json { render 'show', status: :created, location: @checkout }
       else
