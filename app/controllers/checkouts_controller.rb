@@ -26,6 +26,7 @@ class CheckoutsController < ApplicationController
   # POST /checkouts.json
   def create
     @checkout = Checkout.new(checkout_params)
+    @checkout.book = Book.find_by_isbn(params['isbn']) unless params['isbn'].nil?
     respond_to do |format|
       if @checkout.save
         check_reservation

@@ -20,12 +20,13 @@ require 'spec_helper'
 
 describe CheckoutsController, solr: true do
 
-  let(:user) { create(:user) }
+  let(:patron) { create(:patron) }
+  let(:distributor) { create(:distributor) }
   let(:book) { create(:book) }
-  let(:reservation) { Reservation.create(user_id: user.id, book_id: book.id) }
+  let(:reservation) { Reservation.create(user_id: patron.id, book_id: book.id) }
 
   after(:all) do
-    user.destroy
+    patron.destroy
     book.destroy
     reservation.destroy
   end
@@ -34,7 +35,7 @@ describe CheckoutsController, solr: true do
   # Checkout. As you add validations to Checkout, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { patron_id: user.id, book_id: book.id }
+    { patron_id: patron.id, book_id: book.id, distributor_id: distributor.id }
   end
 
   # This should return the minimal set of values that should be in the session

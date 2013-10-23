@@ -2,10 +2,15 @@ require 'spec_helper'
 
 describe Checkout, solr: true do
   let(:book) { create(:book) }
-  let(:user) { create(:user) }
+  let(:patron) { create(:patron) }
+  let(:distributor) { create(:distributor) }
 
   before(:each) do
-    @checkout = create(:checkout)
+    @checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
+    due_date: Date.new(2013, 2, 11))
+    @checkout.patron = patron
+    @checkout.distributor = distributor
+    @checkout.save
   end
 
   it 'can be created' do
@@ -14,9 +19,7 @@ describe Checkout, solr: true do
   end
 
   it 'can have a patron' do
-    expect(@checkout.patron).to be_nil
-    @checkout.patron user
-    expect(@checkout.patron).to eq(user)
+    expect(@checkout.patron).to eq(patron)
   end
 
   it 'has a due date at the appropriate time' do
@@ -24,11 +27,10 @@ describe Checkout, solr: true do
   end
 
   it 'can be found given book and patron' do
-    expect(Checkout.checked_out(book, user)).to be_false
+    expect(Checkout.checked_out(book, patron)).to be_false
     @checkout.book = book
-    @checkout.patron user
     @checkout.save
-    expect(Checkout.checked_out(book, user)).to be_true
+    expect(Checkout.checked_out(book, patron)).to be_true
   end
 
   it 'can be checked back in' do
@@ -53,10 +55,10 @@ describe Checkout, solr: true do
 
     it 'should send an email' do
       @checkout.book = book
-      @checkout.patron = user
+      @checkout.patron = patron
       @checkout.save
-      expect { @checkout.send_overdue }.to change { user.strikes.count }.from(0).to(1)
-      expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
+      expect { @checkout.send_overdue }.to change { patron.strikes.count }.from(0).to(1)
+      expect(ActionMailer::Base.deliveries.last.to).to include(patron.email)
       expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book overdue.')
     end
   end
@@ -76,10 +78,10 @@ describe Checkout, solr: true do
 
     it 'should send an email' do
       @checkout.book = book
-      @checkout.patron = user
+      @checkout.patron = patron
       @checkout.due_date = Date.today + Rails.configuration.remind_before
       @checkout.send_reminder
-      expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
+      expect(ActionMailer::Base.deliveries.last.to).to include(patron.email)
       expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book due soon.')
     end
   end

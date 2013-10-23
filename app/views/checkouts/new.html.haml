@@ -1,3 +1,12 @@
-%h1 New checkout
-
-= render 'form', checkout: @checkout, back_path: checkouts_path
+.center-text
+  %h3 Add book by ISBN
+%br
+= form_for(@checkout) do |f|
+  = f.text_field :book, name: 'isbn', placeholder: 'ISBN', class: 'form-control input-lg center-text'
+  %br
+  = f.text_field :distributor_id, placeholder: 'Distributor', class: 'form-control input-lg center-text'
+  %br
+  = f.text_field :patron_id, placeholder: 'Patron', class: 'form-control input-lg center-text'
+  %br
+  %div
+    = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'

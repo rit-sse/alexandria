@@ -58,4 +58,11 @@ RSpec.configure do |config|
     Sunspot.session = original_sunspot_session
     Sunspot.remove_all!
   end
+
+  config.before :all do
+    Role.create(name: 'patron')
+    Role.create(name: 'librarian')
+    Role.create(name: 'distributor')
+    Role.create(name: 'technical admin')
+  end
 end
