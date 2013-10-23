@@ -1,5 +1,7 @@
+require 'bcrypt'
 # User model
 class User < ActiveRecord::Base
+  include BCrypt
   # Only permit omniauth accounts
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   devise :database_authenticatable
@@ -14,6 +16,15 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   before_save :default_values
+
+  def barcode
+    @barcode ||= Password.new(barcode_hash)
+  end
+
+  def barcode=(new_barcode)
+    @barcode = Password.create(new_barcode)
+    self.barcode_hash = @barcode
+  end
 
   def default_values
     self.role ||= Role.find_by_name('patron')
