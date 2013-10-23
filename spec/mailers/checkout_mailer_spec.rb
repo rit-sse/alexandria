@@ -52,4 +52,14 @@ describe CheckoutMailer, solr: true do
       expect(mail.subject).to eq('You have a book due soon.')
     end
   end
+
+  describe 'checkouts' do
+    let(:mail) { CheckoutMailer.checkout_book(checkout) }
+
+    it_behaves_like 'a checkout mailer'
+
+    it 'renders the subject' do
+      expect(mail.subject).to eq('You checked out a book.')
+    end
+  end
 end
