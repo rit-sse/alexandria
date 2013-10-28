@@ -9,7 +9,7 @@ class Checkout < ActiveRecord::Base
   delegate :title, to: :book
   delegate :user_name, to: :patron
 
-  validates :checked_out_at, :distributor_id, :patron_id, presence: true
+  validates :checked_out_at, :distributor_id, :patron_id, :book_id, presence: true
   validate :unique_checkout
   validate :restricted_book
   validate :is_a_distributor

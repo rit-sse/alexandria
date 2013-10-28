@@ -25,7 +25,7 @@ class CheckoutsController < ApplicationController
   # POST /checkouts
   # POST /checkouts.json
   def create
-    @checkout = Checkout.new()
+    @checkout = Checkout.new
     User.all.each do |user|
       @checkout.distributor = user if user.barcode == params['distributor_barcode']
       @checkout.patron = user if user.barcode == params['patron_barcode']
@@ -72,6 +72,21 @@ class CheckoutsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to checkouts_url }
       format.json { head :no_content }
+    end
+  end
+
+  def check_in
+    if request.post?
+      @checkout = Book.find_by_isbn(params['isbn']).active_checkout
+      unless @checkout.nil?
+        @checkout.checked_in_at = DateTime.now
+        @checkout.save
+        format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
+        format.json { head :no_content }
+      else
+        format.html { render 'check_in' }
+        format.json { render json: @checkout.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -7,7 +7,11 @@ Alexandria::Application.routes.draw do
 
   resources :strikes
 
-  resources :checkouts
+  resources :checkouts do
+    collection do
+      match 'check_in', via: [:get, :post]
+    end
+  end
 
   resources :reservations
 

@@ -8,6 +8,7 @@ describe Checkout, solr: true do
   before(:each) do
     @checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
     due_date: Date.new(2013, 2, 11))
+    @checkout.book = book
     @checkout.patron = patron
     @checkout.distributor = distributor
     @checkout.save
@@ -27,9 +28,6 @@ describe Checkout, solr: true do
   end
 
   it 'can be found given book and patron' do
-    expect(Checkout.checked_out(book, patron)).to be_false
-    @checkout.book = book
-    @checkout.save
     expect(Checkout.checked_out(book, patron)).to be_true
   end
 
@@ -54,7 +52,6 @@ describe Checkout, solr: true do
     end
 
     it 'should send an email' do
-      @checkout.book = book
       @checkout.patron = patron
       @checkout.save
       expect { @checkout.send_overdue }.to change { patron.strikes.count }.from(0).to(1)
@@ -77,7 +74,6 @@ describe Checkout, solr: true do
     end
 
     it 'should send an email' do
-      @checkout.book = book
       @checkout.patron = patron
       @checkout.due_date = Date.today + Rails.configuration.remind_before
       @checkout.send_reminder
