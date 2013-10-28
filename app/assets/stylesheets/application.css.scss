@@ -144,19 +144,11 @@ ul.commas{
 	display: inline;
 }
 
-.text-center{
-	text-align: center
-}
-
 #isbn-add{
 	width:99%;
 	font-size:25px;
 	height:50px;
 	line-height:1;
-	text-align:center;
-}
-
-.center-text{
 	text-align:center;
 }
 
@@ -166,4 +158,8 @@ ul.commas{
 	border-radius: 10px !important;
 	border:none !important;
 	font-size: 30px !important;
+}
+.center{
+	display: block;
+	margin: 0 auto;
 }
