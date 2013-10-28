@@ -78,14 +78,16 @@ class CheckoutsController < ApplicationController
   def check_in
     if request.post?
       @checkout = Book.find_by_isbn(params['isbn']).active_checkout
-      unless @checkout.nil?
-        @checkout.checked_in_at = DateTime.now
-        @checkout.save
-        format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
-        format.json { head :no_content }
-      else
-        format.html { render 'check_in' }
-        format.json { render json: @checkout.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        unless @checkout.nil?
+          @checkout.checked_in_at = DateTime.now
+          @checkout.save
+          format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
+          format.json { head :no_content }
+        else
+          format.html { render 'check_in' }
+          format.json { render json: @checkout.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

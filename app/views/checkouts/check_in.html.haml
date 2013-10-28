@@ -1,0 +1,8 @@
+.center-text
+  %h3 Check In Book
+%br
+= form_tag(check_in_path) do |f|
+  %input.form-control.input-lg.center-text{ type: "text", placeholder: "ISBN", name: "isbn" }
+  %br
+  %div
+    %input.btn.btn-primary{ type: 'submit', text: 'Check In', style: 'display: block; margin: 0 auto;'}
