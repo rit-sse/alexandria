@@ -25,11 +25,18 @@ class CheckoutsController < ApplicationController
   # POST /checkouts
   # POST /checkouts.json
   def create
-    @checkout = Checkout.new(checkout_params)
+    @checkout = Checkout.new
+    User.all.each do |user|
+      @checkout.distributor = user if user.barcode == params['distributor_barcode']
+      @checkout.patron = user if user.barcode == params['patron_barcode']
+      break unless @checkout.patron.nil? or @checkout.distributor.nil?
+    end
+    @checkout.book = Book.find_by_isbn(params['isbn']) unless params['isbn'].nil?
     respond_to do |format|
       if @checkout.save
         check_reservation
-        format.html { redirect_to request.referer, notice: 'Checkout was successfully created.' }
+        CheckoutMailer.overdue_book(@checkout).deliver
+        format.html { redirect_to @checkout, notice: 'Checkout was successfully created.' }
         format.json { render 'show', status: :created, location: @checkout }
       else
         format.html { render 'new' }
@@ -65,6 +72,23 @@ class CheckoutsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to checkouts_url }
       format.json { head :no_content }
+    end
+  end
+
+  def check_in
+    if request.post?
+      @checkout = Book.find_by_isbn(params['isbn']).active_checkout
+      respond_to do |format|
+        unless @checkout.nil?
+          @checkout.checked_in_at = DateTime.now
+          @checkout.save
+          format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
+          format.json { head :no_content }
+        else
+          format.html { render 'check_in' }
+          format.json { render json: @checkout.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 

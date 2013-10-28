@@ -29,6 +29,12 @@ class Book < ActiveRecord::Base
     checkouts.any?
   end
 
+  def active_checkout
+    checkouts.each do |checkout|
+      return checkout if checkout.checked_in_at.nil?
+    end
+  end
+
   def reserved?
     Reservation.where(book_id: id, fulfilled: false).any?
   end

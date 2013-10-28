@@ -40,7 +40,7 @@ group :development, :test do
   gem 'database_cleaner'
 
   #for search
-  gem 'sunspot_solr', '~> 2.0.0'
+  gem 'sunspot_solr', '2.0.0'
 
   # Make error checking/viewing less horrible
   gem "better_errors"
@@ -56,7 +56,7 @@ gem 'twitter-typeahead-rails'
 gem "haml-rails"
 
 #for search
-gem 'sunspot_rails'
+gem 'sunspot_rails', '~> 2.0.0'
 gem 'sunspot-rails-tester'
 
 #for authentication
@@ -74,7 +74,7 @@ gem 'marc'
 gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.0'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'

@@ -9,30 +9,19 @@ class Checkout < ActiveRecord::Base
   delegate :title, to: :book
   delegate :user_name, to: :patron
 
-  validates :checked_out_at, presence: true
+  validates :checked_out_at, :distributor_id, :patron_id, :book_id, presence: true
   validate :unique_checkout
   validate :restricted_book
+  validate :is_a_distributor
 
   def default_values
     self.checked_out_at ||= DateTime.now
     self.due_date ||= checked_out_at + Rails.configuration.checkout_period
   end
 
-  def patron(who = nil)
-    if who
-      self.patron_id = who.id
-    else
-      if patron_id
-        return User.find(patron_id)
-      else
-        return nil
-      end
-    end
-  end
-
   def self.checked_out(book, patron)
     checkouts = Checkout.where(patron_id: patron.id, checked_in_at: nil).select do |i|
-      i.book.id == book.id
+      i.book.try(:id) == book.id
     end
 
     !checkouts.empty?
@@ -55,6 +44,12 @@ class Checkout < ActiveRecord::Base
   def restricted_book
     if book.present? && book.restricted
       errors.add(:book, 'Book is restricted can not check out.')
+    end
+  end
+
+  def is_a_distributor
+    unless [Role.find_by_name('librarian'), Role.find_by_name('distributor')].include?(distributor.role)
+      errors.add(:distributor, 'User is not a distributor or librarian')
     end
   end
 

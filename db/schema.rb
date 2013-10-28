@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010211455) do
+ActiveRecord::Schema.define(version: 20131022182801) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20131010211455) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "role_id"
+    t.string   "barcode_hash"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,3 +1,18 @@
-%h1 New checkout
-
-= render 'form', checkout: @checkout, back_path: checkouts_path
+.text-center
+  Checkout book
+%br
+= form_for(@checkout) do |f|
+  -if @checkout.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@checkout.errors.count, "error")} prohibited this checkout from being saved:"
+      %ul
+        - @checkout.errors.full_messages.each do |msg|
+          %li= msg
+  = f.text_field :book, name: 'isbn', placeholder: 'ISBN', class: 'form-control input-lg center-text'
+  %br
+  = f.password_field :distributor, name: 'distributor_barcode', placeholder: 'Distributor', class: 'form-control input-lg center-text'
+  %br
+  = f.password_field :patron, name: 'patron_barcode', placeholder: 'Patron', class: 'form-control input-lg center-text'
+  %br
+  %div
+    = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'
