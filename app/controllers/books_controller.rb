@@ -20,6 +20,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @rating = Goodreads.new.book_by_isbn(@book.isbn).average_rating.to_f
   end
 
   # GET /books/new

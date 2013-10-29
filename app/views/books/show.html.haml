@@ -22,7 +22,7 @@
         %p.text-warning Reserved
       - else
         %p.text-success Available
-
+    = @rating
     - if user_signed_in?
       .book-actions
         - if Reservation.has_reservation(@book, current_user)
