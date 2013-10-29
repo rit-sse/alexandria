@@ -1,5 +1,7 @@
 # Reservations controller
 class ReservationsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations

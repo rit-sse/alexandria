@@ -89,6 +89,8 @@ gem 'chosen-rails'
 gem 'font-awesome-rails'
 gem 'goodreads'
 
+gem 'cancan'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

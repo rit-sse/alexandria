@@ -66,6 +66,18 @@ describe Checkout, solr: true do
     expect(checkout.errors.messages).to include(patron:['Someone has already reserved this book.'])
   end
 
+  it 'cannot have a patron as distributor' do
+    @checkout.checked_in_at = DateTime.now
+    @checkout.save
+    checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
+    due_date: Date.new(2013, 2, 11))
+    checkout.book = book
+    checkout.patron = patron
+    checkout.distributor = patron
+    checkout.save
+    expect(checkout.errors.messages).to include(distributor:['User is not a distributor or librarian.'])
+  end
+
   describe 'being overdue' do
     it 'is overdue if past due date' do
       expect(@checkout.overdue?).to be_true

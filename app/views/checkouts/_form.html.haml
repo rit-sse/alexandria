@@ -12,9 +12,7 @@
       = f.select :patron_id, options_for_select(User.all.collect { |u| [u.user_name, u.id] }, checkout.patron.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
     .form-group
       = f.label :distributor
-      - d = Role.find_by_name('distributor')
-      - l = Role.find_by_name('librarian')
-      = f.select :distributor, options_for_select(User.all.select{|u| [d, l].include?(u.role)}.collect { |u| [u.user_name, u.id] }, checkout.distributor.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+      = f.select :distributor, options_for_select(User.all.select{|u| u.distributor? or u.librarian? }.collect { |u| [u.user_name, u.id] }, checkout.distributor.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
     .form-group
       = f.label :book
       = f.select :book_id, options_for_select(Book.all.collect { |b| [b.title, b.id] }, checkout.book.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}

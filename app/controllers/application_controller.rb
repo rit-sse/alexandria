@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def authenticate!
     redirect_to root_path unless current_user
   end
+  check_authorization unless: :devise_controller?
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 end

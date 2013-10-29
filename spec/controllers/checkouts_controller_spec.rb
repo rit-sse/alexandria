@@ -22,20 +22,25 @@ describe CheckoutsController, solr: true do
 
   let(:patron) { create(:patron) }
   let(:distributor) { create(:distributor) }
+  let(:librarian) { create(:librarian) }
   let(:book) { create(:book) }
   let(:reservation) { Reservation.create(user_id: patron.id, book_id: book.id) }
 
   before(:each) do
+    sign_in librarian
     patron.barcode = '5555'
     distributor.barcode = '6666'
+    librarian.barcode = '7777'
     patron.save
     distributor.save
+    librarian.save
   end
   after(:all) do
     patron.destroy
     distributor.destroy
     book.destroy
     reservation.destroy
+    librarian.destroy
   end
 
   # This should return the minimal set of attributes required to create a valid
