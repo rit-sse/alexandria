@@ -36,6 +36,7 @@ class BooksController < ApplicationController
     left_right = Lccable.where_to_place(@book)
     @left = left_right[:left]
     @right = left_right[:right]
+    @shelf = left_right[:shelf]
   end
 
   # POST /books

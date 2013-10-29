@@ -97,10 +97,18 @@ module Lccable
   def self.where_to_place(book)
     books = Book.all.sort { |a, b| sort_it_up(a.lcc, b.lcc) }
     i = books.index(book)
+    shelf = Rails.configuration.shelves.count
+    Rails.configuration.shelves.each_with_index do |x, i|
+      if sort_it_up(book.lcc, x) <= 0
+        shelf = i+1
+        break
+      end
+    end
+    shelf = 0 if book.restricted
     left = books[i - 1]
     right  = books[i + 1]
     left = nil if i == 0
     right = nil if i == books.count - 1
-    { left: left, right: right }
+    { left: left, right: right, shelf: shelf }
   end
 end
