@@ -33,12 +33,15 @@ Solr is the search engine tool used in Alexandria. Once it is running, it will a
 
 Authentication
 --------------
-If you need access to the google api keys, let kristen know and she'll give you access. 
+If you need access to the google api keys, let kristen know and she'll give you access.
 Store them in the following environment variables.
 
 *OAuth:*<br>
 **ALEXANDRIA_KEY**: client id<br>
-**ALEXANDRIA_SECRET**: client secret 
+**ALEXANDRIA_SECRET**: client secret
 
 *Google Books:*<br>
-**ALEXANDRIA_SIMPLE**: API key 
+**ALEXANDRIA_SIMPLE**: API key
+
+*Goodreads:*<br>
+**GOODREADS_KEY**: Goodreads API Keys

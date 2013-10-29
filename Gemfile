@@ -86,7 +86,8 @@ gem 'whenever'
 gem 'people', '~> 0.2'
 
 gem 'chosen-rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'goodreads'
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -1,0 +1,1 @@
+Goodreads.configure(:api_key => ENV['GOODREADS_KEY'])
