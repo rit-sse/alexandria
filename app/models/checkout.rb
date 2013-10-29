@@ -10,9 +10,10 @@ class Checkout < ActiveRecord::Base
   delegate :user_name, to: :patron
 
   validates :checked_out_at, :distributor_id, :patron_id, :book_id, presence: true
-  validate :unique_checkout
+  validate :unique_checkout, on: :create
   validate :restricted_book
   validate :is_a_distributor
+  validate :first_reservation, on: :create
 
   def default_values
     self.checked_out_at ||= DateTime.now
@@ -34,7 +35,6 @@ class Checkout < ActiveRecord::Base
   def unique_checkout
     unless book.nil?
       book_checkouts = Checkout.all_active.where(book_id: book.id)
-      book_checkouts = book_checkouts.where('id != ?', id)
       unless book_checkouts.empty?
         errors.add(:book, 'Cannot checkout an already checked out book.')
       end
@@ -49,7 +49,14 @@ class Checkout < ActiveRecord::Base
 
   def is_a_distributor
     unless [Role.find_by_name('librarian'), Role.find_by_name('distributor')].include?(distributor.role)
-      errors.add(:distributor, 'User is not a distributor or librarian')
+      errors.add(:distributor, 'User is not a distributor or librarian.')
+    end
+  end
+
+  def first_reservation
+    res = book.reservations.select{ |r| !r.fulfilled and !r.expired? }.sort!{|a,b| a.created_at <=> b.created_at }.first
+    unless res.nil? or res.user == patron
+      errors.add(:patron, 'Someone has already reserved this book.')
     end
   end
 

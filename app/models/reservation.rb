@@ -10,6 +10,10 @@ class Reservation < ActiveRecord::Base
   validates :book_id, :user_id, presence: true
   validate :cannot_have_2_reservations_on_1_book
 
+  def expired?
+    DateTime.now > expires_at
+  end
+
   def default_values
     self.expires_at ||= DateTime.now + Rails.configuration.reservation_period
     self.fulfilled ||= false
@@ -21,7 +25,7 @@ class Reservation < ActiveRecord::Base
       reservations = Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false)
       reservations = reservations.delete_if { |x| x.id == id }
       unless reservations.empty?
-        errors.add(:user_id, 'cannot have multiple reservations on one book')
+        errors.add(:user_id, 'Cannot have multiple reservations on one book.')
       end
     end
   end

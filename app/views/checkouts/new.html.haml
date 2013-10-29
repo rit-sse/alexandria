@@ -1,5 +1,5 @@
 .text-center
-  Checkout book
+  %h3 Checkout book
 %br
 = form_for(@checkout) do |f|
   -if @checkout.errors.any?
@@ -8,7 +8,7 @@
       %ul
         - @checkout.errors.full_messages.each do |msg|
           %li= msg
-  = f.text_field :book, name: 'isbn', placeholder: 'ISBN', class: 'form-control input-lg center-text'
+  = f.text_field :book, name: 'isbn', placeholder: 'ISBN', value: @checkout.book.try(:isbn), class: 'form-control input-lg center-text'
   %br
   = f.password_field :distributor, name: 'distributor_barcode', placeholder: 'Distributor', class: 'form-control input-lg center-text'
   %br

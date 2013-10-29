@@ -39,10 +39,37 @@ describe Checkout, solr: true do
     end.to change { Checkout.all_active.count }.from(1).to(0)
   end
 
+  it 'cannot be checked out if already checked out' do
+    checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
+    due_date: Date.new(2013, 2, 11))
+    checkout.book = book
+    checkout.patron = patron
+    checkout.distributor = distributor
+    checkout.save
+    expect(checkout.errors.messages).to include(book:['Cannot checkout an already checked out book.'])
+  end
+
+  it 'cannot check out a book that is reserved by someone else' do
+    @reservation = Reservation.new
+    book.reservations << @reservation
+    @reservation.user = distributor
+    @reservation.save
+    book.save
+    @checkout.checked_in_at = DateTime.now
+    @checkout.save
+    checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
+    due_date: Date.new(2013, 2, 11))
+    checkout.book = book
+    checkout.patron = patron
+    checkout.distributor = distributor
+    checkout.save
+    expect(checkout.errors.messages).to include(patron:['Someone has already reserved this book.'])
+  end
+
   describe 'being overdue' do
     it 'is overdue if past due date' do
       expect(@checkout.overdue?).to be_true
-      @checkout.due_date = Date.today + 1.day
+      @checkout.due_date = DateTime.now + 1.day
       expect(@checkout.overdue?).to be_false
     end
 
