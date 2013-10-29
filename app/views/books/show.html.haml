@@ -37,6 +37,8 @@
               = f.hidden_field "book_id", value: @book.id
               = f.hidden_field "user_id", value: current_user.id
               = f.submit "Make Reservation", class: "btn btn-primary"
+        %div
+          = pluralize(@book.reservations.where(fulfilled: false).count, 'reservation')
   .col-md-10
     %dl.dl-horizontal
       %dt Authors

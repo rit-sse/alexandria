@@ -69,7 +69,7 @@ describe Checkout, solr: true do
   describe 'being overdue' do
     it 'is overdue if past due date' do
       expect(@checkout.overdue?).to be_true
-      @checkout.due_date = Date.today + 1.day
+      @checkout.due_date = DateTime.now + 1.day
       expect(@checkout.overdue?).to be_false
     end
 

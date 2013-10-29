@@ -25,7 +25,7 @@ class Reservation < ActiveRecord::Base
       reservations = Reservation.where(user_id: user.id, book_id: book.id, fulfilled: false)
       reservations = reservations.delete_if { |x| x.id == id }
       unless reservations.empty?
-        errors.add(:user_id, 'cannot have multiple reservations on one book')
+        errors.add(:user_id, 'Cannot have multiple reservations on one book.')
       end
     end
   end
