@@ -44,18 +44,18 @@ class User < ActiveRecord::Base
   end
 
   def librarian?
-    role.name == 'librarian'
+    role.try(:name) == 'librarian'
   end
 
   def distributor?
-    role.name == 'distributor'
+    role.try(:name) == 'distributor'
   end
 
   def patron?
-    role.name == 'patron'
+    role.try(:name) == 'patron'
   end
 
   def technical_admin?
-    role.name == 'technical admin'
+    role.try(:name) == 'technical admin'
   end
 end
