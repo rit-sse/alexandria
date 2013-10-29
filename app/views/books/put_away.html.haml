@@ -31,8 +31,9 @@
         %br
         - unless @right.nil?
           - if @right.google_book_data.img_small != ""
-            %a{href: book_path(@left)}
-              %img{src: @right.google_book_data.img_small}
+            %div
+              %a{href: book_path(@left)}
+                %img{src: @right.google_book_data.img_small, height: '250px;'}
           -else
             %a{href: book_path(@left)}
               .blank-thumbnail-large{style: 'margin: 0 auto;'}
