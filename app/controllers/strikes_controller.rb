@@ -1,5 +1,7 @@
 # Strikes controller
 class StrikesController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_strike, only: [:show, :edit, :update, :destroy]
 
   # GET /strikes

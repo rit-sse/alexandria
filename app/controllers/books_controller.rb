@@ -1,5 +1,7 @@
 # Controller for books
 class BooksController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :put_away]
   before_filter :authenticate!
   skip_before_filter :authenticate!, only: [:index, :show, :create]

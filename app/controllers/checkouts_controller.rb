@@ -1,5 +1,7 @@
 # Checkouts controller
 class CheckoutsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
 
   # GET /checkouts
