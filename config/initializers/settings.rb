@@ -1,6 +1,3 @@
-# A Struct for conveniently storing individual shelves for the shelves setting.
-Shelf = Struct.new(:begin, :end)
-
 Alexandria::Application.configure do
   # This file contains configuration options for the Alexandria library itself.
   # Be sure to restart your server when you modify this file.
