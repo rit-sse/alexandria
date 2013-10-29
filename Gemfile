@@ -88,6 +88,8 @@ gem 'people', '~> 0.2'
 gem 'chosen-rails'
 gem "font-awesome-rails"
 
+gem 'cancan'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
