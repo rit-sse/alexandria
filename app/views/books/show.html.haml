@@ -35,8 +35,11 @@
           %i.fa.fa-lg.fa-star-o.text-warning
     %em.text-muted
       = @rating
-      %br
+      |
       = "#{@num_ratings} ratings"
+      %br
+      from
+      %a{href:'https://goodreads.com', target: '_blank'} Goodreads
     - if user_signed_in?
       .book-actions
         - if Reservation.has_reservation(@book, current_user)
