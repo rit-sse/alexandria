@@ -42,4 +42,20 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def librarian?
+    role.name == 'librarian'
+  end
+
+  def distributor?
+    role.name == 'distributor'
+  end
+
+  def patron?
+    role.name == 'patron'
+  end
+
+  def technical_admin?
+    role.name == 'technical admin'
+  end
 end

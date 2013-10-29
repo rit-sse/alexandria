@@ -48,7 +48,7 @@ class Checkout < ActiveRecord::Base
   end
 
   def is_a_distributor
-    unless [Role.find_by_name('librarian'), Role.find_by_name('distributor')].include?(distributor.role)
+    unless distributor.distributor? or distributor.librarian?
       errors.add(:distributor, 'User is not a distributor or librarian.')
     end
   end
