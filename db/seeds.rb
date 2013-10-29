@@ -56,6 +56,6 @@ d.each do |row|
 end
 
 Role.create(name: 'patron')
-Role.create(name: 'librarian')
 Role.create(name: 'distributor')
+Role.create(name: 'librarian')
 Role.create(name: 'technical admin')
