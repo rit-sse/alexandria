@@ -20,7 +20,12 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @rating = Goodreads.new.book_by_isbn(@book.isbn).average_rating.to_f
+    goodreads = Goodreads.new.book_by_isbn(@book.isbn)
+    @rating = goodreads.average_rating.to_f
+    @num_ratings = goodreads.work.ratings_count
+  rescue
+    @rating = 0.0
+    @ratings_count = 0
   end
 
   # GET /books/new

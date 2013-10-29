@@ -22,7 +22,21 @@
         %p.text-warning Reserved
       - else
         %p.text-success Available
-    = @rating
+    %div
+      - count = @rating
+      - 5.times do
+        - if count >= 1
+          %i.fa.fa-lg.fa-star.text-warning
+          - count -= 1
+        - elsif count >= 0.5
+          %i.fa.fa-lg.fa-star-half-o.text-warning
+          - count -= 0.5
+        - else
+          %i.fa.fa-lg.fa-star-o.text-warning
+    %em.text-muted
+      = @rating
+      %br
+      = "#{@num_ratings} ratings"
     - if user_signed_in?
       .book-actions
         - if Reservation.has_reservation(@book, current_user)
