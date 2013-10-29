@@ -19,7 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe AuthorsController do
+  let(:librarian) { create(:librarian) }
 
+  before(:each) do
+    sign_in librarian
+  end
+
+  after(:each) do
+    librarian.destroy
+  end
   # This should return the minimal set of attributes required to create a valid
   # Author. As you add validations to Author, be sure to
   # update the return value of this method accordingly.

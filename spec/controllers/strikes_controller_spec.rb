@@ -19,6 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe StrikesController do
+  let(:librarian) { create(:librarian) }
+
+  before(:each) do
+    sign_in librarian
+  end
+
+  after(:each) do
+    librarian.destroy
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Strike. As you add validations to Strike, be sure to

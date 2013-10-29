@@ -19,14 +19,14 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BooksController, solr: true do
-  let(:user) { create(:user) }
+  let(:librarian) { create(:librarian) }
 
   before(:each) do
-    sign_in user
+    sign_in librarian
   end
 
   after(:all) do
-    user.destroy
+    librarian.destroy
   end
 
   # This should return the minimal set of attributes required to create a valid
