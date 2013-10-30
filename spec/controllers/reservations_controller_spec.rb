@@ -109,7 +109,7 @@ describe ReservationsController, solr: true do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
         post :create, { reservation: { 'user' => 'invalid value' } }, valid_session
-        response.should render_template('new')
+        response.should redirect_to(request.referer)
       end
     end
   end

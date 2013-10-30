@@ -46,13 +46,13 @@ describe Checkout, solr: true do
     checkout.patron = patron
     checkout.distributor = distributor
     checkout.save
-    expect(checkout.errors.messages).to include(book:['Cannot checkout an already checked out book.'])
+    expect(checkout.errors.messages).to include(book:['is already checked out.'])
   end
 
   it 'cannot check out a book that is reserved by someone else' do
     @reservation = Reservation.new
-    book.reservations << @reservation
     @reservation.user = distributor
+    book.reservations << @reservation
     @reservation.save
     book.save
     @checkout.checked_in_at = DateTime.now
@@ -63,7 +63,7 @@ describe Checkout, solr: true do
     checkout.patron = patron
     checkout.distributor = distributor
     checkout.save
-    expect(checkout.errors.messages).to include(patron:['Someone has already reserved this book.'])
+    expect(checkout.errors.messages).to include(someone:['has already reserved this book.'])
   end
 
   it 'cannot have a patron as distributor' do
@@ -75,7 +75,7 @@ describe Checkout, solr: true do
     checkout.patron = patron
     checkout.distributor = patron
     checkout.save
-    expect(checkout.errors.messages).to include(distributor:['User is not a distributor or librarian.'])
+    expect(checkout.errors.messages).to include(distributor:['is not a distributor or librarian.'])
   end
 
   describe 'being overdue' do
