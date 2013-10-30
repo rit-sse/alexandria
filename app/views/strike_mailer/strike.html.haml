@@ -1,0 +1,18 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', :'http-equiv' => 'Content-Type'}
+  %body
+    %p
+      = "Hi #{@user.user_name},"
+      %br
+      You have recieved a strike for the following reason:
+      %b
+        = @strike.message
+      \. You currently have
+      = pluralize(@user.strikes.count, 'strike')
+      \. If you recieve
+      = pluralize (Rails.configuration.strikes_for_ban, 'strike')
+      , you will be banned from the system.
+      %br
+      \- The Society of Software Engineers
