@@ -95,7 +95,7 @@ describe Checkout, solr: true do
       @checkout.save
       expect { @checkout.send_overdue }.to change { patron.strikes.count }.from(0).to(1)
       expect(ActionMailer::Base.deliveries.last.to).to include(patron.email)
-      expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book overdue.')
+      expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book overdue')
     end
   end
 
@@ -117,7 +117,7 @@ describe Checkout, solr: true do
       @checkout.due_date = Date.today + Rails.configuration.remind_before
       @checkout.send_reminder
       expect(ActionMailer::Base.deliveries.last.to).to include(patron.email)
-      expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book due soon.')
+      expect(ActionMailer::Base.deliveries.last.subject).to eq('You have a book due soon')
     end
   end
 end

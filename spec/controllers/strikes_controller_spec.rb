@@ -33,7 +33,7 @@ describe StrikesController do
   # Strike. As you add validations to Strike, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { 'message' => 'MyString' }
+    { 'message' => 'MyString', 'patron_id' => librarian.id, 'distributor_id' => librarian.id }
   end
 
   # This should return the minimal set of values that should be in the session

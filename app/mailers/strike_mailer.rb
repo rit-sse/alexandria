@@ -5,11 +5,11 @@ class StrikeMailer < ActionMailer::Base
   def strike(strike)
     @strike = strike
     @user = strike.patron
-    mail(to: @user.email, subject: 'You have recieved a strike.')
+    mail(to: @user.email, subject: 'You have recieved a strike')
   end
 
   def banned(user)
     @user = user
-    mail(to: user.email, subject: 'You have been banned.')
+    mail(to: user.email, subject: 'You have been banned')
   end
 end

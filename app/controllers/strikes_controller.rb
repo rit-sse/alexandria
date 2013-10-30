@@ -79,6 +79,6 @@ class StrikesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def strike_params
-    params.require(:strike).permit(:message)
+    params.require(:strike).permit(:message, :patron_id, :distributor_id)
   end
 end
