@@ -28,9 +28,15 @@ class StrikesController < ApplicationController
   # POST /strikes.json
   def create
     @strike = Strike.new(strike_params)
-
     respond_to do |format|
       if @strike.save
+        StrikeMailer.strike(@strike).deliver
+        if @strike.patron.strikes.count == Rails.configuration.strikes_for_ban
+          StrikeMailer.banned(@strike.patron).deliver
+          patron = @strike.patron
+          patron.banned = true
+          patron.save
+        end
         format.html { redirect_to @strike, notice: 'Strike was successfully created.' }
         format.json { render 'show', status: :created, location: @strike }
       else
