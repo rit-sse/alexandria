@@ -1,7 +1,7 @@
 = "Hi #{@user.user_name},"
 \
 You have recieved a strike for the following reason:
-= @strike.message
+= @strike.other_info
 \. You currently have
 = pluralize(@user.strikes.count, 'strike')
 \. If you recieve

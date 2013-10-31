@@ -59,3 +59,8 @@ Role.create(name: 'patron')
 Role.create(name: 'distributor')
 Role.create(name: 'librarian')
 Role.create(name: 'technical admin')
+
+Role.create(message: 'Overdue Book')
+Role.create(message: 'Damaged Book')
+Role.create(message: 'Other')
+

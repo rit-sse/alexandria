@@ -3,7 +3,7 @@ require "spec_helper"
 describe StrikeMailer do
   let(:patron) { create(:patron) }
   let(:distributor) { create(:distributor) }
-  let(:strike) { Strike.create(patron_id: patron.id, distributor_id: distributor.id, message: 'Test Message') }
+  let(:strike) { Strike.create(patron_id: patron.id, distributor_id: distributor.id, other_info: 'Test Message') }
 
   shared_examples_for 'a strike mailer' do
     it 'renders the reciever email' do
@@ -25,7 +25,7 @@ describe StrikeMailer do
     end
 
     it 'assigns @strike' do
-      expect(mail.body.encoded).to match(strike.message)
+      expect(mail.body.encoded).to match(strike.other_info)
     end
   end
 
