@@ -1,12 +1,12 @@
 %p
-  %b User:
-  = @strike.user
+  %b Patron:
+  = @strike.patron.user_name
 %p
   %b Distributor:
-  = @strike.distributor
+  = @strike.distributor.user_name
 %p
   %b Message:
-  = @strike.other_info
+  = @strike.message
 
 = link_to 'Edit', edit_strike_path(@strike)
 \|

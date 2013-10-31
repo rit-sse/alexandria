@@ -28,6 +28,10 @@ class StrikesController < ApplicationController
   # POST /strikes.json
   def create
     @strike = Strike.new(strike_params)
+    User.all.each do |user|
+      @strike.distributor = user if user.barcode == params['distributor_barcode']
+      break unless @strike.distributor.nil?
+    end
     respond_to do |format|
       if @strike.save
         StrikeMailer.strike(@strike).deliver
@@ -79,6 +83,6 @@ class StrikesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def strike_params
-    params.require(:strike).permit(:other_info, :reason_id, :patron_id, :distributor_id)
+    params.require(:strike).permit(:other_info, :reason_id, :patron_id)
   end
 end
