@@ -1,0 +1,11 @@
+= "Hi #{@user.user_name},"
+\
+You have recieved a strike for the following reason:
+= @strike.message
+\. You currently have
+= pluralize(@user.strikes.count, 'strike')
+\. If you recieve
+= pluralize(Rails.configuration.strikes_for_ban, 'strike')
+, you will be banned from the system.
+\
+\- The Society of Software Engineers

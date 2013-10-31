@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   before_save :default_values
 
   def barcode
-    @barcode ||= Password.new(barcode_hash)
+    @barcode ||= Password.new(barcode_hash) unless barcode_hash.nil?
   end
 
   def barcode=(new_barcode)

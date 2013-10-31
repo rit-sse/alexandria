@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
         format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
         format.json { render 'show', status: :created, location: @reservation }
       else
-        format.html { render 'new' }
+        format.html { redirect_to request.referer, alert: @reservation.errors.messages[:user].try(:first) }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end

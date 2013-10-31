@@ -1,13 +1,13 @@
-.text-center
-  %h3 Checkout book
-%br
+
 = form_for(@checkout) do |f|
   -if @checkout.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@checkout.errors.count, "error")} prohibited this checkout from being saved:"
-      %ul
-        - @checkout.errors.full_messages.each do |msg|
-          %li= msg
+    .alert.alert-danger
+      - @checkout.errors.full_messages.each do |msg|
+        = msg
+        %br
+  .text-center
+    %h3 Checkout book
+  %br
   = f.text_field :book, name: 'isbn', placeholder: 'ISBN', value: @checkout.book.try(:isbn), class: 'form-control input-lg center-text'
   %br
   = f.password_field :distributor, name: 'distributor_barcode', placeholder: 'Distributor', class: 'form-control input-lg center-text'

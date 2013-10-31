@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe StrikesController do
   let(:librarian) { create(:librarian) }
+  let(:reason) { create(:reason) }
 
   before(:each) do
     sign_in librarian
@@ -33,7 +34,7 @@ describe StrikesController do
   # Strike. As you add validations to Strike, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { 'message' => 'MyString' }
+    { 'other_info' => 'MyString', 'reason_id' => reason.id, 'patron_id' => librarian.id, 'distributor_id' => librarian.id }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -119,8 +120,8 @@ describe StrikesController do
         # specifies that the Strike created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Strike.any_instance.should_receive(:update).with('message' => '')
-        put :update, { id: strike.to_param, strike: { 'message' => '' } }, valid_session
+        Strike.any_instance.should_receive(:update).with('other_info' => '')
+        put :update, { id: strike.to_param, strike: { 'other_info' => '' } }, valid_session
       end
 
       it 'assigns the requested strike as @strike' do

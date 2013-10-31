@@ -26,6 +26,7 @@ class Ability
 
       can :manage, Checkout, patron_id: user.id
       can :manage, Checkout, distributor_id: user.id
+      can :manage, Checkout, distributor_check_in_id: user.id
       can :manage, Strike, distributor_id: user.id
     elsif user.librarian?
       can :manage, :all

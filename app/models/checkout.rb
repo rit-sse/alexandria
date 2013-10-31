@@ -4,6 +4,7 @@ class Checkout < ActiveRecord::Base
 
   belongs_to :patron, class_name: 'User'
   belongs_to :distributor, class_name: 'User'
+  belongs_to :distributor_check_in, class_name: 'User'
   belongs_to :book
 
   delegate :title, to: :book
@@ -13,6 +14,7 @@ class Checkout < ActiveRecord::Base
   validate :unique_checkout, on: :create
   validate :restricted_book
   validate :is_a_distributor
+  validate :patron_not_banned
   validate :first_reservation, on: :create
 
   def default_values
@@ -36,27 +38,31 @@ class Checkout < ActiveRecord::Base
     unless book.nil?
       book_checkouts = Checkout.all_active.where(book_id: book.id)
       unless book_checkouts.empty?
-        errors.add(:book, 'Cannot checkout an already checked out book.')
+        errors.add(:book, 'is already checked out.')
       end
     end
   end
 
   def restricted_book
     if book.present? && book.restricted
-      errors.add(:book, 'Book is restricted can not check out.')
+      errors.add(:book, 'is restricted can not check out.')
     end
   end
 
   def is_a_distributor
-    unless distributor.distributor? or distributor.librarian?
-      errors.add(:distributor, 'User is not a distributor or librarian.')
+    unless !distributor.nil? and (distributor.distributor? or distributor.librarian?)
+      errors.add(:distributor, 'is not a distributor or librarian.')
     end
+  end
+
+  def patron_not_banned
+    errors.add(:patron, 'cannot checkout a book if banned') if patron.nil? or patron.banned
   end
 
   def first_reservation
     res = book.reservations.select{ |r| !r.fulfilled and !r.expired? }.sort!{|a,b| a.created_at <=> b.created_at }.first
     unless res.nil? or res.user == patron
-      errors.add(:patron, 'Someone has already reserved this book.')
+      errors.add(:someone, 'has already reserved this book.')
     end
   end
 
@@ -75,6 +81,7 @@ class Checkout < ActiveRecord::Base
       strike = Strike.new
       strike.patron = patron
       strike.distributor = distributor
+      strike.reason = Reason.find_by_message('Overdue book')
       strike.save
       CheckoutMailer.overdue_book(self).deliver
     end

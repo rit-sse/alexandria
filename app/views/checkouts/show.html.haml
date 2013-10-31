@@ -15,10 +15,16 @@
   %dl.dl-horizontal
     %dt Checked Out By
     %dd= @checkout.user_name
-    %dt Distributor
+    %dt Distributor Check Out
     %dd= @checkout.distributor.user_name
     %dt Date Checked Out
     %dd= @checkout.checked_out_at.strftime('%B %d, %Y')
+    %dt Distributor Checked In
+    %dd
+      - if @checkout.checked_in_at.nil?
+        Not checked in yet.
+      - else
+        = @checkout.distributor_check_in.user_name
     %dt Date Checked In
     %dd
       - if @checkout.checked_in_at.nil?

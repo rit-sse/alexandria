@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CheckoutMailer, solr: true do
   let(:user) { create(:user) }
-  let(:book) { Book.add_by_isbn('9780201767308') }
+  let(:book) { Book.create(isbn: '9780201767308', title: 'Enriching The Value Chain' ) }
   let(:checkout) do
     Checkout.new(
                 checked_out_at: Date.today,
@@ -35,10 +35,10 @@ describe CheckoutMailer, solr: true do
     it_behaves_like 'a checkout mailer'
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('You have a book overdue.')
+      expect(mail.subject).to eq('You have a book overdue')
     end
 
-    it 'assigns @user' do
+    it 'contians the number of strikesi' do
       expect(mail.body.encoded).to match(/#{user.strikes.count}\s*strikes/)
     end
   end
@@ -49,7 +49,7 @@ describe CheckoutMailer, solr: true do
     it_behaves_like 'a checkout mailer'
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('You have a book due soon.')
+      expect(mail.subject).to eq('You have a book due soon')
     end
   end
 
@@ -59,7 +59,7 @@ describe CheckoutMailer, solr: true do
     it_behaves_like 'a checkout mailer'
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('You checked out a book.')
+      expect(mail.subject).to eq('You checked out a book' )
     end
   end
 end
