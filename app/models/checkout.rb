@@ -4,6 +4,7 @@ class Checkout < ActiveRecord::Base
 
   belongs_to :patron, class_name: 'User'
   belongs_to :distributor, class_name: 'User'
+  belongs_to :distributor_check_in, class_name: 'User'
   belongs_to :book
 
   delegate :title, to: :book
