@@ -18,3 +18,12 @@ test:
   pool: 5
   timeout: 5000
 
+production:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: alexandria_production
+  pool: 5
+  min_messages: warning #magic sauce
+  username: deploy
+  password: ''
