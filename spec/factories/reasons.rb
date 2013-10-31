@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :reason do
-    message "MyString"
+    message 'Overdue book'
   end
 end

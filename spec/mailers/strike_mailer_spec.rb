@@ -3,7 +3,8 @@ require "spec_helper"
 describe StrikeMailer do
   let(:patron) { create(:patron) }
   let(:distributor) { create(:distributor) }
-  let(:strike) { Strike.create(patron_id: patron.id, distributor_id: distributor.id, other_info: 'Test Message') }
+  let(:reason) { create(:reason) }
+  let(:strike) { Strike.create(reason_id: reason.id, patron_id: patron.id, distributor_id: distributor.id, other_info: 'Test Message') }
 
   shared_examples_for 'a strike mailer' do
     it 'renders the reciever email' do

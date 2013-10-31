@@ -12,6 +12,7 @@ describe Checkout, solr: true do
     @checkout.patron = patron
     @checkout.distributor = distributor
     @checkout.save
+    create(:reason)
   end
 
   it 'can be created' do

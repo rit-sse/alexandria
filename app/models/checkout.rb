@@ -80,6 +80,7 @@ class Checkout < ActiveRecord::Base
       strike = Strike.new
       strike.patron = patron
       strike.distributor = distributor
+      strike.reason = Reason.find_by_message('Overdue book')
       strike.save
       CheckoutMailer.overdue_book(self).deliver
     end

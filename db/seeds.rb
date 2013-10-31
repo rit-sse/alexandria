@@ -60,7 +60,7 @@ Role.create(name: 'distributor')
 Role.create(name: 'librarian')
 Role.create(name: 'technical admin')
 
-Role.create(message: 'Overdue Book')
-Role.create(message: 'Damaged Book')
-Role.create(message: 'Other')
+Reason.create(message: 'Overdue book')
+Reason.create(message: 'Damaged book')
+Reason.create(message: 'Other')
 
