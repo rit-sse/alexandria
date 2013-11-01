@@ -261,4 +261,56 @@ describe Ability do
       expect(patron.cannot?(:destroy, User)).to be_true
     end
   end
+
+  describe 'not logged in' do
+    let(:none) { Ability.new }
+
+    it 'can read authors' do
+      expect(none.can?(:show, Author)).to be_true
+      expect(none.can?(:index, Author)).to be_true
+      expect(none.cannot?(:create, Author)).to be_true
+      expect(none.cannot?(:update, Author)).to be_true
+      expect(none.cannot?(:destroy, Author)).to be_true
+    end
+    it 'can read books' do
+      expect(none.can?(:show, Book)).to be_true
+      expect(none.can?(:index, Book)).to be_true
+      expect(none.cannot?(:put_away, Book)).to be_true
+      expect(none.cannot?(:create, Book)).to be_true
+      expect(none.cannot?(:update, Book)).to be_true
+      expect(none.cannot?(:destroy, Book)).to be_true
+    end
+
+    it 'can read checkouts' do
+      expect(none.cannot?(:show, Checkout)).to be_true
+      expect(none.cannot?(:index, Checkout)).to be_true
+      expect(none.cannot?(:create, Checkout)).to be_true
+      expect(none.cannot?(:update, Checkout)).to be_true
+      expect(none.cannot?(:destroy, Checkout)).to be_true
+      expect(none.cannot?(:check_in, Checkout)).to be_true
+    end
+
+    it 'can manage reservations' do
+      expect(none.cannot?(:show, Reservation)).to be_true
+      expect(none.cannot?(:index, Reservation)).to be_true
+      expect(none.cannot?(:create, Reservation)).to be_true
+      expect(none.cannot?(:update, Reservation)).to be_true
+      expect(none.cannot?(:destroy, Reservation)).to be_true
+    end
+
+    it 'can manage strikes' do
+      expect(none.cannot?(:show, Strike)).to be_true
+      expect(none.cannot?(:index, Strike)).to be_true
+      expect(none.cannot?(:create, Strike)).to be_true
+      expect(none.cannot?(:update, Strike)).to be_true
+      expect(none.cannot?(:destroy, Strike)).to be_true
+    end
+    it 'can manage users' do
+      expect(none.cannot?(:show, User)).to be_true
+      expect(none.cannot?(:index, User)).to be_true
+      expect(none.cannot?(:create, User)).to be_true
+      expect(none.cannot?(:update, User)).to be_true
+      expect(none.cannot?(:destroy, User)).to be_true
+    end
+  end
 end

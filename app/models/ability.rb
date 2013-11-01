@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user=nil)
     user ||= User.new
     if user.patron?
       can :read, Author
