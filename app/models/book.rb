@@ -15,7 +15,7 @@ class Book < ActiveRecord::Base
   validates :isbn, :lcc, uniqueness: true, allow_blank: true
 
   def default_values
-    restricted ||= false
+    self.restricted ||= false
   end
 
   def as_json(options = {})
