@@ -16,6 +16,8 @@ class Ability
       can :read, Author
       can :read, Book
 
+      can :put_away, Book
+
       can :show, Reservation, user_id: user.id
       can :show, Strike, patron_id: user.id
       can :show, User, id: user.id
@@ -24,10 +26,12 @@ class Ability
       can :create, Checkout
       can :create, Strike
 
-      can :manage, Checkout, patron_id: user.id
-      can :manage, Checkout, distributor_id: user.id
-      can :manage, Checkout, distributor_check_in_id: user.id
-      can :manage, Strike, distributor_id: user.id
+      can :check_in, Checkout
+
+      can :show, Checkout, patron_id: user.id
+      can :show, Checkout, distributor_id: user.id
+      can :show, Checkout, distributor_check_in_id: user.id
+      can :show, Strike, distributor_id: user.id
     elsif user.librarian?
       can :manage, :all
     elsif user.technical_admin?
