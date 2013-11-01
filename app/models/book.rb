@@ -1,6 +1,7 @@
 # Book model
 class Book < ActiveRecord::Base
   include Lccable
+  after_initialize :default_values
   has_many :reservations
   has_many :author_books
   has_many :authors, through: :author_books
@@ -12,6 +13,10 @@ class Book < ActiveRecord::Base
   end
 
   validates :isbn, :lcc, uniqueness: true, allow_blank: true
+
+  def default_values
+    restricted ||= false
+  end
 
   def as_json(options = {})
     json = super(options)
