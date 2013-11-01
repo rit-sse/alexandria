@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Ability do
   let(:book) { create(:book) }
-  let(:patron) { Ability.new(create(:patron)) }
   let(:none) { Ability.new }
 
   describe 'technical admin' do
@@ -129,7 +128,7 @@ describe Ability do
       expect(distributor.cannot?(:destroy, Book)).to be_true
     end
 
-    it 'can manage checkouts' do
+    it 'can create checkouts and see their own' do
       checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
       due_date: Date.new(2013, 2, 11))
       checkout.book = book
@@ -147,7 +146,7 @@ describe Ability do
       expect(distributor.can?(:check_in, Checkout)).to be_true
     end
 
-    it 'can manage reservations' do
+    it 'can create reservations and see their own' do
       reservation = Reservation.new
       reservation.book = book
 
@@ -162,7 +161,7 @@ describe Ability do
       expect(distributor.cannot?(:destroy, Reservation)).to be_true
     end
 
-    it 'can manage strikes' do
+    it 'can create strikes and view their own' do
       strike = Strike.new
 
       expect(distributor.cannot?(:show, strike)).to be_true
@@ -176,13 +175,90 @@ describe Ability do
       expect(distributor.cannot?(:update, Strike)).to be_true
       expect(distributor.cannot?(:destroy, Strike)).to be_true
     end
-    it 'can manage users' do
+    it 'can see own user' do
       expect(distributor.can?(:show, distributor_user)).to be_true
       expect(distributor.cannot?(:show, User.new)).to be_true
       expect(distributor.cannot?(:index, User)).to be_true
       expect(distributor.cannot?(:create, User)).to be_true
       expect(distributor.cannot?(:update, User)).to be_true
       expect(distributor.cannot?(:destroy, User)).to be_true
+    end
+  end
+
+  describe 'patron' do
+    let(:patron_user) { create(:patron) }
+    let(:patron) { Ability.new(patron_user) }
+
+    it 'can read authors' do
+      expect(patron.can?(:show, Author)).to be_true
+      expect(patron.can?(:index, Author)).to be_true
+      expect(patron.cannot?(:create, Author)).to be_true
+      expect(patron.cannot?(:update, Author)).to be_true
+      expect(patron.cannot?(:destroy, Author)).to be_true
+    end
+    it 'can read and put_away books' do
+      expect(patron.can?(:show, Book)).to be_true
+      expect(patron.can?(:index, Book)).to be_true
+      expect(patron.cannot?(:put_away, Book)).to be_true
+      expect(patron.cannot?(:create, Book)).to be_true
+      expect(patron.cannot?(:update, Book)).to be_true
+      expect(patron.cannot?(:destroy, Book)).to be_true
+    end
+
+    it 'can manage checkouts' do
+      checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
+      due_date: Date.new(2013, 2, 11))
+      checkout.book = book
+
+      expect(patron.cannot?(:show, checkout)).to be_true
+
+      checkout.patron = patron_user
+      checkout.distributor = patron_user
+
+      expect(patron.can?(:show, checkout)).to be_true
+      expect(patron.cannot?(:index, Checkout)).to be_true
+      expect(patron.cannot?(:create, Checkout)).to be_true
+      expect(patron.cannot?(:update, Checkout)).to be_true
+      expect(patron.cannot?(:destroy, Checkout)).to be_true
+      expect(patron.cannot?(:check_in, Checkout)).to be_true
+    end
+
+    it 'can manage reservations' do
+      reservation = Reservation.new
+      reservation.book = book
+
+      expect(patron.cannot?(:show, reservation)).to be_true
+
+      reservation.user = patron_user
+
+      expect(patron.can?(:show, reservation)).to be_true
+      expect(patron.cannot?(:index, Reservation)).to be_true
+      expect(patron.can?(:create, Reservation)).to be_true
+      expect(patron.cannot?(:update, Reservation)).to be_true
+      expect(patron.cannot?(:destroy, Reservation)).to be_true
+    end
+
+    it 'can manage strikes' do
+      strike = Strike.new
+
+      expect(patron.cannot?(:show, strike)).to be_true
+
+      strike.patron = patron_user
+      strike.distributor = patron_user
+
+      expect(patron.can?(:show, strike)).to be_true
+      expect(patron.cannot?(:index, Strike)).to be_true
+      expect(patron.cannot?(:create, Strike)).to be_true
+      expect(patron.cannot?(:update, Strike)).to be_true
+      expect(patron.cannot?(:destroy, Strike)).to be_true
+    end
+    it 'can manage users' do
+      expect(patron.can?(:show, patron_user)).to be_true
+      expect(patron.cannot?(:show, User.new)).to be_true
+      expect(patron.cannot?(:index, User)).to be_true
+      expect(patron.cannot?(:create, User)).to be_true
+      expect(patron.cannot?(:update, User)).to be_true
+      expect(patron.cannot?(:destroy, User)).to be_true
     end
   end
 end

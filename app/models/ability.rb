@@ -9,6 +9,7 @@ class Ability
 
       can :show, Checkout, patron_id: user.id
       can :show, Reservation, user_id: user.id
+      can :show, Strike, patron_id: user.id
       can :show, User, id: user.id
 
       can :create, Reservation
