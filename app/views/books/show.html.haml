@@ -22,7 +22,24 @@
         %p.text-warning Reserved
       - else
         %p.text-success Available
-
+    %div
+      - count = @rating
+      - 5.times do
+        - if count >= 1
+          %i.fa.fa-lg.fa-star.text-warning
+          - count -= 1
+        - elsif count >= 0.5
+          %i.fa.fa-lg.fa-star-half-o.text-warning
+          - count -= 0.5
+        - else
+          %i.fa.fa-lg.fa-star-o.text-warning
+    %em.text-muted
+      = @rating
+      |
+      = "#{@num_ratings} ratings"
+      %br
+      from
+      %a{href:'https://goodreads.com', target: '_blank'} Goodreads
     - if user_signed_in?
       .book-actions
         - if Reservation.has_reservation(@book, current_user)
@@ -37,6 +54,8 @@
               = f.hidden_field "book_id", value: @book.id
               = f.hidden_field "user_id", value: current_user.id
               = f.submit "Make Reservation", class: "btn btn-primary"
+        %div
+          = pluralize(@book.reservations.where(fulfilled: false).count, 'reservation')
   .col-md-10
     %dl.dl-horizontal
       %dt Authors

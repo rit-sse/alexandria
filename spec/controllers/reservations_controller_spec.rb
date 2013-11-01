@@ -20,11 +20,15 @@ require 'spec_helper'
 
 describe ReservationsController, solr: true do
 
-  let(:user) { create(:user) }
+  let(:librarian) { create(:librarian) }
   let(:book) { create(:book) }
 
+  before(:each) do
+    sign_in librarian
+  end
+
   after(:all) do
-    user.destroy
+    librarian.destroy
     book.destroy
   end
 
@@ -32,7 +36,7 @@ describe ReservationsController, solr: true do
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { user_id: user.id, book_id: book.id }
+    { user_id: librarian.id, book_id: book.id }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -105,7 +109,7 @@ describe ReservationsController, solr: true do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
         post :create, { reservation: { 'user' => 'invalid value' } }, valid_session
-        response.should render_template('new')
+        response.should redirect_to(request.referer)
       end
     end
   end
@@ -118,7 +122,7 @@ describe ReservationsController, solr: true do
         # specifies that the Reservation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Reservation.any_instance.should_receive(:update).with({ 'fulfilled' => true })
+        Reservation.any_instance.should_receive(:update).with('fulfilled' => true)
         put :update, { id: reservation.to_param, reservation: { 'fulfilled' => true } }, valid_session
       end
 

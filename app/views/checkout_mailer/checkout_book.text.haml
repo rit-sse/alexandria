@@ -1,0 +1,10 @@
+="Hi #{@user.user_name},"
+\
+You just checked out the book,
+= @book.title
+\. This book is due
+= @checkout.due_date.strftime('%B %d, %Y')
+\. If you will need the book for longer, come back and renew the book before
+that date. You will be given a strike if the book isn't returned by that date.
+\
+\- The Society of Software Engineers

@@ -17,5 +17,8 @@
       = f.label :role
       = f.select :role_id, options_for_select(Role.all.collect { |u| [u.name, u.id] }, user.role.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
     .form-group
+      = f.label :barcode
+      = f.password_field :barcode, name: 'barcode', class: 'form-control'
+    .form-group
       = f.submit 'Save', class: 'btn btn-primary'
       = link_to 'Back', back_path, class: 'btn btn-default'

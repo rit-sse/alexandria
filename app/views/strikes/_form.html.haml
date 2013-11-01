@@ -1,19 +1,23 @@
-= form_for strike do |f|
-  -if strike.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(strike.errors.count, "error")} prohibited this strike from being saved:"
-      %ul
-        - strike.errors.full_messages.each do |msg|
-          %li= msg
+.well.well-small
+  = form_for strike do |f|
+    -if strike.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(strike.errors.count, "error")} prohibited this strike from being saved:"
+        %ul
+          - strike.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :distributor
-    = f.text_field :distributor
-  .field
-    = f.label :message
-    = f.text_field :message
-  .actions
-    = f.submit 'Save'
+    .form-group
+      = f.label :patron
+      = f.select :patron_id, options_for_select(User.all.collect { |u| [u.user_name, u.id] }, strike.patron.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :distributor_barcode
+      = f.password_field :distributor_id, name: 'distributor_barcode', class: 'form-control'
+    .form-group
+      = f.label :reason
+      = f.select :reason_id, options_for_select(Reason.all.collect { |r| [r.message, r.id] }, strike.reason.try(:id)), { include_blank: true }, { class: 'chosen-select form-control'}
+    .form-group
+      = f.label :other_info
+      = f.text_field :other_info, class: 'form-control'
+    .actions
+      = f.submit 'Save', class: 'btn btn-primary'

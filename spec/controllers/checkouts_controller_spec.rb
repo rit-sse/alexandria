@@ -20,21 +20,34 @@ require 'spec_helper'
 
 describe CheckoutsController, solr: true do
 
-  let(:user) { create(:user) }
+  let(:patron) { create(:patron) }
+  let(:distributor) { create(:distributor) }
+  let(:librarian) { create(:librarian) }
   let(:book) { create(:book) }
-  let(:reservation) { Reservation.create(user_id: user.id, book_id: book.id) }
+  let(:reservation) { Reservation.create(user_id: patron.id, book_id: book.id) }
 
+  before(:each) do
+    sign_in librarian
+    patron.barcode = '5555'
+    distributor.barcode = '6666'
+    librarian.barcode = '7777'
+    patron.save
+    distributor.save
+    librarian.save
+  end
   after(:all) do
-    user.destroy
+    patron.destroy
+    distributor.destroy
     book.destroy
     reservation.destroy
+    librarian.destroy
   end
 
   # This should return the minimal set of attributes required to create a valid
   # Checkout. As you add validations to Checkout, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { patron_id: user.id, book_id: book.id }
+    { patron_id: patron.id, book_id: book.id, distributor_id: distributor.id }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -79,19 +92,19 @@ describe CheckoutsController, solr: true do
     describe 'with valid params' do
       it 'creates a new Checkout' do
         expect do
-          post :create, { checkout: valid_attributes }, valid_session
+          post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
         end.to change(Checkout, :count).by(1)
       end
 
       it 'assigns a newly created checkout as @checkout' do
-        post :create, { checkout: valid_attributes }, valid_session
+        post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
         assigns(:checkout).should be_a(Checkout)
         assigns(:checkout).should be_persisted
       end
 
       it 'redirects to the created checkout' do
-        post :create, { checkout: valid_attributes }, valid_session
-        response.should redirect_to(request.referer)
+        post :create, { patron_barcode: '5555', distributor_barcode: '6666', isbn: book.isbn, checkout: valid_attributes }, valid_session
+        response.should redirect_to(Checkout.last)
       end
     end
 
@@ -121,7 +134,7 @@ describe CheckoutsController, solr: true do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         date = DateTime.new
-        Checkout.any_instance.should_receive(:update).with({ 'checked_out_at' => date })
+        Checkout.any_instance.should_receive(:update).with('checked_out_at' => date)
         put :update, { id: checkout.to_param, checkout: { 'checked_out_at' => date } }, valid_session
       end
 

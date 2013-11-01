@@ -19,14 +19,14 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BooksController, solr: true do
-  let(:user) { create(:user) }
+  let(:librarian) { create(:librarian) }
 
   before(:each) do
-    sign_in user
+    sign_in librarian
   end
 
   after(:all) do
-    user.destroy
+    librarian.destroy
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -127,7 +127,7 @@ describe BooksController, solr: true do
         # specifies that the Book created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Book.any_instance.should_receive(:update).with({ 'isbn' => 'MyString' })
+        Book.any_instance.should_receive(:update).with('isbn' => 'MyString')
         put :update, { id: book.to_param, book: { authors: [], 'isbn' => 'MyString' } }, valid_session
       end
 

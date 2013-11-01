@@ -1,5 +1,7 @@
 # Controller for the authors
 class AuthorsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   # GET /authors

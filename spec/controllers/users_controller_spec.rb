@@ -19,7 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe UsersController do
+  let(:librarian) { create(:librarian) }
 
+  before(:each) do
+    sign_in librarian
+  end
+
+  after(:each) do
+    librarian.destroy
+  end
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
@@ -38,7 +46,7 @@ describe UsersController do
     it 'assigns all users as @users' do
       user = User.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:users).should eq([user])
+      assigns(:users).should eq([librarian, user])
     end
   end
 
@@ -110,7 +118,7 @@ describe UsersController do
         # specifies that the User created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        User.any_instance.should_receive(:update).with({ 'user_name' => 'MyString' })
+        User.any_instance.should_receive(:update).with('user_name' => 'MyString')
         put :update, { id: user.to_param, user: { 'user_name' => 'MyString' } }, valid_session
       end
 

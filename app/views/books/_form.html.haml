@@ -11,8 +11,14 @@
       = f.label :isbn
       = f.text_field :isbn, class: 'form-control'
     .form-group
+      = f.label :lcc
+      = f.text_field :lcc, class: 'form-control'
+    .form-group
       = f.label :title
       = f.text_field :title, class: 'form-control'
+    .form-group
+      = f.label :subtitle
+      = f.text_field :subtitle, class: 'form-control'
     .form-group
       = f.label :authors
       = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
@@ -20,8 +26,11 @@
       = f.label :publish_date
       .input-group.date.datepicker
         %span.input-group-addon
-          %i.icon-calendar
+          %i.fa.fa-calendar
         = f.text_field :publish_date, class: 'form-control'
+    .form-group
+      = f.label :restricted
+      = f.check_box :restricted
     .actions
       = f.submit 'Save', class: 'btn btn-primary'
       = link_to 'Back', book_path(book), class: 'btn btn-default'

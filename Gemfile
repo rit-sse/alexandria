@@ -16,9 +16,6 @@ gem 'sass-rails',   '~> 4.0.0'
 gem "compass-rails", "~> 2.0.alpha.0"
 gem 'bootstrap-sass-rails', '~> 3.0.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 gem 'uglifier', '>= 1.0.3'
 gem 'handlebars_assets'
 
@@ -35,10 +32,6 @@ end
 
 # Test-related gems
 group :development, :test do
-  gem 'therubyracer'
-  gem 'libv8', '~> 3.11.8'
-
-
   gem 'rspec'
   gem 'coveralls', require: false
   gem 'rspec-rails'
@@ -47,7 +40,7 @@ group :development, :test do
   gem 'database_cleaner'
 
   #for search
-  gem 'sunspot_solr', '~> 2.0.0'
+  gem 'sunspot_solr', '2.0.0'
 
   # Make error checking/viewing less horrible
   gem 'better_errors'
@@ -65,7 +58,7 @@ gem 'twitter-typeahead-rails'
 gem "haml-rails"
 
 #for search
-gem 'sunspot_rails'
+gem 'sunspot_rails', '~> 2.0.0'
 gem 'sunspot-rails-tester'
 
 #for authentication
@@ -83,7 +76,7 @@ gem 'marc'
 gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.0'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
@@ -97,8 +90,12 @@ gem 'people', '~> 0.2'
 gem 'chosen-rails'
 gem 'font-awesome-rails'
 
+gem 'goodreads'
+
+gem 'cancan'
+
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'

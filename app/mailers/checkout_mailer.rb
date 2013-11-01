@@ -6,13 +6,20 @@ class CheckoutMailer < ActionMailer::Base
     @user = checkout.patron
     @book = checkout.book
     @checkout = checkout
-    mail(to: @user.email, subject: 'You have a book due soon.')
+    mail(to: @user.email, subject: 'You have a book due soon')
   end
 
   def overdue_book(checkout)
     @user = checkout.patron
     @book = checkout.book
     @checkout = checkout
-    mail(to: @user.email, subject: 'You have a book overdue.')
+    mail(to: @user.email, subject: 'You have a book overdue')
+  end
+
+  def checkout_book(checkout)
+    @user = checkout.patron
+    @book = checkout.book
+    @checkout = checkout
+    mail(to: @user.email, subject: 'You checked out a book')
   end
 end

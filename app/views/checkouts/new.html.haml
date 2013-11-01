@@ -1,3 +1,18 @@
-%h1 New checkout
 
-= render 'form', checkout: @checkout, back_path: checkouts_path
+= form_for(@checkout) do |f|
+  -if @checkout.errors.any?
+    .alert.alert-danger
+      - @checkout.errors.full_messages.each do |msg|
+        = msg
+        %br
+  .text-center
+    %h3 Checkout book
+  %br
+  = f.text_field :book, name: 'isbn', placeholder: 'ISBN', value: @checkout.book.try(:isbn), class: 'form-control input-lg center-text'
+  %br
+  = f.password_field :distributor, name: 'distributor_barcode', placeholder: 'Distributor', class: 'form-control input-lg center-text'
+  %br
+  = f.password_field :patron, name: 'patron_barcode', placeholder: 'Patron', class: 'form-control input-lg center-text'
+  %br
+  %div
+    = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'

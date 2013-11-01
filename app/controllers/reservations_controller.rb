@@ -1,5 +1,7 @@
 # Reservations controller
 class ReservationsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations
@@ -32,7 +34,7 @@ class ReservationsController < ApplicationController
         format.html { redirect_to request.referer, notice: 'Reservation was successfully created.' }
         format.json { render 'show', status: :created, location: @reservation }
       else
-        format.html { render 'new' }
+        format.html { redirect_to request.referer, alert: @reservation.errors.messages[:user].try(:first) }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end

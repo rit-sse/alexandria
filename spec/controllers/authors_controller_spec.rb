@@ -19,7 +19,15 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe AuthorsController do
+  let(:librarian) { create(:librarian) }
 
+  before(:each) do
+    sign_in librarian
+  end
+
+  after(:each) do
+    librarian.destroy
+  end
   # This should return the minimal set of attributes required to create a valid
   # Author. As you add validations to Author, be sure to
   # update the return value of this method accordingly.
@@ -110,7 +118,7 @@ describe AuthorsController do
         # specifies that the Author created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Author.any_instance.should_receive(:update).with({ 'first_name' => 'MyString' })
+        Author.any_instance.should_receive(:update).with('first_name' => 'MyString')
         put :update, { id: author.to_param, author: { 'first_name' => 'MyString' } }, valid_session
       end
 

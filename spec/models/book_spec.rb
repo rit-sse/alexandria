@@ -32,7 +32,10 @@ describe Book, solr: true do
   it 'can be checked out' do
     book = create(:book)
     expect(book.checked_out?).to be_false
-    Checkout.create(checked_out_at: DateTime.now, book: book)
+    checkout = Checkout.new(checked_out_at: DateTime.now, book: book)
+    checkout.patron = create(:patron)
+    checkout.distributor = create(:distributor)
+    checkout.save
     expect(book.checked_out?).to be_true
   end
 

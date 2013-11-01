@@ -1,5 +1,7 @@
 # Controller for books
 class BooksController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :put_away]
   before_filter :authenticate!
   skip_before_filter :authenticate!, only: [:index, :show, :create]
@@ -20,6 +22,12 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    goodreads = Goodreads.new.book_by_isbn(@book.isbn)
+    @rating = goodreads.average_rating.to_f
+    @num_ratings = goodreads.work.ratings_count
+  rescue
+    @rating = 0.0
+    @ratings_count = 0
   end
 
   # GET /books/new
@@ -36,6 +44,7 @@ class BooksController < ApplicationController
     left_right = Lccable.where_to_place(@book)
     @left = left_right[:left]
     @right = left_right[:right]
+    @shelf = left_right[:shelf]
   end
 
   # POST /books
@@ -57,7 +66,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    @book.authors = params[:book][:authors].delete_if{|x| x == ''}.collect{ |i| Author.find(i)}
+    @book.authors = params[:book][:authors].delete_if { |x| x == '' }.map { |i| Author.find(i) }
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -88,7 +97,7 @@ class BooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
-    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle)
+    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle, :restricted, :lcc)
   end
 
   def search

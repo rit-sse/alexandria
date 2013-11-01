@@ -1,0 +1,18 @@
+!!! 5
+%html
+  %head
+    %meta{content: 'text/html; charset=UTF-8', :'http-equiv' => 'Content-Type'}
+  %body
+    %p
+      = "Hi #{@user.user_name},"
+      %br
+      You just checked out the book,
+      %b
+        = @book.title
+      \. This book is due
+      %b
+        = @checkout.due_date.strftime('%B %d, %Y')
+      \. If you will need the book for longer, come back and renew the book before
+      that date. You will be given a strike if the book isn't returned by that date.
+      %br
+      \- The Society of Software Engineers

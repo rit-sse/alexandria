@@ -2,7 +2,7 @@ require 'people'
 
 # Author model class
 class Author < ActiveRecord::Base
-  @@parser = People::NameParser.new
+  PARSER = People::NameParser.new
 
   after_initialize :default_values
   # Unique author validator class
@@ -69,7 +69,7 @@ class Author < ActiveRecord::Base
   # Parses the names into expected portions. All methods that parse
   # a name for Author use this.
   def self.parse_name(name)
-    parsed_name = @@parser.parse name
+    parsed_name = PARSER.parse name
 
     {
       first_name:     parsed_name[:first],

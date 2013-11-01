@@ -1,15 +1,35 @@
-%p
-  %b User:
-  = @checkout.user_name
-%p
-  %b Book:
-  = @checkout.title
-%p
-  %b Checked out at:
-  = @checkout.checked_out_at
-%p
-  %b Checked in at:
-  = @checkout.checked_in_at
-%p
-  %b Due Date:
-  = @checkout.due_date
+.page-header
+  %h1
+    Checkout for
+    = @checkout.title
+
+.row
+  - if @checkout.book.google_book_data.img_small != ""
+    %div
+      %a{href: book_path(@checkout.book)}
+        %img.center{src: @checkout.book.google_book_data.img_small, height: '250px;'}
+  -else
+    %a{href: book_path(@checkout.book)}
+      .blank-thumbnail-large.center
+.row
+  %dl.dl-horizontal
+    %dt Checked Out By
+    %dd= @checkout.user_name
+    %dt Distributor Check Out
+    %dd= @checkout.distributor.user_name
+    %dt Date Checked Out
+    %dd= @checkout.checked_out_at.strftime('%B %d, %Y')
+    %dt Distributor Checked In
+    %dd
+      - if @checkout.checked_in_at.nil?
+        Not checked in yet.
+      - else
+        = @checkout.distributor_check_in.user_name
+    %dt Date Checked In
+    %dd
+      - if @checkout.checked_in_at.nil?
+        Not checked in yet.
+      - else
+        = @checkout.checked_in_at.strftime('%B %d, %Y')
+    %dt Due Date
+    %dd= @checkout.due_date.strftime('%B %d, %Y')

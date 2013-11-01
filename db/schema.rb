@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009165951) do
+ActiveRecord::Schema.define(version: 20131031190533) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131009165951) do
     t.datetime "updated_at"
     t.string   "subtitle"
     t.string   "lcc"
+    t.boolean  "restricted"
   end
 
   create_table "checkouts", force: true do |t|
@@ -50,9 +51,11 @@ ActiveRecord::Schema.define(version: 20131009165951) do
     t.integer  "distributor_id"
     t.integer  "book_id"
     t.datetime "due_date"
+    t.integer  "distributor_check_in_id"
   end
 
   add_index "checkouts", ["book_id"], name: "index_checkouts_on_book_id"
+  add_index "checkouts", ["distributor_check_in_id"], name: "index_checkouts_on_distributor_check_in_id"
   add_index "checkouts", ["distributor_id"], name: "index_checkouts_on_distributor_id"
   add_index "checkouts", ["patron_id"], name: "index_checkouts_on_patron_id"
 
@@ -64,6 +67,12 @@ ActiveRecord::Schema.define(version: 20131009165951) do
     t.string   "img_large"
     t.string   "img_medium"
     t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reasons", force: true do |t|
+    t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -88,15 +97,17 @@ ActiveRecord::Schema.define(version: 20131009165951) do
   end
 
   create_table "strikes", force: true do |t|
-    t.string   "message"
+    t.string   "other_info"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "patron_id"
     t.integer  "distributor_id"
+    t.integer  "reason_id"
   end
 
   add_index "strikes", ["distributor_id"], name: "index_strikes_on_distributor_id"
   add_index "strikes", ["patron_id"], name: "index_strikes_on_patron_id"
+  add_index "strikes", ["reason_id"], name: "index_strikes_on_reason_id"
 
   create_table "users", force: true do |t|
     t.string   "user_name"
@@ -114,6 +125,7 @@ ActiveRecord::Schema.define(version: 20131009165951) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "role_id"
+    t.string   "barcode_hash"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
