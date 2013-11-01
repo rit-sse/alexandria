@@ -12,7 +12,8 @@ class Book < ActiveRecord::Base
     text :title, :isbn, :authors
   end
 
-  validates :isbn, :lcc, uniqueness: true, allow_blank: true
+  validates :lcc, uniqueness: true, allow_blank: true
+  validates :isbn, presence: true
 
   def default_values
     self.restricted ||= false

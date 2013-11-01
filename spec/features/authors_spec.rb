@@ -1,6 +1,10 @@
 require 'spec_helper'
+require 'feature_helper'
 
 feature 'author_management' do
+  before do
+    login
+  end
   scenario 'Creates a new author' do
     visit '/authors/new'
 
