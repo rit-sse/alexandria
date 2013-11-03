@@ -94,6 +94,8 @@ gem 'cancan'
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'dotenv-rails'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

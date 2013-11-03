@@ -31,17 +31,7 @@ Solr
 ----
 Solr is the search engine tool used in Alexandria. Once it is running, it will automatically index newly created book entries, but existing entries that are not indexed are ignored. Index entries manually by running `rake sunspot:reindex`.
 
-Authentication
+API Keys
 --------------
-If you need access to the google api keys, let kristen know and she'll give you access.
-Store them in the following environment variables.
-
-*OAuth:*<br>
-**ALEXANDRIA_KEY**: client id<br>
-**ALEXANDRIA_SECRET**: client secret
-
-*Google Books:*<br>
-**ALEXANDRIA_SIMPLE**: API key
-
-*Goodreads:*<br>
-**GOODREADS_KEY**: Goodreads API Keys
+If you need access to the api keys, let kristen know and she'll will send you the
+`.env` file. Store this in the app directory. Don't check it in.
