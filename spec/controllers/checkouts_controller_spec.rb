@@ -28,12 +28,6 @@ describe CheckoutsController, solr: true do
 
   before(:each) do
     sign_in librarian
-    patron.barcode = '5555'
-    distributor.barcode = '6666'
-    librarian.barcode = '7777'
-    patron.save
-    distributor.save
-    librarian.save
   end
   after(:all) do
     patron.destroy

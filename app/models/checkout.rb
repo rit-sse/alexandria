@@ -60,7 +60,7 @@ class Checkout < ActiveRecord::Base
   end
 
   def first_reservation
-    res = book.reservations.select{ |r| !r.fulfilled and !r.expired? }.sort!{|a,b| a.created_at <=> b.created_at }.first
+    res = book.reservations.select{ |r| !r.fulfilled and !r.expired? }.sort!{|a,b| a.created_at <=> b.created_at }.first if book.present?
     unless res.nil? or res.user == patron
       errors.add(:someone, 'has already reserved this book.')
     end

@@ -6,7 +6,7 @@
         = msg
         %br
   .text-center
-    %h3 Checkout book
+    %h3 Check out book
   %br
   = f.text_field :book, name: 'isbn', placeholder: 'ISBN', value: @checkout.book.try(:isbn), class: 'form-control input-lg center-text'
   %br
@@ -15,4 +15,4 @@
   = f.password_field :patron, name: 'patron_barcode', placeholder: 'Patron', class: 'form-control input-lg center-text'
   %br
   %div
-    = f.submit 'Checkout', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'
+    = f.submit 'Check out', class: 'btn btn-primary',style: 'display: block; margin: 0 auto;'
