@@ -79,18 +79,18 @@ describe StrikesController do
     describe 'with valid params' do
       it 'creates a new Strike' do
         expect do
-          post :create, { strike: valid_attributes }, valid_session
+          post :create, { strike: valid_attributes, distributor_barcode: '7777' }, valid_session
         end.to change(Strike, :count).by(1)
       end
 
       it 'assigns a newly created strike as @strike' do
-        post :create, { strike: valid_attributes }, valid_session
+        post :create, { strike: valid_attributes, distributor_barcode: '7777' }, valid_session
         assigns(:strike).should be_a(Strike)
         assigns(:strike).should be_persisted
       end
 
       it 'redirects to the created strike' do
-        post :create, { strike: valid_attributes }, valid_session
+        post :create, { strike: valid_attributes, distributor_barcode: '7777' }, valid_session
         response.should redirect_to(Strike.last)
       end
     end
