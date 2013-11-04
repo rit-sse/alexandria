@@ -5,8 +5,6 @@ gem 'rails', '4.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', git: 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
@@ -32,6 +30,7 @@ end
 
 # Test-related gems
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec'
   gem 'coveralls', require: false
   gem 'rspec-rails'
@@ -45,6 +44,7 @@ group :development, :test do
   # Make error checking/viewing less horrible
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'factory_girl_rails'
 end
 
 group :production do
@@ -71,8 +71,6 @@ gem 'googlebooks'
 gem 'zoom', git: 'https://github.com/bricestacey/ruby-zoom.git'
 gem 'marc'
 
-gem 'factory_girl_rails'
-
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.0'
 
@@ -96,8 +94,8 @@ gem 'unicorn'
 
 gem 'dotenv-rails'
 
-# Deploy with Capistrano
-# gem 'capistrano'
+gem 'sshkit'
+gem 'highline'
 
 # To use debugger
 # gem 'debugger'
