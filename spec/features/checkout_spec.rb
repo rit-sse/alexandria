@@ -4,7 +4,10 @@ require 'feature_helper'
 feature 'Managing Checkouts' do
 	before do
     login
-    Book.add_by_isbn('9780199273133')
+    book = Book.new(isbn: '9780199273133', title: 'Principles of Computer Hardware')
+    g = GoogleBookData.create
+    book.google_book_data = g
+    book.save
     create(:patron)
   end
   describe 'Check out' do
