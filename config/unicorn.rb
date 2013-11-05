@@ -21,7 +21,7 @@ worker_processes 4
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-APP_PATH = '/home/deploy/alexandria'
+APP_PATH = '/alexandria'
 
 working_directory  APP_PATH
 

@@ -27,3 +27,13 @@ production:
   min_messages: warning #magic sauce
   username: deploy
   password: ''
+
+staging:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  database: alexandria_staging
+  pool: 5
+  min_messages: warning #magic sauce
+  username: deploy
+  password: ''
