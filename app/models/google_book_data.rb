@@ -3,7 +3,7 @@ require 'googlebooks'
 class GoogleBookData < ActiveRecord::Base
   belongs_to :book
 
-  def self.book_from_isbn(isbn)
+  def self.book_from_isbn(results)
     GoogleBookData.new(
         description:   '',
         img_thumbnail: '',
@@ -11,7 +11,7 @@ class GoogleBookData < ActiveRecord::Base
         img_medium:    '',
         img_large:     '',
         preview_link:  ''
-      ).update_data(isbn)
+      ).set_google_book(results)
   end
 
   def update_data(isbn = book.isbn)
@@ -36,6 +36,7 @@ class GoogleBookData < ActiveRecord::Base
       self.img_large     = google_book.image_link(zoom: 3).to_s
       self.preview_link  = google_book.preview_link.to_s
     end
+    self
   end
 
   def self.update_all_null
