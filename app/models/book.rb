@@ -9,7 +9,10 @@ class Book < ActiveRecord::Base
   has_many :checkouts
 
   searchable do
-    text :title, :isbn, :authors
+    text :title, :isbn
+    text :authors do
+      authors.map{ |author| author.full_name }
+    end
   end
 
   validates :lcc, uniqueness: true, allow_blank: true
