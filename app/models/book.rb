@@ -17,6 +17,7 @@ class Book < ActiveRecord::Base
 
   def default_values
     self.restricted ||= false
+    self.lcc ||= ''
   end
 
   def as_json(options = {})
