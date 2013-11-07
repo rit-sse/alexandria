@@ -12,7 +12,7 @@
         %h3 On the left side
         %br
         - unless @left.nil?
-          - if @left.google_book_data.img_small != ""
+          - if @left.google_book_data.img_small.present?
             %div
               %a{href: book_path(@left)}
                 %img{src: @left.google_book_data.img_small, height: '250px;' }
@@ -30,7 +30,7 @@
         %h3 On the right side
         %br
         - unless @right.nil?
-          - if @right.google_book_data.img_small != ""
+          - if @right.google_book_data.img_small.present?
             %div
               %a{href: book_path(@left)}
                 %img{src: @right.google_book_data.img_small, height: '250px;'}

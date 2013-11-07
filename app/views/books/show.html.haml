@@ -9,7 +9,7 @@
 
 .row
   .col-md-2.text-center
-    - if @book.google_book_data.img_small != ""
+    - if @book.google_book_data.img_small.present?
       %img{src: @book.google_book_data.img_small, class: "img-polaroid" }
     -else
       .blank-thumbnail-large
@@ -46,14 +46,10 @@
           %a{href: "#", class:"btn btn-primary", disabled: true}
             Reserved
         - else
-          - if Checkout.checked_out(@book, current_user)
-            %a{href: "#", class:"btn btn-primary", disabled: true}
-              Checked Out
-          - else
-            = form_for :reservation, url: "/reservations" do |f|
-              = f.hidden_field "book_id", value: @book.id
-              = f.hidden_field "user_id", value: current_user.id
-              = f.submit "Make Reservation", class: "btn btn-primary"
+          = form_for :reservation, url: "/reservations" do |f|
+            = f.hidden_field "book_id", value: @book.id
+            = f.hidden_field "user_id", value: current_user.id
+            = f.submit "Make Reservation", class: "btn btn-primary"
         %div
           = pluralize(@book.reservations.where(fulfilled: false).count, 'reservation')
   .col-md-10

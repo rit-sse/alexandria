@@ -1,20 +1,35 @@
-%h3 Current Checkouts
-
-%table.table.table-striped
+.btn-group{style: "float: right;"}
+  %button.btn.btn-default{type: 'button', onclick: "location.href='#{checkouts_path}'"}
+    All Checkouts
+  %button.btn.btn-default{type: 'button', onclick: "location.href='#{checkouts_path(params: {active:true})}'"}
+    Active Checkouts
+  %button.btn.btn-default{type: 'button', onclick: "location.href='#{checkouts_path(params: {overdue:true})}'"}
+    Overdue
+%h3 Checkouts
+%table.table.table-striped.table-hover
   %tr
     %th id
     %th Patron
+    %th Distributor Check Out
+    %th Distributor Check In
     %th Book
     %th Checked Out Time
-    %th Actions
+    %th Checked In Time
+    %th Due Date
 
   - @checkouts.each do |checkout|
-    %tr
+    %tr{onclick: "location.href='#{checkout_path(checkout)}'"}
       %td= checkout.id
       %td= checkout.user_name
+      %td= checkout.distributor.user_name
+      -if checkout.distributor_check_in.present?
+        %td= checkout.distributor_check_in.user_name
+      -else
+        %td Not checked in yet
       %td= checkout.title
       %td= checkout.checked_out_at.strftime("%Y-%m-%d %l:%M %p")
-      %td
-        = form_for checkout, html: {class: "btn-form"} do |f|
-          = f.hidden_field "checked_in_at", value: "now"
-          = f.submit "Check In", class: "btn btn-primary"
+      -if checkout.checked_in_at.present?
+        %td= checkout.checked_in_at.strftime("%Y-%m-%d %l:%M %p")
+      -else
+        %td Not checked in yet
+      %td= checkout.due_date.strftime("%Y-%m-%d %l:%M %p")

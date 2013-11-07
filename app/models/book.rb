@@ -43,6 +43,7 @@ class Book < ActiveRecord::Base
     checkouts.each do |checkout|
       return checkout if checkout.checked_in_at.nil?
     end
+    nil
   end
 
   def reserved?
