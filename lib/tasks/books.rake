@@ -7,15 +7,29 @@ namespace :books do
 		puts "Updated:      #{updated.count}"
 	end
 
-  desc "Updates lcc for books without them"
-  task lcc: :environment do
-    books = Book.where('lcc = ?', '')
-    books.each do |book|
-      puts "Title: #{book.title}"
-      puts "ISBN: #{book.isbn}"
-      lcc = ask('LCC for this book is:')
-      book.lcc = lcc.strip
-      book.save
+  namespace :lcc do
+    desc "Updates lcc manually for books without them"
+    task manual: :environment do
+      books = Book.where('lcc = ?', '')
+      books.each do |book|
+        puts "Title: #{book.title}"
+        puts "ISBN: #{book.isbn}"
+        lcc = ask('LCC for this book is:')
+        book.lcc = lcc.strip
+        book.save
+      end
+    end
+
+    desc "Updates lcc from the database for books without them"
+    task auto: :environment do
+      books = Book.where('lcc = ?', '')
+      books.each do |book|
+        book.get_lcc
+        book.save
+      end
+      updated = books.select{ |i| i.lcc != '' }
+      puts "Investigate: #{books.count}"
+      puts "Updated:     #{updated.count}"
     end
   end
 end

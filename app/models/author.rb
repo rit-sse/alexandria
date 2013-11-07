@@ -73,7 +73,7 @@ class Author < ActiveRecord::Base
 
     {
       first_name:     parsed_name[:first],
-      middle_initial: parsed_name[:middle],
+      middle_initial: parsed_name[:middle][0] || '',
       last_name:      parsed_name[:last]
     }
   end
