@@ -95,7 +95,7 @@ class Book < ActiveRecord::Base
 
   def set_book(gb)
     title = gb.title.split(':')
-    self.title = title[0]
+    self.title = title[0].titleize
     self.subtitle = title[1] ? title[1].strip : ''
     self.publish_date = gb.published_date
 
