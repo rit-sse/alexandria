@@ -33,3 +33,6 @@
       -else
         %td Not checked in yet
       %td= checkout.due_date.strftime('%B %d, %Y %l:%M %p')
+
+.text-center
+  =will_paginate @checkouts

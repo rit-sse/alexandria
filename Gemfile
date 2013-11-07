@@ -97,6 +97,7 @@ gem 'sshkit'
 gem 'highline'
 
 gem 'has_scope'
+gem 'bootstrap-will_paginate'
 
 # To use debugger
 # gem 'debugger'

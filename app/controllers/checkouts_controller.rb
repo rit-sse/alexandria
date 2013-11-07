@@ -13,6 +13,7 @@ class CheckoutsController < ApplicationController
   def index
     scope = apply_scopes(Checkout)
     @checkouts = scope.respond_to?(:to_a) ? scope.to_a : scope.all
+    @checkouts = @checkouts.paginate(page: params['page'])
   end
 
   # GET /checkouts/1
