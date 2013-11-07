@@ -1,4 +1,4 @@
-.btn-group{style: "float: right;"}
+.btn-group.pull-right
   %button.btn.btn-default{type: 'button', onclick: "location.href='#{checkouts_path}'"}
     All Checkouts
   %button.btn.btn-default{type: 'button', onclick: "location.href='#{checkouts_path(params: {active:true})}'"}
@@ -27,9 +27,9 @@
       -else
         %td Not checked in yet
       %td= checkout.title
-      %td= checkout.checked_out_at.strftime("%Y-%m-%d %l:%M %p")
+      %td= checkout.checked_out_at.strftime('%B %d, %Y %l:%M %p')
       -if checkout.checked_in_at.present?
-        %td= checkout.checked_in_at.strftime("%Y-%m-%d %l:%M %p")
+        %td= checkout.checked_in_at.strftime('%B %d, %Y %l:%M %p')
       -else
         %td Not checked in yet
-      %td= checkout.due_date.strftime("%Y-%m-%d %l:%M %p")
+      %td= checkout.due_date.strftime('%B %d, %Y %l:%M %p')

@@ -1,5 +1,9 @@
 # Reservation model
 class Reservation < ActiveRecord::Base
+  scope :active, -> { all.select{ |x| not x.fulfilled and not x.expired? } }
+  scope :patron, -> patron { where(user_id: patron) }
+  scope :book, -> book { where(book_id: book) }
+
   after_initialize :default_values
   belongs_to :user
   belongs_to :book
