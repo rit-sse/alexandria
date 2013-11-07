@@ -62,7 +62,11 @@ class Book < ActiveRecord::Base
       checksum = isbn13_checksum_digit("978#{isbn.chop}")
       isbn = "978#{isbn.chop}#{checksum}"
     end
-    results =  GoogleBooks.search("isbn:#{isbn}")
+    if ENV['ALEXANDRIA_SIMPLE'].blank?
+      results = GoogleBooks.search("isbn:#{isbn}")
+    else
+      results = GoogleBooks.search("isbn:#{isbn}", { api_key: ENV['ALEXANDRIA_SIMPLE'] })
+    end
     book = Book.new(isbn: isbn)
     book.get_lcc
     gbook = GoogleBookData.new
