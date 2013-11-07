@@ -6,7 +6,7 @@
 
 %h3 Current Reservations
 
-%table.table.table-striped
+%table.table.table-striped.table-hover
   %tr
     %th id
     %th User
@@ -16,7 +16,7 @@
     %th Expires on
 
   - @reservations.each do |reservation|
-    %tr
+    %tr{onclick: "location.href='#{reservation_path(reservation)}'"}
       %td= reservation.id
       %td
         = reservation.user_name
