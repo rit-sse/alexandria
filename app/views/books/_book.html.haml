@@ -1,7 +1,7 @@
 .book-block
   .row
     .col-md-1
-      - if book.google_book_data.img_thumbnail != ''
+      - if book.google_book_data.img_thumbnail.present?
         = link_to image_tag(book.google_book_data.img_thumbnail), book
       - else
         = link_to "", book, class: "blank-thumbnail"

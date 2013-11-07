@@ -1,5 +1,11 @@
 # Checkout model
 class Checkout < ActiveRecord::Base
+
+  scope :active, ->  { where(checked_in_at: nil) }
+  scope :patron, -> patron { where(patron_id: patron) }
+  scope :book, -> book { where(book_id: book) }
+  scope :overdue, -> { all.select{ |x| x.overdue? } }
+
   after_initialize :default_values
 
   belongs_to :patron, class_name: 'User'

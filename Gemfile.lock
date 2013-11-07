@@ -125,6 +125,7 @@ GEM
       execjs (>= 1.2.9)
       sprockets (>= 2.0.3)
       tilt
+    has_scope (0.5.1)
     hashie (2.0.5)
     highline (1.6.20)
     hike (1.2.3)
@@ -327,6 +328,7 @@ DEPENDENCIES
   googlebooks
   haml-rails
   handlebars_assets
+  has_scope
   highline
   jbuilder
   jquery-rails
@@ -345,7 +347,6 @@ DEPENDENCIES
   sshkit
   sunspot-rails-tester
   sunspot_rails (~> 2.0.0)
-  sunspot_solr (= 2.0.0)
   turbolinks
   twitter-typeahead-rails
   uglifier (>= 1.0.3)

@@ -1,26 +1,30 @@
+.btn-group.pull-right
+  %button.btn.btn-default{type: 'button', onclick: "location.href='#{reservations_path}'"}
+    All Reservations
+  %button.btn.btn-default{type: 'button', onclick: "location.href='#{reservations_path(params: {active:true})}'"}
+    Active Reservations
+
 %h3 Current Reservations
 
-%table.table.table-striped
+%table.table.table-striped.table-hover
   %tr
     %th id
     %th User
     %th Book
-    %th Actions
+    %th Reserved on
+    %th Fulfilled
+    %th Expires on
 
   - @reservations.each do |reservation|
-    %tr
+    %tr{onclick: "location.href='#{reservation_path(reservation)}'"}
       %td= reservation.id
       %td
         = reservation.user_name
       %td
         = reservation.title
       %td
-        = form_for :checkout, url: "/checkouts", html: {class: "btn-form"} do |f|
-          = f.hidden_field "book_id", value: reservation.book.id
-          = f.hidden_field "patron_id", value: reservation.user.id
-          - if reservation.book.checked_out?
-            = f.submit "Check Out", class: "btn btn-success", disabled:true
-          - else
-            = f.submit "Check Out", class: "btn btn-success"
-
-        = link_to "Delete", reservation, method: :delete, class: "btn btn-danger"
+        = reservation.reserve_at.strftime('%B %d, %Y %l:%M %p')
+      %td
+        = reservation.fulfilled
+      %td
+        = reservation.expires_at.strftime('%B %d, %Y %l:%M %p')

@@ -9,7 +9,10 @@ class Book < ActiveRecord::Base
   has_many :checkouts
 
   searchable do
-    text :title, :isbn, :authors
+    text :title, :isbn
+    text :authors do
+      authors.map{ |author| author.full_name }
+    end
   end
 
   validates :lcc, uniqueness: true, allow_blank: true
@@ -17,6 +20,7 @@ class Book < ActiveRecord::Base
 
   def default_values
     self.restricted ||= false
+    self.lcc ||= ''
   end
 
   def as_json(options = {})
@@ -39,6 +43,7 @@ class Book < ActiveRecord::Base
     checkouts.each do |checkout|
       return checkout if checkout.checked_in_at.nil?
     end
+    nil
   end
 
   def reserved?
@@ -52,16 +57,40 @@ class Book < ActiveRecord::Base
   end
 
   def self.add_by_isbn(isbn)
-    results =  GoogleBooks.search("isbn:#{isbn}")
+    isbn = "0#{isbn}" if isbn.size == 9
+    if isbn.size == 10
+      checksum = isbn13_checksum_digit("978#{isbn.chop}")
+      isbn = "978#{isbn.chop}#{checksum}"
+    end
+    if ENV['ALEXANDRIA_SIMPLE'].blank?
+      results = GoogleBooks.search("isbn:#{isbn}")
+    else
+      results = GoogleBooks.search("isbn:#{isbn}", { api_key: ENV['ALEXANDRIA_SIMPLE'] })
+    end
     book = Book.new(isbn: isbn)
+    book.get_lcc
+    gbook = GoogleBookData.new
     if results.total_items > 0
       book.set_book(results.first)
-      gbook = GoogleBookData.book_from_isbn(book.isbn)
-      gbook.book = book
-      gbook.save
+      gbook = GoogleBookData.book_from_isbn(results)
     end
+    gbook.book = book
+    gbook.save
     book.save
     book
+  end
+
+  def self.isbn_checksum(isbn_string)
+    digits = isbn_string.split(//).map(&:to_i)
+    transformed_digits = digits.each_with_index.map do |digit, digit_index|
+      digit_index.modulo(2).zero? ? digit : digit*3
+    end
+    sum = transformed_digits.reduce(:+)
+  end
+
+  def self.isbn13_checksum_digit(isbn12)
+    checksum = isbn_checksum(isbn12)
+    10 - checksum.modulo(10)
   end
 
   def set_book(gb)
@@ -69,7 +98,6 @@ class Book < ActiveRecord::Base
     self.title = title[0]
     self.subtitle = title[1] ? title[1].strip : ''
     self.publish_date = gb.published_date
-    get_lcc
 
     author = gb.authors
     author ||= ''
