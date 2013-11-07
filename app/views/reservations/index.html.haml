@@ -18,13 +18,11 @@
   - @reservations.each do |reservation|
     %tr{onclick: "location.href='#{reservation_path(reservation)}'"}
       %td= reservation.id
-      %td
-        = reservation.user_name
-      %td
-        = reservation.title
-      %td
-        = reservation.reserve_at.strftime('%B %d, %Y %l:%M %p')
-      %td
-        = reservation.fulfilled
-      %td
-        = reservation.expires_at.strftime('%B %d, %Y %l:%M %p')
+      %td= reservation.user_name
+      %td= reservation.title
+      %td= reservation.reserve_at.strftime('%B %d, %Y %l:%M %p')
+      %td= reservation.fulfilled
+      %td= reservation.expires_at.strftime('%B %d, %Y %l:%M %p')
+
+.text-center
+  =will_paginate @reservations

@@ -12,6 +12,7 @@ class ReservationsController < ApplicationController
   def index
     scope = apply_scopes(Reservation)
     @reservations = scope.respond_to?(:to_a) ? scope.to_a : scope.all
+    @reservations = @reservations.paginate(page: params['page'])
   end
 
   # GET /reservations/1
