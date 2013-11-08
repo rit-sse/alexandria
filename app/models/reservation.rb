@@ -32,7 +32,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def user_not_banned
-    errors.add(:user, 'cannot reserve a book if banned') if user.nil? or user.banned
+    errors.add(:user, 'cannot reserve a book if banned') if user.nil? || user.banned
   end
 
   def self.has_reservation(book, user)

@@ -130,7 +130,7 @@ describe Ability do
 
     it 'can create checkouts and see their own' do
       checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
-      due_date: Date.new(2013, 2, 11))
+                              due_date: Date.new(2013, 2, 11))
       checkout.book = book
 
       expect(distributor.cannot?(:show, checkout)).to be_true
@@ -207,7 +207,7 @@ describe Ability do
 
     it 'can manage checkouts' do
       checkout = Checkout.new(checked_out_at: Date.new(2013, 2, 4),
-      due_date: Date.new(2013, 2, 11))
+                              due_date: Date.new(2013, 2, 11))
       checkout.book = book
 
       expect(patron.cannot?(:show, checkout)).to be_true

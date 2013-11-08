@@ -15,14 +15,14 @@ class Strike < ActiveRecord::Base
   end
 
   def is_distributor
-    unless !distributor.nil? and (distributor.distributor? or distributor.librarian?)
+    unless !distributor.nil? && (distributor.distributor? || distributor.librarian?)
       errors.add(:distributor, 'is not a distributor or librarian.')
     end
   end
 
   def other_has_info
-    if reason == Reason.find_by_message('Other') and other_info.blank?
-      errors.add(:strike, 'needs more information if "Other" is chosen for reason.' )
+    if reason == Reason.find_by_message('Other') && other_info.blank?
+      errors.add(:strike, 'needs more information if "Other" is chosen for reason.')
     end
   end
 end

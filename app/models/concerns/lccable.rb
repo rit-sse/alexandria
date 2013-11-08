@@ -100,7 +100,7 @@ module Lccable
     shelf = Rails.configuration.shelves.count
     Rails.configuration.shelves.each_with_index do |x, i|
       if sort_it_up(book.lcc, x) <= 0
-        shelf = i+1
+        shelf = i + 1
         break
       end
     end

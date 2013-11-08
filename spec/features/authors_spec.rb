@@ -14,7 +14,7 @@ feature 'author_management' do
 
     click_button 'Save'
 
-    expect(page).to have_text("Author was successfully created.")
+    expect(page).to have_text('Author was successfully created.')
   end
 
   scenario 'Should display error when bad author is created' do
@@ -26,6 +26,6 @@ feature 'author_management' do
 
     click_button 'Save'
 
-    expect(page).to have_text("Middle initial is too long (maximum is 1 characters)")
+    expect(page).to have_text('Middle initial is too long (maximum is 1 characters)')
   end
 end

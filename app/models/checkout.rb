@@ -50,17 +50,17 @@ class Checkout < ActiveRecord::Base
   end
 
   def is_a_distributor
-    unless !distributor.nil? and (distributor.distributor? or distributor.librarian?)
+    unless !distributor.nil? && (distributor.distributor? || distributor.librarian?)
       errors.add(:distributor, 'is not a distributor or librarian.')
     end
   end
 
   def patron_not_banned
-    errors.add(:patron, 'cannot checkout a book if banned') if patron.nil? or patron.banned
+    errors.add(:patron, 'cannot checkout a book if banned') if patron.nil? || patron.banned
   end
 
   def first_reservation
-    res = book.reservations.select{ |r| !r.fulfilled and !r.expired? }.sort!{|a,b| a.created_at <=> b.created_at }.first if book.present?
+    res = book.reservations.select { |r| !r.fulfilled and !r.expired? }.sort! { |a, b| a.created_at <=> b.created_at }.first if book.present?
     unless res.nil? or res.user == patron
       errors.add(:someone, 'has already reserved this book.')
     end

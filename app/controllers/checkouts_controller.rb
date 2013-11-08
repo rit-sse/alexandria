@@ -31,7 +31,7 @@ class CheckoutsController < ApplicationController
     User.all.each do |user|
       @checkout.distributor = user if user.barcode == params['distributor_barcode']
       @checkout.patron = user if user.barcode == params['patron_barcode']
-      break unless @checkout.patron.nil? or @checkout.distributor.nil?
+      break unless @checkout.patron.nil? || @checkout.distributor.nil?
     end
     @checkout.book = Book.find_by_isbn(params['isbn']) unless params['isbn'].nil?
     respond_to do |format|
@@ -88,7 +88,7 @@ class CheckoutsController < ApplicationController
         @checkout.checked_in_at = DateTime.now
       end
       respond_to do |format|
-        if @checkout.try(:distributor_check_in).try(:distributor?) or @checkout.try(:distributor_check_in).try(:librarian?)
+        if @checkout.try(:distributor_check_in).try(:distributor?) || @checkout.try(:distributor_check_in).try(:librarian?)
           @checkout.save
           format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
           format.json { head :no_content }

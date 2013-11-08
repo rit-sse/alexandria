@@ -16,8 +16,8 @@ feature 'Managing Checkouts' do
       find('#checkout_patron').set '5555'
       click_button 'Check out'
 
-      expect(page).to have_text("Checkout for Principles of Computer Hardware")
-      expect(page).to have_text("Checked In Not checked in yet")
+      expect(page).to have_text('Checkout for Principles of Computer Hardware')
+      expect(page).to have_text('Checked In Not checked in yet')
     end
     scenario 'invalid distributor' do
       visit new_checkout_path
@@ -27,7 +27,7 @@ feature 'Managing Checkouts' do
       find('#checkout_patron').set '5555'
       click_button 'Check out'
 
-      expect(page).to have_text("Distributor is not a distributor or librarian")
+      expect(page).to have_text('Distributor is not a distributor or librarian')
     end
   end
 end
