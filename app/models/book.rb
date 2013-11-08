@@ -90,7 +90,7 @@ class Book < ActiveRecord::Base
 
   def self.isbn13_checksum_digit(isbn12)
     checksum = isbn_checksum(isbn12)
-    10 - checksum.modulo(10)
+    (10 - checksum.modulo(10))%10
   end
 
   def set_book(gb)
