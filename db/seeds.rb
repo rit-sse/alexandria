@@ -8,7 +8,7 @@
 
 require 'csv'
 
-d = CSV.read(Rails.root.join("db", "data.csv"))
+d = CSV.read(Rails.root.join('db', 'data.csv'))
 d.shift
 
 d = d.first(25) if Rails.env == "development"
@@ -17,9 +17,9 @@ d.each do |row|
   book = Book.add_by_isbn(row[3])
 
   if book.title.nil?
-    titles = row[0].split(":")
+    titles = row[0].split(':')
     book.title = titles[0]
-    book.subtitle = titles[1] if titles.length > 1
+    book.subtitle = titles[1] || ''
 
     author = row[1]
     author.split(",").each do |i|
