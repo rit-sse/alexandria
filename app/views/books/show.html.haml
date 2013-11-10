@@ -45,6 +45,9 @@
         - if Reservation.has_reservation(@book, current_user)
           %a{href: "#", class:"btn btn-primary", disabled: true}
             Reserved
+        - elsif @book.restricted
+          %a{href: "#", class:"btn btn-primary", disabled: true}
+            Restricted
         - else
           = form_for :reservation, url: "/reservations" do |f|
             = f.hidden_field "book_id", value: @book.id
