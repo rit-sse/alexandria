@@ -8,50 +8,31 @@
 
 require 'csv'
 
-d = CSV.read(Rails.root.join("db", "data.csv"))
+d = CSV.read(Rails.root.join('db', 'data.csv'))
 d.shift
 
-d = d.first(5) if Rails.env == "development"
+d = d.first(25) if Rails.env == "development"
 
 d.each do |row|
-  titles = row[0].split(":")
-  title = titles[0]
-  subtitle = ""
+  book = Book.add_by_isbn(row[3])
 
-  subtitle = titles[1] if titles.length > 1
+  if book.title.nil?
+    titles = row[0].split(':')
+    book.title = titles[0]
+    book.subtitle = titles[1] || ''
 
-  author = row[1]
-  publish_date = Date.new(row[2].to_i, 1, 1)
-  isbn = row[3]
-
-  book = Book.new(
-    isbn: isbn,
-    title: title,
-    subtitle: subtitle,
-    publish_date: publish_date
-  )
-
-  book.get_lcc
-
-  author ||= ""
-
-  author.split(",").each do |i|
-    book.authors << Author.find_or_create(i)
+    author = row[1]
+    author.split(",").each do |i|
+      book.authors << Author.find_or_create(i)
+    end
+    book.publish_date = Date.new(row[2].to_i, 1, 1)
+    book.save
   end
-  book.save
-
-  gbook = GoogleBookData.book_from_isbn(book.isbn)
-  gbook.save
-
-  gbook.book = book
-  gbook.save
 
   puts "Title: #{book.title}"
   puts "Author: #{book.authors}"
   puts "ISBN: #{book.isbn}"
   puts "LCC: #{book.lcc}"
-  puts "**** Google Book ****"
-  puts book.google_book_data
   puts "================"
 end
 

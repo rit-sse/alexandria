@@ -3,11 +3,17 @@ class CheckoutsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: [:create]
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
+  has_scope :active, type: :boolean
+  has_scope :patron
+  has_scope :book
+  has_scope :overdue, type: :boolean
 
   # GET /checkouts
   # GET /checkouts.json
   def index
-    @checkouts = Checkout.all_active
+    scope = apply_scopes(Checkout)
+    @checkouts = scope.respond_to?(:to_a) ? scope.to_a : scope.all
+    @checkouts = @checkouts.paginate(page: params['page'])
   end
 
   # GET /checkouts/1

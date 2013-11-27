@@ -47,12 +47,12 @@ ul.commas{
 .more-results{
 	text-align: center;
 	border-top: solid 1px grey;
-	padding-top: 5px	
+	padding-top: 5px
 }
 
 #master-search{
 	width:200px;
-	
+
 	@include transition-delay(0s);
 	@include transition-duration(0.15s);
 	@include transition-property(all);

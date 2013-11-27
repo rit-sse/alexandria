@@ -4,7 +4,7 @@
     = @checkout.title
 
 .row
-  - if @checkout.book.google_book_data.img_small != ""
+  - if @checkout.book.google_book_data.img_small.present?
     %div
       %a{href: book_path(@checkout.book)}
         %img.center{src: @checkout.book.google_book_data.img_small, height: '250px;'}

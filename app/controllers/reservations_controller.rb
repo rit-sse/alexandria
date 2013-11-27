@@ -3,11 +3,16 @@ class ReservationsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: [:create]
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  has_scope :active, type: :boolean
+  has_scope :patron
+  has_scope :book
 
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.where(fulfilled: false)
+    scope = apply_scopes(Reservation)
+    @reservations = scope.respond_to?(:to_a) ? scope.to_a : scope.all
+    @reservations = @reservations.paginate(page: params['page'])
   end
 
   # GET /reservations/1

@@ -38,9 +38,6 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 
-  #for search
-  gem 'sunspot_solr', '2.0.0'
-
   # Make error checking/viewing less horrible
   gem "better_errors"
   gem "binding_of_caller"
@@ -98,6 +95,9 @@ gem 'dotenv-rails'
 
 gem 'sshkit'
 gem 'highline'
+
+gem 'has_scope'
+gem 'bootstrap-will_paginate'
 
 # To use debugger
 # gem 'debugger'

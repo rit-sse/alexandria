@@ -1,5 +1,9 @@
 # Reservation model
 class Reservation < ActiveRecord::Base
+  scope :active, -> { all.select{ |x| not x.fulfilled and not x.expired? } }
+  scope :patron, -> patron { where(user_id: patron) }
+  scope :book, -> book { where(book_id: book) }
+
   after_initialize :default_values
   belongs_to :user
   belongs_to :book
@@ -10,6 +14,7 @@ class Reservation < ActiveRecord::Base
   validates :book_id, :user_id, presence: true
   validate :cannot_have_2_reservations_on_1_book
   validate :user_not_banned
+  validate :cannot_reserve_restricted_book
 
   def expired?
     DateTime.now > expires_at
@@ -33,6 +38,10 @@ class Reservation < ActiveRecord::Base
 
   def user_not_banned
     errors.add(:user, 'cannot reserve a book if banned') if user.nil? || user.banned
+  end
+
+  def cannot_reserve_restricted_book
+    errors.add(:book, 'is restricted') if book.present? and book.restricted
   end
 
   def self.has_reservation(book, user)

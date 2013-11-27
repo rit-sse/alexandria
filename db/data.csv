@@ -135,7 +135,7 @@ Framing Software Reuse: Lessons from the Real World,Paul G. Bassett,1997,9780133
 "Integration-Ready Architecture and Design: Software Engineering with XML, Java, .NET, Wireless, Speech, and Knowledge Technologies",Jeff Zhuk,2004,9780521525831,"presentation factories, VoiceXML, WAP, J2EE, J2ME, JSAPI, 802.11, RDF, UDDI, client-server software, JavaCard, integration technologies",
 Practical Software Reuse: Strategies for Introducing Reuse Concepts in Your Organization,Donald J. Reifer,1997,9780471578536,"domain engineering, reusable assests, reuses operational concepts, business planning, operational transition",123
 Pattern Languages of Program Design 4,"Neil Harrison, Brian Foote, Hans Rohnert",2000,9780201433043,"design patterns for, object-oriented infrastructure, security, temproal patterns, human-computer interaction, domain-oriented patterns",
-Software Reuse: Domain Analysis and Design Process,"Jag Sodhi, Prince Sodhi",1999,639785300717,"domain engineering, reuse strategies, planning for reuse, reuse management, CORBA, domain analysis, domain design process",
+Software Reuse: Domain Analysis and Design Process,"Jag Sodhi, Prince Sodhi",1999,9780070579231,"domain engineering, reuse strategies, planning for reuse, reuse management, CORBA, domain analysis, domain design process",
 Software Engineering Concepts and Techniques: Proceedings of the NATO Conderences,"Peter Naur, Brian Randell, J.N. Buxton",1976,884053342,"design, production, service, software flexibility, large systems, education",
 Managing Software Acquisition: Open Systems and COTS Products,"B. Craig Meyers, Patricia Oberndorf",2001,9780201704549,"commercial-off0the-shelf products, standards,reference models and architectures, managing transition, acquisition models",
 History of Programming Languages - II,"Thomas J. Bergin, Richard G. Gibson",1996,9780201895025,"Pascal, Ada, Lisp, Smalltalk, Icon, Forth, C, C++, Prolog, discrete event simulation languages, FORMAC",
@@ -164,7 +164,7 @@ The Essence of Human-Computer Interaction,Christine Faulkner,1998,9780137519750,
 Structure and Interpretation of Computer Programs,"Harold Abelsom, Gerald Jay Sussman, Julie Sussman",1985,262010771,"building abstractions, metalinguistic abstraction, register machines, modularity, objects, state",
 Glitch: The Hidden Impact of Faulty Software,Jeff Papows Ph.D.,2011,9780132160636,"cyberterrorism, cloud computing, infrastructure, cyber crime, outsourcing",
 The Art of Computer Programming. Vol 1/ Fundamental Algorithms Second Edition,Donald E. Knuth,1973,201038099,"basic math, information structures, linear lists, binary trees, doubly linked lists, arrays",
-Programming Productivity,Capers Jones,1986,70328110,"problems with measuring software, high-level languages, programming productivity, program maintenance, reusable modules, staff sizes",
+Programming Productivity,Capers Jones,1986,9780070328112,"problems with measuring software, high-level languages, programming productivity, program maintenance, reusable modules, staff sizes",
 Death March Second Edition,Edward Yourdon,2004,9780131436350,"why do they happen, why do people paticipate, team-building issues, good-enough software, negotiations",
 Bionomics: The Inevitablity of Capitalism,Michael Rothschild,1990,9780805010688,"capatilism as natural process, capatilism evolution, learning, feedback loops, exploitation",
 Software Development: Building Reliable Systems,Marc Hamilton,1999,9780130812469,"building team, software architecture, organization, software lifecycle, programming languages, development tools, multithreaded programming",
@@ -202,7 +202,7 @@ Software Engineering: Fifth Edition,Ian Commerville,1995,9780201427653,"requirem
 "Software Engineering: Barry W. Boehm's Lifetime Contributions to Software Development, Management, and Research",Richard W. Selby,2007,9780470148730,"software architecture, software economics, software tools, value-based software engineering, risk management, systems management",
 "Problem-Solving Principles for ADA Programmers: Applies Logic, Psychology, and Grit",William E. Lewis,1982,810452111,"method to madness, basic problem-solving, advanced problem-solving, debugging, framework for prblem solving",
 Smalltalk-80: The Interactive Programming Environment,Adele Goldberg,1984,201113724,"modifying classes, creating classes, objects, evaluating expressions, finding information, errors, file system",
-Theory and Problems of Computers and Programming,Francis Scheid,1982,70551960,"information processing, program logic, top-down structured programming, arrays, I/O format, graph problems",
+Theory and Problems of Computers and Programming,Francis Scheid,1982,9780070551961,"information processing, program logic, top-down structured programming, arrays, I/O format, graph problems",
 The Computer Engineering Handbook,Vojin G. Oklobdzija,2002,9780849308857,"fabrication, computer systems and architecture, embedded applications, signal processing, I/), operating systems, wireless, computer networks",
 Structured Systems Analysis: Tools and Techniques,"Chris Gane, Trish Sarson",1977,930196007,"data flow diagrams, data dictionary, process logic, data stores",196
 Software Architecture in Practice,"Len Bass, Paul Clements, Rick Kazman",1998,9780201199307,"architecture business cycle, quality attributes, architecture styles, unit operations, case studies, architecture description languages, reusing architectures",
@@ -225,7 +225,7 @@ Design Patterns Explained: A New Perspective on Object-Oriented Design,"Alan Sha
 The Unified Modeling Language User Guide,"Grady Booch, James Rumbaugh, Ivar Jacobson",1999,9780201571684,"class diagrams, relationships, object diagrams, advanced classes, packages, state machines, use case diagrams, interaction diagrams, events, signals, architectural modeling",212
 Software Engineering Handbook,Jessica Keyes,2003,9780849314797,"project plan, requirements elicitation, object-oriented design, software testing, re-engineering",
 Documenting Software Architectures: Views and Beyond,"Paul Clements, Felix Bachmann, Len Bass, David Garlan, James Ivers, Reed Little, Robert Nord, Judith Stafford",2003,9780201703726,"architecture documentation, module viewtype, component-and-connector viewtype, allocation viewtype, ",
-Basic: A Hands-On Method Second Edition,Herbert D. Peckham,1981,70491607,"computer arithmetic, I/O, loops, functions, program management, strings, random numbers",
+Basic: A Hands-On Method Second Edition,Herbert D. Peckham,1981,9780070491601,"computer arithmetic, I/O, loops, functions, program management, strings, random numbers",
 The Standard C Library,P.J. Plauger,1992,9780131315099,"C API, float.h, math.h, stddef.h, stdio.h",
 Practical Software Engineering: Analysis and Design for the .NET Platform,Enricos Manassis,2004,321136195,"Rational Unified Process, Object Oriented Analysis and Design, system specification, system analysis, system design, implementation model, testing",
 Ada: An Advanced Introduction,Narain Gehani,1983,130039624,"types, packages, concurrency, program structure, representation clauses",
@@ -243,4 +243,4 @@ Essential System Requirements: A Practical Guide to Event-Driven Methods,Bill Wi
 Making the Software Business Case: Improvement by the Numbers,Donald J. Reifer,2002,9780201728873,"business case analysis, present-value, return-on-investmenr, break-even, cost/benefit calculations, case studies",
 The Rational Unified Process: An Intorduction Second Edition,Philippe Kruchten,2000,9780201707106,"static strcture, dynamic structure, business modeling, implementation workflow, test workflow, iteration plans, environment workflow",
 Modeling XML Applications wiht UML: Practical e-Business Applications,David Carlson,2001,9780201709155,"XML vocabularies, UML diagrams, XML Schemas, e-Business architectures, XML DTDs, vocabulary transformation, RosettaNet XML standard",
-Theory and Problems of Set Theory and Related Topics,Seymour Lipschutz,1964,70379866,"functions, relations, cardinal and ordinal numbers, transfinite induction, Zorn's Lemma, algebra of propositions, boolean algebra",229
+Theory and Problems of Set Theory and Related Topics,Seymour Lipschutz,1964,9780070379862,"functions, relations, cardinal and ordinal numbers, transfinite induction, Zorn's Lemma, algebra of propositions, boolean algebra",229

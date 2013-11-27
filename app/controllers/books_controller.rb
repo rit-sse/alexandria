@@ -16,6 +16,7 @@ class BooksController < ApplicationController
       search
       @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
+      @books = @books.paginate(page: params['page'])
     end
   end
 
