@@ -48,4 +48,20 @@ describe Book, solr: true do
     expect(where_to_place[:left]).to eq(left_book)
     expect(where_to_place[:right]).to eq(right_book)
   end
+
+  it 'can have multiple copies' do
+    book = create(:book)
+    book.quantity = 2
+    book.save
+    checkout = Checkout.new(checked_out_at: DateTime.now, book: book)
+    checkout.patron = create(:patron)
+    checkout.distributor = create(:distributor)
+    checkout.save
+    expect(book.checked_out?).to be_false
+    checkout = Checkout.new(checked_out_at: DateTime.now, book: book)
+    checkout.patron = create(:patron)
+    checkout.distributor = create(:distributor)
+    checkout.save
+    expect(book.checked_out?).to be_true
+  end
 end

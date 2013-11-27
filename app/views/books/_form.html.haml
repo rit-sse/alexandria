@@ -31,6 +31,9 @@
     .form-group
       = f.label :restricted
       = f.check_box :restricted
+    .form-group
+      = f.label :quantity
+      = f.number_field :quantity, class: 'form-control'
     .actions
       = f.submit 'Save', class: 'btn btn-primary'
       = link_to 'Back', book_path(book), class: 'btn btn-default'

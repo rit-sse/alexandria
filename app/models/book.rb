@@ -36,7 +36,7 @@ class Book < ActiveRecord::Base
       i.book.id == id
     end
 
-    checkouts.any?
+    checkouts.count == quantity
   end
 
   def active_checkout
