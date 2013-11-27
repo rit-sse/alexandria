@@ -43,7 +43,7 @@ class Checkout < ActiveRecord::Base
   def unique_checkout
     unless book.nil?
       book_checkouts = Checkout.all_active.where(book_id: book.id)
-      unless book_checkouts.empty?
+      unless book_checkouts < book.quantity
         errors.add(:book, 'is already checked out.')
       end
     end
