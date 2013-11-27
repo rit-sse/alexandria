@@ -94,14 +94,13 @@ class Book < ActiveRecord::Base
   end
 
   def set_book(gb)
-    title = gb.title.split(':')
-    self.title = title[0].titleize
-    self.subtitle = title[1] ? title[1].strip : ''
+    title = gb.titles_array
+    self.title = title[0]
+    self.subtitle = title[1] || ''
     self.publish_date = gb.published_date
 
-    author = gb.authors
-    author ||= ''
-    author.split(', ').each do |i|
+    author_array = gb.authors_array
+    author_array.each do |i|
       authors << Author.find_or_create(i)
     end
   end
