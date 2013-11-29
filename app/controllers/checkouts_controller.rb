@@ -86,21 +86,45 @@ class CheckoutsController < ApplicationController
 
   def check_in
     if request.post?
-      @checkout = Book.find_by_isbn(params['isbn']).active_checkout
-      unless  @checkout.nil?
-        User.all.each do |user|
-          @checkout.distributor_check_in = user if user.barcode == params['distributor_barcode']
-          break unless @checkout.distributor_check_in.nil?
-        end
+      patron = nil
+      distributor_check_in = nil
+      User.all.each do |user|
+        distributor_check_in = user if user.barcode == params['distributor_barcode']
+        patron = user if user.barcode == params['patron_barcode']
+        break unless distributor_check_in.nil? or patron.nil?
+      end
+      @checkout = Book.find_by_isbn(params['isbn']).active_checkout(patron)
+      unless @checkout.nil?
         @checkout.checked_in_at = DateTime.now
+        @checkout.distributor_check_in = distributor_check_in
       end
       respond_to do |format|
         if @checkout.try(:distributor_check_in).try(:distributor?) or @checkout.try(:distributor_check_in).try(:librarian?)
           @checkout.save
+          left_right = Lccable.where_to_place(@checkout.book)
+          hash = {
+            book: {
+              title: @checkout.book.title,
+              lcc: @checkout.book.lcc
+            },
+            left: {
+              title: left_right[:left].try(:title) || '',
+              image: left_right[:left].try(:google_book_data).try(:img_small) || '',
+              lcc: left_right[:left].try(:lcc) || ''
+            },
+            right: {
+              title: left_right[:right].try(:title) || '',
+              image: left_right[:right].try(:google_book_data).try(:img_small) || '',
+              lcc: left_right[:right].try(:lcc) || ''
+            },
+            shelf: {
+              number: left_right[:shelf].to_s
+            }
+          }
           format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
-          format.json { render json: { title: @checkout.book.title }, status: :ok, location: @checkout.book }
+          format.json { render json: hash, status: :ok, location: @checkout.book }
         else
-          format.html { redirect_to check_in_url, alert: 'Book not checked out or invalid distributor' }
+          format.html { redirect_to check_in_url, alert: 'Book not checked out, invalid distributor, or invalid patron' }
           format.json { render json: @checkout.errors, status: :unprocessable_entity }
         end
       end

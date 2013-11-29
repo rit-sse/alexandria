@@ -39,9 +39,9 @@ class Book < ActiveRecord::Base
     checkouts.count == quantity
   end
 
-  def active_checkout
+  def active_checkout patron
     checkouts.each do |checkout|
-      return checkout if checkout.checked_in_at.nil?
+      return checkout if checkout.checked_in_at.nil? and checkout.patron == patron
     end
     nil
   end
