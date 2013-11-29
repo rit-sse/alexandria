@@ -46,6 +46,8 @@ class Ability
     else
       can :read, Author
       can :read, Book
+      can :create, Checkout
+      can :check_in, Checkout
     end
   end
 end

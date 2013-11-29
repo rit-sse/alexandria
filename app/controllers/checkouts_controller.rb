@@ -1,5 +1,6 @@
 # Checkouts controller
 class CheckoutsController < ApplicationController
+  skip_before_action :verify_authenticity_token, if: :json_request?
   load_and_authorize_resource
   skip_load_resource only: [:create]
   before_action :set_checkout, only: [:show, :edit, :update, :destroy]
@@ -43,9 +44,9 @@ class CheckoutsController < ApplicationController
     respond_to do |format|
       if @checkout.save
         check_reservation
-        CheckoutMailer.overdue_book(@checkout).deliver
+        # CheckoutMailer.checkout_book(@checkout).deliver
         format.html { redirect_to @checkout, notice: 'Checkout was successfully created.' }
-        format.json { render 'show', status: :created, location: @checkout }
+        format.json { render json: { title: @checkout.book.title }, status: :created, location: @checkout.book }
       else
         format.html { render 'new' }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
@@ -97,7 +98,7 @@ class CheckoutsController < ApplicationController
         if @checkout.try(:distributor_check_in).try(:distributor?) or @checkout.try(:distributor_check_in).try(:librarian?)
           @checkout.save
           format.html { redirect_to put_away_book_url(@checkout.book), notice: 'Book was succesfully checked in.' }
-          format.json { head :no_content }
+          format.json { render json: { title: @checkout.book.title }, status: :ok, location: @checkout.book }
         else
           format.html { redirect_to check_in_url, alert: 'Book not checked out or invalid distributor' }
           format.json { render json: @checkout.errors, status: :unprocessable_entity }
@@ -107,6 +108,10 @@ class CheckoutsController < ApplicationController
   end
 
   private
+
+  def json_request?
+    request.format.json?
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_checkout
