@@ -17,7 +17,7 @@ describe Checkout, solr: true do
 
   it 'can be created' do
     expect(@checkout).to_not be_nil
-    expect(@checkout.checked_out_at).to eq(Date.new(2013, 2, 4))
+    expect(@checkout.checked_out_at.to_date).to eq(Date.new(2013, 2, 4))
   end
 
   it 'can have a patron' do
