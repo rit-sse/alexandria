@@ -69,7 +69,14 @@ class Book < ActiveRecord::Base
     end
     book = Book.new(isbn: isbn)
     book.get_lcc
-    gbook = GoogleBookData.new
+    gbook = GoogleBookData.new(
+        description:   '',
+        img_thumbnail: '',
+        img_small:     '',
+        img_medium:    '',
+        img_large:     '',
+        preview_link:  ''
+      )
     if results.total_items > 0
       book.set_book(results.first)
       gbook = GoogleBookData.book_from_isbn(results)

@@ -16,7 +16,13 @@ class BooksController < ApplicationController
       search
       @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
-      @books = @books.paginate(page: params['page'])
+      unless request.format.json?
+        @books = @books.paginate(page: params['page'])
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.json { 'show' }
     end
   end
 
