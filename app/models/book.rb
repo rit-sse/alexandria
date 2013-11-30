@@ -68,6 +68,10 @@ class Book < ActiveRecord::Base
       results = GoogleBooks.search("isbn:#{isbn}", { api_key: ENV['ALEXANDRIA_SIMPLE'] })
     end
     book = Book.new(isbn: isbn)
+    if results.first.nil?
+      book.errors.add(:isbn, 'isbn is invalid')
+      return book
+    end
     book.get_lcc
     gbook = GoogleBookData.new(
         description:   '',

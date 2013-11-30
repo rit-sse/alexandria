@@ -36,6 +36,10 @@ describe BooksController, solr: true do
     { authors: [], 'isbn' => '9780199273133' }
   end
 
+  def other_valid_atributes
+    {'isbn' => '9780199273133', 'librarian_barcode' => '7777'}
+  end
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # BooksController. Be sure to keep this updated too.
@@ -86,18 +90,18 @@ describe BooksController, solr: true do
     describe 'with valid params' do
       it 'creates a new Book' do
         expect do
-          post :create, valid_attributes, valid_session
+          post :create, other_valid_atributes, valid_session
         end.to change(Book, :count).by(1)
       end
 
       it 'assigns a newly created book as @book' do
-        post :create, valid_attributes, valid_session
+        post :create, other_valid_atributes, valid_session
         assigns(:book).should be_a(Book)
         assigns(:book).should be_persisted
       end
 
       it 'redirects to the created book' do
-        post :create, valid_attributes, valid_session
+        post :create, other_valid_atributes, valid_session
         response.should redirect_to(Book.last)
       end
     end
@@ -106,7 +110,7 @@ describe BooksController, solr: true do
       it 'assigns a newly created but unsaved book as @book' do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, { 'isbn' => '9780199273133', book: { 'reservation' => 9 } }, valid_session
+        post :create, { 'isbn' => '9780199273133', 'librarian_barcode' => '7777', book: { 'reservation' => 9 } }, valid_session
         assigns(:book).should be_a_new(Book)
       end
 

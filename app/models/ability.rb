@@ -48,6 +48,7 @@ class Ability
       can :read, Book
       can :create, Checkout
       can :check_in, Checkout
+      can :create, Book
     end
   end
 end
