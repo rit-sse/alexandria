@@ -1,5 +1,6 @@
 # Controller for books
 class BooksController < ApplicationController
+  skip_before_action :verify_authenticity_token, if: :json_request?
   load_and_authorize_resource
   skip_load_resource only: [:create]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :put_away]

@@ -133,10 +133,6 @@ class CheckoutsController < ApplicationController
 
   private
 
-  def json_request?
-    request.format.json?
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_checkout
     @checkout = Checkout.find(params[:id])
