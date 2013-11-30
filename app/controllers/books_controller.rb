@@ -13,6 +13,7 @@ class BooksController < ApplicationController
     books_with_isbn = Book.where(isbn: params[:search])
     if books_with_isbn.any?
       redirect_to books_with_isbn.first
+      return
     else
       search
       @books = @books.first(params[:limit].to_i) if params[:limit]
@@ -67,7 +68,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.present? and @book.errors.empty? and @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render 'show', status: :created, location: @book }
+        format.json { render json { title: @book.title }, status: :created, location: @book }
       else
         format.html { render 'new' }
         format.json { render json: @book.try(:errors) , status: :unprocessable_entity }
