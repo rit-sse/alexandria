@@ -64,14 +64,20 @@ class BooksController < ApplicationController
       librarian = user if user.barcode == params['librarian_barcode']
       break unless librarian.nil?
     end
-    @book = Book.add_by_isbn(params[:isbn])if librarian.try(:librarian?)
+    cheese = {}
+    if librarian.try(:librarian?)
+      @book = Book.add_by_isbn(params[:isbn])
+      cheese[:isbn] = ["ISBN is invalid"] if @book.errors.any?
+    else
+      cheese[:librarian] = ["Librarian pin is invalid."]
+    end
     respond_to do |format|
       if @book.present? and @book.errors.empty? and @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render json { title: @book.title }, status: :created, location: @book }
+        format.json { render json: { title: @book.title }, status: :created, location: @book }
       else
         format.html { render 'new' }
-        format.json { render json: @book.try(:errors) , status: :unprocessable_entity }
+        format.json { render json: cheese , status: :unprocessable_entity }
       end
     end
   end

@@ -49,7 +49,7 @@ class CheckoutsController < ApplicationController
         format.json { render json: { title: @checkout.book.title }, status: :created, location: @checkout.book }
       else
         format.html { render 'new' }
-        format.json { render json: @checkout.errors, status: :unprocessable_entity }
+        format.json { render json: @checkout.errors.as_json(full_messages: true) , status: :unprocessable_entity }
       end
     end
   end
@@ -125,7 +125,7 @@ class CheckoutsController < ApplicationController
           format.json { render json: hash, status: :ok, location: @checkout.book }
         else
           format.html { redirect_to check_in_url, alert: 'Book not checked out, invalid distributor, or invalid patron' }
-          format.json { render json: @checkout.errors, status: :unprocessable_entity }
+          format.json { render json: @checkout.errors.as_json(full_messages: true), status: :unprocessable_entity }
         end
       end
     end

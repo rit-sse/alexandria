@@ -33,11 +33,11 @@ describe BooksController, solr: true do
   # Book. As you add validations to Book, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { authors: [], 'isbn' => '9780199273133' }
+    { authors: [], 'isbn' => '9780201633610' }
   end
 
   def other_valid_atributes
-    {'isbn' => '9780199273133', 'librarian_barcode' => '7777'}
+    {'isbn' => '9780201633610', 'librarian_barcode' => '7777'}
   end
 
   # This should return the minimal set of values that should be in the session
@@ -110,14 +110,14 @@ describe BooksController, solr: true do
       it 'assigns a newly created but unsaved book as @book' do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, { 'isbn' => '9780199273133', 'librarian_barcode' => '7777', book: { 'reservation' => 9 } }, valid_session
+        post :create, { 'isbn' => '9780201633610', 'librarian_barcode' => '7777', book: { 'reservation' => 9 } }, valid_session
         assigns(:book).should be_a_new(Book)
       end
 
       it 're-renders the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Book.any_instance.stub(:save).and_return(false)
-        post :create, { 'isbn' => '9780199273133', book: { 'reservation' => 9 } }, valid_session
+        post :create, { 'isbn' => '9780201633610', book: { 'reservation' => 9 } }, valid_session
         response.should render_template('new')
       end
     end
