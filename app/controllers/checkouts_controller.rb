@@ -93,7 +93,7 @@ class CheckoutsController < ApplicationController
         patron = user if user.barcode == params['patron_barcode']
         break unless distributor_check_in.nil? or patron.nil?
       end
-      @checkout = Book.find_by_isbn(params['isbn']).active_checkout(patron)
+      @checkout = Book.find_by_isbn(params['isbn']).try(:active_checkout, patron)
       unless @checkout.nil?
         @checkout.checked_in_at = DateTime.now
         @checkout.distributor_check_in = distributor_check_in
@@ -125,7 +125,11 @@ class CheckoutsController < ApplicationController
           format.json { render json: hash, status: :ok, location: @checkout.book }
         else
           format.html { redirect_to check_in_url, alert: 'Book not checked out, invalid distributor, or invalid patron' }
-          format.json { render json: @checkout.errors.as_json(full_messages: true), status: :unprocessable_entity }
+          if @checkout.present?
+            format.json { render json: @checkout.errors.as_json(full_messages: true), status: :unprocessable_entity }
+          else
+            format.json { render json: { checkout: ["checkout does not exist for book"]}, status: :unprocessable_entity}
+          end
         end
       end
     end
