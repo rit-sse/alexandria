@@ -123,6 +123,7 @@ class BooksController < ApplicationController
     if params[:search]
       @search = Book.search do
         fulltext params[:search]
+        paginate page: 1, per_page: Book.count
       end
       @books = @search.results
     else
