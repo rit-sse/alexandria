@@ -5,8 +5,9 @@ $(document).ready(function() {
     format: 'yyyy-mm-dd'
   });
   $("#master-search").typeahead([{
+    limit: 6,
     remote: {
-        url: "/books.json?search=%QUERY&limit=9",
+        url: "/books.json?search=%QUERY&limit=5",
         filter: function( data ){
         if(!data[0]){
           data = [{
@@ -14,8 +15,8 @@ $(document).ready(function() {
             id: "none",
             none: true
           }]
-        } else if(data.length > 8){
-          data[8] = {
+        } else if(data.length > 5){
+          data[5] = {
             title: $("#master-search")[0].value,
             id: "more",
             more: true
