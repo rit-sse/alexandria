@@ -16,7 +16,6 @@ class Reservation < ActiveRecord::Base
   validate :user_not_banned
   validate :book_not_restricted
   validate :book_not_archived
-  validate :cannot_reserve_restricted_book
 
   def expired?
     DateTime.now > expires_at
