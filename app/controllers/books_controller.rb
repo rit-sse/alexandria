@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     books_with_isbn = Book.where(isbn: params[:search])
-    if books_with_isbn.any?
+    if books_with_isbn.any? and not request.format.json?
       redirect_to books_with_isbn.first
       return
     else
