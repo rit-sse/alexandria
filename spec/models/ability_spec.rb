@@ -276,7 +276,7 @@ describe Ability do
       expect(none.can?(:show, Book)).to be_true
       expect(none.can?(:index, Book)).to be_true
       expect(none.cannot?(:put_away, Book)).to be_true
-      expect(none.cannot?(:create, Book)).to be_true
+      expect(none.can?(:create, Book)).to be_true
       expect(none.cannot?(:update, Book)).to be_true
       expect(none.cannot?(:destroy, Book)).to be_true
     end
@@ -284,10 +284,10 @@ describe Ability do
     it 'can read checkouts' do
       expect(none.cannot?(:show, Checkout)).to be_true
       expect(none.cannot?(:index, Checkout)).to be_true
-      expect(none.cannot?(:create, Checkout)).to be_true
+      expect(none.can?(:create, Checkout)).to be_true
       expect(none.cannot?(:update, Checkout)).to be_true
       expect(none.cannot?(:destroy, Checkout)).to be_true
-      expect(none.cannot?(:check_in, Checkout)).to be_true
+      expect(none.can?(:check_in, Checkout)).to be_true
     end
 
     it 'can manage reservations' do

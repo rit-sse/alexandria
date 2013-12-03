@@ -10,7 +10,8 @@ feature 'Managing Books' do
     visit '/books/new'
 
     find('#isbn-add').set '9780201633610'
-    find('#isbn-submit').click
+    find('#isbn-librarian').set '7777'
+    find("#isbn-submit").click
     expect(page).to have_text('Design Patterns')
   end
 

@@ -1,5 +1,6 @@
 # Controller for books
 class BooksController < ApplicationController
+  skip_before_action :verify_authenticity_token, if: :json_request?
   load_and_authorize_resource
   skip_load_resource only: [:create]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :put_away]
@@ -10,13 +11,20 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     books_with_isbn = Book.where(isbn: params[:search])
-    if books_with_isbn.any?
+    if books_with_isbn.any? and not request.format.json?
       redirect_to books_with_isbn.first
+      return
     else
       search
       @books = @books.first(params[:limit].to_i) if params[:limit]
       @query = params[:search]
-      @books = @books.paginate(page: params['page'])
+      unless request.format.json?
+        @books = @books.paginate(page: params['page'])
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.json { 'show' }
     end
   end
 
@@ -51,15 +59,25 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.add_by_isbn(params[:isbn])
-
+    librarian = nil
+    User.all.each do |user|
+      librarian = user if user.barcode == params['librarian_barcode']
+      break unless librarian.nil?
+    end
+    cheese = {}
+    if librarian.try(:librarian?)
+      @book = Book.add_by_isbn(params[:isbn])
+      cheese[:isbn] = ["ISBN is invalid"] if @book.errors.any?
+    else
+      cheese[:librarian] = ["Librarian pin is invalid."]
+    end
     respond_to do |format|
-      if @book.save
+      if @book.present? and @book.errors.empty? and @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render 'show', status: :created, location: @book }
+        format.json { render json: { title: @book.title }, status: :created, location: @book }
       else
         format.html { render 'new' }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: cheese , status: :unprocessable_entity }
       end
     end
   end
@@ -105,6 +123,7 @@ class BooksController < ApplicationController
     if params[:search]
       @search = Book.search do
         fulltext params[:search]
+        paginate page: 1, per_page: Book.count
       end
       @books = @search.results
     else
