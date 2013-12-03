@@ -14,6 +14,8 @@ class Reservation < ActiveRecord::Base
   validates :book_id, :user_id, presence: true
   validate :cannot_have_2_reservations_on_1_book
   validate :user_not_banned
+  validate :book_not_restricted
+  validate :book_not_archived
   validate :cannot_reserve_restricted_book
 
   def expired?
@@ -40,8 +42,12 @@ class Reservation < ActiveRecord::Base
     errors.add(:user, 'cannot reserve a book if banned') if user.nil? || user.banned
   end
 
-  def cannot_reserve_restricted_book
-    errors.add(:book, 'is restricted') if book.present? and book.restricted
+  def book_not_restricted
+    errors.add(:book, 'is restricted and can not be reserved') if book.present? and book.restricted
+  end
+
+  def book_not_archived
+    errors.add(:book, 'is archived and can not be reserved') if book.present? and book.archived
   end
 
   def self.has_reservation(book, user)
