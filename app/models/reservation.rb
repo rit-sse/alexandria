@@ -17,7 +17,7 @@ class Reservation < ActiveRecord::Base
   validate :book_not_restricted
   validate :book_not_unavailable
 
-  default_scope order('id ASC')
+  default_scope { order('id ASC') }
 
   def expired?
     DateTime.now > expires_at

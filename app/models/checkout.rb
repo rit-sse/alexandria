@@ -24,7 +24,7 @@ class Checkout < ActiveRecord::Base
   validate :patron_not_banned
   validate :first_reservation, on: :create
 
-  default_scope order('id ASC')
+  default_scope { order('id ASC') }
 
   def default_values
     self.checked_out_at ||= DateTime.now

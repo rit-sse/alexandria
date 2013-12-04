@@ -8,7 +8,7 @@ class Book < ActiveRecord::Base
   has_one :google_book_data
   has_many :checkouts
 
-  default_scope order('title ASC')
+  default_scope { order('title ASC') }
 
   searchable do
     text :title, :isbn

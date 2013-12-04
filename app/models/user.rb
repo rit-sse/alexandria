@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   before_save :default_values
 
-  default_scope order('id ASC')
+  default_scope { order('id ASC') }
 
   def barcode
     @barcode ||= Password.new(barcode_hash) unless barcode_hash.nil?

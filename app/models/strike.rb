@@ -8,7 +8,7 @@ class Strike < ActiveRecord::Base
   validate :is_distributor
   validate :other_has_info
 
-  default_scope order('id ASC')
+  default_scope { order('id ASC') }
 
   def message
     string = reason.message
