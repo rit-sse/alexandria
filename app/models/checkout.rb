@@ -18,10 +18,13 @@ class Checkout < ActiveRecord::Base
 
   validates :checked_out_at, :distributor_id, :patron_id, :book_id, presence: true
   validate :unique_checkout, on: :create
-  validate :restricted_book
+  validate :book_not_restricted
+  validate :book_not_unavailable
   validate :is_a_distributor
   validate :patron_not_banned
   validate :first_reservation, on: :create
+
+  default_scope { order('id ASC') }
 
   def default_values
     self.checked_out_at ||= DateTime.now
@@ -49,10 +52,12 @@ class Checkout < ActiveRecord::Base
     end
   end
 
-  def restricted_book
-    if book.present? && book.restricted
-      errors.add(:book, 'is restricted can not check out.')
-    end
+  def book_not_restricted
+    errors.add(:book, 'is restricted can not be checked out.') if book.present? && book.restricted
+  end
+
+  def book_not_unavailable
+    errors.add(:book, 'is unavailable can not be checked out.') if book.present? && book.unavailable
   end
 
   def is_a_distributor

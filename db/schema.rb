@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127221852) do
+ActiveRecord::Schema.define(version: 20131203201826) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20131127221852) do
     t.string   "lcc"
     t.boolean  "restricted"
     t.integer  "quantity",     default: 1
+    t.boolean  "unavailable"
   end
 
   create_table "checkouts", force: true do |t|

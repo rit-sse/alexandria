@@ -36,4 +36,20 @@ describe Reservation, solr: true do
     Reservation.create(book_id: book.id, user_id: user.id)
     expect(Reservation.has_reservation(book, user)).to be_true
   end
+
+  it 'cannot be created on a restricted book' do
+    book.restricted = true
+    book.save
+    expect do
+      Reservation.create(book_id: book.id, user_id: user.id)
+    end.to_not change { Reservation.all.count }.by(1)
+  end
+
+  it 'cannot be created on am unavailable book' do
+    book.unavailable = true
+    book.save
+    expect do
+      Reservation.create(book_id: book.id, user_id: user.id)
+    end.to_not change { Reservation.all.count }.by(1)
+  end
 end
