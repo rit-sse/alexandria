@@ -17,7 +17,7 @@
         - if book.google_book_data.img_small.present?
           = image_tag(book.google_book_data.img_small)
         - else
-          .blank-thumbnail-medium{style: 'margin: 0 auto;'}
+          .blank-thumbnail-medium.center
 
 .row
   - @books.each do |book|

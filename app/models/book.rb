@@ -50,7 +50,7 @@ class Book < ActiveRecord::Base
   end
 
   def reserved?
-    Reservation.where(book_id: id, fulfilled: false).any?
+    Reservation.where(book_id: id, fulfilled: false).select{|x| !x.expired?}.any?
   end
 
   def self.featured_book
