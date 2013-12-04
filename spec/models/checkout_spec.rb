@@ -90,8 +90,8 @@ describe Checkout, solr: true do
     end.to_not change { Checkout.all.count }.by(1)
   end
 
-  it 'cannot be created on a archived book' do
-    book.archived = true
+  it 'cannot be created on an unavailable book' do
+    book.unavailable = true
     book.save
     expect do
       Checkout.create(book_id: book.id, distributor_id: distributor.id,

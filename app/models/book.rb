@@ -8,6 +8,8 @@ class Book < ActiveRecord::Base
   has_one :google_book_data
   has_many :checkouts
 
+  default_scope order('title ASC')
+
   searchable do
     text :title, :isbn
     text :authors do
@@ -21,7 +23,7 @@ class Book < ActiveRecord::Base
   def default_values
     self.restricted ||= false
     self.lcc ||= ''
-    self.archived  ||= false
+    self.unavailable  ||= false
   end
 
   def as_json(options = {})

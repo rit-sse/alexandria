@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131203201826) do
     t.string   "lcc"
     t.boolean  "restricted"
     t.integer  "quantity",     default: 1
-    t.boolean  "archived"
+    t.boolean  "unavailable"
   end
 
   create_table "checkouts", force: true do |t|

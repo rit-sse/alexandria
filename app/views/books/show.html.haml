@@ -14,8 +14,8 @@
 
 
     %h4
-      - if @book.archived
-        %p.text-danger Archived
+      - if @book.unavailable
+        %p.text-danger Unavailable
       - elsif @book.checked_out?
         %p Checked Out
       - elsif @book.reserved?
@@ -48,9 +48,9 @@
         - elsif @book.restricted
           %a{href: "#", class:"btn btn-primary", disabled: true}
             Restricted
-        - elsif @book.archived
+        - elsif @book.unavailable
           %a{href: "#", class:"btn btn-primary", disabled: true}
-            Archived
+            Unavailable
         - else
           = form_for :reservation, url: "/reservations" do |f|
             = f.hidden_field "book_id", value: @book.id

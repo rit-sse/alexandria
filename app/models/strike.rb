@@ -8,6 +8,8 @@ class Strike < ActiveRecord::Base
   validate :is_distributor
   validate :other_has_info
 
+  default_scope order('id ASC')
+
   def message
     string = reason.message
     string = "#{string}: #{other_info}" unless other_info.blank?
