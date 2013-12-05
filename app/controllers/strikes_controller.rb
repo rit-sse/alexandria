@@ -35,7 +35,7 @@ class StrikesController < ApplicationController
     respond_to do |format|
       if @strike.save
         StrikeMailer.strike(@strike).deliver
-        if @strike.patron.strikes.count == Rails.configuration.strikes_for_ban
+        if @strike.patron.active_strikes.count == Rails.configuration.strikes_for_ban
           StrikeMailer.banned(@strike.patron).deliver
           patron = @strike.patron
           patron.banned = true
