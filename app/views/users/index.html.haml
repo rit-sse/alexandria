@@ -1,23 +1,17 @@
 %h1 Listing users
 
-%table.table.table-striped
+%table.table.table-striped.table-hover
   %tr
     %th User name
     %th Banned
     %th Role
     %th
     %th
-    %th
 
   - @users.each do |user|
-    %tr
+    %tr{onclick: "location.href='#{user_path(user)}'"}
       %td= user.user_name
       %td= user.banned
       %td= user.role.name
-      %td= link_to 'Show', user, class: 'btn btn-default'
       %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-default'
       %td= link_to 'Destroy', user, data: { confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-default'
-
-%br
-
-= link_to 'New User', new_user_path
