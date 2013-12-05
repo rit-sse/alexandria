@@ -85,7 +85,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    @book.authors = params[:book][:authors].delete_if { |x| x == '' }.map { |i| Author.find(i) }
+    @book.authors = params[:book][:authors].delete_if { |x| x == '' }.map { |i| Author.find(i) } if params[:book][:authors].present?
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -116,7 +116,9 @@ class BooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
-    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle, :restricted, :lcc, :unavailable)
+    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle,
+                                 :restricted, :lcc, :unavailable, google_book_data_attributes:
+                                 [:description, :img_thumbnail, :img_small, :img_medium, :img_large, :preview_link])
   end
 
   def search

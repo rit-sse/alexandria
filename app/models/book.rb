@@ -6,6 +6,7 @@ class Book < ActiveRecord::Base
   has_many :author_books
   has_many :authors, through: :author_books
   has_one :google_book_data
+  accepts_nested_attributes_for :google_book_data
   has_many :checkouts
 
   default_scope { order('title ASC') }
