@@ -67,13 +67,6 @@ describe CheckoutsController, solr: true do
     end
   end
 
-  describe 'GET new' do
-    it 'assigns a new checkout as @checkout' do
-      get :new, {}, valid_session
-      assigns(:checkout).should be_a_new(Checkout)
-    end
-  end
-
   describe 'GET edit' do
     it 'assigns the requested checkout as @checkout' do
       checkout = Checkout.create! valid_attributes
@@ -108,13 +101,6 @@ describe CheckoutsController, solr: true do
         Checkout.any_instance.stub(:save).and_return(false)
         post :create, { checkout: { 'user' => 'invalid value' } }, valid_session
         assigns(:checkout).should be_a_new(Checkout)
-      end
-
-      it 're-renders the new template' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Checkout.any_instance.stub(:save).and_return(false)
-        post :create, { checkout: { 'user' => 'invalid value' } }, valid_session
-        response.should render_template('new')
       end
     end
   end

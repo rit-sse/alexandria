@@ -63,13 +63,6 @@ describe BooksController, solr: true do
     end
   end
 
-  describe 'GET new' do
-    it 'assigns a new book as @book' do
-      get :new, {}, valid_session
-      assigns(:book).should be_a_new(Book)
-    end
-  end
-
   describe 'GET edit' do
     it 'assigns the requested book as @book' do
       book = Book.create! valid_attributes
@@ -112,13 +105,6 @@ describe BooksController, solr: true do
         Book.any_instance.stub(:save).and_return(false)
         post :create, { 'isbn' => '9780201633610', 'librarian_barcode' => '7777', book: { 'reservation' => 9 } }, valid_session
         assigns(:book).should be_a_new(Book)
-      end
-
-      it 're-renders the new template' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Book.any_instance.stub(:save).and_return(false)
-        post :create, { 'isbn' => '9780201633610', book: { 'reservation' => 9 } }, valid_session
-        response.should render_template('new')
       end
     end
   end

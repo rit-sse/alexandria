@@ -39,11 +39,6 @@ class BooksController < ApplicationController
     @ratings_count = 0
   end
 
-  # GET /books/new
-  def new
-    @book = Book.new
-  end
-
   # GET /books/1/edit
   def edit
   end
@@ -76,7 +71,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render json: { title: @book.title }, status: :created, location: @book }
       else
-        format.html { render 'new' }
+        format.html { redirect_to root_path, notice: 'Book was not created.'}
         format.json { render json: cheese , status: :unprocessable_entity }
       end
     end
