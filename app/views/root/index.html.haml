@@ -1,14 +1,30 @@
 %h1 Welcome to Alexandria
 %hr
 .row
-  .col-md-6
-    = link_to 'Check out', new_checkout_path, class: 'btn-block btn btn-primary big-btn'
-  .col-md-6
-    = link_to 'Check in', check_in_path, class: 'btn-block btn btn-primary big-btn'
-%br
-%hr
-%footer.pull-right
-  %small
-    The library for the
-    %a{href: "https://sse.se.rit.edu"}
-      Society of Software Engineers
+  - @books.each do |book|
+    .col-md-4
+      .text-center
+        %h4
+          =link_to book.title, book
+        %i
+          %h5= book.subtitle
+
+.row
+  - @books.each do |book|
+    .col-md-4
+      .text-center
+        %br
+        - if book.google_book_data.img_small.present?
+          = image_tag(book.google_book_data.img_small)
+        - else
+          .blank-thumbnail-medium.center
+
+.row
+  - @books.each do |book|
+    .col-md-4
+      %br
+      - if book.google_book_data.description.blank?
+        %i
+          %p No description available
+      -else
+        %p= truncate(book.google_book_data.description, length: 500)
