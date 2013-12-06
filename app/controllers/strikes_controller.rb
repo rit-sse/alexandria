@@ -35,7 +35,7 @@ class StrikesController < ApplicationController
     respond_to do |format|
       if @strike.save
         StrikeMailer.strike(@strike).deliver
-        if @strike.patron.strikes.count == Rails.configuration.strikes_for_ban
+        if @strike.patron.active_strikes.count == Rails.configuration.strikes_for_ban
           StrikeMailer.banned(@strike.patron).deliver
           patron = @strike.patron
           patron.banned = true
@@ -83,6 +83,6 @@ class StrikesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def strike_params
-    params.require(:strike).permit(:other_info, :reason_id, :patron_id)
+    params.require(:strike).permit(:other_info, :reason_id, :patron_id, :active)
   end
 end
