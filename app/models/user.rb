@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
 
   def inactive_strikes
     strikes.where(active: false)
+  end
 
   def active_checkouts
     checkouts.select{ |x| x.checked_in_at.nil? }

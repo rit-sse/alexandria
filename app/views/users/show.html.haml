@@ -6,13 +6,15 @@
     %dt Role
     %dd= @user.role.name.capitalize
     %dt Strikes Recieved
-    %dd= @user.strikes.count
+    %dd= "#{@user.active_strikes.count} active/ #{@user.inactive_strikes.count} inactive"
     %dt Strikes
-    %i
-      - if @user.strikes.count == 0
-        %dd No strikes. Good job!
-      - else
-        - @user.strikes.each do |strike|
+    - if @user.strikes.count == 0
+      %dd No strikes. Good job!
+    - else
+      - @user.active_strikes.each do |strike|
+        %dd= link_to strike.message, strike
+      %i
+        - @user.inactive_strikes.each do |strike|
           %dd= link_to strike.message, strike
     %dt Banned
     %dd= @user.banned ? 'Yes' : 'No'

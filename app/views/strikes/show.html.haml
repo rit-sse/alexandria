@@ -10,3 +10,5 @@
   %dd= @strike.message
   %dt Recieved On:
   %dd= @strike.created_at.strftime('%B %d, %Y')
+  %dt Active
+  %dd= @strike.active ? 'Yes' : 'No'
