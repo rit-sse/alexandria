@@ -1,13 +1,38 @@
-%p
-  %b User name:
-  = @user.user_name
-%p
-  %b Banned:
-  = @user.banned
-%p
-  %b Role:
-  = @user.role.name
+.page-header
+  %h1= @user.user_name
 
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+.row
+  %dl.dl-horizontal
+    %dt Role
+    %dd= @user.role.name.capitalize
+    %dt Strikes Recieved
+    %dd= @user.strikes.count
+    %dt Strikes
+    %i
+      - if @user.strikes.count == 0
+        %dd No strikes. Good job!
+      - else
+        - @user.strikes.each do |strike|
+          %dd= link_to strike.message, strike
+    %dt Banned
+    %dd= @user.banned ? 'Yes' : 'No'
+
+.page-header
+  %h2 Active Checkouts
+
+= render 'display_books', list: @user.active_checkouts
+
+.page-header
+  %h2 Active Reservations
+
+= render 'display_books', list: @user.active_reservations
+
+.page-header
+  %h2 Inactive Checkouts
+
+= render 'display_books', list: @user.inactive_checkouts
+
+.page-header
+  %h2 Inactive Reservations
+
+= render 'display_books', list: @user.inactive_reservations

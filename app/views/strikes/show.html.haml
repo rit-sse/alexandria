@@ -1,13 +1,12 @@
-%p
-  %b Patron:
-  = @strike.patron.user_name
-%p
-  %b Distributor:
-  = @strike.distributor.user_name
-%p
-  %b Message:
-  = @strike.message
+.page-header
+  %h2 Strike
 
-= link_to 'Edit', edit_strike_path(@strike)
-\|
-= link_to 'Back', strikes_path
+%dl.dl-horizontal
+  %dt Patron:
+  %dd= @strike.patron.user_name
+  %dt Distributor:
+  %dd= @strike.distributor.user_name
+  %dt Message:
+  %dd= @strike.message
+  %dt Recieved On:
+  %dd= @strike.created_at.strftime('%B %d, %Y')

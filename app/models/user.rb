@@ -51,6 +51,21 @@ class User < ActiveRecord::Base
 
   def inactive_strikes
     strikes.where(active: false)
+
+  def active_checkouts
+    checkouts.select{ |x| x.checked_in_at.nil? }
+  end
+
+  def inactive_checkouts
+    checkouts.select{ |x| x.checked_in_at.present? }
+  end
+
+  def active_reservations
+    reservations.select{ |x| !x.fulfilled and !x.expired? }
+  end
+
+  def inactive_reservations
+    reservations.select{ |x| x.fulfilled or x.expired? }
   end
 
   def librarian?

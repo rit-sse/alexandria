@@ -1,0 +1,16 @@
+- list.each_slice(4) do |items|
+  .row
+    - items.each do |item|
+      .col-md-3
+        .text-center
+          %br
+          - if item.book.google_book_data.img_small.present?
+            = link_to(image_tag(item.book.google_book_data.img_small), item)
+          - else
+            .blank-thumbnail-medium.center
+  .row
+    - items.each do |item|
+      .col-md-3
+        .text-center
+          %br
+          = link_to item.book.title, item

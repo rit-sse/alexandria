@@ -95,6 +95,11 @@ class Checkout < ActiveRecord::Base
       strike.reason = Reason.find_by_message('Overdue book')
       strike.save
       CheckoutMailer.overdue_book(self).deliver
+      if patron.strikes.count == Rails.configuration.strikes_for_ban
+        StrikeMailer.banned(patron).deliver
+        patron.banned = true
+        patron.save
+      end
     end
   end
 
