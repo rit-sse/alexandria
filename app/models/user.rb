@@ -45,6 +45,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def active_strikes
+    strikes.where(active: true)
+  end
+
+  def inactive_strikes
+    strikes.where(active: false)
+  end
+
   def librarian?
     role.try(:name) == 'librarian'
   end

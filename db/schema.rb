@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203201826) do
+ActiveRecord::Schema.define(version: 20131205164256) do
 
   create_table "author_books", force: true do |t|
     t.integer  "author_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20131203201826) do
     t.integer  "patron_id"
     t.integer  "distributor_id"
     t.integer  "reason_id"
+    t.boolean  "active",         default: true
   end
 
   add_index "strikes", ["distributor_id"], name: "index_strikes_on_distributor_id"
