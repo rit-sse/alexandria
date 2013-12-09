@@ -6,7 +6,10 @@ class Book < ActiveRecord::Base
   has_many :author_books
   has_many :authors, through: :author_books
   has_one :google_book_data
+  accepts_nested_attributes_for :google_book_data
   has_many :checkouts
+
+  default_scope { order('title ASC') }
 
   searchable do
     text :title, :isbn
@@ -21,6 +24,7 @@ class Book < ActiveRecord::Base
   def default_values
     self.restricted ||= false
     self.lcc ||= ''
+    self.unavailable  ||= false
   end
 
   def as_json(options = {})
@@ -47,7 +51,7 @@ class Book < ActiveRecord::Base
   end
 
   def reserved?
-    Reservation.where(book_id: id, fulfilled: false).any?
+    Reservation.where(book_id: id, fulfilled: false).select{|x| !x.expired?}.any?
   end
 
   def self.featured_book

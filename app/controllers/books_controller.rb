@@ -39,11 +39,6 @@ class BooksController < ApplicationController
     @ratings_count = 0
   end
 
-  # GET /books/new
-  def new
-    @book = Book.new
-  end
-
   # GET /books/1/edit
   def edit
   end
@@ -76,7 +71,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render json: { title: @book.title }, status: :created, location: @book }
       else
-        format.html { render 'new' }
+        format.html { redirect_to root_path, notice: 'Book was not created.'}
         format.json { render json: cheese , status: :unprocessable_entity }
       end
     end
@@ -85,7 +80,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    @book.authors = params[:book][:authors].delete_if { |x| x == '' }.map { |i| Author.find(i) }
+    @book.authors = params[:book][:authors].delete_if { |x| x == '' }.map { |i| Author.find(i) } if params[:book][:authors].present?
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -116,7 +111,9 @@ class BooksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
-    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle, :restricted, :lcc)
+    params.require(:book).permit(:isbn, :publish_date, :title, :subtitle,
+                                 :restricted, :lcc, :unavailable, google_book_data_attributes:
+                                 [:description, :img_thumbnail, :img_small, :img_medium, :img_large, :preview_link])
   end
 
   def search

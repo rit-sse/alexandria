@@ -1,17 +1,25 @@
-%h4 Reservation Details
+.page-header
+  %h1
+    Reservation for
+    = @reservation.title
 
-%p
-  %b User:
-  = @reservation.user_name
-%p
-  %b Book:
-  = @reservation.title
-%p
-  %b Reserved at:
-  = @reservation.reserve_at.strftime("%m/%d/%Y")
-%p
-  %b fulfilled:
-  = @reservation.fulfilled
-/ %p
-/   %b Expires at:
-/   = @reservation.expires_at
+.row
+  - if @reservation.book.google_book_data.img_small.present?
+    %div
+      %a{href: book_path(@reservation.book)}
+        %img.center{src: @reservation.book.google_book_data.img_small, height: '250px;'}
+  -else
+    %a{href: book_path(@reservation.book)}
+      .blank-thumbnail-large.center
+.row
+  %dl.dl-horizontal
+    %dt Reserved By
+    %dd= @reservation.user_name
+    %dt Date Reserved
+    %dd= @reservation.reserve_at.strftime('%B %d, %Y')
+    %dt Expires At
+    %dd= @reservation.expires_at.strftime('%B %d, %Y')
+    %dt Fulfilled
+    %dd= @reservation.fulfilled ? 'Yes' : 'No'
+    %dt Expired
+    %dd= @reservation.expired? ? 'Yes' : 'No'

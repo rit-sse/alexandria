@@ -79,6 +79,28 @@ describe Checkout, solr: true do
     expect(checkout.errors.messages).to include(distributor: ['is not a distributor or librarian.'])
   end
 
+  it 'cannot be created on a restricted book' do
+    book.restricted = true
+    book.save
+    expect do
+      Checkout.create(book_id: book.id,  distributor_id: distributor.id,
+                      patron_id: patron.id,
+                      checked_out_at: Date.new(2013, 2, 4),
+                      due_date: Date.new(2013, 2, 11))
+    end.to_not change { Checkout.all.count }.by(1)
+  end
+
+  it 'cannot be created on an unavailable book' do
+    book.unavailable = true
+    book.save
+    expect do
+      Checkout.create(book_id: book.id, distributor_id: distributor.id,
+                      patron_id: patron.id,
+                      checked_out_at: Date.new(2013, 2, 4),
+                      due_date: Date.new(2013, 2, 11))
+    end.to_not change { Checkout.all.count }.by(1)
+  end
+
   describe 'being overdue' do
     it 'is overdue if past due date' do
       expect(@checkout.overdue?).to be_true

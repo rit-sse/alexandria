@@ -38,8 +38,8 @@ describe CheckoutMailer, solr: true do
       expect(mail.subject).to eq('You have a book overdue')
     end
 
-    it 'contians the number of strikesi' do
-      expect(mail.body.encoded).to match(/#{user.strikes.count}\s*strikes/)
+    it 'contains the number of strikes' do
+      expect(mail.body.encoded).to match(/#{user.active_strikes.count}\s*active strike/)
     end
   end
 

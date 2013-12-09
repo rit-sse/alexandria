@@ -23,7 +23,6 @@
         .navbar-right
           -if user_signed_in?
             = link_to current_user.email, user_path(current_user)
-            = link_to "Add Book", new_book_path, class: "btn btn-default navbar-btn"
             = link_to "Sign out", destroy_user_session_path, class: "btn btn-default navbar-btn", method: :delete
 
           -else
@@ -37,3 +36,9 @@
         .alert.alert-danger
           = alert
       = yield
+      %hr
+      %footer.pull-right
+        %small
+          The library for the
+          %a{href: "https://sse.se.rit.edu"}
+            Society of Software Engineers

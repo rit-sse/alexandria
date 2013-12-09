@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   before_save :default_values
 
+  default_scope { order('id ASC') }
+
   def barcode
     @barcode ||= Password.new(barcode_hash) unless barcode_hash.nil?
   end
@@ -41,6 +43,30 @@ class User < ActiveRecord::Base
           )
     end
     user
+  end
+
+  def active_strikes
+    strikes.where(active: true)
+  end
+
+  def inactive_strikes
+    strikes.where(active: false)
+  end
+
+  def active_checkouts
+    checkouts.select{ |x| x.checked_in_at.nil? }
+  end
+
+  def inactive_checkouts
+    checkouts.select{ |x| x.checked_in_at.present? }
+  end
+
+  def active_reservations
+    reservations.select{ |x| !x.fulfilled and !x.expired? }
+  end
+
+  def inactive_reservations
+    reservations.select{ |x| x.fulfilled or x.expired? }
   end
 
   def librarian?

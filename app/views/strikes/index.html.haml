@@ -1,23 +1,20 @@
-%h1 Listing strikes
+%h3 Listing strikes
 
-%table
+%table.table.table-striped.table-hover
   %tr
-    %th User
+    %th Patron
     %th Distributor
-    %th Message
-    %th
+    %th Reason
+    %th Other Info
     %th
     %th
 
   - @strikes.each do |strike|
-    %tr
-      %td= strike.user
-      %td= strike.distributor
+    %tr{onclick: "location.href='#{strike_path(strike)}'"}
+      %td= strike.patron.user_name
+      %td= strike.distributor.user_name
+      %td= strike.reason.message
       %td= strike.other_info
-      %td= link_to 'Show', strike
       %td= link_to 'Edit', edit_strike_path(strike)
       %td= link_to 'Destroy', strike, data: { confirm: 'Are you sure?'}, method: :delete
-
 %br
-
-= link_to 'New Strike', new_strike_path

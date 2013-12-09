@@ -19,5 +19,8 @@
     .form-group
       = f.label :other_info
       = f.text_field :other_info, class: 'form-control'
+    .form-group
+      = f.label :active
+      = f.check_box :active
     .actions
       = f.submit 'Save', class: 'btn btn-primary'

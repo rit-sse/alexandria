@@ -12,9 +12,8 @@
       , is overdue. Because of this, you have recieved a strike. You
       currently have
       %b
-        = @user.strikes.count
-        strikes.
-      If you don't return this book by
+        = pluralize(@user.active_strikes.count, 'active strike')
+      \. If you don't return this book by
       %b
         = @checkout.due_date.strftime('%B %d, %Y')
       you will recieve another strike.

@@ -1,39 +1,80 @@
-.well.well-small
-  = form_for book do |f|
-    -if book.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
-        %ul
-          - book.errors.full_messages.each do |msg|
-            %li= msg
+%ul.nav.nav-tabs
+  %li.active
+    %a{href: "#book", :'data-toggle' => "tab"} Book
+  %li
+    %a{href: "#additional", :'data-toggle' => "tab"} Additional Info
+.tab-content
+  .tab-pane.active#book
+    .well.well-small.well-additions
+      = form_for book do |f|
+        -if book.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
+            %ul
+              - book.errors.full_messages.each do |msg|
+                %li= msg
 
-    .form-group
-      = f.label :isbn
-      = f.text_field :isbn, class: 'form-control'
-    .form-group
-      = f.label :lcc
-      = f.text_field :lcc, class: 'form-control'
-    .form-group
-      = f.label :title
-      = f.text_field :title, class: 'form-control'
-    .form-group
-      = f.label :subtitle
-      = f.text_field :subtitle, class: 'form-control'
-    .form-group
-      = f.label :authors
-      = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
-    .form-group
-      = f.label :publish_date
-      .input-group.date.datepicker
-        %span.input-group-addon
-          %i.fa.fa-calendar
-        = f.text_field :publish_date, class: 'form-control'
-    .form-group
-      = f.label :restricted
-      = f.check_box :restricted
-    .form-group
-      = f.label :quantity
-      = f.number_field :quantity, class: 'form-control'
-    .actions
-      = f.submit 'Save', class: 'btn btn-primary'
-      = link_to 'Back', book_path(book), class: 'btn btn-default'
+        .form-group
+          = f.label :isbn
+          = f.text_field :isbn, class: 'form-control'
+        .form-group
+          = f.label :lcc
+          = f.text_field :lcc, class: 'form-control'
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
+        .form-group
+          = f.label :subtitle
+          = f.text_field :subtitle, class: 'form-control'
+        .form-group
+          = f.label :authors
+          = f.select :authors, options_for_select(Author.all.collect { |a| [a.full_name, a.id] }, book.authors.collect{|a| a.id}), { include_blank: true }, { multiple: true, class: 'chosen-select form-control'}
+        .form-group
+          = f.label :publish_date
+          .input-group.date.datepicker
+            %span.input-group-addon
+              %i.fa.fa-calendar
+            = f.text_field :publish_date, class: 'form-control'
+        .form-group
+          = f.label :restricted
+          = f.check_box :restricted
+        .form-group
+          = f.label :unavailable
+          = f.check_box :unavailable
+        .form-group
+          = f.label :quantity
+          = f.number_field :quantity, class: 'form-control'
+        .actions
+          = f.submit 'Save', class: 'btn btn-primary'
+          = link_to 'Back', book_path(book), class: 'btn btn-default'
+  .tab-pane#additional
+    .well.well-small.well-additions
+      = form_for book do |f|
+        -if book.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(book.errors.count, "error")} prohibited this book from being saved:"
+            %ul
+              - book.errors.full_messages.each do |msg|
+                %li= msg
+        = f.fields_for :google_book_data do |other|
+          .form-group
+            = other.label :description
+            = other.text_area :description, class: 'form-control'
+          .form-group
+            = other.label :img_thumbnail
+            = other.text_field :img_thumbnail, class: 'form-control'
+          .form-group
+            = other.label :img_small
+            = other.text_field :img_small, class: 'form-control'
+          .form-group
+            = other.label :img_medium
+            = other.text_field :img_medium, class: 'form-control'
+          .form-group
+            = other.label :img_large
+            = other.text_field :img_large, class: 'form-control'
+          .form-group
+            = other.label :preview_link
+            = other.text_field :preview_link, class: 'form-control'
+        .actions
+          = f.submit 'Save', class: 'btn btn-primary'
+          = link_to 'Back', book_path(book), class: 'btn btn-default'
