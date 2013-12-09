@@ -11,7 +11,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sass-rails',   '~> 4.0.0'
-gem "compass-rails", "~> 2.0.alpha.0"
+gem 'compass-rails'
 gem 'bootstrap-sass-rails', '~> 3.0.0'
 
 gem 'uglifier', '>= 1.0.3'
