@@ -33,12 +33,12 @@ module Lccable
       else
         second_part = rec['050']['b']
       end
-      self.lcc = normalize("#{rec['050']['a']} #{second_part}").strip
+      self.lcc = Lccable.normalize("#{rec['050']['a']} #{second_part}").strip
     end
   end
 
   # Return a normalized version of the lcc
-  def normalize(callno)
+  def self.normalize(callno)
     cp = LCC_REGEX.match(callno)
     out = cp[:aclass] + cp[:nclass]
     out += ".#{cp[:dclass]}" if cp[:dclass].present?

@@ -48,7 +48,7 @@ else
       book.authors << Author.find_or_create(author)
     end
     book.isbn = row[3]
-    book.lcc = row[4]
+    book.lcc = Book.normalize(row[4])
     begin
       book.publish_date = Date.parse(row[5])
     rescue
