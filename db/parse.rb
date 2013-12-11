@@ -16,7 +16,7 @@ CSV.open('books.csv', 'wb') do |csv|
       subtitle = titles[1] || ''
       authors = gb.authors || ''
       publish_date = gb.published_date
-      description   = gb.description
+      description   = gb.description.gsub('"', '') unless gb.description.nil?
       img_thumbnail = gb.image_link(zoom: 5)
       img_small     = gb.image_link
       img_medium    = gb.image_link(zoom: 2)
