@@ -54,6 +54,18 @@ class Book < ActiveRecord::Base
     Reservation.where(book_id: id, fulfilled: false).select{|x| !x.expired?}.any?
   end
 
+  def shelf
+    s = Rails.configuration.shelves.count
+    Rails.configuration.shelves.each_with_index do |x, i|
+      if Lccable.sort_it_up(lcc, x) <= 0
+        s = i + 1
+        break
+      end
+    end
+    shelf = 0 if restricted
+    s
+  end
+
   def self.featured_book
     gb = GoogleBookData.arel_table
     all = GoogleBookData.where(gb[:description].not_eq(''))

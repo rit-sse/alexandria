@@ -32,10 +32,10 @@
         - unless @right.nil?
           - if @right.google_book_data.img_small.present?
             %div
-              %a{href: book_path(@left)}
+              %a{href: book_path(@right)}
                 %img{src: @right.google_book_data.img_small, height: '250px;'}
           -else
-            %a{href: book_path(@left)}
+            %a{href: book_path(@right)}
               .blank-thumbnail-large{style: 'margin: 0 auto;'}
           %br
           = @right.title

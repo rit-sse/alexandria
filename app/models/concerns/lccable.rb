@@ -8,7 +8,7 @@ module Lccable
   extend ActiveSupport::Concern
 
   # Regex to match an LCC
-  LCC_REGEX = /^(?<aclass>[A-Z]{1,3})(?<nclass>\d{1,4})(\ ?)(\.(?<dclass>\d{1,3}))?(?<date>\ [A-Za-z0-9]{1,4}\ )?([\ \.](?<c1>[A-Z][0-9]{1,4}))(\ (?<c1d>[A-Za-z0-9]{0,4}))?(\.?(?<c2>[A-Z][0-9]{1,4}))?(\ (?<e8>\w*)\ ?)?(\ (?<e9>\w*)\ ?)?(\ (?<e10>\w*)\ ?)?/
+  LCC_REGEX = /^(?<aclass>[A-Z]{1,3})(?<nclass>\d{1,4})(\ ?)(\.(?<dclass>\d{1,5}))?(?<date>\ [A-Za-z0-9]{1,4}\ )?([\ \.](?<c1>[A-Z][0-9]{1,4}))(\ (?<c1d>[A-Za-z0-9]{0,4}))?(\.?(?<c2>[A-Z][0-9]{1,4}))?(\ (?<e8>\w*)\ ?)?(\ (?<e9>\w*)\ ?)?(\ (?<e10>\w*)\ ?)?/
 
   # Gets the LCC for an LCCable object
   def get_lcc
@@ -97,18 +97,10 @@ module Lccable
   def self.where_to_place(book)
     books = Book.all.sort { |a, b| sort_it_up(a.lcc, b.lcc) }
     i = books.index(book)
-    shelf = Rails.configuration.shelves.count
-    Rails.configuration.shelves.each_with_index do |x, i|
-      if sort_it_up(book.lcc, x) <= 0
-        shelf = i + 1
-        break
-      end
-    end
-    shelf = 0 if book.restricted
     left = books[i - 1]
     right  = books[i + 1]
-    left = nil if i == 0
-    right = nil if i == books.count - 1
-    { left: left, right: right, shelf: shelf }
+    left = nil if i == 0 || left.shelf != book.shelf
+    right = nil if i == books.count - 1 || right.shelf != book.shelf
+    { left: left, right: right, shelf: book.shelf }
   end
 end
