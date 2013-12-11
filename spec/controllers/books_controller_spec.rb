@@ -33,7 +33,7 @@ describe BooksController, solr: true do
   # Book. As you add validations to Book, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { authors: [], 'isbn' => '9780201633610' }
+    { authors: [], 'isbn' => '9780201633610', 'lcc' => 'QA76.64.D47 1995' }
   end
 
   def other_valid_atributes
