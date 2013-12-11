@@ -21,5 +21,5 @@ Alexandria::Application.configure do
   # book codes of each shelf need to be stored here.
   #
   # TODO: Replace this with an Array of the last LCC on each of the Shelves
-  config.shelves = []
+  config.shelves = ['QA76.73.J38 K57 2002', 'QA76.76.C73 C66 2003', 'QA76.76.T48 P46 2000', 'TK7888.3.M343 1991', 'Z253.4.T47 S64 1992']
 end
