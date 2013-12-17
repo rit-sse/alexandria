@@ -1,4 +1,6 @@
-// window.location.origin = window.location.protocol + "//" + window.location.host  unless window.location.origin
+if(!window.location.origin){
+  window.location.origin = window.location.protocol + "//" + window.location.host;
+}
 
 $(document).ready(function() {
   $('.datepicker').datepicker({
