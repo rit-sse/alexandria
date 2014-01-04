@@ -97,8 +97,14 @@ module Lccable
   def self.where_to_place(book)
     books = Book.all.sort { |a, b| sort_it_up(a.lcc, b.lcc) }
     i = books.index(book)
-    left = books[i - 1]
-    right  = books[i + 1]
+    left_count = i - 1
+    right_count = i + 1
+
+    left_count -= 1 while left_count >= 0 && books[left_count].checked_out?
+    right_count += 1 while right_count < books.count && books[right_count].checked_out?
+
+    left = books[left_count]
+    right  = books[right_count]
     left = nil if i == 0 || left.shelf != book.shelf
     right = nil if i == books.count - 1 || right.shelf != book.shelf
     { left: left, right: right, shelf: book.shelf }
